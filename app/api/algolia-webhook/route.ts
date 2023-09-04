@@ -6,7 +6,7 @@ import { z } from "zod"
 const client = algolia(env.ALGOLIA_API_ID, env.ALGOLIA_API_KEY)
 const index = client.initIndex("articles")
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization")
   if (!authHeader || authHeader !== env.HYGRAPH_WEBOOK_SECRET)
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
