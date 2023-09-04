@@ -7,6 +7,7 @@ export const env = createEnv({
       .enum(["true", "false"])
       .optional()
       .transform((value) => value === "true"),
+    HYGRAPH_CONTENT_API_URL: z.string(),
   },
   client: {},
   runtimeEnv: {
