@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel \"development\" \"codegen --watch\"",
     "development": "cross-env FORCE_COLOR=1 next dev",
-    "build": "next build",
+    "build": "graphql-codegen --require dotenv/config --config codegen.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -21,8 +21,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "npx patch-package -y",
     "coupling-graph": "npx madge --extensions js,jsx,ts,tsx,css,md,mdx ./ --exclude '.next|tailwind.config.js|reset.d.ts|prettier.config.js|postcss.config.js|playwright.config.ts|next.config.js|next-env.d.ts|instrumentation.ts|e2e/|README.md|.storybook/|.eslintrc.js' --image graph.svg",
-    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
-    "prebuild": "graphql-codegen --require dotenv/config --config codegen.ts"
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.3.0",
