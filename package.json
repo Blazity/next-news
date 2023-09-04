@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env FORCE_COLOR=1 next dev",
+    "dev": "npm-run-all --parallel \"development\" \"codegen --watch\"",
+    "development": "cross-env FORCE_COLOR=1 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -21,8 +22,8 @@
     "postinstall": "npx patch-package -y",
     "preinstall": "npx only-allow yarn",
     "coupling-graph": "npx madge --extensions js,jsx,ts,tsx,css,md,mdx ./ --exclude '.next|tailwind.config.js|reset.d.ts|prettier.config.js|postcss.config.js|playwright.config.ts|next.config.js|next-env.d.ts|instrumentation.ts|e2e/|README.md|.storybook/|.eslintrc.js' --image graph.svg",
-    "prebuild": "graphql-codegen --require dotenv/config --config codegen.ts",
-    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts --watch"
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
+    "prebuild": "codegen"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.3.0",
@@ -81,6 +82,7 @@
     "@typescript-eslint/parser": "^5.54.1",
     "all-contributors-cli": "^6.24.0",
     "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "eslint": "8.46.0",
@@ -94,6 +96,7 @@
     "fetch-mock": "^9.11.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "npm-run-all": "^4.1.5",
     "patch-package": "^8.0.0",
     "postcss": "^8.4.21",
     "postinstall-postinstall": "^2.1.0",

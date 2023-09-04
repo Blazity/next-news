@@ -12,5 +12,6 @@ export const env = createEnv({
   client: {},
   runtimeEnv: {
     ANALYZE: process.env.ANALYZE,
+    HYGRAPH_CONTENT_API_URL: process.env.HYGRAPH_CONTENT_API_URL,
   },
 })
