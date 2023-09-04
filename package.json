@@ -22,7 +22,7 @@
     "postinstall": "npx patch-package -y",
     "coupling-graph": "npx madge --extensions js,jsx,ts,tsx,css,md,mdx ./ --exclude '.next|tailwind.config.js|reset.d.ts|prettier.config.js|postcss.config.js|playwright.config.ts|next.config.js|next-env.d.ts|instrumentation.ts|e2e/|README.md|.storybook/|.eslintrc.js' --image graph.svg",
     "codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
-    "prebuild": "codegen"
+    "prebuild": "graphql-codegen --require dotenv/config --config codegen.ts"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.3.0",
