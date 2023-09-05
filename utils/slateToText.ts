@@ -1,4 +1,4 @@
-import { isArray, isObject, isString, values } from "lodash"
+import { isArray, isObject, values } from "lodash"
 
 export function slateToText(obj: unknown): string {
   if (isObject(obj)) {
@@ -10,6 +10,5 @@ export function slateToText(obj: unknown): string {
       .reduce((acc, val) => acc + val, "")
   }
   if (isArray(obj)) return obj.map(slateToText).reduce((acc, val) => acc + val, "")
-  if (isString(obj)) return obj
   return ""
 }
