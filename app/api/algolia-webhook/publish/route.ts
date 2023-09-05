@@ -1,21 +1,18 @@
-import algolia from "algoliasearch"
-import { env } from "env.mjs"
 import { NextRequest, NextResponse } from "next/server"
 import { pipe } from "utils/pipe"
 import { slateToText } from "utils/slateToText"
 import { z } from "zod"
+import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
-const client = algolia(env.ALGOLIA_API_ID, env.ALGOLIA_API_KEY)
-
-async function handleAlgoliaWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
+async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
     article.localizations.map(async ({ locale, title, content }) => {
-      const index = client.initIndex(`articles-${locale}`)
+      const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.saveObject({
         objectID: article.id,
         title,
@@ -31,7 +28,7 @@ async function handleAlgoliaWebhook(req: NextRequestWithValidBody<z.infer<typeof
 
 export async function POST(req: NextRequest) {
   try {
-    return await pipe(req, validateSignature, validateBody(bodySchema), handleAlgoliaWebhook)
+    return await pipe(req, validateSignature, validateBody(bodySchema), handleAlgoliaPublishWebhook)
   } catch (error) {
     return errorToNextResponse(error)
   }
