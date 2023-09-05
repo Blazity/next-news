@@ -1,11 +1,11 @@
+import { verifyWebhookSignature } from "@hygraph/utils"
 import algolia from "algoliasearch"
 import { env } from "env.mjs"
 import { NextRequest, NextResponse } from "next/server"
+import { slateToText } from "utils/slateToText"
 import { z } from "zod"
-import { verifyWebhookSignature } from "@hygraph/utils"
 
 const client = algolia(env.ALGOLIA_API_ID, env.ALGOLIA_API_KEY)
-const index = client.initIndex("articles")
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("gcms-signature")
@@ -24,16 +24,30 @@ export async function POST(req: NextRequest) {
     const parseResult = bodySchema.safeParse(publishedData)
     if (!parseResult.success) return NextResponse.json({ message: "Bad Request" }, { status: 400 })
 
-    // const { id: objectID, ...data } = parseResult.data.data.PUBLISHED
+    const article = parseResult.data.data
 
-    // await index.saveObject({ objectID, ...data })
+    const indexingResults = await Promise.allSettled(
+      article.localizations.map(async ({ locale, title, content }) => {
+        const index = client.initIndex(`articles-${locale}`)
+        await index.saveObject({
+          objectID: article.id,
+          title,
+          content: slateToText(content),
+        })
 
-    return NextResponse.json({ message: "ok" }, { status: 201 })
+        return { title, locale }
+      })
+    )
+
+    return NextResponse.json({ result: indexingResults }, { status: 201 })
   } catch (err) {
     return NextResponse.json({ message: "Unexpected Error" }, { status: 500 })
   }
 }
 
 const bodySchema = z.object({
-  data: z.object({ localizations: z.array(z.any()) }),
+  data: z.object({
+    localizations: z.array(z.object({ content: z.any(), title: z.string(), locale: z.string() })),
+    id: z.string(),
+  }),
 })
