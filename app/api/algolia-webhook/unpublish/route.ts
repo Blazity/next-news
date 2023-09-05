@@ -14,15 +14,11 @@ async function handleAlgoliaWebhook(req: NextRequestWithValidBody<z.infer<typeof
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale, title, content }) => {
+    article.localizations.map(async ({ locale }) => {
       const index = client.initIndex(`articles-${locale}`)
-      await index.saveObject({
-        objectID: article.id,
-        title,
-        content: slateToText(content),
-      })
+      await index.deleteObject(article.id)
 
-      return { title, locale }
+      return { locale }
     })
   )
 
@@ -39,7 +35,7 @@ export async function POST(req: NextRequest) {
 
 const bodySchema = z.object({
   data: z.object({
-    localizations: z.array(z.object({ content: z.any(), title: z.string(), locale: z.string() })),
+    localizations: z.array(z.object({ locale: z.string() })),
     id: z.string(),
   }),
 })
