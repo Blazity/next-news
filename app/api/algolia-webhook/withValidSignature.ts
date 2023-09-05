@@ -3,8 +3,8 @@ import { env } from "env.mjs"
 import { NextRequest, NextResponse } from "next/server"
 
 export const withValidSignature =
-  (fun: (req: NextRequestWithBody, context?: any) => Promise<NextResponse>) =>
-  async (req: NextRequest, context?: any) => {
+  <TContext>(fun: (req: NextRequestWithBody, context?: TContext) => Promise<NextResponse>) =>
+  async (req: NextRequest, context?: TContext) => {
     const authHeader = req.headers.get("gcms-signature")
     if (!authHeader) return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     const parsedBody = await req.json()
