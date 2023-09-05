@@ -1,30 +1,16 @@
-import { verifyWebhookSignature } from "@hygraph/utils"
 import algolia from "algoliasearch"
 import { env } from "env.mjs"
 import { NextRequest, NextResponse } from "next/server"
 import { slateToText } from "utils/slateToText"
 import { z } from "zod"
+import { NextRequestWithValidBody, withBodySchema } from "./withBodySchema"
+import { withValidSignature } from "./withValidSignature"
 
 const client = algolia(env.ALGOLIA_API_ID, env.ALGOLIA_API_KEY)
 
-export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get("gcms-signature")
-  if (!authHeader) return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
-
+async function handleAlgoliaWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   try {
-    const publishedData = await req.json()
-
-    const isSignatureValid = verifyWebhookSignature({
-      body: publishedData,
-      signature: authHeader,
-      secret: env.HYGRAPH_WEBOOK_SECRET,
-    })
-    if (!isSignatureValid) return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
-
-    const parseResult = bodySchema.safeParse(publishedData)
-    if (!parseResult.success) return NextResponse.json({ message: "Bad Request" }, { status: 400 })
-
-    const article = parseResult.data.data
+    const article = req.validBody.data
 
     const indexingResults = await Promise.allSettled(
       article.localizations.map(async ({ locale, title, content }) => {
@@ -51,3 +37,5 @@ const bodySchema = z.object({
     id: z.string(),
   }),
 })
+
+export const POST = withValidSignature(withBodySchema(handleAlgoliaWebhook, bodySchema))
