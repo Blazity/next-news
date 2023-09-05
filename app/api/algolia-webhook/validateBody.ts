@@ -9,7 +9,7 @@ export const validateBody =
     try {
       const hasBody = hasParsedBody(req)
 
-      const parseResult = schema.safeParse(hasBody ? req.body : await req.json())
+      const parseResult = schema.safeParse(hasBody ? req.parsedBody : await req.json())
       if (!parseResult.success) throw new HttpError("BadRequest", 400)
 
       const reqWithBody: NextRequestWithValidBody<T> = Object.assign(req, { validBody: parseResult.data })
