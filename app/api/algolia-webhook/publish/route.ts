@@ -1,33 +1,39 @@
 import algolia from "algoliasearch"
 import { env } from "env.mjs"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
+import { pipe } from "utils/pipe"
 import { slateToText } from "utils/slateToText"
 import { z } from "zod"
-import { withValidSignature } from "../withValidSignature"
-import { NextRequestWithValidBody, withBodySchema } from "../withBodySchema"
+import { errorToNextResponse } from "../httpError"
+import { NextRequestWithValidBody, validateBody } from "../validateBody"
+import { validateSignature } from "../validateSignature"
 
 const client = algolia(env.ALGOLIA_API_ID, env.ALGOLIA_API_KEY)
 
 async function handleAlgoliaWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
-  try {
-    const article = req.validBody.data
+  const article = req.validBody.data
 
-    const indexingResults = await Promise.allSettled(
-      article.localizations.map(async ({ locale, title, content }) => {
-        const index = client.initIndex(`articles-${locale}`)
-        await index.saveObject({
-          objectID: article.id,
-          title,
-          content: slateToText(content),
-        })
-
-        return { title, locale }
+  const indexingResults = await Promise.allSettled(
+    article.localizations.map(async ({ locale, title, content }) => {
+      const index = client.initIndex(`articles-${locale}`)
+      await index.saveObject({
+        objectID: article.id,
+        title,
+        content: slateToText(content),
       })
-    )
 
-    return NextResponse.json({ result: indexingResults }, { status: 201 })
-  } catch (err) {
-    return NextResponse.json({ message: "Unexpected Error" }, { status: 500 })
+      return { title, locale }
+    })
+  )
+
+  return NextResponse.json({ result: indexingResults }, { status: 201 })
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    return await pipe(req, validateSignature, validateBody(bodySchema), handleAlgoliaWebhook)
+  } catch (error) {
+    return errorToNextResponse(error)
   }
 }
 
@@ -37,5 +43,3 @@ const bodySchema = z.object({
     id: z.string(),
   }),
 })
-
-export const POST = withValidSignature(withBodySchema(handleAlgoliaWebhook, bodySchema))
