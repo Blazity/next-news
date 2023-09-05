@@ -27,7 +27,7 @@ module.exports = {
       },
     ],
     "sort-imports": [
-      "warning",
+      "warn",
       {
         ignoreCase: true,
         ignoreDeclarationSort: true,
