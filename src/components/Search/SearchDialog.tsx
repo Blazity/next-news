@@ -7,6 +7,7 @@ import { Input } from "components/ui/Input/Input"
 import { env } from "env.mjs"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
+import { Search } from "lucide-react"
 import { ChangeEvent, useMemo, useState } from "react"
 import {
   Configure,
@@ -29,11 +30,14 @@ function SearchDialogContent({ index }: { index: string }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className=" rounded-full bg-gray-50 px-8 text-slate-700 shadow-md"
+          className=" rounded-full bg-gray-50 text-slate-700 shadow-md"
           variant="ghost"
           aria-label="Open search dialog"
         >
-          Search for an article
+          <div className="flex items-center gap-4 px-1">
+            <Search className="h-4 w-4" />
+            Search for an article
+          </div>
         </Button>
       </DialogTrigger>
       <InstantSearch searchClient={algoliaClient} indexName={index}>
