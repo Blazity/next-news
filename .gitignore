@@ -2,10 +2,10 @@
 
 
 # codegen
-gql/fragment-masking.ts
-gql/gql.ts
-gql/graphql.ts
-gql/index.ts
+src/gql/fragment-masking.ts
+src/gql/gql.ts
+src/gql/graphql.ts
+src/gql/index.ts
 
 # Yarn 3 files
 .pnp.*

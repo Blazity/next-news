@@ -1,7 +1,7 @@
 import { GraphQLClient } from "graphql-request"
 import { graphql } from "../gql"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
-import { env } from "env.mjs"
+import { env } from "../env.mjs"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.HYGRAPH_CONTENT_API_URL, {
