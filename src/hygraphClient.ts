@@ -1,7 +1,8 @@
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient } from "graphql-request"
-import { graphql } from "../gql"
-import { TypedDocumentNode } from "@graphql-typed-document-node/core"
-import { env } from "../env.mjs"
+import type { HygraphLocaleEnum, Locale } from "i18n.js"
+import { env } from "./env.mjs"
+import { graphql } from "./gql"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.HYGRAPH_CONTENT_API_URL, {
@@ -9,22 +10,21 @@ const hygraphClient = (init?: RequestInit) =>
   })
 
 const getArticles = graphql(`
-  query getArticles($locales: [Locale!] = [en]) {
+  query getArticles($locales: [Locale!]!) {
     articles(locales: $locales) {
       id
       title
-      content {
-        html
-      }
     }
   }
 `)
 
-export const useHygraphClient = () => {
+export const useHygraphClient = (inputLocale: Locale) => {
+  const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
+
   const makeRequest =
     <TQuery, TVariables>(document: TypedDocumentNode<TQuery, TVariables>) =>
     (init?: RequestInit) =>
-      hygraphClient(init).request(document, {})
+      hygraphClient(init).request(document, { locales: [locale] })
 
   return {
     getArticles: makeRequest(getArticles),
