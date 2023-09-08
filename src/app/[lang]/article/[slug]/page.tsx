@@ -1,11 +1,11 @@
-import { useHygraphClient } from "hygraphClient"
+import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
 import { Metadata } from "next/types"
 
 type ArticlePageProps = { params: { lang: Locale; slug: string } }
 
 export async function generateMetadata({ params: { lang, slug } }: ArticlePageProps): Promise<Metadata | null> {
-  const { getArticleSummary } = useHygraphClient(lang)
+  const { getArticleSummary } = HygraphClient(lang)
   const { article } = await getArticleSummary({ slug })
 
   if (!article) return null
@@ -33,7 +33,7 @@ export async function generateMetadata({ params: { lang, slug } }: ArticlePagePr
 }
 
 export default async function Web({ params: { lang, slug } }: ArticlePageProps) {
-  const { getArticleSummary } = useHygraphClient(lang)
+  const { getArticleSummary } = HygraphClient(lang)
   const article = await getArticleSummary({ slug })
 
   return (

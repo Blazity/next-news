@@ -1,8 +1,6 @@
 import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
-import { useHygraphClient } from "hygraphClient"
 import { Locale } from "i18n.js"
-import { useMemo } from "react"
 
 export const metadata = {
   title: "Next.js Enterprise Boilerplate",

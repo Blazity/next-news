@@ -35,7 +35,7 @@ const getArticleSummary = graphql(`
   }
 `)
 
-export const useHygraphClient = (inputLocale: Locale) => {
+export const HygraphClient = (inputLocale: Locale) => {
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
