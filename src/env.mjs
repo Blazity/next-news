@@ -11,6 +11,7 @@ export const env = createEnv({
     HYGRAPH_WEBOOK_SECRET: z.string(),
     ALGOLIA_API_ID: z.string(),
     ALGOLIA_API_KEY: z.string(),
+    GA_MEASUREMENT_ID: z.string(),
   },
   client: {
     NEXT_PUBLIC_ALGOLIA_API_ID: z.string(),
@@ -22,6 +23,7 @@ export const env = createEnv({
     HYGRAPH_WEBOOK_SECRET: process.env.HYGRAPH_WEBOOK_SECRET,
     ALGOLIA_API_ID: process.env.ALGOLIA_API_ID,
     ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
+    GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
     NEXT_PUBLIC_ALGOLIA_API_ID: process.env.NEXT_PUBLIC_ALGOLIA_API_ID,
     NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
   },

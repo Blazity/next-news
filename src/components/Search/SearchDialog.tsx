@@ -35,6 +35,7 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
           className=" rounded-lg bg-gray-50 text-slate-700 shadow-md"
           variant="ghost"
           aria-label="Open search dialog"
+          name="Search"
         >
           <div className="flex items-center gap-4 px-1">
             <Search className="h-4 w-4" />
