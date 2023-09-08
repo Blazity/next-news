@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
-import { GraphQLClient } from "graphql-request"
+import { GraphQLClient, Variables } from "graphql-request"
 import type { HygraphLocaleEnum, Locale } from "i18n.js"
 import { env } from "./env.mjs"
 import { graphql } from "./gql"
@@ -18,15 +18,35 @@ const getArticles = graphql(`
   }
 `)
 
+const getArticleSummary = graphql(`
+  query getArticleSummary($locales: [Locale!]!, $slug: String!) {
+    article(locales: $locales, where: { slug: $slug }) {
+      id
+      title
+      coverImage {
+        id
+        url
+      }
+      author {
+        id
+        name
+      }
+    }
+  }
+`)
+
 export const useHygraphClient = (inputLocale: Locale) => {
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
     <TQuery, TVariables>(document: TypedDocumentNode<TQuery, TVariables>) =>
-    (init?: RequestInit) =>
-      hygraphClient(init).request(document, { locales: [locale] })
+    (variables: Omit<TVariables, "locales">, init?: RequestInit) => {
+      const vars: Variables = { locales: [locale], ...variables }
+      return hygraphClient(init).request(document, vars)
+    }
 
   return {
     getArticles: makeRequest(getArticles),
+    getArticleSummary: makeRequest(getArticleSummary),
   }
 }

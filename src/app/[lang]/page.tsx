@@ -2,6 +2,7 @@ import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
 import { useHygraphClient } from "hygraphClient"
 import { Locale } from "i18n.js"
+import { useMemo } from "react"
 
 export const metadata = {
   title: "Next.js Enterprise Boilerplate",
@@ -21,8 +22,7 @@ export const metadata = {
 }
 
 export default async function Web({ params: { lang } }: { params: { lang: Locale } }) {
-  const client = useHygraphClient(lang)
-  const { articles } = await client.getArticles()
+  // const client = useHygraphClient(lang)
 
   return (
     <>
@@ -30,7 +30,7 @@ export default async function Web({ params: { lang } }: { params: { lang: Locale
         <DynamicSearchDialog lang={lang} />
         <DynamicLangSelect lang={lang} />
       </section>
-      <section>{lang}</section>
+      <section></section>
     </>
   )
 }
