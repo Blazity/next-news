@@ -11,22 +11,29 @@ export async function GET(request: NextRequest) {
     (
       <div
         style={{
-          fontSize: 40,
-          color: "white",
-          backgroundImage: `url("${image}")`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          display: "flex",
+          background: "#f6f6f6",
           width: "100%",
           height: "100%",
-          padding: "50px",
-          textAlign: "start",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          textShadow: "1px 1px 4px rgba(66, 68, 90, 1)",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {title}
+        <img src={image ?? undefined} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <p
+          style={{
+            position: "absolute",
+            padding: "40px 60px",
+            top: 0,
+            left: 0,
+            color: "white",
+            textShadow: "1px 1px 4px rgba(66, 68, 90, 1)",
+            fontSize: 50,
+          }}
+        >
+          {title}
+        </p>
       </div>
     ),
     {
