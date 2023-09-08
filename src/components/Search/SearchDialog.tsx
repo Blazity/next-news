@@ -63,9 +63,9 @@ function Hit({ hit }: { hit: Hit<{ title: string; content: string; objectID: str
   return (
     <a
       href="/"
-      className="ring-offset-background focus-visible:ring-ring inline-flex w-full rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="ring-offset-background focus-visible:ring-ring inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
-      <article className="flex cursor-pointer flex-col rounded-md px-4 py-2 hover:bg-slate-100">
+      <article className="flex cursor-pointer flex-col rounded-md px-4 py-2">
         <Highlight
           attribute="title"
           hit={hit}
