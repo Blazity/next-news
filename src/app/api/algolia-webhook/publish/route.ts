@@ -26,6 +26,8 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
     })
   )
 
+  console.log(indexingResults)
+
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
 
