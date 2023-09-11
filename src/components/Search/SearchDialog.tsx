@@ -9,6 +9,7 @@ import { Locale } from "i18n"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
@@ -67,8 +68,9 @@ type ArticleHit = Hit<{ title: string; content: string; objectID: string; slug: 
 
 function Hit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (
-    <a
+    <Link
       href={`/${lang}/article/${hit.slug}`}
+      prefetch={false}
       className="ring-offset-background focus-visible:ring-ring inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col rounded-md px-4 py-2">
@@ -88,7 +90,7 @@ function Hit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
           }}
         />
       </article>
-    </a>
+    </Link>
   )
 }
 

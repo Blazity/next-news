@@ -1,12 +1,22 @@
+import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
 import "../../styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
+import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
+import type { Locale } from "i18n"
 
 export default function Layout({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
+  const lang = params.lang as Locale
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <GoogleAnalytics />
       <body>
-        <main className="main mx-auto flex max-w-4xl flex-col items-center justify-start">{children}</main>
+        <main className="main mx-auto flex max-w-4xl flex-col items-center justify-start">
+          <nav className="flex w-full justify-end gap-4 p-4">
+            <DynamicSearchDialog lang={lang} />
+            <DynamicLangSelect lang={lang} />
+          </nav>
+          {children}
+        </main>
       </body>
     </html>
   )

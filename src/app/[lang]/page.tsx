@@ -22,10 +22,6 @@ export const metadata = {
 export default async function Web({ params: { lang } }: { params: { lang: Locale } }) {
   return (
     <>
-      <section className="flex w-full justify-end gap-4 p-4">
-        <DynamicSearchDialog lang={lang} />
-        <DynamicLangSelect lang={lang} />
-      </section>
       <section></section>
     </>
   )
