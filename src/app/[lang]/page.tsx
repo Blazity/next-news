@@ -20,8 +20,6 @@ export const metadata = {
 }
 
 export default async function Web({ params: { lang } }: { params: { lang: Locale } }) {
-  // const client = useHygraphClient(lang)
-
   return (
     <>
       <section className="flex w-full justify-end gap-4 p-4">

@@ -7,16 +7,19 @@ import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
+export const runtime = "edge"
+
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale, title, content }) => {
+    article.localizations.map(async ({ locale, title, content, slug }) => {
       const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.saveObject({
         objectID: article.id,
         title,
         content: slateToText(content),
+        slug: slug,
       })
 
       return { title, locale }
@@ -36,7 +39,7 @@ export async function POST(req: NextRequest) {
 
 const bodySchema = z.object({
   data: z.object({
-    localizations: z.array(z.object({ content: z.any(), title: z.string(), locale: z.string() })),
+    localizations: z.array(z.object({ content: z.any(), title: z.string(), locale: z.string(), slug: z.string() })),
     id: z.string(),
   }),
 })

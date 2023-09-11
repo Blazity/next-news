@@ -9,6 +9,7 @@ import { Locale } from "i18n"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
   Configure,
@@ -51,7 +52,10 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
 
           <Configure attributesToSnippet={["content:20"]} />
           <NoResultsBoundary fallback={<NoResults />}>
-            <Hits hitComponent={Hit} className="flex flex-col gap-4 py-2" />
+            <Hits
+              hitComponent={(props) => <Hit {...props} hit={props.hit as ArticleHit} lang={lang} />}
+              className="flex flex-col gap-4 py-2"
+            />
           </NoResultsBoundary>
         </DialogContent>
       </InstantSearch>
@@ -59,10 +63,12 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
   )
 }
 
-function Hit({ hit }: { hit: Hit<{ title: string; content: string; objectID: string }> }) {
+type ArticleHit = Hit<{ title: string; content: string; objectID: string; slug: string }>
+
+function Hit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (
     <a
-      href="/"
+      href={`/${lang}/article/${hit.slug}`}
       className="ring-offset-background focus-visible:ring-ring inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col rounded-md px-4 py-2">
