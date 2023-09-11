@@ -40,7 +40,7 @@ async function verifyWebhookSignature({
   const EnvironmentName = rawEnv.replace("env=", "")
   const Timestamp = parseInt(rawTimestamp.replace("t=", ""))
 
-  let payload = JSON.stringify({
+  const payload = JSON.stringify({
     Body: rawPayload || JSON.stringify(body),
     EnvironmentName,
     TimeStamp: Timestamp,
