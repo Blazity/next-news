@@ -6,7 +6,8 @@ type ArticlePageProps = { params: { lang: Locale; slug: string } }
 
 export async function generateMetadata({ params: { lang, slug } }: ArticlePageProps): Promise<Metadata | null> {
   const { getArticleSummary } = HygraphClient(lang)
-  const { article } = await getArticleSummary({ slug })
+  const { articles } = await getArticleSummary({ slug })
+  const article = articles[0]
 
   if (!article) return null
   return {

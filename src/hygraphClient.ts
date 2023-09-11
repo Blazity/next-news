@@ -20,7 +20,7 @@ const getArticles = graphql(`
 
 const getArticleSummary = graphql(`
   query getArticleSummary($locales: [Locale!]!, $slug: String!) {
-    article(locales: $locales, where: { slug: $slug }) {
+    articles(locales: $locales, where: { slug: $slug }) {
       id
       title
       coverImage {
