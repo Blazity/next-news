@@ -29,7 +29,7 @@ async function verifyWebhookSignature({
   secret,
   rawPayload,
 }: {
-  body?: any
+  body?: unknown
   signature: string
   secret: string
   rawPayload?: string
