@@ -21,7 +21,7 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
         slug,
       })
 
-      revalidatePath(`/${locale}/article/${slug}`)
+      revalidatePath(`/[lang]/article/[slug]`)
       return { title, locale }
     })
   )

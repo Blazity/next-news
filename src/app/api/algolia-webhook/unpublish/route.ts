@@ -11,11 +11,11 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale, slug }) => {
+    article.localizations.map(async ({ locale }) => {
       const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.deleteObject(article.id)
 
-      revalidatePath(`/${locale}/article/${slug}`)
+      revalidatePath(`/[lang]/article/[slug]`)
 
       return { locale }
     })
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
 const bodySchema = z.object({
   data: z.object({
-    localizations: z.array(z.object({ locale: z.string(), slug: z.string() })),
+    localizations: z.array(z.object({ locale: z.string() })),
     id: z.string(),
   }),
 })
