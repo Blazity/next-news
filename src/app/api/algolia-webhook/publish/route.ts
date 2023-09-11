@@ -6,6 +6,7 @@ import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
+import { revalidatePath } from "next/cache"
 
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
@@ -17,9 +18,10 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
         objectID: article.id,
         title,
         content: slateToText(content),
-        slug: slug,
+        slug,
       })
 
+      revalidatePath(`/${locale}/article/${slug}`)
       return { title, locale }
     })
   )
