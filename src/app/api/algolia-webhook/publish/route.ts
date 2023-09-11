@@ -21,10 +21,11 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
         slug,
       })
 
-      revalidatePath(`/[lang]/article/[slug]`)
       return { title, locale }
     })
   )
+
+  revalidatePath(`/[lang]/article/[slug]`)
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }

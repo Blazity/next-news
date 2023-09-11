@@ -15,11 +15,11 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
       const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.deleteObject(article.id)
 
-      revalidatePath(`/[lang]/article/[slug]`)
-
       return { locale }
     })
   )
+
+  revalidatePath(`/[lang]/article/[slug]`)
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
