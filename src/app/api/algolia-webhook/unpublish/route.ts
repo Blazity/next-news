@@ -6,8 +6,6 @@ import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
-export const runtime = "edge"
-
 async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
 

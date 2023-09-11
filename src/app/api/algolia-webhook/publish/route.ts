@@ -7,8 +7,6 @@ import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
-export const runtime = "edge"
-
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
 
@@ -25,8 +23,6 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
       return { title, locale }
     })
   )
-
-  console.log(indexingResults)
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
