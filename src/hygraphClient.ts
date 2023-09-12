@@ -23,13 +23,16 @@ const getArticleSummary = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
-      coverImage {
+      coverImage(forceParentLocale: true) {
         id
         url
       }
       author {
         id
         name
+      }
+      content {
+        raw
       }
     }
   }

@@ -10,8 +10,8 @@ export default function Layout({ children, params }: { children: React.ReactNode
     <html lang={lang}>
       <GoogleAnalytics />
       <body>
-        <main className="main mx-auto flex max-w-4xl flex-col items-center justify-start">
-          <nav className="flex w-full justify-end gap-4 p-4">
+        <main className="main mx-auto flex max-w-[1200px] flex-col items-center justify-start">
+          <nav className="flex w-full justify-end gap-4 px-4 py-8">
             <DynamicSearchDialog lang={lang} />
             <DynamicLangSelect lang={lang} />
           </nav>

@@ -17,7 +17,7 @@ function LangSelect({ lang }: LangSelectProps) {
       <SelectTrigger className="w-[100px]" aria-label="language select">
         <SelectValue>{lang}</SelectValue>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white">
         <SelectGroup>
           {i18n.locales.map((locale) => {
             return (

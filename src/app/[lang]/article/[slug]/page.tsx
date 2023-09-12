@@ -1,5 +1,7 @@
+import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
+import Image from "next/image"
 import { Metadata } from "next/types"
 
 type ArticlePageProps = { params: { lang: Locale; slug: string } }
@@ -38,9 +40,25 @@ export default async function Web({ params: { lang, slug } }: ArticlePageProps) 
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
+  if (!article) return null
   return (
-    <>
-      <section className="flex w-full justify-end gap-4 p-4">{JSON.stringify(article)}</section>
-    </>
+    <article className="w-full px-4 pb-16">
+      {article.coverImage && (
+        <Image
+          src={article.coverImage.url}
+          alt={""}
+          width={1200}
+          height={630}
+          quality={100}
+          className="max-h-[630px] rounded-sm object-cover"
+        />
+      )}
+      <h1 className="mb-8 text-2xl font-semibold">{article.title}</h1>
+      {article.content && (
+        <section className="flex w-full flex-col gap-4">
+          <RichText raw={article.content.raw} />
+        </section>
+      )}
+    </article>
   )
 }

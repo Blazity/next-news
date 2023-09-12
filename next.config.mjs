@@ -18,6 +18,14 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
       ],
     }
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.graphassets.com",
+      },
+    ],
+  },
 })
 
 export default config

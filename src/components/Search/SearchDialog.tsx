@@ -46,7 +46,7 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
         </Button>
       </DialogTrigger>
       <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
-        <DialogContent className="bottom-auto top-[10%] translate-y-[0%] sm:max-w-2xl">
+        <DialogContent className="bottom-auto top-[10%] translate-y-[0%] bg-white sm:max-w-2xl">
           <DialogHeader>
             <DebouncedSearchBox />
           </DialogHeader>

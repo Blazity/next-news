@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",
+    "@graphcms/rich-text-react-renderer": "^0.6.1",
     "@hygraph/utils": "^1.2.1",
     "@next/bundle-analyzer": "^13.3.0",
     "@radix-ui/react-accordion": "^1.1.1",
