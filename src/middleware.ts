@@ -24,9 +24,11 @@ export function middleware(request: NextRequest) {
 
   if (!pathnameIsMissingLocale) return
   const locale = getLocale(request)
+
+  console.log("LOCALE", locale)
   return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url))
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/"],
 }

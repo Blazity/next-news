@@ -5,7 +5,7 @@ import { env } from "./env.mjs"
 import { graphql } from "./gql"
 
 const hygraphClient = (init?: RequestInit) =>
-  new GraphQLClient(env.HYGRAPH_CONTENT_API_URL, {
+  new GraphQLClient(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
     fetch: (url, config) => fetch(url, { ...config, ...init }),
   })
 
@@ -38,6 +38,30 @@ const getArticleSummary = graphql(`
   }
 `)
 
+const getRecentArticles = graphql(`
+  query getRecentArticles($locales: [Locale!]!, $perPage: Int = 10, $skip: Int = 0) {
+    articles(locales: $locales, orderBy: publishedAt_DESC, first: $perPage, skip: $skip) {
+      id
+      title
+      slug
+      publishedAt
+      coverImage(forceParentLocale: true) {
+        id
+        url
+      }
+      author {
+        id
+        name
+      }
+    }
+    articlesConnection(locales: $locales) {
+      aggregate {
+        count
+      }
+    }
+  }
+`)
+
 export const HygraphClient = (inputLocale: Locale) => {
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
@@ -51,5 +75,6 @@ export const HygraphClient = (inputLocale: Locale) => {
   return {
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
+    getRecentArticles: makeRequest(getRecentArticles),
   }
 }

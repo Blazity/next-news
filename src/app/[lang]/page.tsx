@@ -1,4 +1,5 @@
 import { Locale } from "i18n.js"
+import { RecentArticles } from "../../components/RecentArticles/RecentArticles"
 
 export const metadata = {
   title: "Blazity-Hygraph news starter",
@@ -20,7 +21,7 @@ export const metadata = {
 export default async function Web({ params: { lang } }: { params: { lang: Locale } }) {
   return (
     <>
-      <section></section>
+      <RecentArticles lang={lang} />
     </>
   )
 }
