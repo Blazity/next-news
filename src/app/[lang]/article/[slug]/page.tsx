@@ -35,7 +35,8 @@ export async function generateMetadata({ params: { lang, slug } }: ArticlePagePr
 
 export default async function Web({ params: { lang, slug } }: ArticlePageProps) {
   const { getArticleSummary } = HygraphClient(lang)
-  const article = await getArticleSummary({ slug })
+  const { articles } = await getArticleSummary({ slug })
+  const article = articles[0]
 
   return (
     <>

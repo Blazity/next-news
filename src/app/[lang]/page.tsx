@@ -1,9 +1,7 @@
-import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
-import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
 import { Locale } from "i18n.js"
 
 export const metadata = {
-  title: "Next.js Enterprise Boilerplate",
+  title: "Blazity-Hygraph news starter",
   openGraph: {
     url: "https://next-enterprise.vercel.app/",
     images: [

@@ -11,9 +11,7 @@ export function GoogleAnalytics() {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', '${env.GA_MEASUREMENT_ID}', {
-            page_path: window.location.pathname,
-          });
+          gtag('config', '${env.GA_MEASUREMENT_ID}');
         `}
       </Script>
     </>
