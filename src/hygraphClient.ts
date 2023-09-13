@@ -62,6 +62,18 @@ const getRecentArticles = graphql(`
   }
 `)
 
+const getHomepage = graphql(`
+  query getHomepage($locales: [Locale!]!) {
+    homepages(locales: $locales) {
+      stockDailyQuotes {
+        id
+        name
+        quote
+      }
+    }
+  }
+`)
+
 export const HygraphClient = (inputLocale: Locale) => {
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
@@ -76,5 +88,6 @@ export const HygraphClient = (inputLocale: Locale) => {
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
     getRecentArticles: makeRequest(getRecentArticles),
+    getHomepage: makeRequest(getHomepage),
   }
 }
