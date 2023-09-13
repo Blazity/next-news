@@ -1,8 +1,8 @@
 "use client"
 
+import { usePathname, useRouter } from "next/navigation"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "components/ui/Select/Select"
 import { i18n, type Locale } from "i18n"
-import { usePathname, useRouter } from "next/navigation"
 
 export type LangSelectProps = { lang: Locale }
 

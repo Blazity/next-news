@@ -1,12 +1,9 @@
-import { QueryClient } from "@tanstack/react-query"
 import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
 import type { Locale } from "i18n"
 import "../../styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
-
-const queryClient = new QueryClient()
 
 export default function Layout({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
   const lang = params.lang as Locale

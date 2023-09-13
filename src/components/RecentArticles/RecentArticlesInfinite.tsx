@@ -1,14 +1,14 @@
 "use client"
 
 import { InfiniteData, useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
+import { Button } from "components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "gql/graphql"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
-import { useState } from "react"
-import Image from "next/image"
-import { Button } from "components/ui/Button/Button"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
-import Link from "next/link"
 
 type RecentArticlesInfiniteProps = {
   initialArticles: GetRecentArticlesQuery

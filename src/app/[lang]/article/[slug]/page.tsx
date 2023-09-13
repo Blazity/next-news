@@ -1,8 +1,8 @@
+import Image from "next/image"
+import { Metadata } from "next/types"
 import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
-import Image from "next/image"
-import { Metadata } from "next/types"
 
 type ArticlePageProps = { params: { lang: Locale; slug: string } }
 

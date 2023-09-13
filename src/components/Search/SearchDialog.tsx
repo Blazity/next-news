@@ -1,11 +1,6 @@
 "use client"
 
 import algoliasearch from "algoliasearch/lite"
-import { Button } from "components/ui/Button/Button"
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "components/ui/Dialog/Dialog"
-import { Input } from "components/ui/Input/Input"
-import { env } from "env.mjs"
-import { Locale } from "i18n"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
@@ -18,10 +13,15 @@ import {
   Hits,
   InstantSearch,
   Snippet,
-  UseSearchBoxProps,
   useInstantSearch,
   useSearchBox,
+  UseSearchBoxProps,
 } from "react-instantsearch"
+import { Button } from "components/ui/Button/Button"
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "components/ui/Dialog/Dialog"
+import { Input } from "components/ui/Input/Input"
+import { env } from "env.mjs"
+import { Locale } from "i18n"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
