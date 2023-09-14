@@ -1,19 +1,16 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "components/ui/Select/Select"
 import { i18n } from "i18n"
 import { useLocale } from "store"
 
 function LangSelect() {
   const router = useRouter()
-  const pathname = usePathname()
   const lang = useLocale().locale
 
-  const [empty, currentLang, ...rest] = pathname.split("/")
-
   return (
-    <Select value={lang} onValueChange={(locale) => router.push(`/${[locale, ...rest].join("/")}`)}>
+    <Select value={lang} onValueChange={(locale) => router.push(`/${locale}`)}>
       <SelectTrigger className="w-[100px]" aria-label="language select">
         <SelectValue>{lang}</SelectValue>
       </SelectTrigger>

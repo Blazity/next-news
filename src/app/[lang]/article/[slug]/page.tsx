@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
 import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
@@ -10,7 +11,7 @@ export async function generateMetadata({ params: { slug } }: ArticlePageProps): 
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
-  if (!article) return null
+  if (!article) return notFound()
   return {
     title: article.title,
     openGraph: {
