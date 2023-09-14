@@ -65,7 +65,8 @@
     "react-dom": "^18.2.0",
     "react-instantsearch": "^7.0.2",
     "tailwind-merge": "^1.10.0",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

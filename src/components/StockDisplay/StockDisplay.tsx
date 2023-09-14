@@ -24,18 +24,14 @@ export async function StockDisplay() {
     { next: { revalidate: 60 * 60 } }
   )
 
-  const validStockQuotes = useMemo(
-    () =>
-      quotes
-        .map((stockQuote) => ({ ...stockQuote, quote: validateQuote(stockQuote.quote) }))
-        .filter((stockQuote): stockQuote is ValidStockQuote => stockQuote.quote !== null)
-        .map(({ quote, ...stockQuoteProps }) => ({
-          id: stockQuoteProps.id,
-          name: stockQuoteProps.name,
-          changePercent: quote["Global Quote"]["10. change percent"],
-        })),
-    [quotes]
-  )
+  const validStockQuotes = quotes
+    .map((stockQuote) => ({ ...stockQuote, quote: validateQuote(stockQuote.quote) }))
+    .filter((stockQuote): stockQuote is ValidStockQuote => stockQuote.quote !== null)
+    .map(({ quote, ...stockQuoteProps }) => ({
+      id: stockQuoteProps.id,
+      name: stockQuoteProps.name,
+      changePercent: quote["Global Quote"]["10. change percent"],
+    }))
 
   return <StockDisplayRenderer quotes={validStockQuotes} />
 }

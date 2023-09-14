@@ -6,16 +6,16 @@ import Link from "next/link"
 import { Button } from "components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "gql/graphql"
 import { HygraphClient } from "hygraphClient"
-import { Locale } from "i18n"
+import { useLocale } from "store"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: GetRecentArticlesQuery
-  lang: Locale
 }
 
-export function RecentArticlesInfinite({ initialArticles, lang }: RecentArticlesInfiniteProps) {
-  const { getRecentArticles } = HygraphClient(lang)
+export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
+  const { getRecentArticles } = HygraphClient()
+  const lang = useLocale().locale
 
   const {
     data: recentArticlesQuery,

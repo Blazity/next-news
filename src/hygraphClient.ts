@@ -1,7 +1,7 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import type { HygraphLocaleEnum, Locale } from "i18n"
-import { i18n } from "i18n"
+import type { HygraphLocaleEnum } from "i18n"
+import { useLocale } from "store"
 import { env } from "./env.mjs"
 import { graphql } from "./gql"
 
@@ -85,7 +85,8 @@ const getStockDailyQuotes = graphql(`
   }
 `)
 
-export const HygraphClient = (inputLocale: Locale = i18n.defaultLocale) => {
+export const HygraphClient = () => {
+  const inputLocale = useLocale.getState().locale
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
