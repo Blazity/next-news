@@ -4,7 +4,7 @@ import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
 
-interface CustomPageProps {
+type CustomPageProps = {
   params: { slug: string; lang: Locale }
 }
 
