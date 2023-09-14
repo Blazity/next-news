@@ -2,14 +2,13 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
-import { Locale } from "i18n"
 
 type CustomPageProps = {
-  params: { slug: string; lang: Locale }
+  params: { slug: string }
 }
 
-export async function generateMetadata({ params: { lang, slug } }: CustomPageProps): Promise<Metadata | null> {
-  const { getPageContent } = HygraphClient(lang)
+export async function generateMetadata({ params: { slug } }: CustomPageProps): Promise<Metadata | null> {
+  const { getPageContent } = HygraphClient()
   const { pages } = await getPageContent({ slug })
   const page = pages[0]
 
@@ -20,8 +19,8 @@ export async function generateMetadata({ params: { lang, slug } }: CustomPagePro
   }
 }
 
-export default async function Web({ params: { slug, lang } }: CustomPageProps) {
-  const { getPageContent } = HygraphClient(lang)
+export default async function Web({ params: { slug } }: CustomPageProps) {
+  const { getPageContent } = HygraphClient()
   const { pages } = await getPageContent({ slug })
   const page = pages[0]
 

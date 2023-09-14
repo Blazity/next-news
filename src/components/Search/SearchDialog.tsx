@@ -5,7 +5,6 @@ import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
   Configure,
@@ -22,14 +21,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "components/u
 import { Input } from "components/ui/Input/Input"
 import { env } from "env.mjs"
 import { Locale } from "i18n"
+import { useLocale } from "store"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
-export type SearchDialogProps = {
-  lang: Locale
-}
+function SearchDialogContent() {
+  const lang = useLocale().locale
 
-function SearchDialogContent({ lang }: SearchDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -54,7 +52,7 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
           <Configure attributesToSnippet={["content:20"]} />
           <NoResultsBoundary fallback={<NoResults />}>
             <Hits
-              hitComponent={(props) => <Hit {...props} hit={props.hit as ArticleHit} lang={lang} />}
+              hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
               className="flex flex-col gap-4 py-2"
             />
           </NoResultsBoundary>
@@ -66,12 +64,12 @@ function SearchDialogContent({ lang }: SearchDialogProps) {
 
 type ArticleHit = Hit<{ title: string; content: string; objectID: string; slug: string }>
 
-function Hit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
+function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (
     <Link
       href={`/${lang}/article/${hit.slug}`}
       prefetch={false}
-      className="ring-offset-background focus-visible:ring-ring inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col rounded-md px-4 py-2">
         <Highlight

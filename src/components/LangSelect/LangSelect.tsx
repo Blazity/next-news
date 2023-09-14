@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "components/ui/Select/Select"
-import { i18n, type Locale } from "i18n"
+import { i18n } from "i18n"
+import { useLocale } from "store"
 
-export type LangSelectProps = { lang: Locale }
-
-function LangSelect({ lang }: LangSelectProps) {
+function LangSelect() {
   const router = useRouter()
+  const lang = useLocale().locale
 
   return (
     <Select value={lang} onValueChange={(locale) => router.push(`/${locale}`)}>
