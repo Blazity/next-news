@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 import { RichText } from "components/RichText/RichText"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
@@ -25,7 +25,7 @@ export default async function Web({ params: { slug, lang } }: CustomPageProps) {
   const { pages } = await getPageContent({ slug })
   const page = pages[0]
 
-  if (!page) return redirect("/not-found")
+  if (!page) notFound()
   return (
     <section className="w-full px-4 pb-16">
       <h1>{page.title}</h1>
