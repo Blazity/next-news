@@ -1,5 +1,5 @@
-import { env } from "env.mjs"
 import Script from "next/script"
+import { env } from "env.mjs"
 
 export function GoogleAnalytics() {
   return (

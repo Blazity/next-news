@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server"
 
 import { HttpError } from "./httpError"
-import { NextRequestWithBody, hasParsedBody } from "./validateSignature"
+import { hasParsedBody, NextRequestWithBody } from "./validateSignature"
 
 export const validateBody =
   <T>(schema: Zod.Schema<T>) =>

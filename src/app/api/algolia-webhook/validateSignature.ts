@@ -1,6 +1,6 @@
+import { verifyWebhookSignature } from "@hygraph/utils"
 import { NextRequest } from "next/server"
 import { HttpError } from "./httpError"
-import { verifyWebhookSignature } from "@hygraph/utils"
 import { env } from "../../../env.mjs"
 
 export const validateSignature = async (req: NextRequest) => {

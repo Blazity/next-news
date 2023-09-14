@@ -1,11 +1,11 @@
+import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
-import { pipe } from "utils/pipe"
 import { z } from "zod"
+import { pipe } from "utils/pipe"
 import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
-import { revalidatePath } from "next/cache"
 
 async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
