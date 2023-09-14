@@ -1,6 +1,7 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import type { HygraphLocaleEnum, Locale } from "i18n.js"
+import type { HygraphLocaleEnum, Locale } from "i18n"
+import { i18n } from "i18n"
 import { env } from "./env.mjs"
 import { graphql } from "./gql"
 
@@ -73,7 +74,29 @@ const getRecentArticles = graphql(`
   }
 `)
 
-export const HygraphClient = (inputLocale: Locale) => {
+const getHomepage = graphql(`
+  query getHomepage($locales: [Locale!]!) {
+    homepages(locales: $locales) {
+      stockDailyQuotes {
+        id
+        name
+        quote
+      }
+    }
+  }
+`)
+
+const getStockDailyQuotes = graphql(`
+  query getStockDailyQuotes($symbols: [String!]!) {
+    stockDailyQuotes(where: { symbol_in: $symbols }) {
+      id
+      name
+      quote
+    }
+  }
+`)
+
+export const HygraphClient = (inputLocale: Locale = i18n.defaultLocale) => {
   const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
@@ -88,5 +111,7 @@ export const HygraphClient = (inputLocale: Locale) => {
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
     getRecentArticles: makeRequest(getRecentArticles),
+    getHomepage: makeRequest(getHomepage),
+    getStockDailyQuotes: makeRequest(getStockDailyQuotes),
   }
 }
