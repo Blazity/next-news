@@ -1,16 +1,15 @@
 "use client"
 
-import { InfiniteData, useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
 import { Button } from "components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "gql/graphql"
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 
-type RecentArticlesInfiniteProps = {
+export type RecentArticlesInfiniteProps = {
   initialArticles: GetRecentArticlesQuery
   lang: Locale
 }
@@ -71,3 +70,5 @@ export function RecentArticlesInfinite({ initialArticles, lang }: RecentArticles
     </>
   )
 }
+
+export default RecentArticlesInfinite

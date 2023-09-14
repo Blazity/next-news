@@ -1,6 +1,6 @@
 import { HygraphClient } from "hygraphClient"
 import { Locale } from "i18n"
-import { RecentArticlesInfinite } from "./RecentArticlesInfinite"
+import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 
 export const RECENT_ARTICLES_PER_PAGE = 4
 
@@ -11,7 +11,7 @@ export async function RecentArticles({ lang }: { lang: Locale }) {
   return (
     <section className="w-full px-4">
       <h2 className="mb-4 text-2xl font-bold">Recent articles</h2>
-      <RecentArticlesInfinite initialArticles={initialArticles} lang={lang} />
+      <RecentArticlesInfiniteDynamic initialArticles={initialArticles} lang={lang} />
     </section>
   )
 }
