@@ -12,8 +12,8 @@ export default function Layout({ children, params }: { children: React.ReactNode
       <GoogleAnalytics />
       <Providers>
         <body>
-          <main className="main mx-auto flex max-w-[1200px] flex-col items-center justify-start">
-            <nav className="flex w-full justify-end gap-4 px-4 py-8">
+          <main className="mx-auto flex max-w-[1200px] flex-col items-center justify-start py-8">
+            <nav className="flex w-full justify-end gap-4 px-4">
               <DynamicSearchDialog lang={lang} />
               <DynamicLangSelect lang={lang} />
             </nav>
