@@ -19,6 +19,24 @@ const getArticles = graphql(`
   }
 `)
 
+const getArticlesWithMeta = graphql(`
+  query getArticlesWithMeta {
+    articles {
+      author {
+        name
+      }
+      createdAt
+      locale
+      slug
+      title
+      updatedAt
+      coverImage {
+        url
+      }
+    }
+  }
+`)
+
 const getPagesConfig = graphql(`
   query getPagesSlug {
     pages {
@@ -117,6 +135,7 @@ export const HygraphClient = () => {
     }
 
   return {
+    getArticlesWithMeta: makeRequest(getArticlesWithMeta),
     getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
     getArticles: makeRequest(getArticles),

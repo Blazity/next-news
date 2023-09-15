@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog posts | RSS Feed</title>
+        <link>localhost:3000</link>
+        <description>Welcome to this blog posts!</description>
+        <lastBuildDate>Fri, 15 Sep 2023 14:28:13 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Feed for Node.js</generator>
+        <language>en</language>
+        <image>
+            <title>Blog posts | RSS Feed</title>
+            <url>localhost:3000/logo.png</url>
+            <link>localhost:3000</link>
+        </image>
+        <copyright>All rights reserved 2023</copyright>
+        <item>
+            <title><![CDATA[Second article UPDATED]]></title>
+            <link>localhost:3000/blog/second-article</link>
+            <guid>localhost:3000/blog/second-article</guid>
+            <pubDate>Tue, 12 Sep 2023 10:41:10 GMT</pubDate>
+            <description><![CDATA[test]]></description>
+        </item>
+        <item>
+            <title><![CDATA[New article 1]]></title>
+            <link>localhost:3000/blog/new-article-1</link>
+            <guid>localhost:3000/blog/new-article-1</guid>
+            <pubDate>Wed, 13 Sep 2023 11:53:33 GMT</pubDate>
+            <description><![CDATA[test]]></description>
+        </item>
+        <item>
+            <title><![CDATA[New article 3]]></title>
+            <link>localhost:3000/blog/new-article-3</link>
+            <guid>localhost:3000/blog/new-article-3</guid>
+            <pubDate>Wed, 06 Sep 2023 11:03:33 GMT</pubDate>
+            <description><![CDATA[test]]></description>
+        </item>
+        <item>
+            <title><![CDATA[I shared that 3]]></title>
+            <link>localhost:3000/blog/i-shared-that-3</link>
+            <guid>localhost:3000/blog/i-shared-that-3</guid>
+            <pubDate>Mon, 11 Sep 2023 13:52:13 GMT</pubDate>
+            <description><![CDATA[test]]></description>
+            <enclosure url="https://media.graphassets.com/Cd2z8xYKRsegaJA3yoUl" length="0" type="image//Cd2z8xYKRsegaJA3yoUl"/>
+        </item>
+        <item>
+            <title><![CDATA[some-article-3]]></title>
+            <link>localhost:3000/blog/some-article-3</link>
+            <guid>localhost:3000/blog/some-article-3</guid>
+            <pubDate>Tue, 12 Sep 2023 14:35:35 GMT</pubDate>
+            <description><![CDATA[test]]></description>
+        </item>
+    </channel>
+</rss>
