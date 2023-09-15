@@ -18,6 +18,7 @@ src/gql/index.ts
 
 # dependencies
 node_modules
+package-lock.json
 .pnp
 .pnp.js
 .yarn
