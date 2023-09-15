@@ -19,6 +19,15 @@ const getArticles = graphql(`
   }
 `)
 
+const getPagesConfig = graphql(`
+  query getPagesSlug {
+    pages {
+      slug
+      locale
+    }
+  }
+`)
+
 const getPageContent = graphql(`
   query getPageContent($locales: [Locale!]!, $slug: String!) {
     pages(locales: $locales, where: { slug: $slug }) {
@@ -108,6 +117,7 @@ export const HygraphClient = () => {
     }
 
   return {
+    getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
