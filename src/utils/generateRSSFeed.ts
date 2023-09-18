@@ -1,11 +1,11 @@
 import { Feed } from "feed"
 import fs from "fs"
-import { HygraphClient } from "@/hygraphClient"
+import { HygraphApi } from "@/hygraphApi/hygraphApi"
 
 export default async function generateRssFeed(locale: string) {
   const siteUrl = process.env.VERCEL_URL ?? "localhost:3000"
 
-  const { getRecentArticlesWithMetadata } = HygraphClient()
+  const { getRecentArticlesWithMetadata } = HygraphApi({})
   const { articles } = await getRecentArticlesWithMetadata({ locales: [locale] })
 
   const feedOptions = {

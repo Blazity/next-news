@@ -1,7 +1,7 @@
 "use client"
 
-import { useLocale } from "i18n/useLocale"
 import { HygraphApi } from "./hygraphApi"
+import { useLocale } from "@/i18n/useLocale"
 
 export function HygraphClientApi() {
   const locale = useLocale()
