@@ -2,6 +2,7 @@ import generateRssFeed from "@utils/generateRSSFeed"
 import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
+import { hygraphLocaleToStandardNotation } from "i18n"
 import { pipe } from "utils/pipe"
 import { slateToText } from "utils/slateToText"
 import { algoliaClient } from "../algoliaClient"
@@ -13,7 +14,8 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale, title, content, slug }) => {
+    article.localizations.map(async ({ locale: hygraphLocale, title, content, slug }) => {
+      const locale = hygraphLocaleToStandardNotation(hygraphLocale)
       const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.saveObject({
         objectID: article.id,
