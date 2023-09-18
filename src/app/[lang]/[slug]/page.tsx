@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { RichText } from "components/RichText/RichText"
-import { HygraphApi } from "hygraphApi/hygraphApi"
-import { Locale } from "i18n/i18n"
+import { RichText } from "@/components/RichText/RichText"
+import { HygraphApi } from "@/hygraphApi/hygraphApi"
+import { Locale } from "@/i18n/i18n"
 
 type CustomPageProps = {
   params: { slug: string; lang: Locale }

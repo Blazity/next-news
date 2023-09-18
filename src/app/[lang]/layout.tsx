@@ -1,7 +1,7 @@
-import { DynamicLangSelect } from "components/LangSelect/DynamicLangSelect"
-import { DynamicSearchDialog } from "components/Search/DynamicSearchDialog"
-import type { Locale } from "i18n/i18n"
-import "../../styles/tailwind.css"
+import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
+import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
+import type { Locale } from "@/i18n/i18n"
+import "@/styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
 

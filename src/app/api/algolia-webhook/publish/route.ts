@@ -1,13 +1,14 @@
 import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
-import { hygraphLocaleToStandardNotation } from "i18n/i18n"
-import { pipe } from "utils/pipe"
-import { slateToText } from "utils/slateToText"
 import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
+import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
+import generateRssFeed from "@/utils/generateRSSFeed"
+import { pipe } from "@/utils/pipe"
+import { slateToText } from "@/utils/slateToText"
 
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
@@ -22,6 +23,7 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
         content: slateToText(content),
         slug,
       })
+      await generateRssFeed(locale)
 
       return { title, locale }
     })

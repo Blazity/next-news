@@ -1,9 +1,9 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
-import { RichText } from "components/RichText/RichText"
-import { HygraphApi } from "hygraphApi/hygraphApi"
-import { Locale } from "i18n/i18n"
+import { RichText } from "@/components/RichText/RichText"
+import { HygraphApi } from "@/hygraphApi/hygraphApi"
+import { Locale } from "@/i18n/i18n"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 

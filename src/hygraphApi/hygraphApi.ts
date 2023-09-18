@@ -1,8 +1,8 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import { type HygraphLocaleEnum, i18n, type Locale } from "i18n/i18n"
-import { env } from "../env.mjs"
-import { graphql } from "../gql"
+import { env } from "@/env.mjs"
+import { graphql } from "@/gql"
+import { type HygraphLocaleEnum, i18n, type Locale } from "@/i18n/i18n"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
@@ -14,6 +14,33 @@ const getArticles = graphql(`
     articles(locales: $locales) {
       id
       title
+    }
+  }
+`)
+
+const getRecentArticlesWithMetadata = graphql(`
+  query getArticlesWithMeta($locales: [Locale!]!) {
+    articles(locales: $locales, first: 50, orderBy: updatedAt_ASC) {
+      author {
+        name
+      }
+      createdAt
+      locale
+      slug
+      title
+      updatedAt
+      coverImage {
+        url
+      }
+    }
+  }
+`)
+
+const getPagesConfig = graphql(`
+  query getPagesSlug {
+    pages {
+      slug
+      locale
     }
   }
 `)
@@ -106,6 +133,8 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
+    getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
