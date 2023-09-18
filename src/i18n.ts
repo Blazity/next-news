@@ -13,9 +13,15 @@ type Replace<
   A extends string = ""
 > = T extends `${infer L}${S}${infer R}` ? Replace<R, S, D, `${A}${L}${D}`> : `${A}${T}`
 
-const locales = Object.values(HygraphLocaleEnum).map((hygraphLocale) => hygraphLocale.replace("_", "-") as Locale)
+const locales = Object.values(HygraphLocaleEnum).map(
+  (hygraphLocale) => hygraphLocaleToStandardNotation(hygraphLocale) as Locale
+)
 
 const defaultLocale: Locale = "en"
+
+export function hygraphLocaleToStandardNotation(locale: string) {
+  return locale.replace("_", "-")
+}
 
 export const i18n = {
   locales,
