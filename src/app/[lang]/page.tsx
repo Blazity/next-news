@@ -1,4 +1,5 @@
 import { StockDisplay } from "components/StockDisplay/StockDisplay"
+import { Locale } from "i18n/i18n"
 import { RecentArticles } from "../../components/RecentArticles/RecentArticles"
 
 export const metadata = {
@@ -18,13 +19,13 @@ export const metadata = {
   },
 }
 
-export default async function Web() {
+export default async function Web({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <div className="flex w-full justify-end px-4 pt-4">
         <StockDisplay />
       </div>
-      <RecentArticles />
+      <RecentArticles lang={params.lang} />
     </>
   )
 }

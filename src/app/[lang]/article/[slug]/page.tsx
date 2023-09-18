@@ -2,12 +2,13 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
 import { RichText } from "components/RichText/RichText"
-import { HygraphClient } from "hygraphClient"
+import { HygraphApi } from "hygraphApi/hygraphApi"
+import { Locale } from "i18n/i18n"
 
-type ArticlePageProps = { params: { slug: string } }
+type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
-export async function generateMetadata({ params: { slug } }: ArticlePageProps): Promise<Metadata | null> {
-  const { getArticleSummary } = HygraphClient()
+export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
+  const { getArticleSummary } = HygraphApi({ lang })
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
@@ -35,8 +36,8 @@ export async function generateMetadata({ params: { slug } }: ArticlePageProps): 
   }
 }
 
-export default async function Web({ params: { slug } }: ArticlePageProps) {
-  const { getArticleSummary } = HygraphClient()
+export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
+  const { getArticleSummary } = HygraphApi({ lang })
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
