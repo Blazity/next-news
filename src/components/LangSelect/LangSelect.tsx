@@ -9,12 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/Select/Select"
-import { i18n } from "@/i18n"
-import { useLocale } from "@/store"
+import { i18n } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/useLocale"
 
 function LangSelect() {
   const router = useRouter()
-  const lang = useLocale().locale
+  const lang = useLocale()
 
   return (
     <Select value={lang} onValueChange={(locale) => router.push(`/${locale}`)}>

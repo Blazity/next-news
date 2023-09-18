@@ -5,7 +5,7 @@ import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
-import { hygraphLocaleToStandardNotation } from "@/i18n"
+import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
 import { pipe } from "@/utils/pipe"
 
 async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {

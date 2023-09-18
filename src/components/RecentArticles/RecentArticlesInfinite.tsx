@@ -1,21 +1,22 @@
+/* eslint-disable import/order */
 "use client"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
-import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { Button } from "@/components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "@/gql/graphql"
-import { HygraphClient } from "@/hygraphClient"
-import { useLocale } from "@/store"
+import { HygraphClientApi } from "@/hygraphApi/hygraphClientApi"
+import { useLocale } from "@/i18n/useLocale"
+import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: GetRecentArticlesQuery
 }
 
 export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
-  const { getRecentArticles } = HygraphClient()
-  const lang = useLocale().locale
+  const { getRecentArticles } = HygraphClientApi()
+  const lang = useLocale()
 
   const {
     data: recentArticlesQuery,

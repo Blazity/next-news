@@ -1,9 +1,8 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import { env } from "./env.mjs"
-import { graphql } from "./gql"
-import type { HygraphLocaleEnum } from "@/i18n"
-import { useLocale } from "@/store"
+import { env } from "@/env.mjs"
+import { graphql } from "@/gql"
+import { type HygraphLocaleEnum, i18n, type Locale } from "@/i18n/i18n"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
@@ -123,9 +122,8 @@ const getStockDailyQuotes = graphql(`
   }
 `)
 
-export const HygraphClient = () => {
-  const inputLocale = useLocale.getState().locale
-  const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
+export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
+  const locale = lang.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
     <TQuery, TVariables>(document: TypedDocumentNode<TQuery, TVariables>) =>
