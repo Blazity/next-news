@@ -1,4 +1,5 @@
 import { StockDisplay } from "components/StockDisplay/StockDisplay"
+import generateRssFeed from "utils/generateRSSFeed"
 import { RecentArticles } from "../../components/RecentArticles/RecentArticles"
 
 export const metadata = {
@@ -19,6 +20,8 @@ export const metadata = {
 }
 
 export default async function Web() {
+  await generateRssFeed()
+
   return (
     <>
       <div className="flex w-full justify-end px-4 pt-4">
