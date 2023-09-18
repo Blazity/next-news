@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
-import { RichText } from "components/RichText/RichText"
-import { HygraphClient } from "hygraphClient"
+import { RichText } from "@/components/RichText/RichText"
+import { HygraphClient } from "@/hygraphClient"
 
 type ArticlePageProps = { params: { slug: string } }
 

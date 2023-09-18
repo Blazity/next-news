@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { i18n, Locale } from "i18n"
+import { i18n, Locale } from "@/i18n"
 
 export const useLocale = create<{
   locale: Locale

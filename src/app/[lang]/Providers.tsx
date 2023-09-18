@@ -2,8 +2,8 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactNode, useEffect, useRef, useState } from "react"
-import { Locale } from "i18n"
-import { useLocale } from "store"
+import { Locale } from "@/i18n"
+import { useLocale } from "@/store"
 
 export default function Providers({ children, lang }: { children: ReactNode; lang: Locale }) {
   const [queryClient] = useState(

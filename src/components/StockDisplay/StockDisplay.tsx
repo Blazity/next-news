@@ -1,7 +1,6 @@
-import { useMemo } from "react"
 import { z } from "zod"
-import { HygraphClient } from "hygraphClient"
 import { StockDisplayRenderer } from "./StockDisplayRenderer"
+import { HygraphClient } from "@/hygraphClient"
 
 type StockQuoteBase = {
   id: string

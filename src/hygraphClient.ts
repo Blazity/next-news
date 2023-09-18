@@ -1,9 +1,9 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import type { HygraphLocaleEnum } from "i18n"
-import { useLocale } from "store"
 import { env } from "./env.mjs"
 import { graphql } from "./gql"
+import type { HygraphLocaleEnum } from "@/i18n"
+import { useLocale } from "@/store"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {

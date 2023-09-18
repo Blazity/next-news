@@ -1,5 +1,5 @@
-import { StockDisplay } from "components/StockDisplay/StockDisplay"
-import { RecentArticles } from "../../components/RecentArticles/RecentArticles"
+import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
+import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 
 export const metadata = {
   title: "Blazity-Hygraph news starter",

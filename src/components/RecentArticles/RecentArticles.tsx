@@ -1,5 +1,5 @@
-import { HygraphClient } from "hygraphClient"
 import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
+import { HygraphClient } from "@/hygraphClient"
 
 export const RECENT_ARTICLES_PER_PAGE = 4
 

@@ -3,11 +3,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "components/ui/Button/Button"
-import { GetRecentArticlesQuery } from "gql/graphql"
-import { HygraphClient } from "hygraphClient"
-import { useLocale } from "store"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
+import { Button } from "@/components/ui/Button/Button"
+import { GetRecentArticlesQuery } from "@/gql/graphql"
+import { HygraphClient } from "@/hygraphClient"
+import { useLocale } from "@/store"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: GetRecentArticlesQuery
