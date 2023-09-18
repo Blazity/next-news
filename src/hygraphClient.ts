@@ -19,7 +19,7 @@ const getArticles = graphql(`
   }
 `)
 
-const getArticlesWithMeta = graphql(`
+const getRecentArticlesWithMetadata = graphql(`
   query getArticlesWithMeta($locales: [Locale!]!) {
     articles(locales: $locales, first: 50, orderBy: updatedAt_ASC) {
       author {
@@ -135,7 +135,7 @@ export const HygraphClient = () => {
     }
 
   return {
-    getArticlesWithMeta: makeRequest(getArticlesWithMeta),
+    getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
     getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
     getArticles: makeRequest(getArticles),
