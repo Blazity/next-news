@@ -10,7 +10,9 @@ type RecentArticlesProps = {
 
 export async function RecentArticles({ lang }: RecentArticlesProps) {
   const { getRecentArticles } = HygraphApi({ lang })
-  const initialArticles = await getRecentArticles({ perPage: RECENT_ARTICLES_PER_PAGE })
+  const initialArticles = await getRecentArticles({
+    perPage: RECENT_ARTICLES_PER_PAGE,
+  })
 
   return (
     <section className="w-full px-4">

@@ -24,7 +24,10 @@ export async function StockDisplay() {
   )
 
   const validStockQuotes = quotes
-    .map((stockQuote) => ({ ...stockQuote, quote: validateQuote(stockQuote.quote) }))
+    .map((stockQuote) => ({
+      ...stockQuote,
+      quote: validateQuote(stockQuote.quote),
+    }))
     .filter((stockQuote): stockQuote is ValidStockQuote => stockQuote.quote !== null)
     .map(({ quote, ...stockQuoteProps }) => ({
       id: stockQuoteProps.id,
@@ -42,5 +45,7 @@ function validateQuote(stockQuote: unknown) {
 }
 
 const quoteSchema = z.object({
-  "Global Quote": z.object({ "10. change percent": z.string().transform((val) => parseFloat(val.slice(0, -1))) }),
+  "Global Quote": z.object({
+    "10. change percent": z.string().transform((val) => parseFloat(val.slice(0, -1))),
+  }),
 })

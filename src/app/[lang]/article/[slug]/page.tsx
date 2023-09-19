@@ -23,7 +23,12 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
       images: article.coverImage
         ? [
             {
-              url: `/api/og?` + new URLSearchParams({ title: article.title, image: article.coverImage.url }),
+              url:
+                `/api/og?` +
+                new URLSearchParams({
+                  title: article.title,
+                  image: article.coverImage.url,
+                }),
               width: 1200,
               height: 630,
             },

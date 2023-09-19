@@ -7,6 +7,10 @@ src/gql/gql.ts
 src/gql/graphql.ts
 src/gql/index.ts
 
+# credentials
+
+google-credentials.json
+
 # Yarn 3 files
 .pnp.*
 .yarn/*
