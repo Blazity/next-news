@@ -1,7 +1,6 @@
-import { useMemo } from "react"
 import { z } from "zod"
-import { HygraphClient } from "hygraphClient"
 import { StockDisplayRenderer } from "./StockDisplayRenderer"
+import { HygraphApi } from "@/hygraphApi/hygraphApi"
 
 type StockQuoteBase = {
   id: string
@@ -18,7 +17,7 @@ type AlphaVantageQuote = {
 const SYMBOLS_TO_FETCH = ["SPY", "AAPL", "AMZN", "GOOGL", "MSFT"]
 
 export async function StockDisplay() {
-  const { getStockDailyQuotes } = HygraphClient()
+  const { getStockDailyQuotes } = HygraphApi({})
   const { stockDailyQuotes: quotes } = await getStockDailyQuotes(
     { symbols: SYMBOLS_TO_FETCH },
     { next: { revalidate: 60 * 60 } }

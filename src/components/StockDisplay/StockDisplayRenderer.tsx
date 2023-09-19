@@ -2,7 +2,7 @@
 
 import { MoveDown, MoveUp } from "lucide-react"
 import { useEffect, useState } from "react"
-import { cn } from "utils/cn"
+import { cn } from "@/utils/cn"
 
 type StockDisplayRendererProps = {
   quotes: { name: string; id: string; changePercent: number }[]

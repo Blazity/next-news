@@ -16,17 +16,17 @@ import {
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch"
-import { Button } from "components/ui/Button/Button"
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "components/ui/Dialog/Dialog"
-import { Input } from "components/ui/Input/Input"
-import { env } from "env.mjs"
-import { Locale } from "i18n"
-import { useLocale } from "store"
+import { Button } from "@/components/ui/Button/Button"
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components/ui/Dialog/Dialog"
+import { Input } from "@/components/ui/Input/Input"
+import { env } from "@/env.mjs"
+import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/useLocale"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
 function SearchDialogContent() {
-  const lang = useLocale().locale
+  const lang = useLocale()
 
   return (
     <Dialog>

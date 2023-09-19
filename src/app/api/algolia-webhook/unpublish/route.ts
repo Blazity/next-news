@@ -1,7 +1,8 @@
 import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
-import { pipe } from "utils/pipe"
+import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
+import { pipe } from "@/utils/pipe"
 import { algoliaClient } from "../algoliaClient"
 import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
@@ -11,7 +12,8 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
   const article = req.validBody.data
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale }) => {
+    article.localizations.map(async ({ locale: hygraphLocale }) => {
+      const locale = hygraphLocaleToStandardNotation(hygraphLocale)
       const index = algoliaClient.initIndex(`articles-${locale}`)
       await index.deleteObject(article.id)
 
@@ -20,6 +22,7 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
   )
 
   revalidatePath(`/[lang]/article/[slug]`)
+  revalidatePath(`/[lang]`)
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }

@@ -1,9 +1,8 @@
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { GraphQLClient, Variables } from "graphql-request"
-import type { HygraphLocaleEnum } from "i18n"
-import { useLocale } from "store"
-import { env } from "./env.mjs"
-import { graphql } from "./gql"
+import { env } from "@/env.mjs"
+import { graphql } from "@/gql"
+import { type HygraphLocaleEnum, i18n, type Locale } from "@/i18n/i18n"
 
 const hygraphClient = (init?: RequestInit) =>
   new GraphQLClient(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
@@ -15,6 +14,33 @@ const getArticles = graphql(`
     articles(locales: $locales) {
       id
       title
+    }
+  }
+`)
+
+const getRecentArticlesWithMetadata = graphql(`
+  query getArticlesWithMeta($locales: [Locale!]!) {
+    articles(locales: $locales, first: 50, orderBy: updatedAt_ASC) {
+      author {
+        name
+      }
+      createdAt
+      locale
+      slug
+      title
+      updatedAt
+      coverImage {
+        url
+      }
+    }
+  }
+`)
+
+const getPagesConfig = graphql(`
+  query getPagesSlug {
+    pages {
+      slug
+      locale
     }
   }
 `)
@@ -96,9 +122,8 @@ const getStockDailyQuotes = graphql(`
   }
 `)
 
-export const HygraphClient = () => {
-  const inputLocale = useLocale.getState().locale
-  const locale = inputLocale.replace("-", "_") as HygraphLocaleEnum
+export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
+  const locale = lang.replace("-", "_") as HygraphLocaleEnum
 
   const makeRequest =
     <TQuery, TVariables>(document: TypedDocumentNode<TQuery, TVariables>) =>
@@ -108,6 +133,8 @@ export const HygraphClient = () => {
     }
 
   return {
+    getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
+    getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
     getArticles: makeRequest(getArticles),
     getArticleSummary: makeRequest(getArticleSummary),
