@@ -3,6 +3,7 @@ import { env } from "@/env.mjs"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
 
 export default async function generateRssFeed(locale: string) {
+  const SITE_URL = env.VERCEL_URL
 
   const { getRecentArticlesWithMetadata } = HygraphApi({})
   const { articles } = await getRecentArticlesWithMetadata({ locales: [locale] })
@@ -10,15 +11,15 @@ export default async function generateRssFeed(locale: string) {
   const feedOptions = {
     title: "Articles | RSS Feed",
     description: "Welcome to this Articles!",
-    id: env.VERCEL_URL,
-    link: env.VERCEL_URL,
+    id: SITE_URL,
+    link: SITE_URL,
     language: locale,
-    image: `${env.VERCEL_URL}/logo.png`,
-    favicon: `${env.VERCEL_URL}/favicon.ico`,
+    image: `${SITE_URL}/logo.png`,
+    favicon: `${SITE_URL}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}`,
     generator: "Feed for Node.js",
     feedLinks: {
-      rss2: `${env.VERCEL_URL}/api/${locale}`,
+      rss2: `${SITE_URL}/api/${locale}`,
     },
   }
 
@@ -28,8 +29,8 @@ export default async function generateRssFeed(locale: string) {
     const date = article?.updatedAt ? new Date(article?.updatedAt) : new Date()
     feed.addItem({
       title: article?.title,
-      id: `${env.VERCEL_URL}/blog/${article?.slug}`,
-      link: `${env.VERCEL_URL}/blog/${article?.slug}`,
+      id: `${SITE_URL}/${locale}/article/${article?.slug}`,
+      link: `${SITE_URL}/${locale}/article/${article?.slug}`,
       description: "test",
       copyright: `All rights reserved ${new Date().getFullYear()}`,
       date: date,
