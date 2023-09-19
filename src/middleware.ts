@@ -2,7 +2,7 @@ import { match } from "@formatjs/intl-localematcher"
 import fromPairs from "lodash/fromPairs"
 import Negotiator from "negotiator"
 import { NextRequest, NextResponse } from "next/server"
-import { i18n } from "./i18n"
+import { i18n } from "./i18n/i18n"
 
 function getLocale(request: NextRequest) {
   // Negotiator expects headers as a record object, not a Set thus some mapping is required

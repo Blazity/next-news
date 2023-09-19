@@ -1,4 +1,4 @@
-import { Locale as HygraphLocaleEnum } from "./gql/graphql"
+import { Locale as HygraphLocaleEnum } from "../gql/graphql"
 
 export { HygraphLocaleEnum }
 
