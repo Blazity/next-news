@@ -22,6 +22,7 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
   )
 
   revalidatePath(`/[lang]/article/[slug]`)
+  revalidatePath("/[lang]")
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
