@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { StockDisplayRenderer } from "./StockDisplayRenderer"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
+import { StockDisplayRenderer } from "./StockDisplayRenderer"
 
 type StockQuoteBase = {
   id: string

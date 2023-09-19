@@ -1,6 +1,6 @@
-import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 
 export const RECENT_ARTICLES_PER_PAGE = 4
 
