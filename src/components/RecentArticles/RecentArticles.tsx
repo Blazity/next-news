@@ -1,6 +1,6 @@
-import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 
 export const RECENT_ARTICLES_PER_PAGE = 4
 
@@ -10,7 +10,9 @@ type RecentArticlesProps = {
 
 export async function RecentArticles({ lang }: RecentArticlesProps) {
   const { getRecentArticles } = HygraphApi({ lang })
-  const initialArticles = await getRecentArticles({ perPage: RECENT_ARTICLES_PER_PAGE })
+  const initialArticles = await getRecentArticles({
+    perPage: RECENT_ARTICLES_PER_PAGE,
+  })
 
   return (
     <section className="w-full px-4">

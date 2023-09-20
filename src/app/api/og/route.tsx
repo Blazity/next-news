@@ -20,7 +20,14 @@ export async function GET(request: NextRequest) {
           alignItems: "center",
         }}
       >
-        <img src={image ?? undefined} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <img
+          src={image ?? undefined}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
         <p
           style={{
             position: "absolute",
