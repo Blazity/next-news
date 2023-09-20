@@ -1,9 +1,9 @@
 import { Feed } from "feed"
-import fs from "fs"
+import { env } from "@/env.mjs"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
 
 export default async function generateRssFeed(locale: string) {
-  const siteUrl = process.env.VERCEL_URL ?? "localhost:3000"
+  const SITE_URL = env.VERCEL_URL
 
   const { getRecentArticlesWithMetadata } = HygraphApi({})
   const { articles } = await getRecentArticlesWithMetadata({
@@ -11,17 +11,17 @@ export default async function generateRssFeed(locale: string) {
   })
 
   const feedOptions = {
-    title: "Blog posts | RSS Feed",
-    description: "Welcome to this blog posts!",
-    id: siteUrl,
-    link: siteUrl,
+    title: "Articles | RSS Feed",
+    description: "Welcome to this Articles!",
+    id: SITE_URL,
+    link: SITE_URL,
     language: locale,
-    image: `${siteUrl}/logo.png`,
-    favicon: `${siteUrl}/favicon.ico`,
+    image: `${SITE_URL}/logo.png`,
+    favicon: `${SITE_URL}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}`,
     generator: "Feed for Node.js",
     feedLinks: {
-      rss2: `${siteUrl}/rss.xml`,
+      rss2: `${SITE_URL}/api/${locale}`,
     },
   }
 
@@ -31,8 +31,8 @@ export default async function generateRssFeed(locale: string) {
     const date = article?.updatedAt ? new Date(article?.updatedAt) : new Date()
     feed.addItem({
       title: article?.title,
-      id: `${siteUrl}/blog/${article?.slug}`,
-      link: `${siteUrl}/blog/${article?.slug}`,
+      id: `${SITE_URL}/${locale}/article/${article?.slug}`,
+      link: `${SITE_URL}/${locale}/article/${article?.slug}`,
       description: "test",
       copyright: `All rights reserved ${new Date().getFullYear()}`,
       date: date,
@@ -41,7 +41,5 @@ export default async function generateRssFeed(locale: string) {
     })
   })
 
-  fs.writeFile(`./public/${locale}.xml`, feed.rss2(), (err) => {
-    if (err) return console.log(err)
-  })
+  return feed.rss2()
 }
