@@ -62,7 +62,12 @@ function SearchDialogContent() {
   )
 }
 
-type ArticleHit = Hit<{ title: string; content: string; objectID: string; slug: string }>
+type ArticleHit = Hit<{
+  title: string
+  content: string
+  objectID: string
+  slug: string
+}>
 
 function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (

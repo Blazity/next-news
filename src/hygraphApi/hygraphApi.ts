@@ -122,6 +122,25 @@ const getStockDailyQuotes = graphql(`
   }
 `)
 
+const getArticlesBySlug = graphql(`
+  query getArticlesBySlug($locales: [Locale!]!, $slugs: [String!]!) {
+    articles(locales: $locales, where: { slug_in: $slugs }) {
+      id
+      title
+      slug
+      publishedAt
+      coverImage(forceParentLocale: true) {
+        id
+        url
+      }
+      author {
+        id
+        name
+      }
+    }
+  }
+`)
+
 export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
   const locale = lang.replace("-", "_") as HygraphLocaleEnum
 
@@ -141,5 +160,6 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     getRecentArticles: makeRequest(getRecentArticles),
     getHomepage: makeRequest(getHomepage),
     getStockDailyQuotes: makeRequest(getStockDailyQuotes),
+    getArticlesBySlug: makeRequest(getArticlesBySlug),
   }
 }

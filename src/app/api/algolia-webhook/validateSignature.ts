@@ -1,7 +1,7 @@
 import { verifyWebhookSignature } from "@hygraph/utils"
 import { NextRequest } from "next/server"
-import { HttpError } from "./httpError"
 import { env } from "@/env.mjs"
+import { HttpError } from "../httpError"
 
 export const validateSignature = async (req: NextRequest) => {
   const authHeader = req.headers.get("gcms-signature")

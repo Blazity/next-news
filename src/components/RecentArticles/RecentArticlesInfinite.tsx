@@ -26,7 +26,10 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
   } = useInfiniteQuery({
     queryKey: ["recent-articles"],
     queryFn: ({ pageParam = 0 }) =>
-      getRecentArticles({ skip: RECENT_ARTICLES_PER_PAGE * pageParam, perPage: RECENT_ARTICLES_PER_PAGE }),
+      getRecentArticles({
+        skip: RECENT_ARTICLES_PER_PAGE * pageParam,
+        perPage: RECENT_ARTICLES_PER_PAGE,
+      }),
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.articlesConnection.aggregate.count <= pages.length * RECENT_ARTICLES_PER_PAGE) return undefined
       return pages.length

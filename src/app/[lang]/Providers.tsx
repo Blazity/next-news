@@ -5,7 +5,15 @@ import { ReactNode, useState } from "react"
 
 export default function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
-    () => new QueryClient({ defaultOptions: { queries: { refetchOnMount: false, refetchOnWindowFocus: false } } })
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
   )
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 }

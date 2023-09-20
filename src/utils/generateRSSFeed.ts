@@ -6,7 +6,9 @@ export default async function generateRssFeed(locale: string) {
   const siteUrl = process.env.VERCEL_URL ?? "localhost:3000"
 
   const { getRecentArticlesWithMetadata } = HygraphApi({})
-  const { articles } = await getRecentArticlesWithMetadata({ locales: [locale] })
+  const { articles } = await getRecentArticlesWithMetadata({
+    locales: [locale],
+  })
 
   const feedOptions = {
     title: "Blog posts | RSS Feed",

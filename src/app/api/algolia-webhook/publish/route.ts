@@ -5,11 +5,10 @@ import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
 import generateRssFeed from "@/utils/generateRSSFeed"
 import { pipe } from "@/utils/pipe"
 import { slateToText } from "@/utils/slateToText"
+import { errorToNextResponse } from "../../httpError"
 import { algoliaClient } from "../algoliaClient"
-import { errorToNextResponse } from "../httpError"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
-
 
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
   const article = req.validBody.data
@@ -33,7 +32,6 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
   revalidatePath(`/[lang]/article/[slug]`)
   revalidatePath(`/[lang]`)
 
-
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
 
@@ -47,7 +45,14 @@ export async function POST(req: NextRequest) {
 
 const bodySchema = z.object({
   data: z.object({
-    localizations: z.array(z.object({ content: z.any(), title: z.string(), locale: z.string(), slug: z.string() })),
+    localizations: z.array(
+      z.object({
+        content: z.any(),
+        title: z.string(),
+        locale: z.string(),
+        slug: z.string(),
+      })
+    ),
     id: z.string(),
   }),
 })
