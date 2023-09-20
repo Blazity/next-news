@@ -3,7 +3,6 @@ import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
 import { Locale } from "@/i18n/i18n"
 
-
 export default async function Web({ params }: { params: { lang: Locale } }) {
   return (
     <>

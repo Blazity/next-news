@@ -2,7 +2,6 @@ import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
-import generateRssFeed from "@/utils/generateRSSFeed"
 import { pipe } from "@/utils/pipe"
 import { slateToText } from "@/utils/slateToText"
 import { errorToNextResponse } from "../../httpError"
@@ -23,7 +22,6 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
         content: slateToText(content),
         slug,
       })
-      await generateRssFeed(locale)
 
       return { title, locale }
     })

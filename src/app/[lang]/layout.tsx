@@ -1,9 +1,9 @@
-import { GoogleAnalytics } from "./GoogleAnalytics"
-import Providers from "./Providers"
 import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
 import { env } from "@/env.mjs"
 import type { Locale } from "@/i18n/i18n"
+import { GoogleAnalytics } from "./GoogleAnalytics"
+import Providers from "./Providers"
 import "@/styles/tailwind.css"
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }){
