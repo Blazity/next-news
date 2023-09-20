@@ -27,8 +27,9 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
         <StockDisplay />
       </div>
       <div className="flex flex-col gap-16">
-      <TrendingArticles lang={params.lang} />
-      <RecentArticles lang={params.lang} /></div>
+        <TrendingArticles lang={params.lang} />
+        <RecentArticles lang={params.lang} />
+      </div>
     </>
   )
 }
