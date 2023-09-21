@@ -41,6 +41,17 @@ const getHomepage = graphql(`
   }
 `)
 
+const getNav = graphql(`
+  query getNav($locales: [Locale!]!) {
+    nav {
+      pages(locales: $locales) {
+        slug
+        title
+      }
+    }
+  }
+`)
+
 const getArticles = graphql(`
   query getArticles($locales: [Locale!]!) {
     articles(locales: $locales) {
@@ -174,6 +185,7 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getNav: makeRequest(getNav),
     getArticlesForSitemap: makeRequest(getArticlesForSitemap),
     getArticlesQuantity: makeRequest(getArticlesQuantity),
     getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
