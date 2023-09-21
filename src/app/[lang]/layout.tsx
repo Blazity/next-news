@@ -1,4 +1,5 @@
 import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
+import { Navigation } from "@/components/Navigation/Navigation"
 import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
 import { env } from "@/env.mjs"
 import type { Locale } from "@/i18n/i18n"
@@ -38,6 +39,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
         <body>
           <main className="mx-auto flex max-w-[1200px] flex-col items-center justify-start py-8">
             <nav className="flex w-full justify-end gap-4 px-4">
+              <Navigation lang={params.lang} />
               <DynamicSearchDialog />
               <DynamicLangSelect />
             </nav>
