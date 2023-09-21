@@ -6,7 +6,7 @@
     "dev": "npm-run-all --parallel \"development\" \"codegen --watch\"",
     "development": "cross-env FORCE_COLOR=1 next dev",
     "build": "graphql-codegen --require dotenv/config --config codegen.ts && next build",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap  --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

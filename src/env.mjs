@@ -30,7 +30,7 @@ export const env = createEnv({
     GA_PROPERTY_ID: process.env.GA_PROPERTY_ID,
     GA_EMAIL: process.env.GA_EMAIL,
     GA_PRIVATE_KEY: process.env.GA_PRIVATE_KEY,
-    VERCEL_URL: process.env.VERCEL_URL ?? "localhost:3000",
+    VERCEL_URL: process.env.VERCEL_URL ?? "http://localhost:3000",
     NEXT_PUBLIC_ALGOLIA_API_ID: process.env.NEXT_PUBLIC_ALGOLIA_API_ID,
     NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
     NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: process.env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL,

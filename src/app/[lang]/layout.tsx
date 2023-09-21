@@ -6,7 +6,7 @@ import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
 import "@/styles/tailwind.css"
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }){
+export async function generateMetadata({ params }: { params: { lang: Locale } }) {
   return {
     title: "Blazity-Hygraph news starter",
     openGraph: {
@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
     },
     alternates: {
       types: {
-        'application/rss+xml': `${env.VERCEL_URL}/api/${params?.lang}`,
+        "application/rss+xml": `${env.VERCEL_URL}/api/${params?.lang}`,
       },
-    }
+    },
   }
-  }
+}
 
 export default function Layout({ children, params }: { children: React.ReactNode; params: { lang: Locale } }) {
   return (
