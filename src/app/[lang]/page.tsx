@@ -9,7 +9,7 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
       <div className="flex w-full justify-end px-4 pt-4">
         <StockDisplay />
       </div>
-      <div className="flex flex-col gap-16">
+      <div className="flex w-full flex-col gap-16">
         <TrendingArticles lang={params.lang} />
         <RecentArticles lang={params.lang} />
       </div>

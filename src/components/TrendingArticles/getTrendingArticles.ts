@@ -7,7 +7,12 @@ import { Locale } from "@/i18n/i18n"
 import { pipe } from "@/utils/pipe"
 import { getConfig } from "./reportConfig"
 
-const analyticsDataClient = new BetaAnalyticsDataClient()
+const analyticsDataClient = new BetaAnalyticsDataClient({
+  credentials: {
+    client_email: env.GA_EMAIL,
+    private_key: env.GA_PRIVATE_KEY,
+  },
+})
 
 async function runReport(locale: string) {
   const [response] = await analyticsDataClient.runReport(getConfig({ locale, propertyId: env.GA_PROPERTY_ID }))
@@ -27,7 +32,7 @@ async function runReport(locale: string) {
         views: views ? parseInt(views) : 0,
       }
     })
-    .filter((x): x is { slug: string; views: number } => x !== null)
+    .filter((x): x is NonNullable<typeof x> => x !== null)
 }
 
 const getArticlesFromReportResults =
