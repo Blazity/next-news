@@ -27,8 +27,8 @@ export default async function Web({ params: { slug, lang } }: CustomPageProps) {
 
   if (!page) notFound()
   return (
-    <section className="w-full px-4 pb-16">
-      <h1>{page.title}</h1>
+    <section className="w-full px-4 pb-16 pt-8">
+      <h1 className="mb-8 text-2xl font-semibold">{page.title}</h1>
       <RichText raw={page.content?.raw} />
     </section>
   )

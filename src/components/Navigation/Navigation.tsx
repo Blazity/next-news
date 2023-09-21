@@ -12,12 +12,19 @@ export async function Navigation({ lang }: NavigationProps) {
   const navElements = navigations[0]?.pages
 
   return (
-    <ul className="flex items-center justify-center gap-5 px-4">
-      {navElements?.map((navElement) => (
-        <li key={navElement?.slug}>
-          <Link href={`/${lang}/${navElement?.slug}`}>{navElement?.title}</Link>
-        </li>
-      ))}
-    </ul>
+    <div className="flex w-full items-center justify-between gap-5 pr-4">
+      <Link href={`/${lang}/`} prefetch={false}>
+        {"Home"}
+      </Link>
+      <ul className="flex gap-5">
+        {navElements?.map((navElement) => (
+          <li key={navElement?.slug}>
+            <Link href={`/${lang}/${navElement?.slug}`} prefetch={false}>
+              {navElement?.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

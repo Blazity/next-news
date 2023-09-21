@@ -48,7 +48,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
 
   if (!article) return null
   return (
-    <article className="w-full px-4 pb-16">
+    <article className="w-full px-4 pb-16 pt-8">
       {article.coverImage && (
         <Image
           src={article.coverImage.url}

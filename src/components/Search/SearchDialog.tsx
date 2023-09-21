@@ -37,7 +37,7 @@ function SearchDialogContent() {
           aria-label="Open search dialog"
           name="Search"
         >
-          <div className="flex items-center gap-4 px-1">
+          <div className="flex min-w-[200px] items-center gap-4 px-1">
             <Search className="h-4 w-4" />
             Search for an article
           </div>
