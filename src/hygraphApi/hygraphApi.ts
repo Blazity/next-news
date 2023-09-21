@@ -9,6 +9,38 @@ const hygraphClient = (init?: RequestInit) =>
     fetch: (url, config) => fetch(url, { ...config, ...init }),
   })
 
+const getPagesConfig = graphql(`
+  query getPagesSlug($locales: [Locale!]!) {
+    pages(locales: $locales) {
+      slug
+      locale
+    }
+  }
+`)
+
+const getPageContent = graphql(`
+  query getPageContent($locales: [Locale!]!, $slug: String!) {
+    pages(locales: $locales, where: { slug: $slug }) {
+      title
+      content {
+        raw
+      }
+    }
+  }
+`)
+
+const getHomepage = graphql(`
+  query getHomepage($locales: [Locale!]!) {
+    homepages(locales: $locales) {
+      stockDailyQuotes {
+        id
+        name
+        quote
+      }
+    }
+  }
+`)
+
 const getArticles = graphql(`
   query getArticles($locales: [Locale!]!) {
     articles(locales: $locales) {
@@ -19,8 +51,8 @@ const getArticles = graphql(`
 `)
 
 const getRecentArticlesWithMetadata = graphql(`
-  query getArticlesWithMeta($locales: [Locale!]!) {
-    articles(locales: $locales, first: 50, orderBy: updatedAt_ASC) {
+  query getArticlesWithMeta($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50) {
+    articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
       author {
         name
       }
@@ -36,21 +68,23 @@ const getRecentArticlesWithMetadata = graphql(`
   }
 `)
 
-const getPagesConfig = graphql(`
-  query getPagesSlug {
-    pages {
+const getArticlesForSitemap = graphql(`
+  query getArticlesForSitemap($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50) {
+    articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
       slug
-      locale
+      updatedAt
+      coverImage {
+        url
+      }
     }
   }
 `)
 
-const getPageContent = graphql(`
-  query getPageContent($locales: [Locale!]!, $slug: String!) {
-    pages(locales: $locales, where: { slug: $slug }) {
-      title
-      content {
-        raw
+const getArticlesQuantity = graphql(`
+  query getArticlesQuantity($locales: [Locale!]!) {
+    articlesConnection(locales: $locales) {
+      pageInfo {
+        pageSize
       }
     }
   }
@@ -100,18 +134,6 @@ const getRecentArticles = graphql(`
   }
 `)
 
-const getHomepage = graphql(`
-  query getHomepage($locales: [Locale!]!) {
-    homepages(locales: $locales) {
-      stockDailyQuotes {
-        id
-        name
-        quote
-      }
-    }
-  }
-`)
-
 const getStockDailyQuotes = graphql(`
   query getStockDailyQuotes($symbols: [String!]!) {
     stockDailyQuotes(where: { symbol_in: $symbols }) {
@@ -152,6 +174,8 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getArticlesForSitemap: makeRequest(getArticlesForSitemap),
+    getArticlesQuantity: makeRequest(getArticlesQuantity),
     getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
     getPagesConfig: makeRequest(getPagesConfig),
     getPageContent: makeRequest(getPageContent),
