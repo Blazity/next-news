@@ -68,6 +68,18 @@ const getRecentArticlesWithMetadata = graphql(`
   }
 `)
 
+const getArticlesForSitemap = graphql(`
+  query getArticlesForSitemap($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50) {
+    articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
+      slug
+      updatedAt
+      coverImage {
+        url
+      }
+    }
+  }
+`)
+
 const getArticlesQuantity = graphql(`
   query getArticlesQuantity($locales: [Locale!]!) {
     articlesConnection(locales: $locales) {
@@ -143,6 +155,7 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getArticlesForSitemap: makeRequest(getArticlesForSitemap),
     getArticlesQuantity: makeRequest(getArticlesQuantity),
     getRecentArticlesWithMetadata: makeRequest(getRecentArticlesWithMetadata),
     getPagesConfig: makeRequest(getPagesConfig),

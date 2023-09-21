@@ -1,4 +1,4 @@
-import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
+import { getServerSideSitemap } from 'next-sitemap';
 import { HygraphApi } from "@/hygraphApi/hygraphApi";
 import { Locale } from '@/i18n/i18n';
 
@@ -10,10 +10,10 @@ async function generateSitemapFields(locale: string) {
         loc: `${locale}/${page.slug}`,
         lastModified: null,
         priority: 0.8,
-        changefreq: 'monthly',
+        changefreq: 'monthly' as const,
     }));
   
-    return  mappedPages as ISitemapField[];
+    return mappedPages;
 }
 
 export async function GET(request: Request, { params }: { params: { lang: string } }) {
