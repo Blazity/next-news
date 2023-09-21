@@ -43,8 +43,8 @@ const getHomepage = graphql(`
 
 const getNav = graphql(`
   query getNav($locales: [Locale!]!) {
-    nav {
-      pages(locales: $locales) {
+    navigations(locales: $locales, first: 1) {
+      pages {
         slug
         title
       }
