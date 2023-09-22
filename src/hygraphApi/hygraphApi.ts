@@ -128,6 +128,14 @@ const getArticleSummary = graphql(`
       content {
         raw
       }
+      recommendedArticles {
+        title
+        slug
+        id
+        coverImage {
+          url
+        }
+      }
     }
   }
 `)
