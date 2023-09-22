@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer/Footer"
 import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
 import { Navigation } from "@/components/Navigation/Navigation"
 import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
@@ -44,6 +45,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
               <DynamicLangSelect />
             </nav>
             {children}
+            <Footer lang={params.lang} />
           </main>
         </body>
       </Providers>
