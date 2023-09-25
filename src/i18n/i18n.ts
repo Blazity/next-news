@@ -23,6 +23,10 @@ export function hygraphLocaleToStandardNotation(locale: string) {
   return locale.replace("_", "-")
 }
 
+export function standardNotationToHygraphLocale(locale: Locale) {
+  return locale.replace("-", "_") as HygraphLocaleEnum
+}
+
 export const i18n = {
   locales,
   defaultLocale,

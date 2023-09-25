@@ -2,8 +2,8 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data"
 import keyBy from "lodash/keyBy"
 import sortBy from "lodash/sortBy"
 import { env } from "@/env.mjs"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { listArticlesBySlugs } from "@/lib/client"
 import { pipe } from "@/utils/pipe"
 import { getConfig } from "./reportConfig"
 
@@ -37,13 +37,11 @@ async function runReport(locale: string) {
 
 const getArticlesFromReportResults =
   (lang: Locale) => async (reportResults: { views: number; slug: string }[] | null) => {
-    const { getArticlesBySlug } = HygraphApi({ lang })
-
     const articleViewsMap = keyBy(reportResults, "slug")
-    const { articles } = await getArticlesBySlug(
-      { slugs: reportResults?.map((article) => article.slug) ?? [] },
-      { next: { revalidate: 60 * 60 * 12 } }
-    )
+    const articles = await listArticlesBySlugs({
+      slugs: reportResults?.map((article) => article.slug) ?? [],
+      locale: lang,
+    })
     const sortedArticles = sortBy(articles, (a) => articleViewsMap[a.slug].views ?? 0).reverse()
     return sortedArticles
   }

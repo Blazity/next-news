@@ -2,17 +2,15 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
 import { RichText } from "@/components/RichText/RichText"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { getArticleBySlug } from "@/lib/client"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
 export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
-  const { getArticleSummary } = HygraphApi({ lang })
-  const { articles } = await getArticleSummary({ slug })
-  const article = articles[0]
+  const article = await getArticleBySlug({ locale: lang, slug })
 
-  if (!article) return notFound()
+  if (!article) return null
   return {
     title: article.title,
     openGraph: {
@@ -42,11 +40,9 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 }
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
-  const { getArticleSummary } = HygraphApi({ lang })
-  const { articles } = await getArticleSummary({ slug })
-  const article = articles[0]
+  const article = await getArticleBySlug({ locale: lang, slug })
 
-  if (!article) return null
+  if (!article) return notFound()
   return (
     <article className="w-full px-4 pb-16 pt-8">
       {article.coverImage && (

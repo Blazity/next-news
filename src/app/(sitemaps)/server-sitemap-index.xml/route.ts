@@ -1,7 +1,7 @@
 import { getServerSideSitemapIndex } from "next-sitemap"
 import { env } from "@/env.mjs"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { i18n } from "@/i18n/i18n"
+import { getArticlesQuantity } from "@/lib/client"
 
 const URLS_PER_SITEMAP = 1000
 
@@ -10,14 +10,9 @@ export async function GET() {
   const pagesSitemaps = locales.map((locale) => `${env.VERCEL_URL}/${locale}/sitemap.xml`)
 
   const articlesSitemapsPromises = locales.map(async (locale) => {
-    const { getArticlesQuantity } = HygraphApi({ lang: locale })
-    const {
-      articlesConnection: {
-        pageInfo: { pageSize = 0 },
-      },
-    } = await getArticlesQuantity({})
+    const allArticlesCount = await getArticlesQuantity(locale)
 
-    const amountOfSitemapFiles = Math.ceil(pageSize ? pageSize / URLS_PER_SITEMAP : 1)
+    const amountOfSitemapFiles = Math.ceil(allArticlesCount / URLS_PER_SITEMAP)
 
     return Array(amountOfSitemapFiles)
       .fill("")
