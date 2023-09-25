@@ -10,7 +10,7 @@ import {
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
-import { getHomepageQuery, getNavigationQuery } from "./queries/components"
+import { getFooterQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { Tag } from "./tags"
 
@@ -54,6 +54,16 @@ export async function graphqlFetch<TQuery, TVariables>({
   const parsed = (await result.json()) as { data: TQuery }
 
   return parsed.data
+}
+
+export async function getFooter(locale: Locale) {
+  const { footers } = await graphqlFetch({
+    cache: "force-cache",
+    document: getFooterQuery,
+    tags: ["PAGES"],
+    variables: { locale },
+  })
+  return footers[0] ?? null
 }
 
 export async function getHomepage(locale: Locale) {

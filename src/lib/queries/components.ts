@@ -22,3 +22,14 @@ export const getHomepageQuery = graphql(`
     }
   }
 `)
+
+export const getFooterQuery = graphql(`
+  query getFooter($locales: [Locale!]!) {
+    footers(locales: $locales, first: 1) {
+      pages {
+        slug
+        title
+      }
+    }
+  }
+`)

@@ -63,6 +63,14 @@ export const getArticleBySlugQuery = graphql(`
       content {
         raw
       }
+      recommendedArticles {
+        title
+        slug
+        id
+        coverImage {
+          url
+        }
+      }
     }
   }
 `)
