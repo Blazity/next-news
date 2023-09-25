@@ -12,7 +12,7 @@ import {
   listArticlesForSitemapQuery,
 } from "./queries/articles"
 import { getFooterQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
-import { getPageBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
+import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { Tag } from "./tags"
 
 export async function graphqlFetch<TQuery, TVariables>({
@@ -143,6 +143,16 @@ export async function getPageBySlug(variables: { locale: Locale; slug: string })
   const { pages } = await graphqlFetch({
     cache: "force-cache",
     document: getPageBySlugQuery,
+    tags: ["PAGES"],
+    variables,
+  })
+  return pages[0] ?? null
+}
+
+export async function getPageMetadataBySlug(variables: { locale: Locale; slug: string }) {
+  const { pages } = await graphqlFetch({
+    cache: "force-cache",
+    document: getPageMetadataBySlugQuery,
     tags: ["PAGES"],
     variables,
   })
