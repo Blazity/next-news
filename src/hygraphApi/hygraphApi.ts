@@ -29,6 +29,19 @@ const getPageContent = graphql(`
   }
 `)
 
+const getPageMetadata = graphql(`
+  query getPageMetadata($locales: [Locale!]!, $slug: String!) {
+    pages(locales: $locales, where: { slug: $slug }) {
+      seoComponent {
+        title
+        description {
+          text
+        }
+      }
+    }
+  }
+`)
+
 const getHomepage = graphql(`
   query getHomepage($locales: [Locale!]!) {
     homepages(locales: $locales) {
@@ -72,8 +85,10 @@ const getRecentArticlesWithMetadata = graphql(`
       slug
       title
       updatedAt
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
       }
     }
   }
@@ -84,8 +99,10 @@ const getArticlesForSitemap = graphql(`
     articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
       slug
       updatedAt
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
       }
     }
   }
@@ -106,9 +123,15 @@ const getArticleSummary = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        data {
+          url
+        }
+        title
+        description {
+          text
+        }
       }
       author {
         id
@@ -116,9 +139,6 @@ const getArticleSummary = graphql(`
       }
       content {
         raw
-      }
-      imageDescription {
-        text
       }
     }
   }
@@ -133,8 +153,14 @@ const getArticleMetadataSummary = graphql(`
           text
         }
       }
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
+        title
+        description {
+          text
+        }
       }
       author {
         name
@@ -150,9 +176,11 @@ const getRecentArticles = graphql(`
       title
       slug
       publishedAt
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        data {
+          url
+        }
       }
       author {
         id
@@ -184,9 +212,11 @@ const getArticlesBySlug = graphql(`
       title
       slug
       publishedAt
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        data {
+          url
+        }
       }
       author {
         id
@@ -207,6 +237,7 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getPageMetadata: makeRequest(getPageMetadata),
     getArticleMetadataSummary: makeRequest(getArticleMetadataSummary),
     getNav: makeRequest(getNav),
     getArticlesForSitemap: makeRequest(getArticlesForSitemap),

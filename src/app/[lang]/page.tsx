@@ -1,7 +1,13 @@
+import { Metadata } from "next"
 import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
 import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
 import { Locale } from "@/i18n/i18n"
+import { getMatadataObj } from "@/utils/getMetadataObj"
+
+export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata | null> {
+  return getMatadataObj({})
+}
 
 export default async function Web({ params }: { params: { lang: Locale } }) {
   return (

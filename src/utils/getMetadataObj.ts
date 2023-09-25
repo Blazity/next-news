@@ -19,9 +19,18 @@ type AuthorInfo = {
   name?: string
 }
 
-type CoverImageInfo = {
+type ImageData = {
   url?: string
-  title?: string
+}
+
+type ImageDescription = {
+  text: string
+}
+
+type ImageInfo = {
+  title: string
+  description?: ImageDescription | null
+  data: ImageData
 }
 
 type MetadataOptions = {
@@ -29,22 +38,22 @@ type MetadataOptions = {
   type?: OpenGraphType
   description?: string
   author?: AuthorInfo
-  coverImage?: CoverImageInfo | null
+  image?: ImageInfo | null
 }
 
 export function getMatadataObj(options: MetadataOptions): Metadata {
-  const { author, type, title, coverImage, description } = options
+  const { author, type, title, image, description } = options
 
   const defaultTitle = "Next.js Enterprise"
   const defaultDescription = "Next.js Enterprise description"
   const defaultType = "article"
 
-  const ogImage = coverImage
+  const ogImage = image?.data?.url
     ? [
         {
           url: `/api/og?${new URLSearchParams({
-            title: coverImage.title ?? "Next.js image title",
-            image: coverImage.url ?? "nextjs/image",
+            title: image?.title,
+            image: image.data?.url,
           })}`,
           width: 1200,
           height: 630,

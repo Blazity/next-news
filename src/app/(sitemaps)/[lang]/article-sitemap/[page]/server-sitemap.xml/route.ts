@@ -14,7 +14,7 @@ async function generateSitemapFields(locale: string, pageNo: number) {
     lastmod: article.updatedAt,
     priority: 0.6,
     changefreq: "daily" as const,
-    images: article.coverImage ? [{ loc: new URL(article.coverImage.url) }] : undefined,
+    images: article.image?.data ? [{ loc: new URL(article.image.data.url) }] : undefined,
   }))
 
   return mappedArticles

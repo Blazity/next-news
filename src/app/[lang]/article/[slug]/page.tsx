@@ -11,12 +11,12 @@ type ArticlePageProps = { params: { slug: string; lang: Locale } }
 export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
   const { getArticleMetadataSummary } = HygraphApi({ lang })
   const { articles } = await getArticleMetadataSummary({ slug })
-  const { seoComponent, coverImage } = articles[0]
+  const { seoComponent, image } = articles[0]
 
   const description = seoComponent?.description?.text
   const title = seoComponent?.title
 
-  return getMatadataObj({ coverImage, description, title })
+  return getMatadataObj({ description, title, image })
 }
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
@@ -24,13 +24,15 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
+  const image = article?.image
+
   if (!article) return notFound()
   return (
     <article className="w-full px-4 pb-16 pt-8">
-      {article?.coverImage && (
+      {image && (
         <Image
-          src={article.coverImage?.url}
-          alt={article.imageDescription?.text ?? ""}
+          src={image.data?.url}
+          alt={image?.description?.text ?? ""}
           width={1200}
           height={630}
           quality={100}
