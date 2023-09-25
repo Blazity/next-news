@@ -2,11 +2,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 
+type imageInfo = {
+  data: { url: string }
+}
+
 type RecommendedArticle = {
   title: string
   slug: string
   id: string
-  coverImage?: { url: string } | null | undefined
+  image?: imageInfo | null
 }
 
 type RecommendedArticlesProps = { recommendedArticles: RecommendedArticle[]; lang: Locale }
@@ -20,9 +24,9 @@ export async function RecommendedArticles({ recommendedArticles, lang }: Recomme
           <Link href={`/${lang}/article/${article.slug}`} prefetch={false} passHref key={`recommended-${article.id}`}>
             <article className="flex flex-col gap-2">
               <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
-                {article?.coverImage?.url && (
+                {article.image?.data.url && (
                   <Image
-                    src={article.coverImage.url}
+                    src={article.image?.data?.url}
                     alt={article.title}
                     width={300}
                     height={157}

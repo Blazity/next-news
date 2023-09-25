@@ -15,8 +15,10 @@ export const listArticlesForSitemapQuery = graphql(`
     articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
       slug
       updatedAt
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
       }
     }
   }
@@ -35,8 +37,10 @@ export const getRecentArticlesQuery = graphql(`
       locale
       slug
       title
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
       }
     }
     articlesConnection(locales: $locales) {
@@ -52,9 +56,11 @@ export const getArticleBySlugQuery = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        data {
+          url
+        }
       }
       author {
         id
@@ -67,8 +73,10 @@ export const getArticleBySlugQuery = graphql(`
         title
         slug
         id
-        coverImage {
-          url
+        image {
+          data {
+            url
+          }
         }
       }
     }
@@ -82,9 +90,11 @@ export const listArticlesBySlugQuery = graphql(`
       title
       slug
       publishedAt
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        data {
+          url
+        }
       }
       author {
         id

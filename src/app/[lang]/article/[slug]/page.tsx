@@ -19,14 +19,14 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
       authors: article.author ? article.author.name : null,
       url: "https://next-enterprise.vercel.app/",
       title: article.title,
-      images: article.coverImage
+      images: article?.image
         ? [
             {
               url:
                 `/api/og?` +
                 new URLSearchParams({
                   title: article.title,
-                  image: article.coverImage.url,
+                  image: article.image?.data?.url,
                 }),
               width: 1200,
               height: 630,
@@ -47,9 +47,9 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
   return (
     <>
       <article className="w-full px-4 pb-16 pt-8">
-        {article.coverImage && (
+        {article?.image && (
           <Image
-            src={article.coverImage.url}
+            src={article.image?.data?.url}
             alt={""}
             width={1200}
             height={630}

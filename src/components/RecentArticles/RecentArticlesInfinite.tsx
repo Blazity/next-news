@@ -50,9 +50,9 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
               <Link href={`/${locale}/article/${article.slug}`} prefetch={false} passHref key={`recent-${article.id}`}>
                 <article className="flex flex-col gap-2">
                   <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
-                    {article.coverImage?.url && (
+                    {article?.image?.data.url && (
                       <Image
-                        src={article.coverImage.url}
+                        src={article.image?.data?.url}
                         alt={article.title}
                         width={300}
                         height={157}
