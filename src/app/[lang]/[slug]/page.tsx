@@ -1,17 +1,24 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { RichText } from "@/components/RichText/RichText"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
-import { Locale } from "@/i18n/i18n"
+import { hygraphLocaleToStandardNotation, i18n, Locale } from "@/i18n/i18n"
+import { getPageBySlug, listPagesForSitemap } from "@/lib/client"
 
 type CustomPageProps = {
   params: { slug: string; lang: Locale }
 }
 
+export async function generateStaticParams() {
+  const pages = await Promise.all(i18n.locales.map((locale) => listPagesForSitemap(locale)))
+  const flatPages = pages.flatMap((pages) => pages)
+  return flatPages.map(({ slug, locale }) => ({
+    lang: hygraphLocaleToStandardNotation(locale),
+    slug,
+  }))
+}
+
 export async function generateMetadata({ params: { slug, lang } }: CustomPageProps): Promise<Metadata | null> {
-  const { getPageContent } = HygraphApi({ lang })
-  const { pages } = await getPageContent({ slug })
-  const page = pages[0]
+  const page = await getPageBySlug({ locale: lang, slug })
 
   if (!page) return null
   return {
@@ -21,9 +28,7 @@ export async function generateMetadata({ params: { slug, lang } }: CustomPagePro
 }
 
 export default async function Web({ params: { slug, lang } }: CustomPageProps) {
-  const { getPageContent } = HygraphApi({ lang })
-  const { pages } = await getPageContent({ slug })
-  const page = pages[0]
+  const page = await getPageBySlug({ locale: lang, slug })
 
   if (!page) notFound()
   return (

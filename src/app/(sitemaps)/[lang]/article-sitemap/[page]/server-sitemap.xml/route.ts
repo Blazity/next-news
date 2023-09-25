@@ -1,16 +1,17 @@
 import { getServerSideSitemap } from "next-sitemap"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
+import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
+import { listArticlesForSitemap } from "@/lib/client"
 
 const MAX_ARTICLES_PER_SITEMAP = 1000
 
-async function generateSitemapFields(locale: string, pageNo: number) {
+async function generateSitemapFields(locale: Locale, pageNo: number) {
   const skip = (pageNo - 1) * MAX_ARTICLES_PER_SITEMAP
-  const { getArticlesForSitemap } = HygraphApi({ lang: locale as Locale })
-  const { articles } = await getArticlesForSitemap({ skip, first: MAX_ARTICLES_PER_SITEMAP })
+
+  const articles = await listArticlesForSitemap({ locale, skip, first: MAX_ARTICLES_PER_SITEMAP })
 
   const mappedArticles = articles.map((article) => ({
-    loc: `/${locale}/articles/${article.slug}`,
+    loc: `${env.VERCEL_URL}/${locale}/articles/${article.slug}`,
     lastmod: article.updatedAt,
     priority: 0.6,
     changefreq: "daily" as const,
@@ -20,7 +21,7 @@ async function generateSitemapFields(locale: string, pageNo: number) {
   return mappedArticles
 }
 
-export async function GET(req: Request, { params }: { params: { lang: string; page: string } }) {
+export async function GET(req: Request, { params }: { params: { lang: Locale; page: string } }) {
   const pageNo = parseInt(params.page)
   const sitemapFields = await generateSitemapFields(params.lang, pageNo)
 

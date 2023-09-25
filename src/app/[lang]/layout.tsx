@@ -40,7 +40,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
         <body>
           <main className="mx-auto flex max-w-[1200px] flex-col items-center justify-start py-8">
             <nav className="flex w-full justify-end gap-4 px-4">
-              <Navigation lang={params.lang} />
+              <Navigation locale={params.lang} />
               <DynamicSearchDialog />
               <DynamicLangSelect />
             </nav>

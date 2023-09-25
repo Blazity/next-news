@@ -1,13 +1,13 @@
 import { getServerSideSitemap } from "next-sitemap"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
+import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
+import { listPagesForSitemap } from "@/lib/client"
 
-async function generateSitemapFields(locale: string) {
-  const { getPagesConfig } = HygraphApi({ lang: locale as Locale })
-  const { pages } = await getPagesConfig({})
+async function generateSitemapFields(locale: Locale) {
+  const pages = await listPagesForSitemap(locale)
 
   const mappedPages = pages.map((page) => ({
-    loc: `${locale}/${page.slug}`,
+    loc: `${env.VERCEL_URL}/${locale}/${page.slug}`,
     lastModified: null,
     priority: 0.8,
     changefreq: "monthly" as const,
@@ -16,7 +16,7 @@ async function generateSitemapFields(locale: string) {
   return mappedPages
 }
 
-export async function GET(request: Request, { params }: { params: { lang: string } }) {
+export async function GET(request: Request, { params }: { params: { lang: Locale } }) {
   const sitemapFields = await generateSitemapFields(params.lang)
 
   const headers = {

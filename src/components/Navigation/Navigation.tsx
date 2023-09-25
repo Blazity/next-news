@@ -1,25 +1,23 @@
-import Link from "next/link"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { getNavigation } from "@/lib/client"
+import Link from "next/link"
 
 type NavigationProps = {
-  lang: Locale
+  locale: Locale
 }
 
-export async function Navigation({ lang }: NavigationProps) {
-  const { getNav } = HygraphApi({ lang })
-  const { navigations } = await getNav({})
-  const navElements = navigations[0]?.pages
+export async function Navigation({ locale }: NavigationProps) {
+  const navigation = await getNavigation(locale)
 
   return (
     <div className="flex w-full items-center justify-between gap-5 pr-4">
-      <Link href={`/${lang}/`} prefetch={false}>
+      <Link href={`/${locale}/`} prefetch={false}>
         {"Home"}
       </Link>
       <ul className="flex gap-5">
-        {navElements?.map((navElement) => (
+        {navigation.pages?.map((navElement) => (
           <li key={navElement?.slug}>
-            <Link href={`/${lang}/${navElement?.slug}`} prefetch={false}>
+            <Link href={`/${locale}/${navElement?.slug}`} prefetch={false}>
               {navElement?.title}
             </Link>
           </li>
