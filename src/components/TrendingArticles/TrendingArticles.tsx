@@ -22,7 +22,7 @@ export async function TrendingArticles({ locale }: TrendingArticlesProps) {
                   {article?.image?.data.url && (
                     <Image
                       src={article.image.data.url}
-                      alt={article.title}
+                      alt={article.image?.description?.text || ""}
                       width={300}
                       height={157}
                       className="h-[157px] w-[300px] rounded-sm object-cover"

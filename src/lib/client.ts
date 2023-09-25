@@ -5,6 +5,7 @@ import { env } from "@/env.mjs"
 import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
+  getArticleMetadataBySlugQuery,
   getArticlesQuantityQuery,
   getRecentArticlesQuery,
   listArticlesBySlugQuery,
@@ -122,6 +123,16 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: getArticleBySlugQuery,
+    tags: ["ARTICLES"],
+    variables,
+  })
+  return articles[0] ?? null
+}
+
+export async function getArticleMetadataBySlug(variables: { locale: Locale; slug: string }) {
+  const { articles } = await graphqlFetch({
+    cache: "force-cache",
+    document: getArticleMetadataBySlugQuery,
     tags: ["ARTICLES"],
     variables,
   })

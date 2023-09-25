@@ -4,40 +4,19 @@ import { Metadata } from "next/types"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
 import { RichText } from "@/components/RichText/RichText"
 import { Locale } from "@/i18n/i18n"
-import { getArticleBySlug } from "@/lib/client"
+import { getArticleBySlug, getArticleMetadataBySlug } from "@/lib/client"
+import { getMatadataObj } from "@/utils/getMetadataObj"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
 export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
-  const article = await getArticleBySlug({ locale: lang, slug })
+  const article = await getArticleMetadataBySlug({ locale: lang, slug })
+  const { seoComponent, image } = article
 
-  if (!article) return null
-  return {
-    title: article.title,
-    openGraph: {
-      type: "article",
-      authors: article.author ? article.author.name : null,
-      url: "https://next-enterprise.vercel.app/",
-      title: article.title,
-      images: article?.image
-        ? [
-            {
-              url:
-                `/api/og?` +
-                new URLSearchParams({
-                  title: article.title,
-                  image: article.image?.data?.url,
-                }),
-              width: 1200,
-              height: 630,
-            },
-          ]
-        : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-    },
-  }
+  const description = seoComponent?.description?.text
+  const title = seoComponent?.title
+
+  return getMatadataObj({ description, title, image })
 }
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
@@ -50,7 +29,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
         {article?.image && (
           <Image
             src={article.image?.data?.url}
-            alt={""}
+            alt={article.image?.description?.text || ""}
             width={1200}
             height={630}
             quality={100}

@@ -38,6 +38,9 @@ export const getRecentArticlesQuery = graphql(`
       slug
       title
       image {
+        description {
+          text
+        }
         data {
           url
         }
@@ -58,6 +61,9 @@ export const getArticleBySlugQuery = graphql(`
       title
       image(forceParentLocale: true) {
         id
+        description {
+          text
+        }
         data {
           url
         }
@@ -74,10 +80,38 @@ export const getArticleBySlugQuery = graphql(`
         slug
         id
         image {
+          description {
+            text
+          }
           data {
             url
           }
         }
+      }
+    }
+  }
+`)
+
+export const getArticleMetadataBySlugQuery = graphql(`
+  query getArticleMetadataBySlugQuery($locales: [Locale!]!, $slug: String!) {
+    articles(locales: $locales, where: { slug: $slug }) {
+      seoComponent {
+        title
+        description {
+          text
+        }
+      }
+      image {
+        data {
+          url
+        }
+        title
+        description {
+          text
+        }
+      }
+      author {
+        name
       }
     }
   }
@@ -92,6 +126,9 @@ export const listArticlesBySlugQuery = graphql(`
       publishedAt
       image(forceParentLocale: true) {
         id
+        description {
+          text
+        }
         data {
           url
         }
