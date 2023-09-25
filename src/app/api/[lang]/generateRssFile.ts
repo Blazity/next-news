@@ -1,13 +1,12 @@
 import { Feed } from "feed"
 import { env } from "@/env.mjs"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { getRecentArticles } from "@/lib/client"
 
 export default async function generateRssFeed(locale: Locale) {
   const SITE_URL = env.VERCEL_URL
 
-  const { getRecentArticlesWithMetadata } = HygraphApi({ lang: locale })
-  const { articles } = await getRecentArticlesWithMetadata({})
+  const { articles } = await getRecentArticles({ locale, first: 100 })
 
   const feedOptions = {
     title: "Articles | RSS Feed",

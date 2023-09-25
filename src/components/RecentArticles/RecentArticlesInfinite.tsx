@@ -1,22 +1,21 @@
 /* eslint-disable import/order */
 "use client"
 
+import { Button } from "@/components/ui/Button/Button"
+import { GetRecentArticlesQuery } from "@/gql/graphql"
+import { useLocale } from "@/i18n/useLocale"
+import { getRecentArticles } from "@/lib/client"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/Button/Button"
-import { GetRecentArticlesQuery } from "@/gql/graphql"
-import { HygraphClientApi } from "@/hygraphApi/hygraphClientApi"
-import { useLocale } from "@/i18n/useLocale"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 
 export type RecentArticlesInfiniteProps = {
-  initialArticles: GetRecentArticlesQuery
+  initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
 }
 
 export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
-  const { getRecentArticles } = HygraphClientApi()
-  const lang = useLocale()
+  const locale = useLocale()
 
   const {
     data: recentArticlesQuery,
@@ -27,11 +26,12 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
     queryKey: ["recent-articles"],
     queryFn: ({ pageParam = 0 }) =>
       getRecentArticles({
+        locale,
         skip: RECENT_ARTICLES_PER_PAGE * pageParam,
-        perPage: RECENT_ARTICLES_PER_PAGE,
+        first: RECENT_ARTICLES_PER_PAGE,
       }),
     getNextPageParam: (lastPage, pages) => {
-      if (lastPage.articlesConnection.aggregate.count <= pages.length * RECENT_ARTICLES_PER_PAGE) return undefined
+      if (lastPage.count <= pages.length * RECENT_ARTICLES_PER_PAGE) return undefined
       return pages.length
     },
     initialData: {
@@ -47,7 +47,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
           .flatMap((page) => page.articles)
           .map((article) => {
             return (
-              <Link href={`/${lang}/article/${article.slug}`} prefetch={false} passHref key={`recent-${article.id}`}>
+              <Link href={`/${locale}/article/${article.slug}`} prefetch={false} passHref key={`recent-${article.id}`}>
                 <article className="flex flex-col gap-2">
                   <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
                     {article.coverImage?.url && (

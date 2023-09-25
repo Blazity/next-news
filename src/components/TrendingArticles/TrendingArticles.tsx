@@ -4,11 +4,11 @@ import { Locale } from "@/i18n/i18n"
 import { getTrendingArticles } from "./getTrendingArticles"
 
 type TrendingArticlesProps = {
-  lang: Locale
+  locale: Locale
 }
 
-export async function TrendingArticles({ lang }: TrendingArticlesProps) {
-  const trendingArticles = await getTrendingArticles(lang)
+export async function TrendingArticles({ locale }: TrendingArticlesProps) {
+  const trendingArticles = await getTrendingArticles(locale)
 
   return (
     <section className="w-full px-4">
@@ -16,7 +16,7 @@ export async function TrendingArticles({ lang }: TrendingArticlesProps) {
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         {trendingArticles.map((article) => {
           return (
-            <Link href={`/${lang}/article/${article.slug}`} prefetch={false} passHref key={`trending-${article.id}`}>
+            <Link href={`/${locale}/article/${article.slug}`} prefetch={false} passHref key={`trending-${article.id}`}>
               <article className="flex flex-col gap-2">
                 <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
                   {article.coverImage?.url && (

@@ -1,5 +1,4 @@
 import { z } from "zod"
-import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { StockDisplayRenderer } from "./StockDisplayRenderer"
 
 type StockQuoteBase = {
@@ -14,15 +13,7 @@ type AlphaVantageQuote = {
   }
 }
 
-const SYMBOLS_TO_FETCH = ["SPY", "AAPL", "AMZN", "GOOGL", "MSFT"]
-
-export async function StockDisplay() {
-  const { getStockDailyQuotes } = HygraphApi({})
-  const { stockDailyQuotes: quotes } = await getStockDailyQuotes(
-    { symbols: SYMBOLS_TO_FETCH },
-    { next: { revalidate: 60 * 60 } }
-  )
-
+export async function StockDisplay({ quotes }: { quotes: { id: string; name: string; quote?: unknown }[] }) {
   const validStockQuotes = quotes
     .map((stockQuote) => ({
       ...stockQuote,
