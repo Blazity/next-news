@@ -117,6 +117,28 @@ const getArticleSummary = graphql(`
       content {
         raw
       }
+      imageDescription {
+        text
+      }
+    }
+  }
+`)
+
+const getArticleMetadataSummary = graphql(`
+  query getArticleMetadataSummary($locales: [Locale!]!, $slug: String!) {
+    articles(locales: $locales, where: { slug: $slug }) {
+      seoComponent {
+        title
+        description {
+          text
+        }
+      }
+      coverImage {
+        url
+      }
+      author {
+        name
+      }
     }
   }
 `)
@@ -185,6 +207,7 @@ export function HygraphApi({ lang = i18n.defaultLocale }: { lang?: Locale }) {
     }
 
   return {
+    getArticleMetadataSummary: makeRequest(getArticleMetadataSummary),
     getNav: makeRequest(getNav),
     getArticlesForSitemap: makeRequest(getArticlesForSitemap),
     getArticlesQuantity: makeRequest(getArticlesQuantity),

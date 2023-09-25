@@ -4,41 +4,19 @@ import { Metadata } from "next/types"
 import { RichText } from "@/components/RichText/RichText"
 import { HygraphApi } from "@/hygraphApi/hygraphApi"
 import { Locale } from "@/i18n/i18n"
+import { getMatadataObj } from "@/utils/getMetadataObj"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
 export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
-  const { getArticleSummary } = HygraphApi({ lang })
-  const { articles } = await getArticleSummary({ slug })
-  const article = articles[0]
+  const { getArticleMetadataSummary } = HygraphApi({ lang })
+  const { articles } = await getArticleMetadataSummary({ slug })
+  const { seoComponent, coverImage } = articles[0]
 
-  if (!article) return notFound()
-  return {
-    title: article.title,
-    openGraph: {
-      type: "article",
-      authors: article.author ? article.author.name : null,
-      url: "https://next-enterprise.vercel.app/",
-      title: article.title,
-      images: article.coverImage
-        ? [
-            {
-              url:
-                `/api/og?` +
-                new URLSearchParams({
-                  title: article.title,
-                  image: article.coverImage.url,
-                }),
-              width: 1200,
-              height: 630,
-            },
-          ]
-        : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-    },
-  }
+  const description = seoComponent?.description?.text
+  const title = seoComponent?.title
+
+  return getMatadataObj({ coverImage, description, title })
 }
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
@@ -46,13 +24,13 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
   const { articles } = await getArticleSummary({ slug })
   const article = articles[0]
 
-  if (!article) return null
+  if (!article) return notFound()
   return (
     <article className="w-full px-4 pb-16 pt-8">
-      {article.coverImage && (
+      {article?.coverImage && (
         <Image
-          src={article.coverImage.url}
-          alt={""}
+          src={article.coverImage?.url}
+          alt={article.imageDescription?.text ?? ""}
           width={1200}
           height={630}
           quality={100}

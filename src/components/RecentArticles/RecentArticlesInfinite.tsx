@@ -47,7 +47,13 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
           .flatMap((page) => page.articles)
           .map((article) => {
             return (
-              <Link href={`/${lang}/article/${article.slug}`} prefetch={false} passHref key={`recent-${article.id}`}>
+              <Link
+                href={`/${lang}/article/${article.slug}`}
+                hrefLang={lang}
+                prefetch={false}
+                passHref
+                key={`recent-${article.id}`}
+              >
                 <article className="flex flex-col gap-2">
                   <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
                     {article.coverImage?.url && (
