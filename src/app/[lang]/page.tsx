@@ -6,6 +6,8 @@ import { i18n, Locale } from "@/i18n/i18n"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({
     lang: locale,

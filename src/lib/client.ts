@@ -48,7 +48,7 @@ export async function graphqlFetch<TQuery, TVariables>({
         },
       }),
     }),
-    cache,
+    ...(!revalidate && { cache }),
     ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
   })
 

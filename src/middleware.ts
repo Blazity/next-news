@@ -17,6 +17,7 @@ function getLocale(request: NextRequest) {
 const mapHeadersToObject = (headers: Headers) => fromPairs(Array.from(headers.entries()))
 
 export function middleware(request: NextRequest) {
+  console.log("hello middleware")
   const pathname = request.nextUrl.pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
@@ -29,5 +30,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/:locale", "/:locale/", "/"],
+  matcher: ["/"],
 }
