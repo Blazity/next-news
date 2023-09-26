@@ -7,6 +7,12 @@ src/gql/gql.ts
 src/gql/graphql.ts
 src/gql/index.ts
 
+# generated on build
+/public/robots.txt
+/public/sitemap.xml
+/public/sitemap-*.xml
+
+
 # credentials
 
 google-credentials.json
