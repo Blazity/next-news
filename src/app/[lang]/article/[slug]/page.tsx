@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
@@ -21,6 +22,7 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
+  const categories = article?.categories
 
   if (!article) return notFound()
   return (
@@ -43,6 +45,22 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
           </section>
         )}
       </article>
+      <nav className="w-full px-4 pt-8">
+        <ul className="flex items-center justify-start gap-2">
+          <li>Categories: </li>
+          {categories.map((category) => (
+            <li key={category.title}>
+              <Link
+                href={`/${lang}/category/${category.title}`}
+                hrefLang={lang}
+                className="rounded-md border px-5 py-3 hover:bg-slate-100"
+              >
+                {category.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {article.recommendedArticles.length > 0 && (
         <RecommendedArticles recommendedArticles={article.recommendedArticles} lang={lang} />
       )}
