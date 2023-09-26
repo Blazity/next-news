@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { RichText } from "@/components/RichText/RichText"
 import { hygraphLocaleToStandardNotation, i18n, Locale } from "@/i18n/i18n"
-import { getPageBySlug, listPagesForSitemap } from "@/lib/client"
+import { getPageBySlug, getPageMetadataBySlug, listPagesForSitemap } from "@/lib/client"
+import { getMatadataObj } from "@/utils/getMetadataObj"
 
 type CustomPageProps = {
   params: { slug: string; lang: Locale }
@@ -18,13 +19,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { slug, lang } }: CustomPageProps): Promise<Metadata | null> {
-  const page = await getPageBySlug({ locale: lang, slug })
+  const { seoComponent } = await getPageMetadataBySlug({ locale: lang, slug })
 
-  if (!page) return null
-  return {
-    title: page.title,
-    keywords: [page.title],
-  }
+  return getMatadataObj({ title: seoComponent?.title, description: seoComponent?.description?.text })
 }
 
 export default async function Web({ params: { slug, lang } }: CustomPageProps) {

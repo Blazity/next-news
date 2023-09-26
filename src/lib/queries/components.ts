@@ -23,6 +23,19 @@ export const getHomepageQuery = graphql(`
   }
 `)
 
+export const getHomepageMetadataQuery = graphql(`
+  query getHomepageMetadataQuery($locales: [Locale!]!) {
+    homepages(locales: $locales, first: 1) {
+      seoComponent {
+        title
+        description {
+          text
+        }
+      }
+    }
+  }
+`)
+
 export const getFooterQuery = graphql(`
   query getFooter($locales: [Locale!]!) {
     footers(locales: $locales, first: 1) {

@@ -73,6 +73,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (
     <Link
       href={`/${lang}/article/${hit.slug}`}
+      hrefLang={lang}
       prefetch={false}
       className="inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >

@@ -5,13 +5,14 @@ import { env } from "@/env.mjs"
 import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
+  getArticleMetadataBySlugQuery,
   getArticlesQuantityQuery,
   getRecentArticlesQuery,
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
-import { getFooterQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
-import { getPageBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
+import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
+import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { Tag } from "./tags"
 
 export async function graphqlFetch<TQuery, TVariables>({
@@ -77,6 +78,16 @@ export async function getHomepage(locale: Locale) {
   return homepages[0] ?? null
 }
 
+export async function getHomepageMetadata(locale: Locale) {
+  const { homepages } = await graphqlFetch({
+    cache: "force-cache",
+    document: getHomepageMetadataQuery,
+    tags: ["CATEGORY", "ARTICLES"],
+    variables: { locale },
+  })
+  return homepages[0] ?? null
+}
+
 export async function getNavigation(locale: Locale) {
   const { navigations } = await graphqlFetch({
     cache: "force-cache",
@@ -128,10 +139,30 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
   return articles[0] ?? null
 }
 
+export async function getArticleMetadataBySlug(variables: { locale: Locale; slug: string }) {
+  const { articles } = await graphqlFetch({
+    cache: "force-cache",
+    document: getArticleMetadataBySlugQuery,
+    tags: ["ARTICLES"],
+    variables,
+  })
+  return articles[0] ?? null
+}
+
 export async function getPageBySlug(variables: { locale: Locale; slug: string }) {
   const { pages } = await graphqlFetch({
     cache: "force-cache",
     document: getPageBySlugQuery,
+    tags: ["PAGES"],
+    variables,
+  })
+  return pages[0] ?? null
+}
+
+export async function getPageMetadataBySlug(variables: { locale: Locale; slug: string }) {
+  const { pages } = await graphqlFetch({
+    cache: "force-cache",
+    document: getPageMetadataBySlugQuery,
     tags: ["PAGES"],
     variables,
   })

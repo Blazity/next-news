@@ -15,8 +15,10 @@ export const listArticlesForSitemapQuery = graphql(`
     articles(locales: $locales, skip: $skip, first: $first, orderBy: updatedAt_ASC) {
       slug
       updatedAt
-      coverImage {
-        url
+      image {
+        data {
+          url
+        }
       }
     }
   }
@@ -35,8 +37,13 @@ export const getRecentArticlesQuery = graphql(`
       locale
       slug
       title
-      coverImage {
-        url
+      image {
+        description {
+          text
+        }
+        data {
+          url
+        }
       }
     }
     articlesConnection(locales: $locales) {
@@ -52,9 +59,14 @@ export const getArticleBySlugQuery = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        description {
+          text
+        }
+        data {
+          url
+        }
       }
       author {
         id
@@ -67,9 +79,39 @@ export const getArticleBySlugQuery = graphql(`
         title
         slug
         id
-        coverImage {
+        image {
+          description {
+            text
+          }
+          data {
+            url
+          }
+        }
+      }
+    }
+  }
+`)
+
+export const getArticleMetadataBySlugQuery = graphql(`
+  query getArticleMetadataBySlugQuery($locales: [Locale!]!, $slug: String!) {
+    articles(locales: $locales, where: { slug: $slug }) {
+      seoComponent {
+        title
+        description {
+          text
+        }
+      }
+      image {
+        data {
           url
         }
+        title
+        description {
+          text
+        }
+      }
+      author {
+        name
       }
     }
   }
@@ -82,9 +124,14 @@ export const listArticlesBySlugQuery = graphql(`
       title
       slug
       publishedAt
-      coverImage(forceParentLocale: true) {
+      image(forceParentLocale: true) {
         id
-        url
+        description {
+          text
+        }
+        data {
+          url
+        }
       }
       author {
         id
