@@ -15,7 +15,7 @@ export async function Footer({ lang }: FooterProps) {
         <ul className="flex gap-5">
           {footer.pages.map((footerElement) => (
             <li key={footerElement?.slug}>
-              <Link href={`/${lang}/${footerElement?.slug}`} hrefLang={lang} prefetch={false}>
+              <Link href={`/${lang}/${footerElement?.slug}`} hrefLang={lang}>
                 {footerElement?.title}
               </Link>
             </li>

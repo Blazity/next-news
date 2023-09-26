@@ -16,13 +16,7 @@ export async function TrendingArticles({ locale }: TrendingArticlesProps) {
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         {trendingArticles.map((article) => {
           return (
-            <Link
-              href={`/${locale}/article/${article.slug}`}
-              hrefLang={locale}
-              prefetch={false}
-              passHref
-              key={`trending-${article.id}`}
-            >
+            <Link href={`/${locale}/article/${article.slug}`} hrefLang={locale} passHref key={`trending-${article.id}`}>
               <article className="flex flex-col gap-2">
                 <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
                   {article?.image?.data.url && (

@@ -11,13 +11,13 @@ export async function Navigation({ locale }: NavigationProps) {
 
   return (
     <div className="flex w-full items-center justify-between gap-5 pr-4">
-      <Link href={`/${locale}/`} hrefLang={locale} prefetch={false}>
+      <Link href={`/${locale}/`} hrefLang={locale}>
         {"Home"}
       </Link>
       <ul className="flex gap-5">
         {navigation.pages?.map((navElement) => (
           <li key={navElement?.slug}>
-            <Link href={`/${locale}/${navElement?.slug}`} hrefLang={locale} prefetch={false}>
+            <Link href={`/${locale}/${navElement?.slug}`} hrefLang={locale}>
               {navElement?.title}
             </Link>
           </li>
