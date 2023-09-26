@@ -11,7 +11,7 @@ import {
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
-import { getFooterQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
+import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { Tag } from "./tags"
 
@@ -73,6 +73,16 @@ export async function getHomepage(locale: Locale) {
     document: getHomepageQuery,
     tags: ["CATEGORY", "ARTICLES"],
     revalidate: 60 * 60 * 12, // 12h
+    variables: { locale },
+  })
+  return homepages[0] ?? null
+}
+
+export async function getHomepageMetadata(locale: Locale) {
+  const { homepages } = await graphqlFetch({
+    cache: "force-cache",
+    document: getHomepageMetadataQuery,
+    tags: ["CATEGORY", "ARTICLES"],
     variables: { locale },
   })
   return homepages[0] ?? null
