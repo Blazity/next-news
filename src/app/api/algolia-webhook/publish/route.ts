@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache"
+import { revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
@@ -27,8 +27,7 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<z.infer
     })
   )
 
-  revalidatePath(`/[lang]/article/[slug]`)
-  revalidatePath(`/[lang]`)
+  revalidateTag("ARTICLES")
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
