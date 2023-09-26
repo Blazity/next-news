@@ -35,7 +35,7 @@ export default async function generateRssFeed(locale: Locale) {
       copyright: `All rights reserved ${new Date().getFullYear()}`,
       date: date,
       author: [{ name: article?.author?.name }],
-      image: article?.coverImage?.url,
+      image: article?.image?.data?.url,
     })
   })
 

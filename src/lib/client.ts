@@ -69,7 +69,6 @@ export async function getFooter(locale: Locale) {
 
 export async function getHomepage(locale: Locale) {
   const { homepages } = await graphqlFetch({
-    cache: "force-cache",
     document: getHomepageQuery,
     tags: ["CATEGORY", "ARTICLES"],
     revalidate: 60 * 60 * 12, // 12h

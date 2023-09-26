@@ -10,9 +10,8 @@ export async function Footer({ lang }: FooterProps) {
   const footer = await getFooter(lang)
 
   return (
-    <footer className="flex w-[100%] items-center justify-between p-4">
-      <p>Footer</p>
-      <nav>
+    <footer className="flex w-full items-center justify-center border-t border-slate-200">
+      <nav className="w-full max-w-[1200px] p-4">
         <ul className="flex gap-5">
           {footer.pages.map((footerElement) => (
             <li key={footerElement?.slug}>
