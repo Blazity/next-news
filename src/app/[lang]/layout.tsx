@@ -33,23 +33,19 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 }
 
 export default function Layout({ children, params }: { children: React.ReactNode; params: { lang: Locale } }) {
-  const invalidLocale = !i18n.locales.includes(params.lang)
-
-  const validLocale = invalidLocale ? i18n.defaultLocale : params.lang
-
   return (
     <html lang={params.lang}>
       <GoogleAnalytics />
       <Providers>
         <body className="flex min-h-screen flex-col items-center">
           <nav className="flex w-full max-w-[1200px] justify-end gap-4 px-4 pt-8">
-            <Navigation locale={validLocale} />
+            <Navigation locale={params.lang} />
             <DynamicSearchDialog />
             <DynamicLangSelect />
           </nav>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col pb-16">{children}</main>
-          <Footer lang={validLocale} />
+          <Footer lang={params.lang} />
         </body>
       </Providers>
     </html>
