@@ -14,6 +14,8 @@ defaults:
     # change this if your nextjs app does not live at the root of the repo
     working-directory: ./
 
+NODE_ENV: "CI"
+
 jobs:
   analyze:
     env:
@@ -43,7 +45,6 @@ jobs:
       - name: Build next.js app
         env:
           SKIP_BUILD_PRODUCT_REDIRECTS: 1
-          NODE_ENV: "CI"
           NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
         # change this if your site requires a custom build command
         run: yarn build

@@ -1,6 +1,5 @@
 import { CodegenConfig } from "@graphql-codegen/cli"
 
-console.log("ENV", process.env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL)
 const config: CodegenConfig = {
   schema: process.env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL,
   documents: ["./src/**/*.ts"],
