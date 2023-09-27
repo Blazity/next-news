@@ -46,7 +46,7 @@ jobs:
           SKIP_BUILD_PRODUCT_REDIRECTS: 1
           GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}"
           GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}"
-          GA_EMAIL: process.env.GA_EMAIL }}"
+          GA_EMAIL: ${{ secrets.GA_EMAIL }}"
           GA_PRIVATE_KEY: ${{ secrets.GA_PRIVATE_KEY }}"
           NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
           NEXT_PUBLIC_ALGOLIA_API_ID: "${{ secrets.NEXT_PUBLIC_ALGOLIA_API_ID }}"
