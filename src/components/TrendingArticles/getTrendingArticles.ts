@@ -10,7 +10,7 @@ import { getConfig } from "./reportConfig"
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
     client_email: env.GA_EMAIL,
-    private_key: env.GA_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    private_key: env.GA_PRIVATE_KEY?.replace(/\\n/g, "\n"),
   },
 })
 
