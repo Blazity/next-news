@@ -116,3 +116,5 @@ jobs:
           body: ${{ steps.get-comment-body.outputs.body }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
           edit-mode: replace
+env:
+  NODE_ENV: "CI"
