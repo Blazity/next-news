@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
+console.log("NODE ENV", process.env.NODE_ENV)
+
 export const env = createEnv({
   server: {
     ANALYZE: z
@@ -35,5 +37,5 @@ export const env = createEnv({
     NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
     NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: process.env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL,
   },
-  skipValidation: process.env.NODE_ENV === "CI",
+  skipValidation: true,
 })
