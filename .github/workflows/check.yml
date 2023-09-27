@@ -35,3 +35,4 @@ jobs:
             "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
 env:
   NODE_ENV: "CI"
+  NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"

@@ -31,3 +31,4 @@ jobs:
           retention-days: 30
 env:
   NODE_ENV: "CI"
+  NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
