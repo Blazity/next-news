@@ -9,8 +9,7 @@ on:
 jobs:
   test:
     env:
-      NODE_ENV: "CI"
-      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
+      SKIP_ENV_VALIDATION: true
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

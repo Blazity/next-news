@@ -14,9 +14,6 @@ defaults:
     # change this if your nextjs app does not live at the root of the repo
     working-directory: ./
 
-env:
-  NODE_ENV: "CI"
-
 jobs:
   analyze:
     env:

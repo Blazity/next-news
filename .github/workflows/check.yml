@@ -11,8 +11,7 @@ on:
 jobs:
   check:
     env:
-      NODE_ENV: "CI"
-      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
+      SKIP_ENV_VALIDATION: true
     name: Check
     runs-on: ubuntu-latest
     steps:
