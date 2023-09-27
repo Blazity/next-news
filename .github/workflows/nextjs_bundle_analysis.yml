@@ -18,8 +18,6 @@ jobs:
   analyze:
     env:
       SKIP_ENV_VALIDATION: true
-      NODE_ENV: "CI"
-      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -45,6 +43,8 @@ jobs:
       - name: Build next.js app
         env:
           SKIP_BUILD_PRODUCT_REDIRECTS: 1
+          NODE_ENV: "CI"
+          NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
         # change this if your site requires a custom build command
         run: yarn build
 
