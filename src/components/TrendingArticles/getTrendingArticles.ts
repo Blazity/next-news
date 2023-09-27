@@ -7,6 +7,8 @@ import { listArticlesBySlugs } from "@/lib/client"
 import { pipe } from "@/utils/pipe"
 import { getConfig } from "./reportConfig"
 
+console.log("GA", env.GA_EMAIL, env.GA_PRIVATE_KEY)
+
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
     client_email: env.GA_EMAIL,
