@@ -1,17 +1,28 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Article, ListArticlesByCategoryQuery } from "@/gql/graphql"
-import { GetRecentArticlesQuery } from "@/gql/graphql"
 import { Locale } from "@/i18n/i18n"
-import { RecommendedArticle } from "../RecommendedArticles/RecommendedArticles"
 
-type Articles =
-  | Article[]
-  | GetRecentArticlesQuery["articles"]
-  | ListArticlesByCategoryQuery["articles"]
-  | RecommendedArticle[]
+type Nullable<T extends object> = T | null
+
+type ImageDescription =
+  | {
+      text: string
+    }
   | null
   | undefined
+
+type ImageData = { url: string }
+
+type Article = {
+  slug: string
+  title: string
+  image?: Nullable<{
+    description?: ImageDescription
+    data: ImageData
+  }>
+}
+
+type Articles = Article[] | undefined | null
 
 type ArtilcesGridProps = { articles: Articles; locale: Locale }
 

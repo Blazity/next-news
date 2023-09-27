@@ -1,13 +1,12 @@
-/* eslint-disable import/order */
 "use client"
 
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/Button/Button"
+import { ListArticlesByCategoryQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { listArticlesByCategory } from "@/lib/client"
-import { useInfiniteQuery } from "@tanstack/react-query"
-import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 import { CATEGORY_ARTICLES_PER_PAGE } from "./CategoryArticles"
-import { ListArticlesByCategoryQuery } from "@/gql/graphql"
+import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type CategoryArticlesInfiniteProps = {
   initialArticles: { articles: ListArticlesByCategoryQuery["articles"]; count: number }
@@ -27,7 +26,7 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
     queryFn: ({ pageParam = 0 }) =>
       listArticlesByCategory({
         locale,
-        slug: category,
+        categorySlug: category,
         skip: CATEGORY_ARTICLES_PER_PAGE * pageParam,
         first: CATEGORY_ARTICLES_PER_PAGE,
       }),

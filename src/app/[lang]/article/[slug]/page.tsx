@@ -48,10 +48,10 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
       <nav className="w-full px-4 pt-8">
         <ul className="flex items-center justify-start gap-2">
           <li>Categories: </li>
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <li key={category.title}>
               <Link
-                href={`/${lang}/category/${category.title}`}
+                href={`/${lang}/category/${category.slug}`}
                 hrefLang={lang}
                 className="rounded-md border px-5 py-3 hover:bg-slate-100"
               >

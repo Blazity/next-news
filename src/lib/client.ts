@@ -191,7 +191,7 @@ export async function listArticlesBySlugs(variables: { locale: Locale; slugs: st
 
 export async function listArticlesByCategory(variables: {
   locale: Locale
-  slug: string
+  categorySlug: string
   skip?: number
   first?: number
 }) {
