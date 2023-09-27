@@ -8,6 +8,9 @@ on:
   workflow_dispatch: null
 jobs:
   test:
+    env:
+      NODE_ENV: "CI"
+      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +32,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-env:
-  NODE_ENV: "CI"
-  NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"

@@ -10,6 +10,9 @@ on:
 
 jobs:
   check:
+    env:
+      NODE_ENV: "CI"
+      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
     name: Check
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +36,3 @@ jobs:
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
             "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
-env:
-  NODE_ENV: "CI"
-  NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
