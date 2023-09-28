@@ -68,14 +68,13 @@ export async function getFooter(locale: Locale) {
 }
 
 export async function getHomepage(locale: Locale) {
-  const data = await graphqlFetch({
+  const { homepages } = await graphqlFetch({
     document: getHomepageQuery,
     tags: ["CATEGORY", "ARTICLES"],
     revalidate: 60 * 60 * 12, // 12h
     variables: { locale },
   })
-  console.log("HOMEPAGES", data)
-  return data.homepages[0] ?? null
+  return homepages[0] ?? null
 }
 
 export async function getHomepageMetadata(locale: Locale) {
