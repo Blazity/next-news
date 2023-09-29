@@ -10,6 +10,8 @@ on:
 
 jobs:
   check:
+    env:
+      SKIP_ENV_VALIDATION: true
     name: Check
     runs-on: ubuntu-latest
     steps:

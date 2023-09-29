@@ -3,10 +3,10 @@ import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
 import { Navigation } from "@/components/Navigation/Navigation"
 import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
 import { env } from "@/env.mjs"
-import type { Locale } from "@/i18n/i18n"
+import { i18n, type Locale } from "@/i18n/i18n"
+import "@/styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
-import "@/styles/tailwind.css"
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }) {
   return {
@@ -43,6 +43,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
             <DynamicSearchDialog />
             <DynamicLangSelect />
           </nav>
+
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col pb-16">{children}</main>
           <Footer lang={params.lang} />
         </body>

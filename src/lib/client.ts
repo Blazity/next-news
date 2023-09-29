@@ -49,12 +49,12 @@ export async function graphqlFetch<TQuery, TVariables>({
         },
       }),
     }),
-    cache,
+    ...(!revalidate && { cache }),
     ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
   })
 
   const parsed = (await result.json()) as { data: TQuery }
-
+  console.log(parsed)
   return parsed.data
 }
 
@@ -62,7 +62,7 @@ export async function getFooter(locale: Locale) {
   const { footers } = await graphqlFetch({
     cache: "force-cache",
     document: getFooterQuery,
-    tags: ["PAGES"],
+    tags: ["FOOTER", "PAGE"],
     variables: { locale },
   })
   return footers[0] ?? null
@@ -71,7 +71,7 @@ export async function getFooter(locale: Locale) {
 export async function getHomepage(locale: Locale) {
   const { homepages } = await graphqlFetch({
     document: getHomepageQuery,
-    tags: ["CATEGORY", "ARTICLES"],
+    tags: ["HOMEPAGE", "CATEGORY", "ARTICLE"],
     revalidate: 60 * 60 * 12, // 12h
     variables: { locale },
   })
@@ -82,7 +82,7 @@ export async function getHomepageMetadata(locale: Locale) {
   const { homepages } = await graphqlFetch({
     cache: "force-cache",
     document: getHomepageMetadataQuery,
-    tags: ["CATEGORY", "ARTICLES"],
+    tags: ["HOMEPAGE", "CATEGORY", "ARTICLE"],
     variables: { locale },
   })
   return homepages[0] ?? null
@@ -92,7 +92,7 @@ export async function getNavigation(locale: Locale) {
   const { navigations } = await graphqlFetch({
     cache: "force-cache",
     document: getNavigationQuery,
-    tags: ["PAGES"],
+    tags: ["NAVIGATION", "PAGE"],
     variables: { locale },
   })
 
@@ -103,7 +103,7 @@ export async function getArticlesQuantity(locale: Locale) {
   const { articlesConnection } = await graphqlFetch({
     cache: "force-cache",
     document: getArticlesQuantityQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables: { locale },
   })
   return articlesConnection.aggregate.count ?? 0
@@ -113,7 +113,7 @@ export async function listArticlesForSitemap(variables: { locale: Locale; skip?:
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: listArticlesForSitemapQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return articles
@@ -123,7 +123,7 @@ export async function getRecentArticles(variables: { locale: Locale; skip?: numb
   const { articles, articlesConnection } = await graphqlFetch({
     cache: "force-cache",
     document: getRecentArticlesQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
@@ -133,7 +133,7 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: getArticleBySlugQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return articles[0] ?? null
@@ -143,7 +143,7 @@ export async function getArticleMetadataBySlug(variables: { locale: Locale; slug
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: getArticleMetadataBySlugQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return articles[0] ?? null
@@ -153,7 +153,7 @@ export async function getPageBySlug(variables: { locale: Locale; slug: string })
   const { pages } = await graphqlFetch({
     cache: "force-cache",
     document: getPageBySlugQuery,
-    tags: ["PAGES"],
+    tags: ["PAGE"],
     variables,
   })
   return pages[0] ?? null
@@ -163,7 +163,7 @@ export async function getPageMetadataBySlug(variables: { locale: Locale; slug: s
   const { pages } = await graphqlFetch({
     cache: "force-cache",
     document: getPageMetadataBySlugQuery,
-    tags: ["PAGES"],
+    tags: ["PAGE"],
     variables,
   })
   return pages[0] ?? null
@@ -173,7 +173,7 @@ export async function listPagesForSitemap(locale: Locale) {
   const { pages } = await graphqlFetch({
     cache: "force-cache",
     document: listPagesForSitemapQuery,
-    tags: ["PAGES"],
+    tags: ["PAGE"],
     variables: { locale },
   })
   return pages
@@ -183,7 +183,7 @@ export async function listArticlesBySlugs(variables: { locale: Locale; slugs: st
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: listArticlesBySlugQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return articles

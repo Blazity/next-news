@@ -10,6 +10,8 @@ on:
       - synchronize
 jobs:
   test:
+    env:
+      SKIP_ENV_VALIDATION: true
     runs-on: ubuntu-latest
     steps:
       - uses: anc95/ChatGPT-CodeReview@main

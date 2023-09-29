@@ -1,17 +1,17 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data"
 import keyBy from "lodash/keyBy"
 import sortBy from "lodash/sortBy"
+import { z } from "zod"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { listArticlesBySlugs } from "@/lib/client"
 import { pipe } from "@/utils/pipe"
 import { getConfig } from "./reportConfig"
 
+const credentials = JSON.parse(atob(env.GA_BASE64_SERVICE_ACCOUNT))
+
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  credentials: {
-    client_email: env.GA_EMAIL,
-    private_key: env.GA_PRIVATE_KEY.replace(/\\n/g, "\n"),
-  },
+  credentials: z.object({ client_email: z.string(), private_key: z.string() }).parse(credentials),
 })
 
 async function runReport(locale: string) {
