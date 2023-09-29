@@ -2,6 +2,7 @@ import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { print } from "graphql"
 import omit from "lodash/omit"
 import { env } from "@/env.mjs"
+import { QuizQuestion } from "@/gql/graphql"
 import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
@@ -13,6 +14,7 @@ import {
 } from "./queries/articles"
 import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
+import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 import { Tag } from "./tags"
 
 export async function graphqlFetch<TQuery, TVariables>({
@@ -186,4 +188,14 @@ export async function listArticlesBySlugs(variables: { locale: Locale; slugs: st
     variables,
   })
   return articles
+}
+
+export async function getQuizQuestionsById(variables: { locale: Locale; id: string; skip: number }) {
+  const { quiz } = await graphqlFetch({
+    cache: "force-cache",
+    document: getQuizQuestionsByIdQuery,
+    tags: ["QUIZES"],
+    variables,
+  })
+  return quiz?.question ?? null
 }

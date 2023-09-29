@@ -1,10 +1,12 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
-import { RichTextContent } from "@graphcms/rich-text-types"
+import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
+import { Quiz } from "../Quiz/Quiz"
 
-export function RichText({ raw }: { raw: RichTextContent }) {
+export function RichText({ raw, references }: { raw: RichTextContent; references?: EmbedReferences }) {
   return (
     <HygraphRichText
       content={raw}
+      references={references}
       renderers={{
         h1: (props) => <h1 {...props} className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white" />,
         h2: (props) => <h1 {...props} className="mb-4 text-2xl font-semibold text-gray-900  dark:text-white" />,
@@ -27,6 +29,11 @@ export function RichText({ raw }: { raw: RichTextContent }) {
             className="overflow-y-scroll rounded-md bg-gray-100 p-2 text-sm dark:bg-gray-800 dark:text-white"
           />
         ),
+        embed: {
+          Quiz: ({ id, title, question }) => {
+            return <Quiz initialQuiz={{ id, title, question }} />
+          },
+        },
       }}
     />
   )
