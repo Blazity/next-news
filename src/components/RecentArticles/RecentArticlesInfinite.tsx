@@ -1,14 +1,12 @@
-/* eslint-disable import/order */
 "use client"
 
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { getRecentArticles } from "@/lib/client"
-import { useInfiniteQuery } from "@tanstack/react-query"
-import Image from "next/image"
-import Link from "next/link"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
+import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
@@ -40,32 +38,11 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
     },
   })
 
+  const articles = recentArticlesQuery?.pages.flatMap((page) => page.articles)
+
   return (
     <>
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-        {recentArticlesQuery?.pages
-          .flatMap((page) => page.articles)
-          .map((article) => {
-            return (
-              <Link href={`/${locale}/article/${article.slug}`} hrefLang={locale} passHref key={`recent-${article.id}`}>
-                <article className="flex flex-col gap-2">
-                  <div className="h-[157px] max-w-[300px] rounded-sm bg-slate-100">
-                    {article?.image?.data.url && (
-                      <Image
-                        src={article.image?.data?.url}
-                        alt={article.image?.description?.text || ""}
-                        width={300}
-                        height={157}
-                        className="h-[157px] w-[300px] rounded-sm object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="font-semibold">{article.title}</div>
-                </article>
-              </Link>
-            )
-          })}
-      </div>
+      <ArticlesGrid locale={locale} articles={articles} />
       {hasNextPage && (
         <Button className="mt-16 w-full bg-slate-100 p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
           See more

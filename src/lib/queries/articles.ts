@@ -88,6 +88,10 @@ export const getArticleBySlugQuery = graphql(`
           }
         }
       }
+      categories {
+        title
+        slug
+      }
     }
   }
 `)
@@ -136,6 +140,34 @@ export const listArticlesBySlugQuery = graphql(`
       author {
         id
         name
+      }
+    }
+  }
+`)
+
+export const listArticlesByCategoryQuery = graphql(`
+  query listArticlesByCategory($locales: [Locale!]!, $categorySlug: String!, $skip: Int = 0, $first: Int = 50) {
+    articles(
+      locales: $locales
+      where: { categories_some: { slug: $categorySlug } }
+      skip: $skip
+      first: $first
+      orderBy: publishedAt_DESC
+    ) {
+      image {
+        description {
+          text
+        }
+        data {
+          url
+        }
+      }
+      slug
+      title
+    }
+    articlesConnection(locales: $locales) {
+      aggregate {
+        count
       }
     }
   }

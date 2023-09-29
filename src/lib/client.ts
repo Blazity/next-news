@@ -8,6 +8,7 @@ import {
   getArticleMetadataBySlugQuery,
   getArticlesQuantityQuery,
   getRecentArticlesQuery,
+  listArticlesByCategoryQuery,
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
@@ -186,4 +187,19 @@ export async function listArticlesBySlugs(variables: { locale: Locale; slugs: st
     variables,
   })
   return articles
+}
+
+export async function listArticlesByCategory(variables: {
+  locale: Locale
+  categorySlug: string
+  skip?: number
+  first?: number
+}) {
+  const { articles, articlesConnection } = await graphqlFetch({
+    cache: "force-cache",
+    document: listArticlesByCategoryQuery,
+    tags: ["ARTICLES"],
+    variables,
+  })
+  return { articles, count: articlesConnection.aggregate.count }
 }
