@@ -21,6 +21,7 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
+  const initialQuiz = article.quiz
 
   if (!article) return notFound()
   return (
@@ -39,7 +40,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
         <h1 className="mb-8 text-2xl font-semibold">{article.title}</h1>
         {article.content && (
           <section className="flex w-full flex-col gap-4">
-            <RichText raw={article.content.raw} />
+            <RichText references={initialQuiz ? [initialQuiz] : []} raw={article.content.raw} />
           </section>
         )}
       </article>

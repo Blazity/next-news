@@ -1,1 +1,1 @@
-export type Tag = "PAGES" | "ARTICLES" | "CATEGORY"
+export type Tag = "PAGES" | "ARTICLES" | "CATEGORY" | "QUIZES"
