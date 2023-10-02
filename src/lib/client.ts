@@ -198,7 +198,7 @@ export async function listArticlesByCategory(variables: {
   const { articles, articlesConnection } = await graphqlFetch({
     cache: "force-cache",
     document: listArticlesByCategoryQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }

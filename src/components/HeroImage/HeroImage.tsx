@@ -14,7 +14,7 @@ type HeroImageProps = {
 
 export function HeroImage({ imageUrl, title, publicationDate, author, authorImageUrl }: HeroImageProps) {
   return (
-    <section className="relative mt-3 w-full overflow-hidden rounded-xl">
+    <section className="relative w-full overflow-hidden rounded-xl">
       <div className="absolute inset-0 z-10 bg-black opacity-20" />
       <Image src={imageUrl} layout="responsive" alt="test" width={1200} height={700} />
       <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 text-white">

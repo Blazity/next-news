@@ -7,6 +7,9 @@ export const getNavigationQuery = graphql(`
         slug
         title
       }
+      logo {
+        url
+      }
     }
   }
 `)
