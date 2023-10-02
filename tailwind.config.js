@@ -29,6 +29,11 @@ module.exports = {
           800: "#1e40af",
           900: "#1e3a8a",
         },
+        custom: {
+          dim: "#D9D9D9",
+          gray: "#FFFFFF40",
+          green: "#55FF0080",
+        },
       },
       fontFamily: {
         body: [
