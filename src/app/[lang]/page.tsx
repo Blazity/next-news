@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { HeroImage } from "@/components/HeroImage/HeroImage"
 import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
 import { StockMarket } from "@/components/StockMarket/StockMarket"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
@@ -29,15 +28,8 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
         <StockMarket />
         {/* <StockDisplay quotes={homepage.stockDailyQuotes} /> */}
       </div>
-      <HeroImage
-        imageUrl="https://media.graphassets.com/eq6zHW7PRxC331vmxHzz"
-        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua."
-        author="John Appleseed"
-        publicationDate="4 June 2021"
-        authorImageUrl="https://media.graphassets.com/7yaFHLqSpe3FMOZATyPz"
-      />
-      <div className="flex w-full flex-col gap-16 pt-4">
+
+      <div className="flex w-full flex-col gap-16">
         <TrendingArticles locale={params.lang} />
         <RecentArticles locale={params.lang} />
       </div>

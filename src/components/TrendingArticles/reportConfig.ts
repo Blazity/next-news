@@ -39,5 +39,5 @@ export const getConfig = ({
       desc: true,
     },
   ],
-  limit: 16,
+  limit: 13,
 })

@@ -141,6 +141,7 @@ export const listArticlesBySlugQuery = graphql(`
         id
         name
       }
+      tags
     }
   }
 `)

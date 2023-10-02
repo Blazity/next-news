@@ -30,7 +30,7 @@ module.exports = {
         custom: {
           test: "#0000000D",
           dim: "#D9D9D9",
-          gray: "#FFFFFF40",
+          gray: "#FFFFFF25",
           green: "#55FF0080",
         },
       },

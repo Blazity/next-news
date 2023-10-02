@@ -14,7 +14,7 @@ const monthNames = [
 ]
 
 export function formatDate(inputDate: Date | string): string {
-  const convertedDate = new Date(inputDate);
+  const convertedDate = new Date(inputDate)
 
   const day = convertedDate.getDate()
   const monthIndex = convertedDate.getMonth()
