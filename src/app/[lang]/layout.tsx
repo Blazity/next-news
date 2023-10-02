@@ -3,7 +3,7 @@ import { DynamicLangSelect } from "@/components/LangSelect/DynamicLangSelect"
 import { Navigation } from "@/components/Navigation/Navigation"
 import { DynamicSearchDialog } from "@/components/Search/DynamicSearchDialog"
 import { env } from "@/env.mjs"
-import { i18n, type Locale } from "@/i18n/i18n"
+import { type Locale } from "@/i18n/i18n"
 import "@/styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
@@ -37,8 +37,8 @@ export default function Layout({ children, params }: { children: React.ReactNode
     <html lang={params.lang}>
       <GoogleAnalytics />
       <Providers>
-        <body className="flex min-h-screen flex-col items-center">
-          <nav className="flex w-full max-w-[1200px] justify-end gap-4 px-4 pt-8">
+        <body className="flex min-h-screen flex-col items-center px-4">
+          <nav className="flex w-full max-w-[1200px] justify-end gap-4 pt-8">
             <Navigation locale={params.lang} />
             <DynamicSearchDialog />
             <DynamicLangSelect />
