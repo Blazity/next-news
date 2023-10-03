@@ -54,7 +54,6 @@ export async function graphqlFetch<TQuery, TVariables>({
   })
 
   const parsed = (await result.json()) as { data: TQuery }
-  console.log(parsed)
   return parsed.data
 }
 
@@ -198,7 +197,7 @@ export async function listArticlesByCategory(variables: {
   const { articles, articlesConnection } = await graphqlFetch({
     cache: "force-cache",
     document: listArticlesByCategoryQuery,
-    tags: ["ARTICLES"],
+    tags: ["ARTICLE"],
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }

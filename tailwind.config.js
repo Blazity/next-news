@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { pick, omit } = require("lodash")
-const colors = require("tailwindcss/colors")
 const defaultTheme = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
@@ -16,6 +14,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          "100%": { transform: "translate(-50%)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 5s ease-in-out infinite",
+      },
       colors: {
         primary: {
           50: "#eff6ff",
@@ -28,6 +34,14 @@ module.exports = {
           700: "#1d4ed8",
           800: "#1e40af",
           900: "#1e3a8a",
+        },
+        custom: {
+          gray: {
+            50: "#00000005",
+            100: "#FFFFFF40",
+          },
+          dim: "#D9D9D9",
+          green: "#55FF0080",
         },
       },
       fontFamily: {

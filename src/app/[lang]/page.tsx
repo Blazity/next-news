@@ -24,10 +24,11 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
 
   return (
     <>
-      <div className="flex w-full justify-end px-4 pt-4">
+      <div className="flex w-full justify-end">
         <StockDisplay quotes={homepage.stockDailyQuotes} />
       </div>
-      <div className="flex w-full flex-col gap-16 pt-4">
+
+      <div className="flex w-full flex-col gap-16">
         <TrendingArticles locale={params.lang} />
         <RecentArticles locale={params.lang} />
       </div>

@@ -1,7 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
-console.log("SKIP VALIDATION", process.env.SKIP_ENV_VALIDATION)
 export const env = createEnv({
   server: {
     ANALYZE: z

@@ -31,16 +31,8 @@ function SearchDialogContent() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          className=" rounded-lg bg-gray-50 text-slate-700 shadow-md"
-          variant="ghost"
-          aria-label="Open search dialog"
-          name="Search"
-        >
-          <div className="flex min-w-[200px] items-center gap-4 px-1">
-            <Search className="h-4 w-4" />
-            Search for an article
-          </div>
+        <Button className="rounded-lg p-4" variant="ghost" aria-label="Open search dialog" name="Search">
+          <Search className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
