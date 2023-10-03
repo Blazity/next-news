@@ -36,7 +36,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
       <GoogleAnalytics />
       <Providers>
         <body className="flex min-h-screen flex-col items-center ">
-          <div className="flex w-full justify-center border-b-[1px]">
+          <div className="z-50 flex w-full justify-center border-b-[1px] bg-white">
             <nav className="flex w-full max-w-[1200px] items-center justify-end gap-4 py-4">
               <Navigation locale={params.lang} />
             </nav>

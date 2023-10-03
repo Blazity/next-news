@@ -18,7 +18,7 @@ export async function Navigation({ locale }: NavigationProps) {
         <Link href={`/${locale}/`} hrefLang={locale}>
           <Image src={logo.url} width={100} height={20} alt="logo" className="" />
         </Link>
-        <ul className="flex items-center gap-5">
+        <ul className="flex items-center gap-5 sm:flex-wrap">
           <li className="flex items-center">
             <DynamicSearchDialog />
           </li>

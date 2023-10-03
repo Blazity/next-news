@@ -39,6 +39,7 @@ module.exports = {
           gray: {
             50: "#00000005",
             100: "#FFFFFF40",
+            200: "#F5F5F5"
           },
           dim: "#D9D9D9",
           green: "#55FF0080",
