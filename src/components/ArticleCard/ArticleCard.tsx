@@ -15,15 +15,28 @@ type ArticleCardProps = {
     }
   }
   tagsPosition?: "over" | "under"
+  orientation?: "vertical" | "horizontal"
 }
 
 export function ArticleCard({
   article: { imageUrl, title, publicationDate, author, tags },
   tagsPosition = "under",
+  orientation = "vertical",
 }: ArticleCardProps) {
   return (
-    <article className=" flex h-full max-h-[490px] w-full cursor-pointer flex-col overflow-hidden rounded-xl">
-      <div className="relative h-[264px] bg-slate-900">
+    <article
+      className={cn(
+        orientation === "vertical" && "flex-col",
+        orientation === "horizontal" && "flex-row",
+        "flex h-full max-h-[490px] w-full cursor-pointer overflow-hidden rounded-xl"
+      )}
+    >
+      <div
+        className={cn(
+          orientation === "horizontal" && "w-1/2 min-w-[204px]",
+          "relative min-h-[264px] bg-gradient-to-br from-gray-200 to-gray-300"
+        )}
+      >
         {imageUrl && (
           <Image
             src={imageUrl}
@@ -47,9 +60,15 @@ export function ArticleCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col rounded-b-xl border border-t-0 border-gray-200 bg-white">
+      <div
+        className={cn(
+          "flex flex-1 flex-col  border border-gray-200 bg-white",
+          orientation === "vertical" && "rounded-b-xl border-t-0",
+          orientation === "horizontal" && "rounded-r-xl border-l-0"
+        )}
+      >
         {tagsPosition === "under" && tags.length > 0 && (
-          <div className="flex gap-2 p-6 pb-3">
+          <div className="flex gap-2 p-5 pb-2">
             {tags.map((tag) => {
               return (
                 <TagButton key={tag} variant="light">
@@ -59,7 +78,7 @@ export function ArticleCard({
             })}
           </div>
         )}
-        <div className="flex flex-1 flex-col justify-end  gap-5  p-6 pt-3 ">
+        <div className="flex flex-1 flex-col justify-end  gap-5  p-5 pt-2 ">
           <h2
             className={cn(
               tagsPosition === "under" && "min-h-[80px] ",

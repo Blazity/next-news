@@ -2,18 +2,18 @@ import { Locale } from "@/i18n/i18n"
 import { getRecentArticles } from "@/lib/client"
 import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 
-export const RECENT_ARTICLES_PER_PAGE = 4
+export const RECENT_ARTICLES_PER_PAGE = 6
 
 type RecentArticlesProps = {
   locale: Locale
 }
 
 export async function RecentArticles({ locale }: RecentArticlesProps) {
-  const initialArticles = await getRecentArticles({ locale, first: RECENT_ARTICLES_PER_PAGE })
+  const initialArticles = await getRecentArticles({ locale, first: 4 })
 
   return (
     <section className="w-full">
-      <h2 className="mb-4 text-2xl font-bold">Recent articles</h2>
+      <h2 className="py-12 pb-8 text-3xl font-bold">Recent news</h2>
       <RecentArticlesInfiniteDynamic initialArticles={initialArticles} />
     </section>
   )

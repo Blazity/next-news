@@ -37,6 +37,7 @@ export const getRecentArticlesQuery = graphql(`
       locale
       slug
       title
+      tags
       image {
         description {
           text

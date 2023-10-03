@@ -2,9 +2,8 @@ import { Locale } from "@/i18n/i18n"
 import { formatDate } from "@/utils/formatDate"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard } from "../ArticleCard/ArticleCard"
-import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
-import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
+import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
 
 type TrendingArticlesProps = {
   locale: Locale

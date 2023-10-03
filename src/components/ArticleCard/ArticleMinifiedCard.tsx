@@ -10,7 +10,7 @@ type ArticleMinifiedCardProps = {
 export function ArticleMinifiedCard({ article: { imageUrl, title } }: ArticleMinifiedCardProps) {
   return (
     <article className="flex w-full gap-5">
-      <div className="relative h-[82px] w-[82px] rounded-xl bg-slate-900">
+      <div className="relative h-[82px] w-[82px] rounded-xl bg-gradient-to-br from-gray-200 to-gray-300">
         {imageUrl && (
           <Image
             src={imageUrl}
