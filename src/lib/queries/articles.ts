@@ -25,8 +25,8 @@ export const listArticlesForSitemapQuery = graphql(`
 `)
 
 export const getRecentArticlesQuery = graphql(`
-  query getRecentArticles($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50) {
-    articles(locales: $locales, skip: $skip, first: $first, orderBy: publishedAt_DESC) {
+  query getRecentArticles($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50, $where: ArticleWhereInput) {
+    articles(locales: $locales, skip: $skip, first: $first, orderBy: publishedAt_DESC, where: $where) {
       id
       author {
         name

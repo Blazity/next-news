@@ -7,7 +7,7 @@ import { useLocale } from "@/i18n/useLocale"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
-import { ArticleCard } from "../ArticleCard/ArticleCard"
+import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
@@ -45,36 +45,10 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
 
   return (
     <section className="flex flex-col gap-5">
-      <ArticleCard
-        article={{
-          imageUrl: firstArticle.image?.data.url,
-          title: firstArticle.title,
-          publicationDate: firstArticle.publishedAt,
-          tags: firstArticle.tags,
-          author: {
-            name: firstArticle.author?.name ?? "Anonymous",
-            imageUrl: undefined,
-          },
-        }}
-        orientation="horizontal"
-      />
+      <ArticleCard article={hygraphArticleToCardProps(firstArticle)} orientation="horizontal" />
       <div className="grid grid-cols-3 gap-5">
         {otherArticles.map((article) => {
-          return (
-            <ArticleCard
-              key={`recent-${article.id}`}
-              article={{
-                imageUrl: article.image?.data.url,
-                title: article.title,
-                publicationDate: article.publishedAt,
-                tags: article.tags,
-                author: {
-                  name: article.author?.name ?? "Anonymous",
-                  imageUrl: undefined,
-                },
-              }}
-            />
-          )
+          return <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} />
         })}
       </div>
       {hasNextPage && (

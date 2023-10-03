@@ -1,13 +1,14 @@
 import Image from "next/image"
+import { cn } from "@/utils/cn"
+import { formatDate } from "@/utils/formatDate"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { TagButton } from "./Buttons/TagButton"
-import { cn } from "@/utils/cn"
 
 type ArticleCardProps = {
   article: {
     imageUrl?: string
     title: string
-    publicationDate: Date | string
+    publicationDate: string | null
     tags: string[]
     author: {
       name: string
@@ -16,6 +17,22 @@ type ArticleCardProps = {
   }
   tagsPosition?: "over" | "under"
   orientation?: "vertical" | "horizontal"
+}
+
+export const hygraphArticleToCardProps = (article: {
+  tags: string[]
+  title: string
+  author?: { name: string } | null
+  image?: { data: { url: string } } | null
+  publishedAt?: string
+}) => {
+  return {
+    tags: article.tags,
+    imageUrl: article.image?.data.url,
+    title: article.title,
+    author: { name: article.author?.name ?? "Anonymous" },
+    publicationDate: article.publishedAt ? formatDate(article.publishedAt) : null,
+  }
 }
 
 export function ArticleCard({
@@ -34,7 +51,7 @@ export function ArticleCard({
       <div
         className={cn(
           orientation === "horizontal" && "w-1/2 min-w-[204px]",
-          "relative min-h-[264px] bg-gradient-to-br from-gray-200 to-gray-300"
+          "relative h-[264px] min-h-[264px] bg-gradient-to-br from-gray-200 to-gray-300"
         )}
       >
         {imageUrl && (
@@ -44,7 +61,7 @@ export function ArticleCard({
             alt="test"
             width={780}
             height={264}
-            className=" max-h-[264px] object-cover text-center brightness-90"
+            className=" h-full max-h-[264px]  min-h-[264px] object-cover text-center brightness-90"
           />
         )}
         <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
@@ -82,7 +99,7 @@ export function ArticleCard({
           <h2
             className={cn(
               tagsPosition === "under" && "min-h-[80px] ",
-              "text-[1.8rem] font-bold leading-10 tracking-[1px]"
+              "line-clamp-2 text-[1.8rem] font-bold leading-10 tracking-[1px]"
             )}
           >
             {title}
@@ -90,7 +107,7 @@ export function ArticleCard({
           <ArticlePublishDetails
             imageUrl={author.imageUrl}
             author={author.name}
-            date={publicationDate}
+            formatedDate={publicationDate}
             variant="light"
           />
         </div>
