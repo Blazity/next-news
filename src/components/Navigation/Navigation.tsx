@@ -10,7 +10,7 @@ type NavigationProps = {
 
 export async function Navigation({ locale }: NavigationProps) {
   const navigation = await getNavigation(locale)
-  const { logo } = navigation
+  const { logo, elements } = navigation
 
   return (
     <>
@@ -19,14 +19,20 @@ export async function Navigation({ locale }: NavigationProps) {
           <Image src={logo.url} width={100} height={20} alt="logo" className="" />
         </Link>
         <ul className="flex items-center gap-5">
-          <DynamicSearchDialog />
-          {navigation.pages?.map((navElement) => (
-            <li key={navElement?.slug}>
-              <Link href={`/${locale}/${navElement?.slug}`} hrefLang={locale}>
-                {navElement?.title}
-              </Link>
-            </li>
-          ))}
+          <li className="flex items-center">
+            <DynamicSearchDialog />
+          </li>
+          {elements?.map((navElement) => {
+            const categoryUrl = navElement.element?.__typename === "Category" ? "/category" : ""
+            const url = `/${locale}${categoryUrl}/${navElement?.element?.slug}`
+            return (
+              <li key={navElement?.element?.slug}>
+                <Link href={url} hrefLang={locale}>
+                  {navElement?.element?.title}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </>

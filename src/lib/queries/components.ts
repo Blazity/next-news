@@ -3,9 +3,19 @@ import { graphql } from "@/gql"
 export const getNavigationQuery = graphql(`
   query getNavigation($locales: [Locale!]!) {
     navigations(locales: $locales, first: 1) {
-      pages {
-        slug
-        title
+      elements {
+        element {
+          ... on Category {
+            __typename
+            title
+            slug
+          }
+          ... on Page {
+            __typename
+            title
+            slug
+          }
+        }
       }
       logo {
         url
