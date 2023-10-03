@@ -19,7 +19,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { slug, lang } }: CustomPageProps): Promise<Metadata | null> {
-  const { seoComponent } = await getPageMetadataBySlug({ locale: lang, slug })
+  const metaData = await getPageMetadataBySlug({ locale: lang, slug })
+  if (!metaData) return null
+
+  const { seoComponent } = metaData
 
   return getMatadataObj({ title: seoComponent?.title, description: seoComponent?.description?.text })
 }
