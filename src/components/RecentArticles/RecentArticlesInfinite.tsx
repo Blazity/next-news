@@ -6,8 +6,8 @@ import { GetRecentArticlesQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
-import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
+import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
