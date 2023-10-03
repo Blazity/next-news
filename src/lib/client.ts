@@ -54,7 +54,6 @@ export async function graphqlFetch<TQuery, TVariables>({
   })
 
   const parsed = (await result.json()) as { data: TQuery }
-  console.log(parsed)
   return parsed.data
 }
 
