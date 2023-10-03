@@ -32,6 +32,14 @@ export const getHomepageQuery = graphql(`
         name
         quote
       }
+      recentSectionTitle
+      trendingSectionTitle
+      highlightedCategoryTitle
+      highlightedCategory(forceParentLocale: true) {
+        slug
+        title
+        id
+      }
     }
   }
 `)

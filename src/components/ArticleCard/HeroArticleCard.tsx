@@ -6,7 +6,7 @@ type HeroArticleCardProps = {
   article: {
     imageUrl?: string
     title: string
-    publicationDate: Date | string
+    publicationDate: string | null
     tags: string[]
     author: {
       name: string
@@ -44,7 +44,7 @@ export function HeroArticleCard({ article: { imageUrl, title, publicationDate, a
             >
               {title}
             </h2>
-            <ArticlePublishDetails imageUrl={author.imageUrl} author={author.name} date={publicationDate} />
+            <ArticlePublishDetails imageUrl={author.imageUrl} author={author.name} formatedDate={publicationDate} />
           </div>
         </div>
       </div>

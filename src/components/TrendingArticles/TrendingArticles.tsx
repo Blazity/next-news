@@ -1,16 +1,15 @@
 import { Locale } from "@/i18n/i18n"
-import { formatDate } from "@/utils/formatDate"
 import { getTrendingArticles } from "./getTrendingArticles"
-import { ArticleCard } from "../ArticleCard/ArticleCard"
-import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
-import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
+import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
+import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
 
 type TrendingArticlesProps = {
   locale: Locale
+  title: string
 }
 
-export async function TrendingArticles({ locale }: TrendingArticlesProps) {
+export async function TrendingArticles({ locale, title }: TrendingArticlesProps) {
   const trendingArticles = await getTrendingArticles(locale)
 
   const [heroArticle, ...otherTrendingArticles] = trendingArticles
@@ -19,34 +18,15 @@ export async function TrendingArticles({ locale }: TrendingArticlesProps) {
 
   return (
     <section className="w-full">
-      {heroArticle && (
-        <HeroArticleCard
-          article={{
-            tags: heroArticle.tags,
-            imageUrl: heroArticle.image?.data.url,
-            title: heroArticle.title,
-            author: { name: heroArticle.author?.name ?? "Anonymous" },
-            publicationDate: formatDate(heroArticle.publishedAt),
-          }}
-        />
-      )}
+      {heroArticle && <HeroArticleCard article={hygraphArticleToCardProps(heroArticle)} />}
       {otherTrendingArticles.length > 0 && (
         <>
-          <h2 className="py-12 pb-8 text-3xl font-bold">Hot topics</h2>
+          <h2 className="py-12 pb-8 text-3xl font-bold">{title}</h2>
           <div className="grid grid-cols-3 gap-5">
             <div className="col-span-2 flex flex-col gap-5">
               {mainArticle && (
                 <div className="h-[388px]">
-                  <ArticleCard
-                    article={{
-                      tags: mainArticle.tags,
-                      imageUrl: mainArticle.image?.data.url,
-                      title: mainArticle.title,
-                      author: { name: mainArticle.author?.name ?? "Anonymous" },
-                      publicationDate: formatDate(mainArticle.publishedAt),
-                    }}
-                    tagsPosition="over"
-                  />
+                  <ArticleCard article={hygraphArticleToCardProps(mainArticle)} tagsPosition="over" />
                 </div>
               )}
               {secondaryArticles.length > 0 && (
@@ -55,13 +35,7 @@ export async function TrendingArticles({ locale }: TrendingArticlesProps) {
                     return (
                       <ArticleCard
                         key={`trending-${article.id}`}
-                        article={{
-                          tags: article.tags,
-                          imageUrl: article.image?.data.url,
-                          title: article.title,
-                          author: { name: article.author?.name ?? "Anonymous" },
-                          publicationDate: formatDate(article.publishedAt),
-                        }}
+                        article={hygraphArticleToCardProps(article)}
                         tagsPosition="under"
                       />
                     )

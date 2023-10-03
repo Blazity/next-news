@@ -1,15 +1,19 @@
 import Image from "next/image"
 import { cn } from "@/utils/cn"
-import { formatDate } from "@/utils/formatDate"
 
 type ArticlePublishDetailsProps = {
   author: string
-  date: Date | string
+  formatedDate: string | null
   imageUrl?: string
   variant?: "dark" | "light"
 }
 
-export function ArticlePublishDetails({ author, date, imageUrl, variant = "dark" }: ArticlePublishDetailsProps) {
+export function ArticlePublishDetails({
+  author,
+  formatedDate,
+  imageUrl,
+  variant = "dark",
+}: ArticlePublishDetailsProps) {
   return (
     <div
       className={cn(
@@ -19,8 +23,12 @@ export function ArticlePublishDetails({ author, date, imageUrl, variant = "dark"
       )}
       style={{ textShadow: variant === "dark" ? "0px 1px 2px rgba(26, 26, 27, 1)" : undefined }}
     >
-      <p>{formatDate(date)}</p>
-      <p>|</p>
+      {formatedDate && (
+        <>
+          <p>{formatedDate}</p>
+          <p>|</p>
+        </>
+      )}
       <p>{author}</p>
       {imageUrl && <Image src={imageUrl} alt="author" width={24} height={24} className="rounded-full" />}
     </div>

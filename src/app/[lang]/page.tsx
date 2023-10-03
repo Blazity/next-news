@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { HighlightedCategoryArticles } from "@/components/HighlightedCategoryArticles/HighlightedCategoryArticles"
 import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
 import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
@@ -28,10 +29,15 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
         <StockDisplay quotes={homepage.stockDailyQuotes} />
       </div>
 
-      <div className="flex w-full flex-col gap-16">
-        <TrendingArticles locale={params.lang} />
-        <RecentArticles locale={params.lang} />
-      </div>
+      <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
+      {homepage.highlightedCategory && (
+        <HighlightedCategoryArticles
+          locale={params.lang}
+          title={homepage.highlightedCategoryTitle ?? homepage.highlightedCategory.title}
+          categoryId={homepage.highlightedCategory.id}
+        />
+      )}
+      <RecentArticles locale={params.lang} title={homepage.recentSectionTitle ?? "Recent articles"} />
     </>
   )
 }

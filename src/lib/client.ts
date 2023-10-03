@@ -118,6 +118,22 @@ export async function listArticlesForSitemap(variables: { locale: Locale; skip?:
   return articles
 }
 
+export async function getRecentArticlesByCategory(variables: {
+  locale: Locale
+  skip?: number
+  first?: number
+  categoryId: string
+}) {
+  const { categoryId, ...variablesInput } = variables
+  const { articles, articlesConnection } = await graphqlFetch({
+    cache: "force-cache",
+    document: getRecentArticlesQuery,
+    tags: ["ARTICLE"],
+    variables: { ...variablesInput, where: { categories_some: { id: categoryId } } },
+  })
+  return { articles, count: articlesConnection.aggregate.count }
+}
+
 export async function getRecentArticles(variables: { locale: Locale; skip?: number; first?: number }) {
   const { articles, articlesConnection } = await graphqlFetch({
     cache: "force-cache",

@@ -6,6 +6,7 @@ import { GetRecentArticlesQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
+import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type RecentArticlesInfiniteProps = {
@@ -39,16 +40,23 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
   })
 
   const articles = recentArticlesQuery?.pages.flatMap((page) => page.articles)
+  if (!articles) return null
+  const [firstArticle, ...otherArticles] = articles
 
   return (
-    <>
-      <ArticlesGrid locale={locale} articles={articles} />
+    <section className="flex flex-col gap-5">
+      <ArticleCard article={hygraphArticleToCardProps(firstArticle)} orientation="horizontal" />
+      <div className="grid grid-cols-3 gap-5">
+        {otherArticles.map((article) => {
+          return <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} />
+        })}
+      </div>
       {hasNextPage && (
-        <Button className="mt-16 w-full bg-slate-100 p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
+        <Button className="w-full border p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
           See more
         </Button>
       )}
-    </>
+    </section>
   )
 }
 
