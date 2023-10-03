@@ -39,7 +39,6 @@ export default function Layout({ children, params }: { children: React.ReactNode
           <div className="flex w-full justify-center border-b-[1px]">
             <nav className="flex w-full max-w-[1200px] items-center justify-end gap-4 py-4">
               <Navigation locale={params.lang} />
-              {/* <DynamicLangSelect /> */}
             </nav>
           </div>
 

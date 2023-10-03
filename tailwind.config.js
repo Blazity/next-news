@@ -14,6 +14,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          "100%": { transform: "translate(-50%)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 5s ease-in-out infinite",
+      },
       colors: {
         primary: {
           50: "#eff6ff",
@@ -28,9 +36,11 @@ module.exports = {
           900: "#1e3a8a",
         },
         custom: {
-          test: "#0000000D",
+          gray: {
+            50: "#00000005",
+            100: "#FFFFFF40",
+          },
           dim: "#D9D9D9",
-          gray: "#FFFFFF40",
           green: "#55FF0080",
         },
       },

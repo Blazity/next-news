@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import { HeroImage } from "@/components/HeroImage/HeroImage"
 import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
-import { StockMarket } from "@/components/StockMarket/StockMarket"
+import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
 import { i18n, Locale } from "@/i18n/i18n"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
@@ -26,8 +26,7 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <div className="flex w-full justify-end">
-        <StockMarket />
-        {/* <StockDisplay quotes={homepage.stockDailyQuotes} /> */}
+        <StockDisplay quotes={homepage.stockDailyQuotes} />
       </div>
       <HeroImage
         imageUrl="https://media.graphassets.com/eq6zHW7PRxC331vmxHzz"

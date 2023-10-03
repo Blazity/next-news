@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { getNavigation } from "@/lib/client"
+import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 
 type NavigationProps = {
   locale: Locale
@@ -17,7 +18,8 @@ export async function Navigation({ locale }: NavigationProps) {
         <Link href={`/${locale}/`} hrefLang={locale}>
           <Image src={logo.url} width={100} height={20} alt="logo" className="" />
         </Link>
-        <ul className="flex gap-5">
+        <ul className="flex items-center gap-5">
+          <DynamicSearchDialog />
           {navigation.pages?.map((navElement) => (
             <li key={navElement?.slug}>
               <Link href={`/${locale}/${navElement?.slug}`} hrefLang={locale}>

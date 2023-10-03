@@ -1,6 +1,6 @@
 export function PlayButton() {
   return (
-    <button className="flex items-center justify-center rounded-full border-[1px] border-white bg-custom-gray p-2 text-center">
+    <button className="flex items-center justify-center rounded-full border-[1px] border-white bg-custom-gray-100 p-2 text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
