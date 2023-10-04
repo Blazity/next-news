@@ -13,7 +13,7 @@ import { validateSignature } from "../validateSignature"
 
 async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<PublishWebhookBody>) {
   const article = req.validBody.data
-  if (article.__typename !== "Article") return NextResponse.json({ result: "success" }, { status: 200 })
+  if (!isArticle(article)) return NextResponse.json({ result: "success" }, { status: 200 })
 
   const indexingResults = await Promise.allSettled(
     article.localizations.map(async ({ locale: hygraphLocale, title, content, slug }) => {
@@ -41,6 +41,9 @@ export async function POST(req: NextRequest) {
   }
 }
 
+const isArticle = (data: PublishWebhookBody["data"]): data is z.infer<typeof articleSchema> =>
+  data.__typename === "Article"
+
 const articleSchema = z.object({
   __typename: z.enum(["Article"]),
   localizations: z.array(
@@ -55,7 +58,7 @@ const articleSchema = z.object({
 })
 
 const bodySchema = z.object({
-  data: articleSchema.and(modelTypesSchema),
+  data: articleSchema.or(modelTypesSchema),
 })
 
 type PublishWebhookBody = z.infer<typeof bodySchema>

@@ -8,9 +8,9 @@ import { handleRevalidation, modelTypesSchema } from "../handleRevalidation"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
-async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.infer<typeof bodySchema>>) {
+async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<UnpublishWebhookBody>) {
   const article = req.validBody.data
-  if (article.__typename !== "Article") return NextResponse.json({ result: "success" }, { status: 200 })
+  if (!isArticle(article)) return NextResponse.json({ result: "success" }, { status: 200 })
 
   const indexingResults = await Promise.allSettled(
     article.localizations.map(async ({ locale: hygraphLocale }) => {
@@ -24,6 +24,9 @@ async function handleAlgoliaUnpublishWebhook(req: NextRequestWithValidBody<z.inf
 
   return NextResponse.json({ result: indexingResults }, { status: 201 })
 }
+
+const isArticle = (data: UnpublishWebhookBody["data"]): data is z.infer<typeof articleSchema> =>
+  data.__typename === "Article"
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,10 +43,13 @@ export async function POST(req: NextRequest) {
 }
 
 const articleSchema = z.object({
+  __typename: z.enum(["Article"]),
   localizations: z.array(z.object({ locale: z.string() })),
   id: z.string(),
 })
 
 const bodySchema = z.object({
-  data: articleSchema.and(modelTypesSchema),
+  data: articleSchema.or(modelTypesSchema),
 })
+
+type UnpublishWebhookBody = z.infer<typeof bodySchema>
