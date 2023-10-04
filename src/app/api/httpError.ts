@@ -17,6 +17,9 @@ export function isHttpError(error: unknown): error is HttpError {
 }
 
 export function errorToNextResponse(error: unknown) {
-  if (!isHttpError(error)) return NextResponse.json({ message: "UnexpectedError" }, { status: 500 })
+  if (!isHttpError(error)) {
+    console.error(error)
+    return NextResponse.json({ message: "UnexpectedError" }, { status: 500 })
+  }
   return NextResponse.json({ message: error.tag }, { status: error.status })
 }
