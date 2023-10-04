@@ -1,12 +1,14 @@
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
+import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
 import { RichText } from "@/components/RichText/RichText"
 import { Locale } from "@/i18n/i18n"
 import { getArticleBySlug, getArticleMetadataBySlug } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
+import { ShareOnSocial } from "@/components/ShareOnSocial/ShareOnSocial"
+import { env } from "@/env.mjs"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
@@ -23,29 +25,31 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
   const categories = article?.categories
+  const articleUrl = `${env.VERCEL_URL}/article/${slug}`
 
   if (!article) return notFound()
+
+  const { image, publishedAt, title, tags, author } = article
   return (
     <>
-      <article className="w-full px-4 pb-16 pt-8">
-        {article?.image && (
-          <Image
-            src={article.image?.data?.url}
-            alt={article.image?.description?.text || ""}
-            width={1200}
-            height={630}
-            quality={100}
-            className="max-h-[630px] rounded-sm object-cover"
-          />
-        )}
-        <h1 className="mb-8 text-2xl font-semibold">{article.title}</h1>
+      <article className="w-full pb-16 pt-8">
+        <HeroArticleCard
+          article={{
+            imageUrl: image?.data.url,
+            publicationDate: publishedAt,
+            title,
+            author: { name: author?.name ?? "Anonymous" },
+            tags,
+          }}
+        />
+        <ShareOnSocial lang={lang} articleUrl={articleUrl} articleTitle={title} />
         {article.content && (
-          <section className="flex w-full flex-col gap-4">
+          <section className="flex w-full flex-col gap-4 pt-8">
             <RichText raw={article.content.raw} />
           </section>
         )}
       </article>
-      <nav className="w-full px-4 pt-8">
+      <nav className="w-full pt-8">
         <ul className="flex items-center justify-start gap-2">
           <li>Categories: </li>
           {categories?.map((category) => (

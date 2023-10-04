@@ -59,6 +59,8 @@ export const getArticleBySlugQuery = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
+      publishedAt
+      tags
       image(forceParentLocale: true) {
         id
         description {
