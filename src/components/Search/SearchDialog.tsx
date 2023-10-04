@@ -39,7 +39,7 @@ function SearchDialogContent() {
       </DialogTrigger>
       <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
         <DialogContent className="bottom-auto top-[10%] translate-y-[0%] overflow-hidden bg-custom-gray-200 sm:max-w-2xl">
-          <DialogHeader className="border-b-[1px] bg-white p-3">
+          <DialogHeader className="z-10 border-b-[1px] bg-white p-3">
             <DebouncedSearchBox />
           </DialogHeader>
 
@@ -47,7 +47,7 @@ function SearchDialogContent() {
           <NoResultsBoundary fallback={<NoResults />}>
             <Hits
               hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
-              className="-mt-4 h-[400px] overflow-y-auto p-4"
+              className="-mt-7 h-[400px] overflow-y-auto p-4"
             />
           </NoResultsBoundary>
         </DialogContent>
@@ -69,7 +69,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
       href={`/${lang}/article/${hit.slug}`}
       hrefLang={lang}
       prefetch={false}
-      className="mt-4 inline-flex w-full rounded-md border-[1px] bg-white transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="mt-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
         <div className="flex items-center gap-2">
