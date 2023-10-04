@@ -18,7 +18,7 @@ export function ArticleMinifiedCard({ article: { imageUrl, title } }: ArticleMin
             alt="test"
             width={82}
             height={82}
-            className=" max-h-[82px] rounded-xl object-cover text-center brightness-90"
+            className=" min-h-[82px] rounded-xl object-cover text-center brightness-90"
           />
         )}
       </div>
