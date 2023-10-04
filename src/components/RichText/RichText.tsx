@@ -1,5 +1,7 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { RichTextContent } from "@graphcms/rich-text-types"
+import Image from "next/image"
+import { CodeSnipet } from "../CodeSnippet/CodeBlock"
 
 export function RichText({ raw }: { raw: RichTextContent }) {
   return (
@@ -18,13 +20,16 @@ export function RichText({ raw }: { raw: RichTextContent }) {
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
         ),
         li: (props) => <li {...props} className="my-2 text-lg text-gray-800 dark:text-white" />,
-        code: (props) => (
-          <code {...props} className="rounded-md bg-gray-100 p-2 text-sm dark:bg-gray-800 dark:text-white" />
-        ),
-        code_block: (props) => (
-          <pre
-            {...props}
-            className="overflow-y-scroll rounded-md bg-gray-100 p-2 text-sm dark:bg-gray-800 dark:text-white"
+        code: (props) => <CodeSnipet text={props.children} />,
+        code_block: (props) => <CodeSnipet text={props.children} />,
+        img: ({ src, altText, height, width }) => (
+          <Image
+            src={src ?? ""}
+            alt={altText ?? ""}
+            height={height}
+            width={width}
+            objectFit="cover"
+            className="rounded-xl"
           />
         ),
       }}
