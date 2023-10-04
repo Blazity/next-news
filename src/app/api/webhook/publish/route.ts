@@ -14,12 +14,12 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
   if (!isArticle(article)) return NextResponse.json({ result: "success" }, { status: 200 })
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale: hygraphLocale, title, content, slug, tags, author }) => {
+    article.localizations.map(async ({ locale: hygraphLocale, title, content, slug, tags }) => {
       const locale = hygraphLocaleToStandardNotation(hygraphLocale)
       const index = algoliaClient.initIndex(`articles-${locale}`)
       index.setSettings({
         searchableAttributes: ["title", "content"],
-        attributesForFaceting: ["filterOnly(tags)", "filterOnly(author)"],
+        attributesForFaceting: ["filterOnly(tags)"],
       })
       await index.saveObject({
         objectID: article.id,
@@ -27,7 +27,6 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
         content: slateToText(content),
         slug,
         tags,
-        author: author?.name ?? "Anonymous",
       })
 
       return { title, locale }
@@ -57,7 +56,6 @@ const articleSchema = z.object({
       locale: z.string(),
       slug: z.string(),
       tags: z.array(z.string()),
-      author: z.object({ name: z.string() }).nullable(),
     })
   ),
   id: z.string(),
