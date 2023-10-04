@@ -32,6 +32,7 @@ export const getRecentArticlesQuery = graphql(`
         name
       }
       publishedAt
+      updatedAt
       locale
       slug
       title
