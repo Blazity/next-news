@@ -31,9 +31,7 @@ export const getRecentArticlesQuery = graphql(`
       author {
         name
       }
-      createdAt
       publishedAt
-      updatedAt
       locale
       slug
       title

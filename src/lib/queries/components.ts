@@ -40,6 +40,26 @@ export const getHomepageQuery = graphql(`
         title
         id
       }
+      highlightedSectionTitle
+      highlightedArticles(forceParentLocale: true) {
+        id
+        author {
+          name
+        }
+        publishedAt
+        locale
+        slug
+        title
+        tags
+        image {
+          description {
+            text
+          }
+          data {
+            url
+          }
+        }
+      }
     }
   }
 `)

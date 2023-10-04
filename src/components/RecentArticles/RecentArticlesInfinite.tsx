@@ -7,7 +7,6 @@ import { useLocale } from "@/i18n/useLocale"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
-import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
@@ -45,10 +44,12 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
 
   return (
     <section className="flex flex-col gap-5">
-      <ArticleCard article={hygraphArticleToCardProps(firstArticle)} orientation="horizontal" />
+      <ArticleCard article={hygraphArticleToCardProps(firstArticle)} orientation="horizontal" locale={locale} />
       <div className="grid grid-cols-3 gap-5">
         {otherArticles.map((article) => {
-          return <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} />
+          return (
+            <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} locale={locale} />
+          )
         })}
       </div>
       {hasNextPage && (

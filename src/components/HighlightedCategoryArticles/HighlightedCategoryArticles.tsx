@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n/i18n"
-import { getRecentArticles, getRecentArticlesByCategory } from "@/lib/client"
+import { getRecentArticlesByCategory } from "@/lib/client"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
 export const RECENT_ARTICLES_PER_PAGE = 6
@@ -23,6 +23,7 @@ export async function HighlightedCategoryArticles({ locale, title, categoryId }:
               orientation="horizontal"
               key={`category-${article.id}`}
               article={hygraphArticleToCardProps(article)}
+              locale={locale}
             />
           )
         })}

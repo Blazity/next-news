@@ -18,7 +18,7 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
 
   return (
     <section className="w-full">
-      {heroArticle && <HeroArticleCard article={hygraphArticleToCardProps(heroArticle)} />}
+      {heroArticle && <HeroArticleCard article={hygraphArticleToCardProps(heroArticle)} locale={locale} />}
       {otherTrendingArticles.length > 0 && (
         <>
           <h2 className="py-12 pb-8 text-3xl font-bold">{title}</h2>
@@ -26,7 +26,7 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
             <div className="col-span-2 flex flex-col gap-5">
               {mainArticle && (
                 <div className="h-[388px]">
-                  <ArticleCard article={hygraphArticleToCardProps(mainArticle)} tagsPosition="over" />
+                  <ArticleCard article={hygraphArticleToCardProps(mainArticle)} tagsPosition="over" locale={locale} />
                 </div>
               )}
               {secondaryArticles.length > 0 && (
@@ -37,6 +37,7 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
                         key={`trending-${article.id}`}
                         article={hygraphArticleToCardProps(article)}
                         tagsPosition="under"
+                        locale={locale}
                       />
                     )
                   })}
@@ -50,7 +51,8 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
                   return (
                     <ArticleMinifiedCard
                       key={`trending-${article.id}`}
-                      article={{ title: article.title, imageUrl: article.image?.data.url }}
+                      article={{ title: article.title, imageUrl: article.image?.data.url, slug: article.slug }}
+                      locale={locale}
                     />
                   )
                 })}
