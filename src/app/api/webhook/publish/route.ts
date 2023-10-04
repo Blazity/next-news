@@ -1,8 +1,6 @@
-import { revalidateTag } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
-import { Tag } from "@/lib/tags"
 import { pipe } from "@/utils/pipe"
 import { slateToText } from "@/utils/slateToText"
 import { errorToNextResponse } from "../../httpError"
@@ -16,14 +14,20 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
   if (!isArticle(article)) return NextResponse.json({ result: "success" }, { status: 200 })
 
   const indexingResults = await Promise.allSettled(
-    article.localizations.map(async ({ locale: hygraphLocale, title, content, slug }) => {
+    article.localizations.map(async ({ locale: hygraphLocale, title, content, slug, tags, author }) => {
       const locale = hygraphLocaleToStandardNotation(hygraphLocale)
       const index = algoliaClient.initIndex(`articles-${locale}`)
+      index.setSettings({
+        searchableAttributes: ["title", "content"],
+        attributesForFaceting: ["filterOnly(tags)", "filterOnly(author)"],
+      })
       await index.saveObject({
         objectID: article.id,
         title,
         content: slateToText(content),
         slug,
+        tags,
+        author: author?.name ?? "Anonymous",
       })
 
       return { title, locale }
@@ -52,6 +56,8 @@ const articleSchema = z.object({
       title: z.string(),
       locale: z.string(),
       slug: z.string(),
+      tags: z.array(z.string()),
+      author: z.object({ name: z.string() }).nullable(),
     })
   ),
   id: z.string(),
