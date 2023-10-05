@@ -19,7 +19,7 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
       const index = algoliaClient.initIndex(`articles-${locale}`)
       index.setSettings({
         searchableAttributes: ["title", "content"],
-        attributesForFaceting: ["filterOnly(tags)"],
+        attributesForFaceting: ["searchable(tags)"],
       })
       await index.saveObject({
         objectID: article.id,
