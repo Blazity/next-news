@@ -22,7 +22,7 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["category-articles"],
+    queryKey: ["category-articles" + category],
     queryFn: ({ pageParam = 0 }) =>
       listArticlesByCategory({
         locale,
@@ -45,9 +45,9 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
 
   return (
     <>
-      <ArticlesGrid locale={locale} articles={articles} />
+      <ArticlesGrid cardsOrientation="horizontal" columns={2} locale={locale} articles={articles} />
       {hasNextPage && (
-        <Button className="mt-16 w-full bg-slate-100 p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
+        <Button className="mt-16 w-full p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
           {buttonText}
         </Button>
       )}

@@ -14,8 +14,8 @@ import {
 } from "./queries/articles"
 import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
-import { Tag } from "./tags"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
+import { Tag } from "./tags"
 
 export async function graphqlFetch<TQuery, TVariables>({
   cache = "force-cache",
