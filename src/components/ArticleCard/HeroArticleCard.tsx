@@ -30,7 +30,6 @@ export function HeroArticleCard({
           {imageUrl && (
             <Image
               src={imageUrl}
-              layout="responsive"
               alt="test"
               width={1200}
               height={320}

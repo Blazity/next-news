@@ -8,11 +8,15 @@ import Link from "next/link"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
   Configure,
+  DynamicWidgets,
   Highlight,
   Hits,
   InstantSearch,
+  Menu,
+  RefinementList,
   Snippet,
   useInstantSearch,
+  useRefinementList,
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch"
@@ -22,6 +26,10 @@ import { Input } from "@/components/ui/Input/Input"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { useLocale } from "@/i18n/useLocale"
+import { useQueries, useQuery } from "@tanstack/react-query"
+import { RefinementCombobox } from "./RefinementCombobox"
+import React from "react"
+import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
@@ -35,21 +43,24 @@ function SearchDialogContent() {
           <Search className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
-        <DialogContent className="bottom-auto top-[10%] translate-y-[0%] bg-white sm:max-w-2xl">
-          <DialogHeader>
-            <DebouncedSearchBox />
-          </DialogHeader>
+      <Popover>
+        <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
+          <DialogContent className="bottom-auto top-[10%] translate-y-[0%] bg-white sm:max-w-2xl">
+            <DialogHeader>
+              <RefinementCombobox attribute={"tags"} />
+              <DebouncedSearchBox />
+            </DialogHeader>
 
-          <Configure attributesToSnippet={["content:20"]} />
-          <NoResultsBoundary fallback={<NoResults />}>
-            <Hits
-              hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
-              className="flex flex-col gap-4 py-2"
-            />
-          </NoResultsBoundary>
-        </DialogContent>
-      </InstantSearch>
+            <Configure attributesToSnippet={["content:20"]} />
+            <NoResultsBoundary fallback={<NoResults />}>
+              <Hits
+                hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
+                className="flex flex-col gap-4 py-2"
+              />
+            </NoResultsBoundary>
+          </DialogContent>
+        </InstantSearch>{" "}
+      </Popover>
     </Dialog>
   )
 }

@@ -19,7 +19,6 @@ export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale
           {imageUrl && (
             <Image
               src={imageUrl}
-              layout="responsive"
               alt="test"
               width={82}
               height={82}

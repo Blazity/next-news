@@ -65,7 +65,6 @@ export function ArticleCard({
           {imageUrl && (
             <Image
               src={imageUrl}
-              layout="responsive"
               alt="test"
               width={780}
               height={264}
