@@ -36,7 +36,7 @@ export const hygraphArticleToCardProps = (article: {
     imageUrl: article.image?.data.url,
     title: article.title,
     author: { name: article.author?.name ?? "Anonymous" },
-    publicationDate: article.publishedAt ? formatDate(article.publishedAt) : null,
+    publicationDate: article.publishedAt ? article.publishedAt : null,
     slug: article.slug,
   }
 }
@@ -114,7 +114,7 @@ export function ArticleCard({
             <ArticlePublishDetails
               imageUrl={author.imageUrl}
               author={author.name}
-              formatedDate={publicationDate}
+              publicationDate={publicationDate}
               variant="light"
             />
           </div>

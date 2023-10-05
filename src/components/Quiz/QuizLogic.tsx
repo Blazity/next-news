@@ -1,13 +1,13 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
+import { ArrowRight, Check, XCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 import { GetQuizQuestionsByIdQuery, QuizAnswer, QuizQuestion } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { getQuizQuestionsById } from "@/lib/client"
 import { cn } from "@/utils/cn"
 import { RichText } from "../RichText/RichText"
-import { ArrowRight, Check, XCircle } from "lucide-react"
 
 type ExtendedQuizAnswer = QuizAnswer & { status?: "clicked" | null }
 

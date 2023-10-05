@@ -99,7 +99,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
             root: "line-clamp-2 text-md",
           }}
         />
-        <ArticlePublishDetails author="Anonymous" variant="light" date="4 June 2021" />
+        <ArticlePublishDetails author="Anonymous" variant="light" publicationDate="4 June 2021" />
       </article>
     </Link>
   )

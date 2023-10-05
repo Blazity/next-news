@@ -56,7 +56,7 @@ export function HeroArticleCard({
               >
                 {title}
               </h2>
-              <ArticlePublishDetails imageUrl={author.imageUrl} author={author.name} formatedDate={publicationDate} />
+              <ArticlePublishDetails imageUrl={author.imageUrl} author={author.name} publicationDate={publicationDate} />
             </div>
           </div>
         </div>

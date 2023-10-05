@@ -1,16 +1,17 @@
 import Image from "next/image"
 import { cn } from "@/utils/cn"
+import { formatDate } from "@/utils/formatDate"
 
 type ArticlePublishDetailsProps = {
   author: string
-  formatedDate: string | null
+  publicationDate: string | null | Date
   imageUrl?: string
   variant?: "dark" | "light"
 }
 
 export function ArticlePublishDetails({
   author,
-  formatedDate,
+  publicationDate,
   imageUrl,
   variant = "dark",
 }: ArticlePublishDetailsProps) {
@@ -23,9 +24,9 @@ export function ArticlePublishDetails({
       )}
       style={{ textShadow: variant === "dark" ? "0px 1px 2px rgba(26, 26, 27, 1)" : undefined }}
     >
-      {formatedDate && (
+      {publicationDate && (
         <>
-          <p>{formatedDate}</p>
+          <p>{formatDate(publicationDate)}</p>
           <p>|</p>
         </>
       )}
