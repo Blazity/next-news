@@ -41,7 +41,11 @@ export function HeroArticleCard({
             <div className="flex w-full justify-between">
               <div className="flex gap-2">
                 {tags.map((tag) => {
-                  return <TagButton key={tag}>{tag}</TagButton>
+                  return (
+                    <TagButton variant="transparent" key={tag}>
+                      {tag}
+                    </TagButton>
+                  )
                 })}
               </div>
             </div>
