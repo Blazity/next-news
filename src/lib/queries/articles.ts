@@ -76,6 +76,25 @@ export const getArticleBySlugQuery = graphql(`
       }
       content {
         raw
+        references {
+          ... on Quiz {
+            id
+            question(first: 1) {
+              id
+              answer {
+                id
+                content {
+                  raw
+                }
+                isValid
+              }
+              content {
+                raw
+              }
+            }
+            title
+          }
+        }
       }
       recommendedArticles {
         title

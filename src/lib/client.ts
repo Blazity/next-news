@@ -15,6 +15,7 @@ import {
 import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { Tag } from "./tags"
+import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 
 export async function graphqlFetch<TQuery, TVariables>({
   cache = "force-cache",
@@ -217,4 +218,14 @@ export async function listArticlesByCategory(variables: {
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
+}
+
+export async function getQuizQuestionsById(variables: { locale: Locale; id: string; skip: number }) {
+  const { quiz } = await graphqlFetch({
+    cache: "force-cache",
+    document: getQuizQuestionsByIdQuery,
+    tags: ["QUIZ"],
+    variables,
+  })
+  return quiz?.question ?? null
 }

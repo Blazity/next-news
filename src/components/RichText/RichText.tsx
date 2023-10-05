@@ -1,11 +1,13 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
-import { RichTextContent } from "@graphcms/rich-text-types"
+import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
 import { CodeSnipet } from "../CodeSnippet/CodeBlock"
+import { Quiz } from "../Quiz/Quiz"
 
-export function RichText({ raw }: { raw: RichTextContent }) {
+export function RichText({ raw, references, pClassName }: { raw: RichTextContent; references?: EmbedReferences, pClassName?: string }) {
   return (
     <HygraphRichText
+      references={references}
       content={raw}
       renderers={{
         h1: (props) => <h1 {...props} className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white" />,
@@ -14,7 +16,7 @@ export function RichText({ raw }: { raw: RichTextContent }) {
         h4: (props) => <h4 {...props} className="text-lg font-semibold  dark:text-white" />,
         h5: (props) => <h5 {...props} className="text-md font-semibold dark:text-white" />,
         h6: (props) => <h6 {...props} className="text-sm font-semibold dark:text-white" />,
-        p: (props) => <p {...props} className="my-4 text-lg text-gray-800 dark:text-white" />,
+        p: (props) => <p {...props} className={`my-4 text-lg text-gray-800 dark:text-white ${pClassName}`} />,
         ul: (props) => <ul {...props} className="my-4 list-inside list-disc text-lg text-gray-800 dark:text-white" />,
         ol: (props) => (
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
@@ -32,6 +34,11 @@ export function RichText({ raw }: { raw: RichTextContent }) {
             className="rounded-xl"
           />
         ),
+        embed: {
+          Quiz: (props) => {
+            return <Quiz initialQuiz={props} />
+          },
+        },
       }}
     />
   )
