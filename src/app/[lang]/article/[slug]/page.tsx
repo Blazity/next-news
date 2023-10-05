@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
@@ -24,7 +23,6 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
-  const categories = article?.categories
   const articleUrl = `${env.VERCEL_URL}/article/${slug}`
   const initialQuiz = article.content?.references[0]
 
@@ -52,22 +50,6 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
           </section>
         )}
       </article>
-      <nav className="w-full pt-8">
-        <ul className="flex items-center justify-start gap-2">
-          <li>Categories: </li>
-          {categories?.map((category) => (
-            <li key={category.title}>
-              <Link
-                href={`/${lang}/category/${category.slug}`}
-                hrefLang={lang}
-                className="rounded-md border px-5 py-3 hover:bg-slate-100"
-              >
-                {category.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
       {article.recommendedArticles.length > 0 && (
         <RecommendedArticles recommendedArticles={article.recommendedArticles} lang={lang} />
       )}

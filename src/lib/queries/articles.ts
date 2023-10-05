@@ -100,6 +100,11 @@ export const getArticleBySlugQuery = graphql(`
         title
         slug
         id
+        tags
+        publishedAt
+        author {
+          name
+        }
         image {
           description {
             text
@@ -184,10 +189,16 @@ export const listArticlesByCategoryQuery = graphql(`
           url
         }
       }
+      author {
+        name
+      }
+      publishedAt
+      tags
       slug
       title
+      id
     }
-    articlesConnection(locales: $locales) {
+    articlesConnection(locales: $locales, where: { categories_some: { slug: $categorySlug } }) {
       aggregate {
         count
       }

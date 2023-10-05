@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
-import { formatDate } from "@/utils/formatDate"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { TagButton } from "./Buttons/TagButton"
 
