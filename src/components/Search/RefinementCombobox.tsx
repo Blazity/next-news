@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronsUpDown, X } from "lucide-react"
 import * as React from "react"
 
 import { useRefinementList, UseRefinementListProps } from "react-instantsearch"
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/Button/Button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/Command/Command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover/Popover"
 import { cn } from "@/utils/cn"
-import { useClickOutside } from "./useClickOutside"
 
 type RefinementComboboxProps = UseRefinementListProps
 
@@ -30,8 +29,14 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
           .filter((item) => item.isRefined)
           .map((item) => {
             return (
-              <div key={`pill-${item.value}`} className="rounded-lg bg-gray-100 px-4 py-2">
+              <div
+                key={`pill-${item.value}`}
+                className="flex h-[40px] items-center gap-2 rounded-lg bg-gray-100 px-4 pr-2"
+              >
                 {item.label}
+                <Button className="h-[20px] w-[20px] rounded-full p-1" onClick={() => refine(item.value)}>
+                  <X className="h-5 w-5" />
+                </Button>
               </div>
             )
           })}

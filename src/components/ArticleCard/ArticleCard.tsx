@@ -4,7 +4,7 @@ import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { formatDate } from "@/utils/formatDate"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
-import { TagButton } from "./Buttons/TagButton"
+import { Tag } from "./Buttons/Tag"
 
 type ArticleCardProps = {
   article: {
@@ -78,7 +78,7 @@ export function ArticleCard({
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
                   {tags.map((tag) => {
-                    return <TagButton key={tag}>{tag}</TagButton>
+                    return <Tag key={tag}>{tag}</Tag>
                   })}
                 </div>
               )}
@@ -96,9 +96,9 @@ export function ArticleCard({
             <div className="flex gap-2 p-5 pb-2">
               {tags.map((tag) => {
                 return (
-                  <TagButton key={tag} variant="light">
+                  <Tag key={tag} variant="light">
                     {tag}
-                  </TagButton>
+                  </Tag>
                 )
               })}
             </div>

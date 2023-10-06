@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
-import { TagButton } from "./Buttons/TagButton"
+import { Tag } from "./Buttons/Tag"
 
 type HeroArticleCardProps = {
   article: {
@@ -40,7 +40,7 @@ export function HeroArticleCard({
             <div className="flex w-full justify-between">
               <div className="flex gap-2">
                 {tags.map((tag) => {
-                  return <TagButton key={tag}>{tag}</TagButton>
+                  return <Tag key={tag}>{tag}</Tag>
                 })}
               </div>
             </div>

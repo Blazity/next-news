@@ -1,9 +1,9 @@
 import { Locale } from "@/i18n/i18n"
+import { cn } from "@/utils/cn"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
 import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
-import { cn } from "@/utils/cn"
 
 type TrendingArticlesProps = {
   locale: Locale
@@ -18,7 +18,6 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
   const minifiedArticles = otherTrendingArticles.slice(3, 12)
 
   const isTwoRowLayout = minifiedArticles.length > 0
-  console.log(minifiedArticles, isTwoRowLayout)
 
   return (
     <section className="w-full">
