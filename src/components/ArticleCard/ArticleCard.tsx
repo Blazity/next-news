@@ -4,6 +4,7 @@ import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/Tooltip/Tooltip"
 
 type ArticleCardProps = {
   article: {
@@ -20,7 +21,7 @@ type ArticleCardProps = {
   tagsPosition?: "over" | "under"
   orientation?: "vertical" | "horizontal"
   locale: Locale
-  lines?: "1" | "2"
+  lines?: "1" | "2" | "3"
 }
 
 export const hygraphArticleToCardProps = (article: {
@@ -41,6 +42,8 @@ export const hygraphArticleToCardProps = (article: {
   }
 }
 
+const MAX_TAGS_TO_DISPLAY = 3
+
 export function ArticleCard({
   article: { imageUrl, title, publicationDate, author, tags, slug },
   tagsPosition = "under",
@@ -48,6 +51,7 @@ export function ArticleCard({
   lines = "2",
   locale,
 }: ArticleCardProps) {
+  const mainTag = tags[0]
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} passHref className="w-full">
       <article
@@ -73,10 +77,10 @@ export function ArticleCard({
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
-            <div className="flex w-full justify-between">
+            <div className="flex w-full flex-wrap justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
-                  {tags.map((tag) => {
+                  {tags.slice(0, MAX_TAGS_TO_DISPLAY).map((tag) => {
                     return <Tag key={tag}>{tag}</Tag>
                   })}
                 </div>
@@ -92,22 +96,32 @@ export function ArticleCard({
           )}
         >
           {tagsPosition === "under" && tags?.length > 0 && (
-            <div className="flex gap-2 p-5 pb-2">
-              {tags?.map((tag) => {
-                return (
-                  <Tag key={tag} variant="light">
-                    {tag}
-                  </Tag>
-                )
-              })}
+            <div className="flex  gap-2 p-5 pb-2">
+              {mainTag && (
+                <Tag key={mainTag} variant="light">
+                  {mainTag}
+                </Tag>
+              )}
+              {tags?.length > 1 && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Tag variant="light">{`+${tags.length - 1}`}</Tag>
+                  </TooltipTrigger>
+                  <TooltipContent className="flex gap-2 bg-white" side="bottom">
+                    {tags.slice(1).join(", ")}
+                  </TooltipContent>
+                </Tooltip>
+              )}
             </div>
           )}
-          <div className="flex flex-1 flex-col justify-end  gap-5  p-5 pt-2 ">
+          <div className="flex flex-1 flex-col justify-between  gap-5  p-5 pt-2 ">
             <h2
               className={cn(
                 tagsPosition === "under" && "min-h-[80px] ",
-                lines === "1" ? " line-clamp-1" : "line-clamp-2",
-                "text-[1.8rem] font-bold leading-10 tracking-[1px]"
+                lines === "1" && "line-clamp-1",
+                lines === "2" && "line-clamp-2",
+                lines === "3" && "line-clamp-3",
+                "text-[1.5rem] font-bold leading-10 tracking-[1px]"
               )}
             >
               {title}

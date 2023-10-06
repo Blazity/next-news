@@ -2,7 +2,9 @@
 import { ReactNode } from "react"
 import { CodeBlock, nord } from "react-code-blocks"
 
-export async function CodeSnippet({ content }: { content: ReactNode }) {
+export type CodeSnippetProps = { content: ReactNode }
+
+function CodeSnippet({ content }: CodeSnippetProps) {
   return (
     <CodeBlock
       language={"javascript"}
@@ -13,3 +15,5 @@ export async function CodeSnippet({ content }: { content: ReactNode }) {
     />
   )
 }
+
+export default CodeSnippet

@@ -1,73 +1,29 @@
-import * as RadixTooltip from "@radix-ui/react-tooltip"
-import { cva, VariantProps } from "class-variance-authority"
-import React from "react"
-import { twMerge } from "tailwind-merge"
+"use client"
 
-const tooltipContent = cva([], {
-  variants: {
-    intent: {
-      primary: ["rounded-0.5md", "bg-zinc-700", "font-open-sans", "text-white"],
-    },
-    size: {
-      md: ["px-4", "py-2.5", "text-2xs"],
-    },
-  },
-  defaultVariants: {
-    intent: "primary",
-    size: "md",
-  },
-})
+import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import * as React from "react"
+import { cn } from "@/utils/cn"
 
-const tooltipArrow = cva([], {
-  variants: {
-    intent: {
-      primary: ["fill-zinc-700"],
-    },
-    size: {
-      md: ["w-4", "h-2"],
-    },
-  },
-  defaultVariants: {
-    intent: "primary",
-    size: "md",
-  },
-})
+const TooltipProvider = TooltipPrimitive.Provider
 
-export interface TooltipProps extends VariantProps<typeof tooltipContent>, RadixTooltip.TooltipProps {
-  explainer: React.ReactElement | string
-  children: React.ReactElement
-  className?: string
-  withArrow?: boolean
-  side?: "top" | "right" | "bottom" | "left"
-}
+const Tooltip = TooltipPrimitive.Root
 
-export function Tooltip({
-  children,
-  explainer,
-  open,
-  defaultOpen,
-  onOpenChange,
-  intent,
-  size,
-  side = "top",
-  className,
-  withArrow,
-}: TooltipProps) {
-  return (
-    <RadixTooltip.Provider>
-      <RadixTooltip.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange} delayDuration={200}>
-        <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
-        <RadixTooltip.Portal>
-          <RadixTooltip.Content
-            side={side}
-            sideOffset={5}
-            className={twMerge(tooltipContent({ intent, size, className }))}
-          >
-            {explainer}
-            {withArrow ? <RadixTooltip.Arrow className={twMerge(tooltipArrow({ intent, size, className }))} /> : null}
-          </RadixTooltip.Content>
-        </RadixTooltip.Portal>
-      </RadixTooltip.Root>
-    </RadixTooltip.Provider>
-  )
-}
+const TooltipTrigger = TooltipPrimitive.Trigger
+
+const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+>(({ className, sideOffset = 4, ...props }, ref) => (
+  <TooltipPrimitive.Content
+    ref={ref}
+    sideOffset={sideOffset}
+    className={cn(
+      "bg-popover text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 overflow-hidden rounded-md border px-3 py-1.5 text-sm shadow-md",
+      className
+    )}
+    {...props}
+  />
+))
+TooltipContent.displayName = TooltipPrimitive.Content.displayName
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
