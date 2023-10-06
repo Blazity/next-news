@@ -41,6 +41,8 @@ export const hygraphArticleToCardProps = (article: {
   }
 }
 
+const MAX_TAGS_TO_DISPLAY = 3
+
 export function ArticleCard({
   article: { imageUrl, title, publicationDate, author, tags, slug },
   tagsPosition = "under",
@@ -48,6 +50,7 @@ export function ArticleCard({
   lines = "2",
   locale,
 }: ArticleCardProps) {
+  const mainTags = tags.slice(0, MAX_TAGS_TO_DISPLAY).map((tag) => tag)
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} passHref className="w-full">
       <article
@@ -73,12 +76,13 @@ export function ArticleCard({
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
-            <div className="flex w-full justify-between">
+            <div className="flex w-full flex-wrap justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
-                  {tags.map((tag) => {
+                  {mainTags?.map((tag) => {
                     return <Tag key={tag}>{tag}</Tag>
                   })}
+                  {tags?.length > MAX_TAGS_TO_DISPLAY && <Tag variant="light">...</Tag>}
                 </div>
               )}
             </div>
@@ -92,14 +96,13 @@ export function ArticleCard({
           )}
         >
           {tagsPosition === "under" && tags?.length > 0 && (
-            <div className="flex gap-2 p-5 pb-2">
-              {tags?.map((tag) => {
-                return (
-                  <Tag key={tag} variant="light">
-                    {tag}
-                  </Tag>
-                )
-              })}
+            <div className="flex flex-wrap gap-2 p-5 pb-2">
+              {mainTags?.map((tag) => (
+                <Tag key={tag} variant="light">
+                  {tag}
+                </Tag>
+              ))}
+              {tags.length > MAX_TAGS_TO_DISPLAY && <Tag variant="light">...</Tag>}
             </div>
           )}
           <div className="flex flex-1 flex-col justify-end  gap-5  p-5 pt-2 ">
