@@ -1,10 +1,18 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
-import { CodeSnipet } from "../CodeSnippet/CodeBlock"
+import { CodeSnippet } from "../CodeSnippet/CodeSnippet"
 import { Quiz } from "../Quiz/Quiz"
 
-export function RichText({ raw, references, pClassName }: { raw: RichTextContent; references?: EmbedReferences, pClassName?: string }) {
+export function RichText({
+  raw,
+  references,
+  pClassName,
+}: {
+  raw: RichTextContent
+  references?: EmbedReferences
+  pClassName?: string
+}) {
   return (
     <HygraphRichText
       references={references}
@@ -22,8 +30,8 @@ export function RichText({ raw, references, pClassName }: { raw: RichTextContent
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
         ),
         li: (props) => <li {...props} className="my-2 text-lg text-gray-800 dark:text-white" />,
-        code: (props) => <CodeSnipet text={props.children} />,
-        code_block: (props) => <CodeSnipet text={props.children} />,
+        code: (props) => <CodeSnippet text={props.children} />,
+        code_block: (props) => <CodeSnippet text={props.children} />,
         img: ({ src, altText, height, width }) => (
           <Image
             src={src ?? ""}
