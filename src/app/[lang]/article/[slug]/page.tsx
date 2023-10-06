@@ -13,6 +13,7 @@ type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
 export async function generateMetadata({ params: { slug, lang } }: ArticlePageProps): Promise<Metadata | null> {
   const article = await getArticleMetadataBySlug({ locale: lang, slug })
+  if (!article) return null
   const { seoComponent, image } = article
 
   const description = seoComponent?.description?.text
@@ -24,7 +25,7 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
   const articleUrl = `${env.VERCEL_URL}/article/${slug}`
-  const initialQuiz = article.content?.references[0]
+  const initialQuiz = article?.content?.references[0]
 
   if (!article) return notFound()
 
