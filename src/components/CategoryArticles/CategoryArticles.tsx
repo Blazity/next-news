@@ -11,7 +11,11 @@ type CategoryArticlesProps = {
 }
 
 export async function CategoryArticles({ locale, category }: CategoryArticlesProps) {
-  const articles = await listArticlesByCategory({ locale: locale, categorySlug: category })
+  const articles = await listArticlesByCategory({
+    locale: locale,
+    categorySlug: category,
+    first: CATEGORY_ARTICLES_PER_PAGE,
+  })
 
   if (!articles) return notFound()
   return (
