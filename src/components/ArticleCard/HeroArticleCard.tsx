@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
-import { TagButton } from "./Buttons/TagButton"
+import { Tag } from "./Buttons/Tag"
 
 type HeroArticleCardProps = {
   article: {
@@ -30,7 +30,6 @@ export function HeroArticleCard({
           {imageUrl && (
             <Image
               src={imageUrl}
-              layout="responsive"
               alt="test"
               width={1200}
               height={320}
@@ -38,14 +37,12 @@ export function HeroArticleCard({
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
-            <div className="flex gap-2">
-              {tags.map((tag) => {
-                return (
-                  <TagButton variant="transparent" key={tag}>
-                    {tag}
-                  </TagButton>
-                )
-              })}
+            <div className="flex w-full justify-between">
+              <div className="flex gap-2">
+                {tags.map((tag) => {
+                  return <Tag key={tag}>{tag}</Tag>
+                })}
+              </div>
             </div>
             <div className="flex flex-col justify-around gap-5">
               <h2

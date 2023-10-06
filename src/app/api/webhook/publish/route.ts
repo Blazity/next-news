@@ -18,8 +18,9 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
       const locale = hygraphLocaleToStandardNotation(hygraphLocale)
       const index = algoliaClient.initIndex(`articles-${locale}`)
       index.setSettings({
-        searchableAttributes: ["title", "content"],
-        attributesForFaceting: ["filterOnly(tags)"],
+        searchableAttributes: ["title", "content", "tags"],
+
+        attributesForFaceting: ["searchable(tags)"],
       })
       await index.saveObject({
         objectID: article.id,

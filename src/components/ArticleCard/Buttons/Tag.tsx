@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { cn } from "@/utils/cn"
 
-export function TagButton({
+export function Tag({
   children,
   variant = "dark",
 }: {
@@ -9,7 +9,7 @@ export function TagButton({
   variant?: "light" | "dark" | "transparent"
 }) {
   return (
-    <button
+    <div
       className={cn(
         variant === "transparent" && "bg-custom-gray-100 text-white",
         variant === "dark" && "bg-gray-500/90 text-white",
@@ -18,6 +18,6 @@ export function TagButton({
       )}
     >
       {children}
-    </button>
+    </div>
   )
 }

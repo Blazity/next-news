@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
-import { TagButton } from "./Buttons/TagButton"
+import { Tag } from "./Buttons/Tag"
 
 type ArticleCardProps = {
   article: {
@@ -20,6 +20,7 @@ type ArticleCardProps = {
   tagsPosition?: "over" | "under"
   orientation?: "vertical" | "horizontal"
   locale: Locale
+  lines?: "1" | "2"
 }
 
 export const hygraphArticleToCardProps = (article: {
@@ -44,6 +45,7 @@ export function ArticleCard({
   article: { imageUrl, title, publicationDate, author, tags, slug },
   tagsPosition = "under",
   orientation = "vertical",
+  lines = "2",
   locale,
 }: ArticleCardProps) {
   return (
@@ -58,25 +60,24 @@ export function ArticleCard({
         <div
           className={cn(
             orientation === "horizontal" && "w-1/2 min-w-[204px]",
-            "relative h-[264px] min-h-[264px] bg-gradient-to-br from-gray-200 to-gray-300"
+            "bg-gradient-to-brh-[264px] relative min-h-[264px] from-gray-200 to-gray-300"
           )}
         >
           {imageUrl && (
             <Image
               src={imageUrl}
-              layout="responsive"
               alt="test"
               width={780}
               height={264}
-              className=" h-full max-h-[264px]  min-h-[264px] object-cover text-center brightness-90"
+              className={cn("h-[264px]  min-h-[264px] w-full object-cover text-center brightness-90")}
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
             <div className="flex w-full justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
-                  {tags?.map((tag) => {
-                    return <TagButton key={tag}>{tag}</TagButton>
+                  {tags.map((tag) => {
+                    return <Tag key={tag}>{tag}</Tag>
                   })}
                 </div>
               )}
@@ -94,9 +95,9 @@ export function ArticleCard({
             <div className="flex gap-2 p-5 pb-2">
               {tags?.map((tag) => {
                 return (
-                  <TagButton key={tag} variant="light">
+                  <Tag key={tag} variant="light">
                     {tag}
-                  </TagButton>
+                  </Tag>
                 )
               })}
             </div>
@@ -105,7 +106,8 @@ export function ArticleCard({
             <h2
               className={cn(
                 tagsPosition === "under" && "min-h-[80px] ",
-                "line-clamp-2 text-[1.8rem] font-bold leading-10 tracking-[1px]"
+                lines === "1" ? " line-clamp-1" : "line-clamp-2",
+                "text-[1.8rem] font-bold leading-10 tracking-[1px]"
               )}
             >
               {title}

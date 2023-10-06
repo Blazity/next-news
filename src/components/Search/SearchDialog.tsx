@@ -1,18 +1,24 @@
 "use client"
 
+import { useQueries, useQuery } from "@tanstack/react-query"
 import algoliasearch from "algoliasearch/lite"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
 import Link from "next/link"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
+import React from "react"
 import {
   Configure,
+  DynamicWidgets,
   Highlight,
   Hits,
   InstantSearch,
+  Menu,
+  RefinementList,
   Snippet,
   useInstantSearch,
+  useRefinementList,
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch"
@@ -22,8 +28,9 @@ import { Input } from "@/components/ui/Input/Input"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { useLocale } from "@/i18n/useLocale"
+import { RefinementCombobox } from "./RefinementCombobox"
 import { ArticlePublishDetails } from "../ArticleCard/ArticlePublishDetails"
-import { TagButton } from "../ArticleCard/Buttons/TagButton"
+import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
@@ -37,21 +44,24 @@ function SearchDialogContent() {
           <Search className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
-        <DialogContent className="bottom-auto top-[10%] translate-y-[0%] overflow-hidden bg-custom-gray-200 sm:max-w-2xl">
-          <DialogHeader className="z-10 border-b-[1px] bg-white p-3">
-            <DebouncedSearchBox />
-          </DialogHeader>
+      <Popover>
+        <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
+          <DialogContent className="bottom-auto top-[10%] translate-y-[0%] bg-white sm:max-w-2xl">
+            <DialogHeader>
+              <RefinementCombobox attribute={"tags"} />
+              <DebouncedSearchBox />
+            </DialogHeader>
 
-          <Configure attributesToSnippet={["content:20"]} />
-          <NoResultsBoundary fallback={<NoResults />}>
-            <Hits
-              hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
-              className="-mt-7 h-[400px] overflow-y-auto p-4"
-            />
-          </NoResultsBoundary>
-        </DialogContent>
-      </InstantSearch>
+            <Configure attributesToSnippet={["content:20"]} />
+            <NoResultsBoundary fallback={<NoResults />}>
+              <Hits
+                hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
+                className="flex flex-col gap-4 py-2"
+              />
+            </NoResultsBoundary>
+          </DialogContent>
+        </InstantSearch>{" "}
+      </Popover>
     </Dialog>
   )
 }
@@ -72,17 +82,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
       className="mt-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
-        <div className="flex items-center gap-2">
-          <TagButton variant="light" key={hit.objectID}>
-            Tagging
-          </TagButton>
-          <TagButton variant="light" key={hit.objectID}>
-            Tagging
-          </TagButton>
-          <TagButton variant="light" key={hit.objectID}>
-            Tagging
-          </TagButton>
-        </div>
+        <div className="flex items-center gap-2"></div>
         <Highlight
           attribute="title"
           hit={hit}
