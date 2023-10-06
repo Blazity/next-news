@@ -31,12 +31,12 @@ export const hygraphArticleToCardProps = (article: {
   slug: string
 }) => {
   return {
-    tags: article.tags,
-    imageUrl: article.image?.data.url,
-    title: article.title,
-    author: { name: article.author?.name ?? "Anonymous" },
-    publicationDate: article.publishedAt ? article.publishedAt : null,
-    slug: article.slug,
+    tags: article?.tags,
+    imageUrl: article?.image?.data?.url,
+    title: article?.title,
+    author: { name: article?.author?.name ?? "Anonymous" },
+    publicationDate: article?.publishedAt ? article.publishedAt : null,
+    slug: article?.slug,
   }
 }
 
@@ -75,7 +75,7 @@ export function ArticleCard({
             <div className="flex w-full justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
-                  {tags.map((tag) => {
+                  {tags?.map((tag) => {
                     return <TagButton key={tag}>{tag}</TagButton>
                   })}
                 </div>
@@ -90,9 +90,9 @@ export function ArticleCard({
             orientation === "horizontal" && "rounded-r-xl border-l-0"
           )}
         >
-          {tagsPosition === "under" && tags.length > 0 && (
+          {tagsPosition === "under" && tags?.length > 0 && (
             <div className="flex gap-2 p-5 pb-2">
-              {tags.map((tag) => {
+              {tags?.map((tag) => {
                 return (
                   <TagButton key={tag} variant="light">
                     {tag}

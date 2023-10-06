@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { ArrowRight, Check, XCircle } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { GetQuizQuestionsByIdQuery, QuizAnswer, QuizQuestion } from "@/gql/graphql"
 import { useLocale } from "@/i18n/useLocale"
 import { getQuizQuestionsById } from "@/lib/client"
@@ -35,6 +35,9 @@ export function QuizLogic({ initialQuiz }: QuizProps) {
     {
       placeholderData: initialQuiz?.question,
       enabled: !!initialQuiz,
+      onSuccess: (data) => {
+        setQuestions(data as QuizQuestion[])
+      },
     }
   )
 
@@ -89,11 +92,6 @@ export function QuizLogic({ initialQuiz }: QuizProps) {
     if (isFirstQuestion) return
     setCurrentQuestionIndex((prev) => prev - 1)
   }
-
-  useEffect(() => {
-    if (!data) return
-    setQuestions(data as QuizQuestion[])
-  }, [data])
 
   return (
     <>

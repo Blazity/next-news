@@ -35,7 +35,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
       <article className="w-full pb-16 pt-8">
         <HeroArticleCard
           article={{
-            imageUrl: image?.data.url,
+            imageUrl: image?.data?.url,
             publicationDate: publishedAt,
             title,
             author: { name: author?.name ?? "Anonymous" },
