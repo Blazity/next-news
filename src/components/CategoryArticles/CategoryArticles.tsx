@@ -16,12 +16,10 @@ export async function CategoryArticles({ locale, category }: CategoryArticlesPro
   if (!articles) return notFound()
   return (
     <section className="w-full">
-      <div className="mb-10 w-full border-b-[1px]">
-        <div className="mx-auto py-8">
-          <h2 className="mb-6 text-3xl font-bold">Search Category</h2>
-          <p className="mb-2 text-xs">Showing {articles.count} results for: </p>
-          <p className="text-xl font-bold">&quot;{category}&quot;</p>
-        </div>
+      <div className="mb-10 w-full border-b-[1px] py-14">
+        <h2 className="mb-6 text-3xl font-bold">Search Category</h2>
+        <p className="mb-2 text-xs">Showing {articles.count} results for: </p>
+        <p className="text-xl font-bold">&quot;{category}&quot;</p>
       </div>
       <div className="mx-auto w-full">
         <CategoryArticlesInfiniteDynamic category={category} initialArticles={articles} />

@@ -30,8 +30,8 @@ export function RichText({
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
         ),
         li: (props) => <li {...props} className="my-2 text-lg text-gray-800 dark:text-white" />,
-        code: (props) => <CodeSnippet text={props.children} />,
-        code_block: (props) => <CodeSnippet text={props.children} />,
+        code: (props) => <CodeSnippet content={props.children} />,
+        code_block: (props) => <CodeSnippet content={props.children} />,
         img: ({ src, altText, height, width }) => (
           <Image
             src={src ?? ""}

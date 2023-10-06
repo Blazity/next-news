@@ -38,16 +38,14 @@ export function HeroArticleCard({
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
-            <div className="flex w-full justify-between">
-              <div className="flex gap-2">
-                {tags.map((tag) => {
-                  return (
-                    <TagButton variant="transparent" key={tag}>
-                      {tag}
-                    </TagButton>
-                  )
-                })}
-              </div>
+            <div className="flex gap-2">
+              {tags.map((tag) => {
+                return (
+                  <TagButton variant="transparent" key={tag}>
+                    {tag}
+                  </TagButton>
+                )
+              })}
             </div>
             <div className="flex flex-col justify-around gap-5">
               <h2
@@ -56,7 +54,11 @@ export function HeroArticleCard({
               >
                 {title}
               </h2>
-              <ArticlePublishDetails imageUrl={author.imageUrl} author={author.name} publicationDate={publicationDate} />
+              <ArticlePublishDetails
+                imageUrl={author.imageUrl}
+                author={author.name}
+                publicationDate={publicationDate}
+              />
             </div>
           </div>
         </div>
