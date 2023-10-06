@@ -24,6 +24,7 @@ export async function HighlightedCategoryArticles({ locale, title, categoryId }:
               key={`category-${article.id}`}
               article={hygraphArticleToCardProps(article)}
               locale={locale}
+              lines="3"
             />
           )
         })}
