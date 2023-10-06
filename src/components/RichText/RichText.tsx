@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
-import { CodeSnippet } from "../CodeSnippet/CodeSnippet"
-import { Quiz } from "../Quiz/Quiz"
+import { CodeSnippetDynamic } from "../CodeSnippet/CodeSnippetDynamic"
+import { QuizDynamic } from "../Quiz/QuizDynamic"
 
 export function RichText({
   raw,
@@ -30,8 +31,8 @@ export function RichText({
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
         ),
         li: (props) => <li {...props} className="my-2 text-lg text-gray-800 dark:text-white" />,
-        code: (props) => <CodeSnippet content={props.children} />,
-        code_block: (props) => <CodeSnippet content={props.children} />,
+        code: (props) => <CodeSnippetDynamic content={props.children} />,
+        code_block: (props) => <CodeSnippetDynamic content={props.children} />,
         img: ({ src, altText, height, width }) => (
           <Image
             src={src ?? ""}
@@ -44,7 +45,7 @@ export function RichText({
         ),
         embed: {
           Quiz: (props) => {
-            return <Quiz initialQuiz={props} />
+            return <QuizDynamic initialQuiz={props} />
           },
         },
       }}
