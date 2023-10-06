@@ -1,11 +1,13 @@
 "use client"
 
+import { useQueries, useQuery } from "@tanstack/react-query"
 import algoliasearch from "algoliasearch/lite"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
 import Link from "next/link"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
+import React from "react"
 import {
   Configure,
   DynamicWidgets,
@@ -26,9 +28,8 @@ import { Input } from "@/components/ui/Input/Input"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { useLocale } from "@/i18n/useLocale"
-import { useQueries, useQuery } from "@tanstack/react-query"
 import { RefinementCombobox } from "./RefinementCombobox"
-import React from "react"
+import { ArticlePublishDetails } from "../ArticleCard/ArticlePublishDetails"
 import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
@@ -45,8 +46,8 @@ function SearchDialogContent() {
       </DialogTrigger>
       <Popover>
         <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
-          <DialogContent className="bottom-auto top-[10%] translate-y-[0%] bg-white sm:max-w-2xl">
-            <DialogHeader>
+          <DialogContent className="bottom-auto top-[10%] max-h-[80vh] translate-y-[0%]  overflow-auto bg-gray-100 sm:max-w-2xl">
+            <DialogHeader className="border-b bg-white p-4">
               <RefinementCombobox attribute={"tags"} />
               <DebouncedSearchBox />
             </DialogHeader>
@@ -55,7 +56,7 @@ function SearchDialogContent() {
             <NoResultsBoundary fallback={<NoResults />}>
               <Hits
                 hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
-                className="flex flex-col gap-4 py-2"
+                className="flex flex-col gap-4 p-4 py-0"
               />
             </NoResultsBoundary>
           </DialogContent>
@@ -78,14 +79,16 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
       href={`/${lang}/article/${hit.slug}`}
       hrefLang={lang}
       prefetch={false}
-      className="inline-flex w-full rounded-md transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="mb-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
-      <article className="flex cursor-pointer flex-col rounded-md px-4 py-2">
+      <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
+        <div className="flex items-center gap-2"></div>
         <Highlight
           attribute="title"
           hit={hit}
           classNames={{
             highlighted: "bg-primary-100",
+            root: "text-xl font-bold",
           }}
         />
         <Snippet
@@ -93,9 +96,10 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
           hit={hit}
           classNames={{
             highlighted: "bg-primary-100",
-            root: "line-clamp-2 text-slate-600 text-sm",
+            root: "line-clamp-2 text-md",
           }}
         />
+        <ArticlePublishDetails author="Anonymous" variant="light" publicationDate="4 June 2021" />
       </article>
     </Link>
   )

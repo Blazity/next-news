@@ -20,7 +20,12 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
     <Popover open={open} onOpenChange={(open) => setOpen(open)}>
       <div className="flex flex-wrap items-start gap-4 pb-4">
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-[150px] justify-between">
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-[150px] justify-between bg-gray-100 text-gray-400"
+          >
             {"Select tag..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -31,10 +36,10 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
             return (
               <div
                 key={`pill-${item.value}`}
-                className="flex h-[40px] items-center gap-2 rounded-lg bg-gray-100 px-4 pr-2"
+                className="flex h-[40px] items-center gap-2 rounded-lg bg-gray-100 px-4 pr-2 text-sm text-black"
               >
                 {item.label}
-                <Button className="h-[20px] w-[20px] rounded-full p-1" onClick={() => refine(item.value)}>
+                <Button className="h-[20px] w-[20px] rounded-full p-1 " onClick={() => refine(item.value)}>
                   <X className="h-5 w-5" />
                 </Button>
               </div>

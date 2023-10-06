@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
-import { formatDate } from "@/utils/formatDate"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
 
@@ -33,12 +32,12 @@ export const hygraphArticleToCardProps = (article: {
   slug: string
 }) => {
   return {
-    tags: article.tags,
-    imageUrl: article.image?.data.url,
-    title: article.title,
-    author: { name: article.author?.name ?? "Anonymous" },
-    publicationDate: article.publishedAt ? formatDate(article.publishedAt) : null,
-    slug: article.slug,
+    tags: article?.tags,
+    imageUrl: article?.image?.data?.url,
+    title: article?.title,
+    author: { name: article?.author?.name ?? "Anonymous" },
+    publicationDate: article?.publishedAt ? article.publishedAt : null,
+    slug: article?.slug,
   }
 }
 
@@ -92,9 +91,9 @@ export function ArticleCard({
             orientation === "horizontal" && "rounded-r-xl border-l-0"
           )}
         >
-          {tagsPosition === "under" && tags.length > 0 && (
+          {tagsPosition === "under" && tags?.length > 0 && (
             <div className="flex gap-2 p-5 pb-2">
-              {tags.map((tag) => {
+              {tags?.map((tag) => {
                 return (
                   <Tag key={tag} variant="light">
                     {tag}
@@ -116,7 +115,7 @@ export function ArticleCard({
             <ArticlePublishDetails
               imageUrl={author.imageUrl}
               author={author.name}
-              formatedDate={publicationDate}
+              publicationDate={publicationDate}
               variant="light"
             />
           </div>

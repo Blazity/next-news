@@ -59,6 +59,8 @@ export const getArticleBySlugQuery = graphql(`
     articles(locales: $locales, where: { slug: $slug }) {
       id
       title
+      publishedAt
+      tags
       image(forceParentLocale: true) {
         id
         description {
@@ -74,11 +76,35 @@ export const getArticleBySlugQuery = graphql(`
       }
       content {
         raw
+        references {
+          ... on Quiz {
+            id
+            question(first: 1) {
+              id
+              answer {
+                id
+                content {
+                  raw
+                }
+                isValid
+              }
+              content {
+                raw
+              }
+            }
+            title
+          }
+        }
       }
       recommendedArticles {
         title
         slug
         id
+        tags
+        publishedAt
+        author {
+          name
+        }
         image {
           description {
             text
@@ -163,10 +189,16 @@ export const listArticlesByCategoryQuery = graphql(`
           url
         }
       }
+      author {
+        name
+      }
+      publishedAt
+      tags
       slug
       title
+      id
     }
-    articlesConnection(locales: $locales) {
+    articlesConnection(locales: $locales, where: { categories_some: { slug: $categorySlug } }) {
       aggregate {
         count
       }
