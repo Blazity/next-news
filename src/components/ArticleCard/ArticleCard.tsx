@@ -21,6 +21,7 @@ type ArticleCardProps = {
   tagsPosition?: "over" | "under"
   orientation?: "vertical" | "horizontal"
   locale: Locale
+  lines?: "1" | "2"
 }
 
 export const hygraphArticleToCardProps = (article: {
@@ -45,6 +46,7 @@ export function ArticleCard({
   article: { imageUrl, title, publicationDate, author, tags, slug },
   tagsPosition = "under",
   orientation = "vertical",
+  lines = "2",
   locale,
 }: ArticleCardProps) {
   return (
@@ -59,7 +61,7 @@ export function ArticleCard({
         <div
           className={cn(
             orientation === "horizontal" && "w-1/2 min-w-[204px]",
-            "relative h-[264px] min-h-[264px] bg-gradient-to-br from-gray-200 to-gray-300"
+            "bg-gradient-to-brh-[264px] relative min-h-[264px] from-gray-200 to-gray-300"
           )}
         >
           {imageUrl && (
@@ -68,7 +70,7 @@ export function ArticleCard({
               alt="test"
               width={780}
               height={264}
-              className=" h-full max-h-[264px]  min-h-[264px] object-cover text-center brightness-90"
+              className={cn("h-[264px]  min-h-[264px] w-full object-cover text-center brightness-90")}
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
@@ -105,7 +107,8 @@ export function ArticleCard({
             <h2
               className={cn(
                 tagsPosition === "under" && "min-h-[80px] ",
-                "line-clamp-2 text-[1.8rem] font-bold leading-10 tracking-[1px]"
+                lines === "1" ? " line-clamp-1" : "line-clamp-2",
+                "text-[1.8rem] font-bold leading-10 tracking-[1px]"
               )}
             >
               {title}
