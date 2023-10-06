@@ -24,7 +24,7 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const article = await getArticleBySlug({ locale: lang, slug })
-  const articleUrl = `${env.VERCEL_URL}/article/${slug}`
+  const articleUrl = `${env.NEXT_PUBLIC_SITE_URL}/article/${slug}`
   const initialQuiz = article?.content?.references[0]
 
   if (!article) return notFound()

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
     },
     alternates: {
       types: {
-        "application/rss+xml": `${env.VERCEL_URL}/api/${params?.lang}`,
+        "application/rss+xml": `${env.NEXT_PUBLIC_SITE_URL}/api/${params?.lang}`,
       },
     },
   }

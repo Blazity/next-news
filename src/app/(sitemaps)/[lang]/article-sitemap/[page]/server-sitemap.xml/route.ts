@@ -11,7 +11,7 @@ async function generateSitemapFields(locale: Locale, pageNo: number) {
   const articles = await listArticlesForSitemap({ locale, skip, first: MAX_ARTICLES_PER_SITEMAP })
 
   const mappedArticles = articles.map((article) => ({
-    loc: `${env.VERCEL_URL}/${locale}/articles/${article.slug}`,
+    loc: `${env.NEXT_PUBLIC_SITE_URL}/${locale}/articles/${article.slug}`,
     lastmod: article.updatedAt,
     priority: 0.6,
     changefreq: "daily" as const,

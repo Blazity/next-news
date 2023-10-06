@@ -67,7 +67,7 @@ export function getMatadataObj(options: MetadataOptions): Metadata {
     openGraph: {
       type: type ?? defaultType,
       authors: author?.name ? [author.name] : [],
-      url: env.VERCEL_URL,
+      url: env.NEXT_PUBLIC_SITE_URL,
       title: title ?? defaultTitle,
       images: ogImage,
     },

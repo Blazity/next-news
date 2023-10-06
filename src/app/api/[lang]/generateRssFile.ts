@@ -4,7 +4,7 @@ import { Locale } from "@/i18n/i18n"
 import { getRecentArticles } from "@/lib/client"
 
 export default async function generateRssFeed(locale: Locale) {
-  const SITE_URL = env.VERCEL_URL
+  const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 
   const { articles } = await getRecentArticles({ locale, first: 100 })
 

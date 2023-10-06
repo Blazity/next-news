@@ -7,7 +7,7 @@ async function generateSitemapFields(locale: Locale) {
   const pages = await listPagesForSitemap(locale)
 
   const mappedPages = pages.map((page) => ({
-    loc: `${env.VERCEL_URL}/${locale}/${page.slug}`,
+    loc: `${env.NEXT_PUBLIC_SITE_URL}/${locale}/${page.slug}`,
     lastModified: null,
     priority: 0.8,
     changefreq: "monthly" as const,

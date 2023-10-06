@@ -7,7 +7,7 @@ const URLS_PER_SITEMAP = 1000
 
 export async function GET() {
   const locales = i18n.locales
-  const pagesSitemaps = locales.map((locale) => `${env.VERCEL_URL}/${locale}/sitemap.xml`)
+  const pagesSitemaps = locales.map((locale) => `${env.NEXT_PUBLIC_SITE_URL}/${locale}/sitemap.xml`)
 
   const articlesSitemapsPromises = locales.map(async (locale) => {
     const allArticlesCount = await getArticlesQuantity(locale)
@@ -16,7 +16,7 @@ export async function GET() {
 
     return Array(amountOfSitemapFiles)
       .fill("")
-      .map((_, index) => `${env.VERCEL_URL}/${locale}/article-sitemap/${index + 1}/server-sitemap.xml`)
+      .map((_, index) => `${env.NEXT_PUBLIC_SITE_URL}/${locale}/article-sitemap/${index + 1}/server-sitemap.xml`)
   })
 
   const articlesSitemaps = (await Promise.all(articlesSitemapsPromises)).flat()
