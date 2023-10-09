@@ -26,7 +26,7 @@ export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale
             />
           )}
         </div>
-        <div className="text-lg font-bold">{title}</div>
+        <div className="line-clamp-3 text-lg font-bold">{title}</div>
       </article>
     </Link>
   )
