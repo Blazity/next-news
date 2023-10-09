@@ -6,6 +6,7 @@ import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles
 import { i18n, Locale } from "@/i18n/i18n"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
+import { HighlightedArticles } from "@/components/HighlightedArticles/HighlightedArticles"
 
 export const dynamicParams = false
 
@@ -30,6 +31,13 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
       </div>
 
       <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
+      {homepage.highlightedArticles && (
+        <HighlightedArticles
+          locale={params.lang}
+          title={homepage.highlightedSectionTitle ?? "Our picks"}
+          articles={homepage.highlightedArticles}
+        />
+      )}
       {homepage.highlightedCategory && (
         <HighlightedCategoryArticles
           locale={params.lang}
