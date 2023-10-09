@@ -94,7 +94,7 @@ export function QuizLogic({ initialQuiz }: QuizProps) {
   }
 
   return (
-    <>
+    <div className="w-full flex-col items-center justify-center rounded-xl border-[1px] p-5">
       {data && (
         <div className="w-full items-center justify-center">
           <div className="mx-1 flex items-center justify-between pb-8">
@@ -136,7 +136,7 @@ export function QuizLogic({ initialQuiz }: QuizProps) {
           <ArrowRight />
         </button>
       </div>
-    </>
+    </div>
   )
 }
 
