@@ -54,7 +54,8 @@ export async function graphqlFetch<TQuery, TVariables>({
     ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
   })
 
-  const parsed = (await result.json()) as { data: TQuery }
+  const parsed = (await result.json()) as { data: TQuery; errors?: any }
+  if (parsed.errors) throw Error(JSON.stringify(parsed.errors))
   return parsed.data
 }
 
