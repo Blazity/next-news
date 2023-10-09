@@ -64,7 +64,7 @@ export async function graphqlFetch<TQuery, TVariables>({
   const result = await throttledFetch()
 
   const parsed = (await result.json()) as { data: TQuery; errors?: any }
-  if (parsed.errors) throw Error(JSON.stringify(parsed.errors))
+  if (!result.ok || parsed.errors) throw Error(JSON.stringify({ status: result.status, errors: parsed.errors }))
   return parsed.data
 }
 
