@@ -7,6 +7,6 @@ module.exports = {
   generateRobotsTxt: true,
   exclude: ["/api/health", "/server-sitemap-index.xml"],
   robotsTxtOptions: {
-    additionalSitemaps: [`${SITE_URL}/server-sitemap-index.xml`],
+    additionalSitemaps: [`https://${SITE_URL}/server-sitemap-index.xml`],
   },
 }
