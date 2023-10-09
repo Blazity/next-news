@@ -52,7 +52,7 @@ export function getMatadataObj(options: MetadataOptions): Metadata {
     ? [
         {
           url: `/api/og?${new URLSearchParams({
-            title: image?.title,
+            title: title ?? "",
             image: image.data?.url,
           })}`,
           width: 1200,
