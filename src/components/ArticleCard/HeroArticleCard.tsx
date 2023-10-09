@@ -34,6 +34,7 @@ export function HeroArticleCard({
               width={1200}
               height={320}
               className=" max-h-[320px] object-cover text-center brightness-90"
+              priority
             />
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
