@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import { ImageResponse, NextRequest } from "next/server"
 
 export const runtime = "edge"
@@ -32,11 +34,12 @@ export async function GET(request: NextRequest) {
           style={{
             position: "absolute",
             padding: "40px 60px",
-            top: 0,
+            bottom: 0,
             left: 0,
             color: "white",
-            textShadow: "1px 1px 4px rgba(66, 68, 90, 1)",
-            fontSize: 50,
+            textShadow: "0px 1px 4px rgba(26, 26, 27, 1)",
+            fontSize: "3rem",
+            fontWeight: 800,
           }}
         >
           {title}
