@@ -46,7 +46,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
         />
         <ShareOnSocial lang={lang} articleUrl={articleUrl} articleTitle={title} />
         {article.content && (
-          <section className="flex w-full flex-col gap-4 pt-8">
+          <section className="flex w-full flex-col pt-8">
             <RichText references={initialQuiz ? [initialQuiz] : []} raw={article.content.raw} />
           </section>
         )}
