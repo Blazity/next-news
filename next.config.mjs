@@ -7,7 +7,7 @@ import { env } from "./src/env.mjs"
  */
 const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
   reactStrictMode: true,
-  experimental: { instrumentationHook: true, workerThreads: false, cpus: 1 },
+  experimental: { instrumentationHook: true },
   rewrites() {
     return {
       beforeFiles: [
