@@ -8,6 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/Tooltip/Tooltip"
 
 type ArticleCardProps = {
   article: {
+    imageAlt?: string
     imageUrl?: string
     title: string
     publicationDate: string | null
@@ -28,13 +29,14 @@ export const hygraphArticleToCardProps = (article: {
   tags: string[]
   title: string
   author?: { name: string } | null
-  image?: { data: { url: string } } | null
+  image?: { data: { url: string }; description?: { text: string } | undefined | null } | null
   publishedAt?: string
   slug: string
 }) => {
   return {
     tags: article?.tags,
     imageUrl: article?.image?.data?.url,
+    imageAlt: article.image?.description?.text,
     title: article?.title,
     author: { name: article?.author?.name ?? "Anonymous" },
     publicationDate: article?.publishedAt ? article.publishedAt : null,
@@ -45,7 +47,7 @@ export const hygraphArticleToCardProps = (article: {
 const MAX_TAGS_TO_DISPLAY = 3
 
 export function ArticleCard({
-  article: { imageUrl, title, publicationDate, author, tags, slug },
+  article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug },
   tagsPosition = "under",
   orientation = "vertical",
   lines = "2",
@@ -70,7 +72,7 @@ export function ArticleCard({
           {imageUrl && (
             <Image
               src={imageUrl}
-              alt="test"
+              alt={imageAlt ?? "lack of description"}
               width={780}
               height={264}
               className={cn("h-[264px]  min-h-[264px] w-full object-cover text-center brightness-90")}
