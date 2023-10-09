@@ -15,8 +15,8 @@ export async function Navigation({ locale }: NavigationProps) {
   return (
     <>
       <div className="flex w-full items-center justify-between gap-5 pr-4">
-        <Link href={`/${locale}/`} hrefLang={locale} prefetch={false}>
-          <Image src={logo.url} width={100} height={20} alt="logo" className="" />
+        <Link href={`/${locale}/`} hrefLang={locale} prefetch={false} className="w-[100px]">
+          <Image src={logo.url} width={100} height={30} alt="site-logo" quality={100} />
         </Link>
         <ul className="flex items-center gap-5 sm:flex-wrap">
           <li className="flex items-center">
