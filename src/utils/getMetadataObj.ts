@@ -51,7 +51,7 @@ export function getMatadataObj(options: MetadataOptions): Metadata {
   const ogImage = image?.data?.url
     ? [
         {
-          url: `/api/og?${new URLSearchParams({
+          url: `${env.NEXT_PUBLIC_SITE_URL}/api/og?${new URLSearchParams({
             title: image?.title,
             image: image.data?.url,
           })}`,
@@ -69,6 +69,7 @@ export function getMatadataObj(options: MetadataOptions): Metadata {
       authors: author?.name ? [author.name] : [],
       url: env.NEXT_PUBLIC_SITE_URL,
       title: title ?? defaultTitle,
+      description: description ?? defaultDescription,
       images: ogImage,
     },
     twitter: {
