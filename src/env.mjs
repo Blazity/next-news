@@ -31,10 +31,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ALGOLIA_API_ID: process.env.NEXT_PUBLIC_ALGOLIA_API_ID,
     NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
     NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: process.env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL,
-    NEXT_PUBLIC_SITE_URL:
-      `https://${process.env.NEXT_PUBLIC_SITE_URL}` ??
-      `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` ??
-      "http://localhost:3000",
+    NEXT_PUBLIC_SITE_URL: `https://${process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VERCEL_URL ?? "localhost:3000"}`,
   },
   skipValidation: process.env.SKIP_ENV_VALIDATION?.toString() === "true",
 })

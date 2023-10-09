@@ -1,6 +1,7 @@
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { print } from "graphql"
 import omit from "lodash/omit"
+import pThrottle from "p-throttle"
 import { env } from "@/env.mjs"
 import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
@@ -17,6 +18,10 @@ import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuer
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 import { Tag } from "./tags"
 
+const throttle = pThrottle({
+  limit: 5, //Community: 5req/sec
+  interval: 1000,
+})
 export async function graphqlFetch<TQuery, TVariables>({
   cache = "force-cache",
   headers,
@@ -35,26 +40,31 @@ export async function graphqlFetch<TQuery, TVariables>({
   const variablesWithoutLocale = omit(variables, "locale")
   const localeFromVariables = variables?.locale
 
-  const result = await fetch(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...headers,
-    },
-    body: JSON.stringify({
-      query: print(document),
-      ...(variables && {
-        variables: {
-          ...(localeFromVariables && { locales: [standardNotationToHygraphLocale(localeFromVariables)] }),
-          ...variablesWithoutLocale,
-        },
+  const throttledFetch = throttle(() =>
+    fetch(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      body: JSON.stringify({
+        query: print(document),
+        ...(variables && {
+          variables: {
+            ...(localeFromVariables && { locales: [standardNotationToHygraphLocale(localeFromVariables)] }),
+            ...variablesWithoutLocale,
+          },
+        }),
       }),
-    }),
-    ...(!revalidate && { cache }),
-    ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
-  })
+      ...(!revalidate && { cache }),
+      ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
+    })
+  )
 
-  const parsed = (await result.json()) as { data: TQuery }
+  const result = await throttledFetch()
+
+  const parsed = (await result.json()) as { data: TQuery; errors?: any }
+  if (!result.ok || parsed.errors) throw Error(JSON.stringify({ status: result.status, errors: parsed.errors }))
   return parsed.data
 }
 
