@@ -9,6 +9,8 @@ export async function GET(request: NextRequest) {
   const image = searchParams.get("image")
   const title = searchParams.get("title")
 
+  console.log({ image, title })
+
   return new ImageResponse(
     (
       <div
