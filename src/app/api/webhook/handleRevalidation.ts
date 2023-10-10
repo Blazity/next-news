@@ -17,10 +17,11 @@ const modelTypeToTags: Record<RevalidationBody["data"]["__typename"], Tag[]> = {
   Homepage: ["HOMEPAGE"],
   Category: ["CATEGORY"],
   Author: ["ARTICLE"],
+  Quiz: ["ARTICLE"],
 }
 
 export const modelTypesSchema = z.object({
-  __typename: z.enum(["Article", "Navigation", "Footer", "Page", "Homepage", "Category", "Author"]),
+  __typename: z.enum(["Article", "Navigation", "Footer", "Page", "Homepage", "Category", "Author", "Quiz"]),
 })
 
 const bodySchema = z.object({
