@@ -6,6 +6,7 @@ import { Tag } from "./Buttons/Tag"
 
 type HeroArticleCardProps = {
   article: {
+    imageAlt?: string
     imageUrl?: string
     title: string
     publicationDate: string | null
@@ -20,7 +21,7 @@ type HeroArticleCardProps = {
 }
 
 export function HeroArticleCard({
-  article: { imageUrl, title, publicationDate, author, tags, slug },
+  article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug },
   locale,
 }: HeroArticleCardProps) {
   return (
@@ -30,7 +31,7 @@ export function HeroArticleCard({
           {imageUrl && (
             <Image
               src={imageUrl}
-              alt="test"
+              alt={imageAlt ?? "lack of description"}
               width={1200}
               height={320}
               className=" max-h-[320px] object-cover text-center brightness-90"
