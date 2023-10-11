@@ -75,6 +75,7 @@ export function ArticleCard({
               alt={imageAlt ?? "lack of description"}
               width={780}
               height={264}
+              sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 780px"
               className={cn("h-[264px]  min-h-[264px] w-full object-cover text-center brightness-90")}
             />
           )}
