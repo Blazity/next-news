@@ -9,7 +9,7 @@ const config = {
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   testEnvironment: "jest-environment-jsdom",
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
-  testPathIgnorePatterns: ["<rootDir>/e2e"],
+  testPathIgnorePatterns: ["<rootDir>/src/e2e"],
 }
 
 export default createJestConfig(config)
