@@ -12,6 +12,13 @@ jobs:
   check:
     env:
       SKIP_ENV_VALIDATION: true
+      SKIP_BUILD_PRODUCT_REDIRECTS: 1
+      GA_MEASUREMENT_ID: "${{ secrets.GA_MEASUREMENT_ID }}"
+      GA_PROPERTY_ID: "${{ secrets.GA_PROPERTY_ID }}"
+      GA_BASE64_SERVICE_ACCOUNT: "${{ secrets.GA_BASE64_SERVICE_ACCOUNT }}"
+      NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL: "${{ secrets.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL }}"
+      NEXT_PUBLIC_ALGOLIA_API_ID: "${{ secrets.NEXT_PUBLIC_ALGOLIA_API_ID }}"
+      NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: "${{ secrets.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY }}"
     name: Check
     runs-on: ubuntu-latest
     steps:
