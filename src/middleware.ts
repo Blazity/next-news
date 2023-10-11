@@ -11,7 +11,9 @@ function getLocale(request: NextRequest) {
     headers,
   }).languages()
 
-  return match(languages, i18n.locales, i18n.defaultLocale)
+  const languagesToMatch = languages.length === 1 && languages[0] === "*" ? [i18n.defaultLocale] : languages
+
+  return match(languagesToMatch, i18n.locales, i18n.defaultLocale)
 }
 
 const mapHeadersToObject = (headers: Headers) => fromPairs(Array.from(headers.entries()))
