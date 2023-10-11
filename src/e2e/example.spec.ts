@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test"
 
 test("has title", async ({ page }) => {
-  await page.goto("./en")
+  await page.goto("./")
 
-  await expect(page).toHaveTitle(/Blazity-Hygraph news starter/)
+  await expect(page).toHaveTitle("Home - Next.js media starter")
 })
