@@ -12,6 +12,7 @@ jobs:
   check:
     env:
       SKIP_ENV_VALIDATION: true
+
       SKIP_BUILD_PRODUCT_REDIRECTS: 1
       GA_MEASUREMENT_ID: "${{ secrets.GA_MEASUREMENT_ID }}"
       GA_PROPERTY_ID: "${{ secrets.GA_PROPERTY_ID }}"
