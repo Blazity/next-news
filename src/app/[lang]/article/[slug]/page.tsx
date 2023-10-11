@@ -43,6 +43,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
             tags,
             slug,
           }}
+          asLink={false}
           locale={lang}
         />
         <ShareOnSocial lang={lang} articleUrl={articleUrl} articleTitle={title} />
