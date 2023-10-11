@@ -51,10 +51,9 @@ export function getMatadataObj(options: MetadataOptions): Metadata {
   const ogImage = image?.data?.url
     ? [
         {
-          url: `${env.NEXT_PUBLIC_SITE_URL}/api/og?${new URLSearchParams({
-            title: encodeURIComponent(title ?? ""),
-            image: encodeURIComponent(image.data?.url),
-          }).toString()}`,
+          url: `${env.NEXT_PUBLIC_SITE_URL}/api/og?title=${encodeURIComponent(title ?? "")}&image=${encodeURIComponent(
+            image.data?.url
+          )}`,
           width: 1200,
           height: 630,
         },
