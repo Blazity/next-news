@@ -107,7 +107,7 @@ export function ArticleCard({
               )}
               {tags?.length > 1 && (
                 <Tooltip>
-                  <TooltipTrigger asChild>
+                  <TooltipTrigger>
                     <Tag variant="light">{`+${tags.length - 1}`}</Tag>
                   </TooltipTrigger>
                   <TooltipContent className="flex gap-2 bg-white" side="bottom">
