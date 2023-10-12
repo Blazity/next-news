@@ -47,13 +47,15 @@ export function Navigation({ locale, navigation }: NavigationProps) {
         </li>
         {navElements}
       </ul>
-      <ul className="flex items-center gap-5 sm:flex-wrap lg:hidden">
+      <ul className="flex items-center sm:flex-wrap lg:hidden">
         <li className="flex items-center">
           <DynamicSearchDialog />
         </li>
         <Sheet open={isSheetOpen}>
           <SheetTrigger asChild onClick={() => setIsSheetOpen((prev) => !prev)}>
-            <Button variant="ghost">{isSheetOpen ? <X /> : <Menu />}</Button>
+            <Button className="-mr-4" variant="ghost">
+              {isSheetOpen ? <X /> : <Menu />}
+            </Button>
           </SheetTrigger>
           <SheetContent className="mt-20 flex min-w-[100vw] list-none flex-col items-center justify-start text-center text-xl font-semibold">
             {navElements}

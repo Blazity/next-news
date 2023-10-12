@@ -45,7 +45,7 @@ export default async function Layout({ children, params }: { children: React.Rea
             </nav>
           </div>
 
-          <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col pb-16">{children}</main>
+          <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
           <Footer lang={params.lang} />
         </body>
       </Providers>
