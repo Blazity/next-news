@@ -5,6 +5,7 @@ import { type Locale } from "@/i18n/i18n"
 import "@/styles/tailwind.css"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
+import { getNavigation } from "@/lib/client"
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }) {
   return {
@@ -30,7 +31,9 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
   }
 }
 
-export default function Layout({ children, params }: { children: React.ReactNode; params: { lang: Locale } }) {
+export default async function Layout({ children, params }: { children: React.ReactNode; params: { lang: Locale } }) {
+  const navigation = await getNavigation(params.lang)
+
   return (
     <html lang={params.lang}>
       <GoogleAnalytics />
@@ -38,7 +41,7 @@ export default function Layout({ children, params }: { children: React.ReactNode
         <body className="flex min-h-screen flex-col items-center ">
           <div className="z-50 flex w-full justify-center border-b bg-white">
             <nav className="flex w-full max-w-[1200px] items-center justify-end gap-4 py-4">
-              <Navigation locale={params.lang} />
+              <Navigation navigation={navigation} locale={params.lang} />
             </nav>
           </div>
 
