@@ -31,6 +31,8 @@ jobs:
           node-version: "${{ env.node_version }}"
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
       - name: Lint check
         run: yarn lint
       - name: Format check
