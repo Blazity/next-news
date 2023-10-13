@@ -53,9 +53,11 @@ export function Navigation({ locale, navigation }: NavigationProps) {
         </li>
         <Sheet open={isSheetOpen}>
           <SheetTrigger asChild onClick={() => setIsSheetOpen((prev) => !prev)}>
-            <Button className="-mr-4" variant="ghost">
-              {isSheetOpen ? <X /> : <Menu />}
-            </Button>
+            <li>
+              <Button aria-label="opening and closing a menu" className="-mr-4" variant="ghost">
+                {isSheetOpen ? <X /> : <Menu />}
+              </Button>
+            </li>
           </SheetTrigger>
           <SheetContent className="mt-20 flex min-w-[100vw] list-none flex-col items-center justify-start text-center text-xl font-semibold">
             {navElements}
