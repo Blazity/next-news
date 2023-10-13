@@ -28,7 +28,7 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
           <div className={cn(isTwoRowLayout ? "md:grid-cols-3" : "md:grid-cols-2", "grid  grid-cols-1 gap-5")}>
             <div className="col-span-2 flex flex-col gap-5">
               {mainArticle && (
-                <div className="h-[388px]">
+                <div className="md:h-[388px]">
                   <ArticleCard
                     article={hygraphArticleToCardProps(mainArticle)}
                     tagsPosition="over"
