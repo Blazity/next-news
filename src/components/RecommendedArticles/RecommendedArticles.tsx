@@ -17,7 +17,7 @@ export function RecommendedArticles({ id, lang }: RecommendedArticlesProps) {
   return (
     <section className="w-full py-4">
       <h2 className="mb-8 text-2xl font-bold">Related articles</h2>
-      <div className={`grid grid-cols-3 gap-8`}>
+      <div className={`grid gap-8 md:grid-cols-3`}>
         {isLoading &&
           Array.from(Array(3).keys()).map((idx) => {
             return <ArticleSkeleton key={`skeleton-${idx}`} />
