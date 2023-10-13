@@ -169,7 +169,6 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
   const { articles } = await graphqlFetch({
     cache: "force-cache",
     document: getArticleBySlugQuery,
-    tags: ["ARTICLE"],
     variables,
   })
   return articles[0] ?? null
