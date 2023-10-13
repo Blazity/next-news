@@ -25,7 +25,7 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
       {otherTrendingArticles.length > 0 && (
         <>
           <h2 className="py-12 pb-8 text-3xl font-bold">{title}</h2>
-          <div className={cn(isTwoRowLayout ? "grid-cols-3" : "grid-cols-2", "grid  gap-5")}>
+          <div className={cn(isTwoRowLayout ? "md:grid-cols-3" : "md:grid-cols-2", "grid  grid-cols-1 gap-5")}>
             <div className="col-span-2 flex flex-col gap-5">
               {mainArticle && (
                 <div className="h-[388px]">
@@ -34,11 +34,12 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
                     tagsPosition="over"
                     locale={locale}
                     lines={"1"}
+                    isMain={true}
                   />
                 </div>
               )}
               {secondaryArticles.length > 0 && (
-                <div className="flex h-[490px] gap-5">
+                <div className="flex flex-col gap-5 lg:h-[490px] lg:flex-row">
                   {secondaryArticles.map((article) => {
                     return (
                       <ArticleCard

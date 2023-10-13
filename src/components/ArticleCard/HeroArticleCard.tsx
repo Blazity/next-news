@@ -70,7 +70,7 @@ export function HeroArticleCard({
             </div>
             <div className="flex flex-col justify-around gap-5">
               <h2
-                className=" text-[1.8rem] font-bold leading-10 tracking-[1px]"
+                className=" text-[1.8rem] font-bold leading-7 tracking-[1px] md:leading-10"
                 style={{ textShadow: "0px 1px 4px rgba(26, 26, 27, 1)" }}
               >
                 {title}
