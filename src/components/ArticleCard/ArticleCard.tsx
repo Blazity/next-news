@@ -23,6 +23,7 @@ type ArticleCardProps = {
   orientation?: "vertical" | "horizontal"
   locale: Locale
   lines?: "1" | "2" | "3"
+  isMain?: boolean
 }
 
 export const hygraphArticleToCardProps = (article: {
@@ -52,21 +53,24 @@ export function ArticleCard({
   orientation = "vertical",
   lines = "2",
   locale,
+  isMain = false,
 }: ArticleCardProps) {
   const mainTag = tags[0]
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} passHref className="w-full">
       <article
         className={cn(
-          orientation === "vertical" && "flex-col",
+          orientation === "vertical" && "flex-row md:flex-col",
           orientation === "horizontal" && "flex-row",
-          "flex h-full max-h-[490px] w-full cursor-pointer overflow-hidden rounded-xl"
+          "flex h-full w-full cursor-pointer gap-5 overflow-hidden rounded-xl md:max-h-[490px] md:gap-0",
+          isMain && "max-h-[490px] flex-col gap-0"
         )}
       >
         <div
           className={cn(
-            orientation === "horizontal" && "w-1/2 min-w-[204px]",
-            "bg-gradient-to-brh-[264px] relative min-h-[264px] from-gray-200 to-gray-300"
+            orientation === "horizontal" && "min-h-[82px] md:w-1/2 md:min-w-[204px]",
+            "bg-gradient-to-brh-[264px] relative h-[82px] min-h-[82px] w-[82px] from-gray-200 to-gray-300 md:min-h-[264px] md:w-full",
+            isMain && "min-h-[264px] w-auto"
           )}
         >
           {imageUrl && (
@@ -76,10 +80,18 @@ export function ArticleCard({
               width={780}
               height={264}
               sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 780px"
-              className={cn("h-[264px]  min-h-[264px] w-full object-cover text-center brightness-90")}
+              className={cn(
+                "h-[82px] min-h-[82px] w-full rounded-xl object-cover text-center brightness-90 md:h-[264px] md:min-h-[264px] md:rounded-none",
+                isMain && "h-[264px] min-h-[264px] rounded-none"
+              )}
             />
           )}
-          <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-end p-6 ">
+          <div
+            className={cn(
+              "absolute inset-0 z-20 hidden w-full flex-col items-start justify-end p-6 md:flex",
+              isMain && "flex"
+            )}
+          >
             <div className="flex w-full flex-wrap justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
@@ -93,13 +105,14 @@ export function ArticleCard({
         </div>
         <div
           className={cn(
-            "flex flex-1 flex-col  border border-gray-200 bg-white",
+            "flex flex-1 flex-col  border-gray-200 bg-white md:border",
             orientation === "vertical" && "rounded-b-xl border-t-0",
-            orientation === "horizontal" && "rounded-r-xl border-l-0"
+            orientation === "horizontal" && "rounded-r-xl border-l-0",
+            isMain && "border"
           )}
         >
           {tagsPosition === "under" && tags?.length > 0 && (
-            <div className="flex  gap-2 p-5 pb-2">
+            <div className={cn("hidden gap-2 p-5 pb-2 md:flex", isMain && "flex")}>
               {mainTag && (
                 <Tag key={mainTag} variant="light">
                   {mainTag}
@@ -117,19 +130,25 @@ export function ArticleCard({
               )}
             </div>
           )}
-          <div className="flex flex-1 flex-col justify-between  gap-5  p-5 pt-2 ">
+          <div
+            className={cn(
+              "flex flex-1 items-start gap-5  pt-0 md:flex-col  md:justify-between md:p-5 md:pt-2",
+              isMain && "flex-col justify-between p-5 pt-2"
+            )}
+          >
             <h2
               className={cn(
                 tagsPosition === "under" && "min-h-[80px] ",
-                lines === "1" && "line-clamp-1",
-                lines === "2" && "line-clamp-2",
-                lines === "3" && "line-clamp-3",
-                "text-[1.5rem] font-bold leading-10 tracking-[1px]"
+                lines === "1" && "md:line-clamp-1",
+                lines === "2" && "md:line-clamp-2",
+                lines === "3" && "md:line-clamp-3",
+                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-10"
               )}
             >
               {title}
             </h2>
             <ArticlePublishDetails
+              className={cn("hidden md:flex", isMain && "flex")}
               imageUrl={author.imageUrl}
               author={author.name}
               publicationDate={publicationDate}
