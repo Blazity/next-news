@@ -139,10 +139,10 @@ export function ArticleCard({
             <h2
               className={cn(
                 tagsPosition === "under" && "min-h-[80px] ",
-                lines === "1" && "line-clamp-1",
-                lines === "2" && "line-clamp-2",
-                lines === "3" && "line-clamp-3",
-                "text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-10"
+                lines === "1" && "md:line-clamp-1",
+                lines === "2" && "md:line-clamp-2",
+                lines === "3" && "md:line-clamp-3",
+                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-10"
               )}
             >
               {title}
