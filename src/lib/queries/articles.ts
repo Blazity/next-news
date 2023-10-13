@@ -54,6 +54,31 @@ export const getRecentArticlesQuery = graphql(`
   }
 `)
 
+export const getArticleRecommendedArticlesQuery = graphql(`
+  query getArticleRecommendedArticles($locales: [Locale!]!, $id: ID!) {
+    article(locales: $locales, where: { id: $id }) {
+      recommendedArticles {
+        title
+        slug
+        id
+        tags
+        publishedAt
+        author {
+          name
+        }
+        image {
+          description {
+            text
+          }
+          data {
+            url
+          }
+        }
+      }
+    }
+  }
+`)
+
 export const getArticleBySlugQuery = graphql(`
   query getArticleBySlug($locales: [Locale!]!, $slug: String!) {
     articles(locales: $locales, where: { slug: $slug }) {
@@ -96,24 +121,7 @@ export const getArticleBySlugQuery = graphql(`
           }
         }
       }
-      recommendedArticles {
-        title
-        slug
-        id
-        tags
-        publishedAt
-        author {
-          name
-        }
-        image {
-          description {
-            text
-          }
-          data {
-            url
-          }
-        }
-      }
+
       categories {
         title
         slug
