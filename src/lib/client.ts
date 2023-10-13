@@ -7,6 +7,7 @@ import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
   getArticleMetadataBySlugQuery,
+  getArticleRecommendedArticlesQuery,
   getArticlesQuantityQuery,
   getRecentArticlesQuery,
   listArticlesByCategoryQuery,
@@ -153,6 +154,15 @@ export async function getRecentArticles(variables: { locale: Locale; skip?: numb
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
+}
+
+export async function getArticleRecommendedArticles(variables: { locale: Locale; id: string }) {
+  const { article } = await graphqlFetch({
+    cache: "force-cache",
+    document: getArticleRecommendedArticlesQuery,
+    variables,
+  })
+  return article ? article.recommendedArticles : []
 }
 
 export async function getArticleBySlug(variables: { locale: Locale; slug: string }) {

@@ -53,9 +53,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
           </section>
         )}
       </article>
-      {article.recommendedArticles.length > 0 && (
-        <RecommendedArticles recommendedArticles={article.recommendedArticles} lang={lang} />
-      )}
+      <RecommendedArticles id={article.id} lang={lang} />
     </>
   )
 }
