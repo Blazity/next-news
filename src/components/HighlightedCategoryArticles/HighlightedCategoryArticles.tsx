@@ -16,7 +16,7 @@ export async function HighlightedCategoryArticles({ locale, title, categoryId }:
   return (
     <section className="w-full">
       <h2 className="py-12 pb-8 text-3xl font-bold">{title}</h2>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid gap-5 lg:grid-cols-2">
         {articles.map((article) => {
           return (
             <ArticleCard

@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n/i18n"
+import { cn } from "@/utils/cn"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
 type Nullable<T extends object> = T | null
@@ -29,14 +30,13 @@ type ArtilcesGridProps = {
   articles: Articles
   locale: Locale
   cardsOrientation?: "vertical" | "horizontal"
-  columns?: number
+  className?: string
 }
 
-export function ArticlesGrid({ articles, locale, cardsOrientation, columns = 3 }: ArtilcesGridProps) {
+export function ArticlesGrid({ articles, locale, cardsOrientation, className }: ArtilcesGridProps) {
   if (!articles || articles.length === 0) return <p>No Articles Found!</p>
-  const columnsStyle = `grid-cols-${columns}`
   return (
-    <div className={`grid ${columnsStyle} gap-8`}>
+    <div className={cn(`grid gap-8 md:grid-cols-3`, className)}>
       {articles.map((article) => {
         return (
           <ArticleCard
