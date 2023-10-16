@@ -52,7 +52,11 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
         articles={articles}
       />
       {hasNextPage && (
-        <Button className="mt-16 w-full p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
+        <Button
+          className="mt-16 w-full rounded-xl border p-4"
+          disabled={isFetchingNextPage}
+          onClick={() => fetchNextPage()}
+        >
           {buttonText}
         </Button>
       )}

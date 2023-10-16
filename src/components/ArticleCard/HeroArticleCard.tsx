@@ -62,7 +62,7 @@ export function HeroArticleCard({
           )}
           <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
             <div className="flex w-full justify-between">
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => {
                   return <Tag key={tag}>{tag}</Tag>
                 })}
