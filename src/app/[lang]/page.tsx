@@ -26,9 +26,11 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
 
   return (
     <>
-      <div className="flex w-full justify-end">
-        <StockDisplay quotes={homepage.stockDailyQuotes} />
-      </div>
+      {homepage.marketStock?.data && (
+        <div className="flex w-full justify-end">
+          <StockDisplay quotes={homepage.marketStock?.data} />
+        </div>
+      )}
 
       <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
       {homepage.highlightedArticles && (

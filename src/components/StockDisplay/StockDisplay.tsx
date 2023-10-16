@@ -1,32 +1,9 @@
 import { z } from "zod"
 import { StockDisplayRenderer } from "./StockDisplayRenderer"
 
-type StockQuoteBase = {
-  id: string
-  name: string
-}
-type ValidStockQuote = StockQuoteBase & { quote: AlphaVantageQuote }
-
-type AlphaVantageQuote = {
-  "Global Quote": {
-    "10. change percent": number
-  }
-}
-
-export async function StockDisplay({ quotes }: { quotes: { id: string; name: string; quote?: unknown }[] }) {
-  const validStockQuotes = quotes
-    .map((stockQuote) => ({
-      ...stockQuote,
-      quote: validateQuote(stockQuote.quote),
-    }))
-    .filter((stockQuote): stockQuote is ValidStockQuote => stockQuote.quote !== null)
-    .map(({ quote, ...stockQuoteProps }) => ({
-      id: stockQuoteProps.id,
-      name: stockQuoteProps.name,
-      changePercent: quote["Global Quote"]["10. change percent"],
-    }))
-
-  return <StockDisplayRenderer quotes={validStockQuotes} />
+export async function StockDisplay({ quotes }: { quotes: Quote[] }) {
+  const validQuotes = quotes.map((quote) => validateQuote(quote)) as Quote[]
+  return <StockDisplayRenderer quotes={validQuotes} />
 }
 
 function validateQuote(stockQuote: unknown) {
@@ -36,7 +13,13 @@ function validateQuote(stockQuote: unknown) {
 }
 
 const quoteSchema = z.object({
-  "Global Quote": z.object({
-    "10. change percent": z.string().transform((val) => parseFloat(val.slice(0, -1))),
-  }),
+  id: z.string(),
+  name: z.string(),
+  change: z.string().transform((val) => parseFloat(val.slice(0, -1))),
 })
+
+type Quote = {
+  id: string
+  name: string
+  change: number
+}
