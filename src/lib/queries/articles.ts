@@ -104,20 +104,6 @@ export const getArticleBySlugQuery = graphql(`
         references {
           ... on Quiz {
             id
-            question(first: 1) {
-              id
-              answer {
-                id
-                content {
-                  raw
-                }
-                isValid
-              }
-              content {
-                raw
-              }
-            }
-            title
           }
         }
       }

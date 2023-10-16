@@ -2,9 +2,9 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
+import { cn } from "@/utils/cn"
 import { CodeSnippetDynamic } from "../CodeSnippet/CodeSnippetDynamic"
 import { QuizDynamic } from "../Quiz/QuizDynamic"
-import { cn } from "@/utils/cn"
 
 export function RichText({
   raw,
@@ -46,7 +46,7 @@ export function RichText({
         ),
         embed: {
           Quiz: (props) => {
-            return <QuizDynamic initialQuiz={props} />
+            return <QuizDynamic id={props.id} />
           },
         },
       }}
