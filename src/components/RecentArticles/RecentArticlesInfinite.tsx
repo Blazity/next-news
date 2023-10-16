@@ -53,7 +53,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
         })}
       </div>
       {hasNextPage && (
-        <Button className="w-full border p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
+        <Button className="w-full rounded-xl border p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
           See more
         </Button>
       )}
