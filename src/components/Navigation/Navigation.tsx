@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Locale } from "@/i18n/i18n"
 import { getNavigation } from "@/lib/client"
+import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
@@ -46,6 +47,9 @@ export function Navigation({ locale, navigation }: NavigationProps) {
           <DynamicSearchDialog />
         </li>
         {navElements}
+        <li>
+          <DynamicLangSelect />
+        </li>
       </ul>
       <ul className="flex items-center sm:flex-wrap lg:hidden">
         <li className="flex items-center">
@@ -59,8 +63,11 @@ export function Navigation({ locale, navigation }: NavigationProps) {
               </Button>
             </li>
           </SheetTrigger>
-          <SheetContent className="mt-20 flex min-w-[100vw] list-none flex-col items-center justify-start text-center text-xl font-semibold">
+          <SheetContent className="mt-20 flex min-w-[100vw] list-none flex-col items-center justify-start text-center text-2xl font-semibold">
             {navElements}
+            <li className="mt-20 w-full text-xl font-normal">
+              <DynamicLangSelect />
+            </li>
           </SheetContent>
         </Sheet>
       </ul>

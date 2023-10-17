@@ -80,13 +80,12 @@ export async function getFooter(locale: Locale) {
 }
 
 export async function getHomepage(locale: Locale) {
-  const { homepages } = await graphqlFetch({
+  const { homepages, marketStock } = await graphqlFetch({
     document: getHomepageQuery,
     tags: ["HOMEPAGE", "CATEGORY", "ARTICLE"],
-    revalidate: 60 * 60 * 12, // 12h
     variables: { locale },
   })
-  return homepages[0] ?? null
+  return { ...homepages[0], marketStock }
 }
 
 export async function getHomepageMetadata(locale: Locale) {

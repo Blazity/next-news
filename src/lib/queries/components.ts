@@ -26,12 +26,8 @@ export const getNavigationQuery = graphql(`
 
 export const getHomepageQuery = graphql(`
   query getHomepage($locales: [Locale!]!) {
+    marketStock
     homepages(locales: $locales, first: 1) {
-      stockDailyQuotes {
-        id
-        name
-        quote
-      }
       recentSectionTitle
       trendingSectionTitle
       highlightedCategoryTitle

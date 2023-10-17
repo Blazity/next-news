@@ -1,6 +1,6 @@
 import { StockQuote } from "./StockQuote"
 
-export type Quote = { name: string; id: string; changePercent: number }
+export type Quote = { name: string; id: string; change: number }
 
 type StockDisplayRendererProps = {
   quotes: Quote[]
