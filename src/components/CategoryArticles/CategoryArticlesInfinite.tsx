@@ -22,7 +22,7 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["category-articles" + category],
+    queryKey: ["category-articles", category],
     queryFn: ({ pageParam = 0 }) =>
       listArticlesByCategory({
         locale,

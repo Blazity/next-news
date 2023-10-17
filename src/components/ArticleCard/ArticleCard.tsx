@@ -55,7 +55,7 @@ export function ArticleCard({
   locale,
   isMain = false,
 }: ArticleCardProps) {
-  const mainTag = tags[0]
+  const mainTag = tags?.[0]
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} passHref className="w-full">
       <article
@@ -95,7 +95,7 @@ export function ArticleCard({
             <div className="flex w-full flex-wrap justify-between">
               {tagsPosition === "over" && (
                 <div className="flex gap-2">
-                  {tags.slice(0, MAX_TAGS_TO_DISPLAY).map((tag) => {
+                  {tags?.slice(0, MAX_TAGS_TO_DISPLAY).map((tag) => {
                     return <Tag key={tag}>{tag}</Tag>
                   })}
                 </div>
