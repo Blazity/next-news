@@ -18,10 +18,7 @@ function LangSelect() {
 
   return (
     <Select value={lang} onValueChange={(locale) => router.push(`/${locale}`)}>
-      <SelectTrigger
-        className="w-full min-w-full rounded-xl bg-white lg:w-[70px] lg:min-w-[70px]"
-        aria-label="language select"
-      >
+      <SelectTrigger className="w-full min-w-full rounded-xl bg-white lg:min-w-[80px]" aria-label="language select">
         <SelectValue>{lang.toUpperCase()}</SelectValue>
       </SelectTrigger>
       <SelectContent className="bg-white">
