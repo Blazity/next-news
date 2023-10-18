@@ -57,12 +57,12 @@ export async function Footer({ lang, footer }: FooterProps) {
             })}
           </ul>
         </nav>
-        <div className="flex flex-col justify-between gap-10 lg:gap-0">
-          <div className="flex w-1/3 justify-end lg:w-full">
+        <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-0">
+          <div className="w-1/3">
             <DynamicLangSelect />
           </div>
           <p className="text-sm text-custom-gray-300">
-            © {new Date().getFullYear()} {companyName} All rights reserved.
+            © {new Date().getFullYear()} {companyName} {footer?.ownershipAndCredits}
           </p>
         </div>
       </div>
