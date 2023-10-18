@@ -9,7 +9,7 @@ export function handleRevalidation<T extends RevalidationBody>(req: NextRequestW
   const article = req.validBody.data
   if (isArticle(article)) {
     article.localizations.forEach(({ locale, slug }) => {
-      revalidatePath(`/${hygraphLocaleToStandardNotation(locale)}/article/${slug}`, "page")
+      revalidatePath(`/${hygraphLocaleToStandardNotation(locale)}/article/${slug}`)
     })
   }
   tags.forEach(revalidateTag)
