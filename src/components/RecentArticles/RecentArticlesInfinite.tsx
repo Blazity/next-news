@@ -48,7 +48,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
         article={hygraphArticleToCardProps(firstArticle)}
         orientation="horizontal"
         locale={locale}
-        imageClassName="w-1/2"
+        imageClassName="md:w-1/2"
       />
       <div className="grid gap-5 md:grid-cols-3">
         {otherArticles.map((article) => {
