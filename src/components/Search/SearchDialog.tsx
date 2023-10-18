@@ -1,24 +1,18 @@
 "use client"
 
-import { useQueries, useQuery } from "@tanstack/react-query"
 import algoliasearch from "algoliasearch/lite"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
 import Link from "next/link"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
-import React from "react"
 import {
   Configure,
-  DynamicWidgets,
   Highlight,
   Hits,
   InstantSearch,
-  Menu,
-  RefinementList,
   Snippet,
   useInstantSearch,
-  useRefinementList,
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch"
@@ -99,7 +93,6 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
             root: "line-clamp-2 text-md",
           }}
         />
-        <ArticlePublishDetails author="Anonymous" variant="light" publicationDate="4 June 2021" />
       </article>
     </Link>
   )
