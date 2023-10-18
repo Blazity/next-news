@@ -13,7 +13,7 @@ type ArticleMinifiedCardProps = {
 
 export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale }: ArticleMinifiedCardProps) {
   return (
-    <a href={`/${locale}/article/${slug}`} hrefLang={locale}>
+    <Link prefetch={false} href={`/${locale}/article/${slug}`} hrefLang={locale}>
       <article className="flex w-full gap-5">
         <div className="relative h-[82px] min-w-[82px] rounded-xl bg-gradient-to-br from-gray-200 to-gray-300">
           {imageUrl && (
@@ -28,6 +28,6 @@ export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale
         </div>
         <div className="line-clamp-3 text-lg font-bold">{title}</div>
       </article>
-    </a>
+    </Link>
   )
 }

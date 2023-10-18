@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Locale } from "@/i18n/i18n"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
+import Link from "next/link"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
@@ -49,9 +50,9 @@ export async function Footer({ lang, footer }: FooterProps) {
               const url = `/${lang}${categoryUrl}/${footerElement?.element?.slug}`
               return (
                 <li key={footerElement?.element?.slug}>
-                  <a href={url} hrefLang={lang}>
+                  <Link prefetch={false} href={url} hrefLang={lang}>
                     {footerElement?.element?.title}
-                  </a>
+                  </Link>
                 </li>
               )
             })}

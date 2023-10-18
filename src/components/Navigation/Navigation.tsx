@@ -8,6 +8,7 @@ import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
+import Link from "next/link"
 
 export type GetNavigationReturn = Awaited<ReturnType<typeof getNavigation>>
 
@@ -25,18 +26,24 @@ export function Navigation({ locale, navigation }: NavigationProps) {
     const url = `/${locale}${categoryUrl}/${navElement?.element?.slug}`
     return (
       <li key={navElement?.element?.slug}>
-        <a href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
+        <Link prefetch={false} href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
           {navElement?.element?.title}
-        </a>
+        </Link>
       </li>
     )
   })
 
   return (
     <div className="pointer-events-auto mx-4 flex w-full items-center justify-between gap-5">
-      <a href={`/${locale}/`} hrefLang={locale} className="w-[100px]" onClick={() => setIsSheetOpen(false)}>
+      <Link
+        prefetch={false}
+        href={`/${locale}/`}
+        hrefLang={locale}
+        className="w-[100px]"
+        onClick={() => setIsSheetOpen(false)}
+      >
         <Image src={logo.url} width={100} height={30} alt="site-logo" quality={100} />
-      </a>
+      </Link>
       <ul className="hidden items-center gap-5 sm:flex-wrap lg:flex">
         <li className="flex items-center">
           <DynamicSearchDialog />

@@ -4,6 +4,7 @@ import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/Tooltip/Tooltip"
+import Link from "next/link"
 
 type ArticleCardProps = {
   article: {
@@ -58,7 +59,7 @@ export function ArticleCard({
 }: ArticleCardProps) {
   const mainTag = tags?.[0]
   return (
-    <a href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
+    <Link prefetch={false} href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
       <article
         className={cn(
           orientation === "vertical" && "flex-row md:flex-col",
@@ -159,6 +160,6 @@ export function ArticleCard({
           </div>
         </div>
       </article>
-    </a>
+    </Link>
   )
 }
