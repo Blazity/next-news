@@ -19,7 +19,7 @@ export function handleRevalidation<T extends RevalidationBody>(req: NextRequestW
 const modelTypeToTags: Record<RevalidationBody["data"]["__typename"], Tag[]> = {
   Article: ["ARTICLE"],
   Navigation: ["NAVIGATION"],
-  Footer: ["FOOTER"],
+  Footer: ["NAVIGATION"],
   Page: ["PAGE"],
   Homepage: ["HOMEPAGE"],
   Category: ["CATEGORY"],
