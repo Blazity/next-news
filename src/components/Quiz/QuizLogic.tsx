@@ -18,18 +18,19 @@ export type QuizProps = { id: string }
 
 export function QuizLogic({ id }: QuizProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [questions, setQuestions] = useState<ExtendedQuizQuestion[]>([])
 
   const locale = useLocale()
   const { data, isLoading } = useQuery(
     ["quiz-questions", id],
-    () => getQuizQuestionsById({ locale, id: id || "", skip: 0 }),
+    () => getQuizQuestionsById({ locale, id: id, skip: 0 }),
     {
       onSuccess: (data) => {
         setQuestions(data as QuizQuestion[])
       },
     }
   )
+
+  const [questions, setQuestions] = useState<ExtendedQuizQuestion[]>((data as QuizQuestion[]) ?? [])
 
   const currentQuestion = questions?.[currentQuestionIndex]
 
@@ -83,7 +84,7 @@ export function QuizLogic({ id }: QuizProps) {
     setCurrentQuestionIndex((prev) => prev - 1)
   }
 
-  if (isLoading && !data) return <Skeleton className="h-[20vh] w-full rounded-xl bg-custom-gray-200" />
+  if (isLoading || !data) return <Skeleton className="h-[20vh] w-full rounded-xl bg-custom-gray-200" />
 
   return (
     <div className="w-full flex-col items-center justify-center rounded-xl border-[1px] p-5">

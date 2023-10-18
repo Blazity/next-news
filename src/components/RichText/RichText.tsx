@@ -41,7 +41,7 @@ export function RichText({
             height={height}
             width={width}
             objectFit="cover"
-            className="rounded-xl"
+            className="rounded-xl bg-gray-50"
           />
         ),
         embed: {
