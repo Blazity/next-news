@@ -35,15 +35,9 @@ export function Navigation({ locale, navigation }: NavigationProps) {
 
   return (
     <div className="pointer-events-auto mx-4 flex w-full items-center justify-between gap-5">
-      <Link
-        href={`/${locale}/`}
-        hrefLang={locale}
-        prefetch={false}
-        className="w-[100px]"
-        onClick={() => setIsSheetOpen(false)}
-      >
+      <a href={`/${locale}/`} hrefLang={locale} className="w-[100px]" onClick={() => setIsSheetOpen(false)}>
         <Image src={logo.url} width={100} height={30} alt="site-logo" quality={100} />
-      </Link>
+      </a>
       <ul className="hidden items-center gap-5 sm:flex-wrap lg:flex">
         <li className="flex items-center">
           <DynamicSearchDialog />
