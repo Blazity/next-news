@@ -30,16 +30,16 @@ export async function Footer({ lang, footer }: FooterProps) {
         </div>
         <nav className="flex flex-col gap-10 md:gap-7">
           <div className="flex gap-4">
-            <a href={twitterLink ?? ""} target="_blank">
+            <a href={twitterLink ?? ""} target="_blank" rel="noreferrer">
               <Twitter />
             </a>
-            <a href={facebookLink ?? ""} target="_blank">
+            <a href={facebookLink ?? ""} target="_blank" rel="noreferrer">
               <Facebook />
             </a>
-            <a href={instagramLink ?? ""} target="_blank">
+            <a href={instagramLink ?? ""} target="_blank" rel="noreferrer">
               <Instagram />
             </a>
-            <a href={youtubeLink ?? ""} target="_blank">
+            <a href={youtubeLink ?? ""} target="_blank" rel="noreferrer">
               <Youtube />
             </a>
           </div>
