@@ -155,6 +155,7 @@ export function ArticleCard({
               author={author.name}
               publicationDate={publicationDate}
               variant="light"
+              lang={locale}
             />
           </div>
         </div>
