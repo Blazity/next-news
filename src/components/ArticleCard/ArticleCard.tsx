@@ -59,7 +59,7 @@ export function ArticleCard({
 }: ArticleCardProps) {
   const mainTag = tags?.[0]
   return (
-    <Link prefetch={false} href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
+    <Link href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
       <article
         className={cn(
           orientation === "vertical" && "flex-row md:flex-col",

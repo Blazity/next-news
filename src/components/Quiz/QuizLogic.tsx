@@ -89,7 +89,7 @@ export function QuizLogic({ id }: QuizProps) {
     <div className="w-full flex-col items-center justify-center rounded-xl border-[1px] p-5">
       <div className="w-full items-center justify-center">
         <div className="mx-1 flex items-center justify-between pb-8">
-          <RichText raw={currentQuestion?.content?.raw} />
+          {currentQuestion?.content?.raw && <RichText raw={currentQuestion?.content?.raw} />}
           <p className="font-semibold text-custom-gray-300">
             {currentQuestionIndex + 1}/{data?.length}
           </p>

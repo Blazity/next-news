@@ -32,12 +32,7 @@ type HeroWrapperProps = {
 }
 
 function HeroWrapper({ link, linkProps, children }: HeroWrapperProps) {
-  if (link)
-    return (
-      <Link {...linkProps} prefetch={false}>
-        {children}
-      </Link>
-    )
+  if (link) return <Link {...linkProps}>{children}</Link>
 
   return <>{children}</>
 }
