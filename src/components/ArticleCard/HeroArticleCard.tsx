@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link, { LinkProps } from "next/link"
 import { ReactNode } from "react"
 import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
@@ -25,16 +24,14 @@ type HeroArticleCardProps = {
 type HeroWrapperProps = {
   link?: boolean
   children: ReactNode
-  linkProps: LinkProps
+  linkProps: {
+    hrefLang: string
+    href: string
+  }
 }
 
 function HeroWrapper({ link, linkProps, children }: HeroWrapperProps) {
-  if (link)
-    return (
-      <Link {...linkProps} passHref>
-        {children}
-      </Link>
-    )
+  if (link) return <a {...linkProps}>{children}</a>
 
   return <>{children}</>
 }

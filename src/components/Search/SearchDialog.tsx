@@ -69,10 +69,9 @@ type ArticleHit = Hit<{
 
 function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
   return (
-    <Link
+    <a
       href={`/${lang}/article/${hit.slug}`}
       hrefLang={lang}
-      prefetch={false}
       className="mb-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
@@ -94,7 +93,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
           }}
         />
       </article>
-    </Link>
+    </a>
   )
 }
 

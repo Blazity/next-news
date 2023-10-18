@@ -1,6 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
@@ -31,18 +30,18 @@ export async function Footer({ lang, footer }: FooterProps) {
         </div>
         <nav className="flex flex-col gap-10 md:gap-7">
           <div className="flex gap-4">
-            <Link href={twitterLink ?? ""} target="_blank">
+            <a href={twitterLink ?? ""} target="_blank">
               <Twitter />
-            </Link>
-            <Link href={facebookLink ?? ""} target="_blank">
+            </a>
+            <a href={facebookLink ?? ""} target="_blank">
               <Facebook />
-            </Link>
-            <Link href={instagramLink ?? ""} target="_blank">
+            </a>
+            <a href={instagramLink ?? ""} target="_blank">
               <Instagram />
-            </Link>
-            <Link href={youtubeLink ?? ""} target="_blank">
+            </a>
+            <a href={youtubeLink ?? ""} target="_blank">
               <Youtube />
-            </Link>
+            </a>
           </div>
           <ul className="grid grid-cols-3 gap-x-10 gap-y-7 text-sm font-semibold md:gap-x-20">
             {links?.map((footerElement) => {
@@ -50,9 +49,9 @@ export async function Footer({ lang, footer }: FooterProps) {
               const url = `/${lang}${categoryUrl}/${footerElement?.element?.slug}`
               return (
                 <li key={footerElement?.element?.slug}>
-                  <Link href={url} hrefLang={lang}>
+                  <a href={url} hrefLang={lang}>
                     {footerElement?.element?.title}
-                  </Link>
+                  </a>
                 </li>
               )
             })}

@@ -9,7 +9,7 @@ function CodeSnippet({ content }: CodeSnippetProps) {
     <CodeBlock
       language={"javascript"}
       customStyle={{ borderRadius: "15px" }}
-      text={String(content)}
+      text={String(content ?? "")}
       showLineNumbers={true}
       theme={nord}
     />

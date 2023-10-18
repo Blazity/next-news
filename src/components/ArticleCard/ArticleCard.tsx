@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
@@ -57,7 +56,7 @@ export function ArticleCard({
 }: ArticleCardProps) {
   const mainTag = tags?.[0]
   return (
-    <Link href={`/${locale}/article/${slug}`} hrefLang={locale} passHref className="w-full">
+    <a href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
       <article
         className={cn(
           orientation === "vertical" && "flex-row md:flex-col",
@@ -157,6 +156,6 @@ export function ArticleCard({
           </div>
         </div>
       </article>
-    </Link>
+    </a>
   )
 }

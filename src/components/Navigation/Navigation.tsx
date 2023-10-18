@@ -1,7 +1,6 @@
 "use client"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
 import { Locale } from "@/i18n/i18n"
 import { getNavigation } from "@/lib/client"
@@ -26,9 +25,9 @@ export function Navigation({ locale, navigation }: NavigationProps) {
     const url = `/${locale}${categoryUrl}/${navElement?.element?.slug}`
     return (
       <li key={navElement?.element?.slug}>
-        <Link href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
+        <a href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
           {navElement?.element?.title}
-        </Link>
+        </a>
       </li>
     )
   })
