@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import { ImageResponse, NextRequest } from "next/server"
+import { ImageResponse, NextRequest, NextResponse } from "next/server"
 
 export const runtime = "edge"
 
@@ -9,7 +9,10 @@ export async function GET(request: NextRequest) {
   const image = searchParams.get("image")
   const title = searchParams.get("title")
 
-  console.log({ image, title })
+  const isHygraphImage = image?.startsWith("https://media.graphassets.com")
+
+  if (!isHygraphImage)
+    return NextResponse.json({ msg: "An image from an unknown source has been provided" }, { status: 415 })
 
   return new ImageResponse(
     (

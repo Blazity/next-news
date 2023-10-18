@@ -21,6 +21,36 @@ export const getNavigationQuery = graphql(`
         url
       }
     }
+    footers(locales: $locales, first: 1) {
+      logo {
+        url
+      }
+      companyName
+      youtubeLink
+      twitterLink
+      instagramLink
+      facebookLink
+      contactSection {
+        country
+        city
+        postCode
+        street
+      }
+      links {
+        element {
+          ... on Category {
+            __typename
+            title
+            slug
+          }
+          ... on Page {
+            __typename
+            title
+            slug
+          }
+        }
+      }
+    }
   }
 `)
 
@@ -68,17 +98,6 @@ export const getHomepageMetadataQuery = graphql(`
         description {
           text
         }
-      }
-    }
-  }
-`)
-
-export const getFooterQuery = graphql(`
-  query getFooter($locales: [Locale!]!) {
-    footers(locales: $locales, first: 1) {
-      pages {
-        slug
-        title
       }
     }
   }

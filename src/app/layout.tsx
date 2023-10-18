@@ -3,7 +3,6 @@ import { Navigation } from "@/components/Navigation/Navigation"
 import { env } from "@/env.mjs"
 import { i18n, type Locale } from "@/i18n/i18n"
 import "@/styles/tailwind.css"
-
 import { getNavigation } from "@/lib/client"
 import { GoogleAnalytics } from "./GoogleAnalytics"
 import Providers from "./Providers"
@@ -35,7 +34,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 
 export default async function Layout({ children, params }: { children: React.ReactNode; params: { lang?: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
-  const navigation = await getNavigation(locale)
+  const { navigation, footer } = await getNavigation(locale)
 
   return (
     <html lang={locale}>
@@ -49,7 +48,7 @@ export default async function Layout({ children, params }: { children: React.Rea
           </div>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
-          <Footer lang={locale} />
+          <Footer footer={footer} lang={locale} />
         </body>
       </Providers>
     </html>
