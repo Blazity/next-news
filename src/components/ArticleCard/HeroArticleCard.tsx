@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link, { LinkProps } from "next/link"
 import { ReactNode } from "react"
 import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
@@ -31,7 +32,12 @@ type HeroWrapperProps = {
 }
 
 function HeroWrapper({ link, linkProps, children }: HeroWrapperProps) {
-  if (link) return <a {...linkProps}>{children}</a>
+  if (link)
+    return (
+      <Link {...linkProps} prefetch={false}>
+        {children}
+      </Link>
+    )
 
   return <>{children}</>
 }
@@ -41,9 +47,8 @@ export function HeroArticleCard({
   locale,
   asLink = true,
 }: HeroArticleCardProps) {
-  const linkProps = { href: `/${locale}/article/${slug}`, hrefLang: locale }
   return (
-    <HeroWrapper link={asLink} linkProps={linkProps}>
+    <HeroWrapper link={asLink} linkProps={{ href: `/${locale}/article/${slug}`, hrefLang: locale }}>
       <article className=" w-full overflow-hidden rounded-xl  text-white">
         <div className="relative h-[320px] bg-slate-900">
           {imageUrl && (
