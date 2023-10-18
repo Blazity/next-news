@@ -59,6 +59,25 @@ export const getHomepageQuery = graphql(`
   query getHomepage($locales: [Locale!]!) {
     marketStock
     homepages(locales: $locales, first: 1) {
+      heroArticle {
+        id
+        author {
+          name
+        }
+        publishedAt
+        locale
+        slug
+        title
+        tags
+        image {
+          description {
+            text
+          }
+          data {
+            url
+          }
+        }
+      }
       recentSectionTitle
       trendingSectionTitle
       highlightedCategoryTitle

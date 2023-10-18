@@ -7,6 +7,8 @@ import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles
 import { i18n, Locale } from "@/i18n/i18n"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
+import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
+import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 
 export const dynamicParams = false
 
@@ -32,6 +34,9 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
         </div>
       )}
 
+      {homepage.heroArticle && (
+        <HeroArticleCard article={hygraphArticleToCardProps(homepage.heroArticle)} locale={params.lang} asLink />
+      )}
       <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
       {homepage.highlightedArticles && (
         <HighlightedArticles

@@ -13,16 +13,14 @@ type TrendingArticlesProps = {
 export async function TrendingArticles({ locale, title }: TrendingArticlesProps) {
   const trendingArticles = await getTrendingArticles(locale)
 
-  const [heroArticle, ...otherTrendingArticles] = trendingArticles
-  const [mainArticle, ...secondaryArticles] = otherTrendingArticles.slice(0, 3)
-  const minifiedArticles = otherTrendingArticles.slice(3, 12)
+  const [mainArticle, ...secondaryArticles] = trendingArticles.slice(0, 3)
+  const minifiedArticles = trendingArticles.slice(3, 12)
 
   const isTwoRowLayout = minifiedArticles.length > 0
 
   return (
     <section className="w-full">
-      {heroArticle && <HeroArticleCard article={hygraphArticleToCardProps(heroArticle)} locale={locale} />}
-      {otherTrendingArticles.length > 0 && (
+      {trendingArticles.length > 0 && (
         <>
           <h2 className="py-12 pb-8 text-3xl font-bold">{title}</h2>
           <div className={cn(isTwoRowLayout ? "md:grid-cols-3" : "md:grid-cols-2", "grid  grid-cols-1 gap-5")}>
