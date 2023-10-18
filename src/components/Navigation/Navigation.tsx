@@ -10,8 +10,10 @@ import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
 
+export type GetNavigationReturn = Awaited<ReturnType<typeof getNavigation>>
+
 type NavigationProps = {
-  navigation: Awaited<ReturnType<typeof getNavigation>>
+  navigation: Pick<GetNavigationReturn, "navigation">["navigation"]
   locale: Locale
 }
 

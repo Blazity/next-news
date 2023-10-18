@@ -14,7 +14,7 @@ import {
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
-import { getFooterQuery, getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
+import { getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 import { Tag } from "./tags"
@@ -69,16 +69,6 @@ export async function graphqlFetch<TQuery, TVariables>({
   return parsed.data
 }
 
-export async function getFooter(locale: Locale) {
-  const { footers } = await graphqlFetch({
-    cache: "force-cache",
-    document: getFooterQuery,
-    tags: ["FOOTER", "PAGE"],
-    variables: { locale },
-  })
-  return footers[0] ?? null
-}
-
 export async function getHomepage(locale: Locale) {
   const { homepages, marketStock } = await graphqlFetch({
     document: getHomepageQuery,
@@ -99,14 +89,14 @@ export async function getHomepageMetadata(locale: Locale) {
 }
 
 export async function getNavigation(locale: Locale) {
-  const { navigations } = await graphqlFetch({
+  const { navigations, footers } = await graphqlFetch({
     cache: "force-cache",
     document: getNavigationQuery,
     tags: ["NAVIGATION", "PAGE"],
     variables: { locale },
   })
 
-  return navigations[0] ?? null
+  return { navigation: navigations[0] ?? null, footer: footers[0] ?? null }
 }
 
 export async function getArticlesQuantity(locale: Locale) {
