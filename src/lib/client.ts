@@ -92,7 +92,7 @@ export async function getNavigation(locale: Locale) {
   const { navigations, footers } = await graphqlFetch({
     cache: "force-cache",
     document: getNavigationQuery,
-    tags: ["NAVIGATION", "PAGE"],
+    tags: ["NAVIGATION", "PAGE", "CATEGORY"],
     variables: { locale },
   })
 
@@ -222,7 +222,7 @@ export async function listArticlesByCategory(variables: {
   const { articles, articlesConnection } = await graphqlFetch({
     cache: "force-cache",
     document: listArticlesByCategoryQuery,
-    tags: ["ARTICLE"],
+    tags: ["ARTICLE", "CATEGORY"],
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
