@@ -44,7 +44,12 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
 
   return (
     <section className="flex flex-col gap-5">
-      <ArticleCard article={hygraphArticleToCardProps(firstArticle)} orientation="horizontal" locale={locale} />
+      <ArticleCard
+        article={hygraphArticleToCardProps(firstArticle)}
+        orientation="horizontal"
+        locale={locale}
+        imageClassName="w-1/2"
+      />
       <div className="grid gap-5 md:grid-cols-3">
         {otherArticles.map((article) => {
           return (

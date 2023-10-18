@@ -24,6 +24,7 @@ type ArticleCardProps = {
   locale: Locale
   lines?: "1" | "2" | "3"
   isMain?: boolean
+  imageClassName?: string
 }
 
 export const hygraphArticleToCardProps = (article: {
@@ -54,6 +55,7 @@ export function ArticleCard({
   lines = "2",
   locale,
   isMain = false,
+  imageClassName,
 }: ArticleCardProps) {
   const mainTag = tags?.[0]
   return (
@@ -68,9 +70,10 @@ export function ArticleCard({
       >
         <div
           className={cn(
-            orientation === "horizontal" && "min-h-[82px] md:w-1/2 md:min-w-[204px]",
-            "bg-gradient-to-brh-[264px] relative h-[82px] min-h-[82px] w-[82px] from-gray-200 to-gray-300 md:min-h-[264px] md:w-full",
-            isMain && "min-h-[264px] w-auto"
+            orientation === "horizontal" ? "min-h-[82px] md:min-w-[204px]" : "md:w-full",
+            "bg-gradient-to-brh-[264px] relative h-[82px] min-h-[82px] w-[82px] from-gray-200 to-gray-300 md:min-h-[264px]",
+            isMain && "min-h-[264px] w-auto",
+            imageClassName
           )}
         >
           {imageUrl && (

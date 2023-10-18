@@ -25,6 +25,7 @@ export const getNavigationQuery = graphql(`
       logo {
         url
       }
+      ownershipAndCredits
       companyName
       youtubeLink
       twitterLink
