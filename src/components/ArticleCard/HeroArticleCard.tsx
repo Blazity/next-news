@@ -76,6 +76,7 @@ export function HeroArticleCard({
                 imageUrl={author.imageUrl}
                 author={author.name}
                 publicationDate={publicationDate}
+                lang={locale}
               />
             </div>
           </div>

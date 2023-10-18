@@ -23,7 +23,6 @@ import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { useLocale } from "@/i18n/useLocale"
 import { RefinementCombobox } from "./RefinementCombobox"
-import { ArticlePublishDetails } from "../ArticleCard/ArticlePublishDetails"
 import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
