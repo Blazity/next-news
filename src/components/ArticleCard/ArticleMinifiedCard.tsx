@@ -4,6 +4,7 @@ import { Locale } from "@/i18n/i18n"
 
 type ArticleMinifiedCardProps = {
   article: {
+    imageAlt?: string
     imageUrl?: string
     title: string
     slug: string
@@ -11,7 +12,10 @@ type ArticleMinifiedCardProps = {
   locale: Locale
 }
 
-export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale }: ArticleMinifiedCardProps) {
+export function ArticleMinifiedCard({
+  article: { imageUrl, imageAlt, title, slug },
+  locale,
+}: ArticleMinifiedCardProps) {
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale}>
       <article className="flex w-full gap-5">
@@ -19,9 +23,10 @@ export function ArticleMinifiedCard({ article: { imageUrl, title, slug }, locale
           {imageUrl && (
             <Image
               src={imageUrl}
-              alt={title}
+              alt={imageAlt ?? "lack of description"}
               width={82}
               height={82}
+              sizes="(max-width: 640px) 82px, 320px, (max-width: 1024px) 82px ,480px, 780px"
               className=" min-h-[82px] rounded-xl object-cover text-center brightness-90"
             />
           )}
