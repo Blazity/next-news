@@ -1,9 +1,9 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
-import Link from "next/link"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
@@ -31,16 +31,16 @@ export async function Footer({ lang, footer }: FooterProps) {
         </div>
         <nav className="flex flex-col gap-10 md:gap-7">
           <div className="flex gap-4">
-            <a href={twitterLink ?? ""} target="_blank" rel="noreferrer">
+            <a href={twitterLink ?? ""} aria-label="Twitter" target="_blank" rel="noreferrer">
               <Twitter />
             </a>
-            <a href={facebookLink ?? ""} target="_blank" rel="noreferrer">
+            <a href={facebookLink ?? ""} aria-label="Facebook" target="_blank" rel="noreferrer">
               <Facebook />
             </a>
-            <a href={instagramLink ?? ""} target="_blank" rel="noreferrer">
+            <a href={instagramLink ?? ""} aria-label="Instagram" target="_blank" rel="noreferrer">
               <Instagram />
             </a>
-            <a href={youtubeLink ?? ""} target="_blank" rel="noreferrer">
+            <a href={youtubeLink ?? ""} aria-label="Youtube" target="_blank" rel="noreferrer">
               <Youtube />
             </a>
           </div>
@@ -62,7 +62,7 @@ export async function Footer({ lang, footer }: FooterProps) {
           <div className="w-1/3">
             <DynamicLangSelect />
           </div>
-          <p className="text-sm text-custom-gray-300">
+          <p className="text-sm">
             © {new Date().getFullYear()} {companyName} {footer?.ownershipAndCredits}
           </p>
         </div>
