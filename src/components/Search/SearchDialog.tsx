@@ -4,7 +4,6 @@ import algoliasearch from "algoliasearch/lite"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
-import Link from "next/link"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
   Configure,
@@ -23,6 +22,7 @@ import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { useLocale } from "@/i18n/useLocale"
 import { RefinementCombobox } from "./RefinementCombobox"
+import { Tag } from "../ArticleCard/Buttons/Tag"
 import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
@@ -64,6 +64,7 @@ type ArticleHit = Hit<{
   content: string
   objectID: string
   slug: string
+  tags: string[]
 }>
 
 function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
@@ -74,7 +75,6 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
       className="mb-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
-        <div className="flex items-center gap-2"></div>
         <Highlight
           attribute="title"
           hit={hit}
@@ -91,6 +91,11 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
             root: "line-clamp-2 text-md",
           }}
         />
+        <div className="flex flex-wrap gap-2">
+          {hit.tags?.map((tag) => {
+            return <Tag key={tag}>{tag}</Tag>
+          })}
+        </div>
       </article>
     </a>
   )
