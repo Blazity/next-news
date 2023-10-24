@@ -4,7 +4,7 @@ import algoliasearch from "algoliasearch/lite"
 import type { Hit } from "instantsearch.js"
 import debounce from "lodash/debounce"
 import { Search } from "lucide-react"
-import Link from "next/link"
+import { useLocale } from "next-intl"
 import { ChangeEvent, ReactNode, useMemo, useState } from "react"
 import {
   Configure,
@@ -21,14 +21,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components
 import { Input } from "@/components/ui/Input/Input"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
-import { useLocale } from "@/i18n/useLocale"
 import { RefinementCombobox } from "./RefinementCombobox"
 import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
 function SearchDialogContent() {
-  const lang = useLocale()
+  const lang = useLocale() as Locale
 
   return (
     <Dialog>

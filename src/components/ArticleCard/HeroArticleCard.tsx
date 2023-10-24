@@ -1,7 +1,7 @@
 import Image from "next/image"
-import Link, { LinkProps } from "next/link"
+import Link from "next/link"
+import { useLocale } from "next-intl"
 import { ReactNode } from "react"
-import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
 
@@ -19,7 +19,6 @@ type HeroArticleCardProps = {
     slug: string
   }
   asLink?: boolean
-  locale: Locale
 }
 
 type HeroWrapperProps = {
@@ -39,9 +38,10 @@ function HeroWrapper({ link, linkProps, children }: HeroWrapperProps) {
 
 export function HeroArticleCard({
   article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug },
-  locale,
   asLink = true,
 }: HeroArticleCardProps) {
+  const locale = useLocale()
+
   return (
     <HeroWrapper link={asLink} linkProps={{ href: `/${locale}/article/${slug}`, hrefLang: locale }}>
       <article className=" w-full overflow-hidden rounded-xl  text-white">
@@ -76,7 +76,6 @@ export function HeroArticleCard({
                 imageUrl={author.imageUrl}
                 author={author.name}
                 publicationDate={publicationDate}
-                lang={locale}
               />
             </div>
           </div>

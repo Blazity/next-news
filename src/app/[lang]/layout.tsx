@@ -1,3 +1,4 @@
+import { NextIntlClientProvider } from "next-intl"
 import { Footer } from "@/components/Footer/Footer"
 import { Navigation } from "@/components/Navigation/Navigation"
 import { env } from "@/env.mjs"
@@ -43,12 +44,14 @@ export default async function Layout({ children, params }: { children: React.Rea
         <body className="flex min-h-screen flex-col items-center ">
           <div className="z-50 flex w-full justify-center border-b bg-white">
             <nav className="flex w-full max-w-[1200px] items-center justify-end gap-4 py-4">
-              <Navigation navigation={navigation} locale={locale} />
+              <NextIntlClientProvider locale={locale}>
+                <Navigation navigation={navigation} />
+              </NextIntlClientProvider>
             </nav>
           </div>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
-          <Footer footer={footer} lang={locale} />
+            <Footer footer={footer} />
         </body>
       </Providers>
     </html>

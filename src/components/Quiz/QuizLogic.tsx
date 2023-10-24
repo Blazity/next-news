@@ -2,9 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { ArrowRight, Check, XCircle } from "lucide-react"
+import { useLocale } from "next-intl"
 import { useState } from "react"
 import { QuizAnswer, QuizQuestion } from "@/gql/graphql"
-import { useLocale } from "@/i18n/useLocale"
+import { Locale } from "@/i18n/i18n"
 import { getQuizQuestionsById } from "@/lib/client"
 import { cn } from "@/utils/cn"
 import { RichText } from "../RichText/RichText"
@@ -19,7 +20,7 @@ export type QuizProps = { id: string }
 export function QuizLogic({ id }: QuizProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
-  const locale = useLocale()
+  const locale = useLocale() as Locale
   const { data, isLoading } = useQuery(
     ["quiz-questions", id],
     () => getQuizQuestionsById({ locale, id: id, skip: 0 }),

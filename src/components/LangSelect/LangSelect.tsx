@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useLocale } from "next-intl"
 import {
   Select,
   SelectContent,
@@ -10,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/Select/Select"
 import { i18n } from "@/i18n/i18n"
-import { useLocale } from "@/i18n/useLocale"
 
 function LangSelect() {
   const router = useRouter()

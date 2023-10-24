@@ -1,13 +1,14 @@
 import { Facebook, Linkedin, Twitter } from "lucide-react"
+import { useLocale } from "next-intl"
 import { Locale } from "@/i18n/i18n"
 
 type ShareOnSocialProps = {
-  lang: Locale
   articleTitle: string
   articleUrl: string
 }
 
-export function ShareOnSocial({ articleTitle, articleUrl, lang }: ShareOnSocialProps) {
+export function ShareOnSocial({ articleTitle, articleUrl }: ShareOnSocialProps) {
+  const locale = useLocale() as Locale
   const encodedTitle = encodeURIComponent(articleTitle)
   const encodedUrl = encodeURIComponent(articleUrl)
 
@@ -19,13 +20,13 @@ export function ShareOnSocial({ articleTitle, articleUrl, lang }: ShareOnSocialP
     <div className="flex items-center justify-between gap-2 py-5 lg:justify-normal">
       <p className="pr-3 text-sm text-custom-gray-300">Share on social:</p>
       <div className="flex items-center gap-2">
-        <a href={twitterShareUrl} aria-label="Twitter" hrefLang={lang} className="rounded-xl bg-black p-2">
+        <a href={twitterShareUrl} aria-label="Twitter" hrefLang={locale} className="rounded-xl bg-black p-2">
           <Twitter fill="white" stroke="none" />
         </a>
-        <a href={facebookShareUrl} aria-label="Facebook" hrefLang={lang} className="rounded-xl bg-black p-2">
+        <a href={facebookShareUrl} aria-label="Facebook" hrefLang={locale} className="rounded-xl bg-black p-2">
           <Facebook fill="white" stroke="none" />
         </a>
-        <a href={linkedinShareUrl} aria-label="Linkedin" hrefLang={lang} className="rounded-xl bg-black p-2">
+        <a href={linkedinShareUrl} aria-label="Linkedin" hrefLang={locale} className="rounded-xl bg-black p-2">
           <Linkedin fill="white" stroke="none" />
         </a>
       </div>

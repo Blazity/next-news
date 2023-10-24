@@ -67,6 +67,7 @@
     "negotiator": "^0.6.3",
     "next": "^13.5.5",
     "next-compose-plugins": "^2.2.1",
+    "next-intl": "3.0.0-beta.19",
     "next-sitemap": "^4.2.3",
     "p-throttle": "^5.1.0",
     "react": "^18.2.0",

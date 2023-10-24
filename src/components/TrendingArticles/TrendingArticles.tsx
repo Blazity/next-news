@@ -1,16 +1,16 @@
+import { useLocale } from "next-intl"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
-import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
 
 type TrendingArticlesProps = {
-  locale: Locale
   title: string
 }
 
-export async function TrendingArticles({ locale, title }: TrendingArticlesProps) {
+export async function TrendingArticles({ title }: TrendingArticlesProps) {
+  const locale = useLocale() as Locale
   const trendingArticles = await getTrendingArticles(locale)
 
   const [mainArticle, ...secondaryArticles] = trendingArticles.slice(0, 3)
@@ -30,7 +30,6 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
                   <ArticleCard
                     article={hygraphArticleToCardProps(mainArticle)}
                     tagsPosition="over"
-                    locale={locale}
                     lines={"1"}
                     isMain={true}
                   />
@@ -44,7 +43,6 @@ export async function TrendingArticles({ locale, title }: TrendingArticlesProps)
                         key={`trending-${article.id}`}
                         article={hygraphArticleToCardProps(article)}
                         tagsPosition="under"
-                        locale={locale}
                       />
                     )
                   })}
