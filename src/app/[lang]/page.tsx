@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { unstable_setRequestLocale } from "next-intl/server"
 import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { HighlightedArticles } from "@/components/HighlightedArticles/HighlightedArticles"
@@ -13,7 +14,7 @@ import { getMatadataObj } from "@/utils/getMetadataObj"
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ locale }))
+  return i18n.locales.map((lang) => ({ lang }))
 }
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata | null> {
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 }
 
 export default async function Web({ params }: { params: { lang: Locale } }) {
+  unstable_setRequestLocale(params.lang)
   const homepage = await getHomepage(params.lang)
 
   return (

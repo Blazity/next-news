@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from "next-intl"
+import { unstable_setRequestLocale } from "next-intl/server"
 import { Footer } from "@/components/Footer/Footer"
 import { Navigation } from "@/components/Navigation/Navigation"
 import { env } from "@/env.mjs"
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 
 export default async function Layout({ children, params }: { children: React.ReactNode; params: { lang?: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
+  unstable_setRequestLocale(locale)
   const { navigation, footer } = await getNavigation(locale)
 
   return (
@@ -51,7 +53,7 @@ export default async function Layout({ children, params }: { children: React.Rea
           </div>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
-            <Footer footer={footer} />
+          <Footer footer={footer} />
         </body>
       </Providers>
     </html>
