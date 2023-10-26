@@ -1,5 +1,4 @@
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { getRecentArticlesByCategory } from "@/lib/client"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
@@ -11,7 +10,7 @@ type RecentArticlesProps = {
 }
 
 export async function HighlightedCategoryArticles({ title, categoryId }: RecentArticlesProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const { articles } = await getRecentArticlesByCategory({ locale, first: RECENT_ARTICLES_PER_PAGE, categoryId })
 
   return (

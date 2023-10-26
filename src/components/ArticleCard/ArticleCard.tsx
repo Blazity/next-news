@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
@@ -56,7 +55,7 @@ export function ArticleCard({
   isMain = false,
   imageClassName,
 }: ArticleCardProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const mainTag = tags?.[0]
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">

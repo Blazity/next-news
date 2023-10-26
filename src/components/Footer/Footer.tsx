@@ -1,7 +1,8 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { NextIntlClientProvider, useLocale } from "next-intl"
+import { NextIntlClientProvider } from "next-intl"
+import { useLocale } from "@/i18n/i18n"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
 
@@ -11,9 +12,11 @@ type FooterProps = {
 
 export async function Footer({ footer }: FooterProps) {
   const locale = useLocale()
+
   if (!footer?.contactSection) return null
   const { street, city, country, postCode } = footer.contactSection
   const { companyName, links, instagramLink, facebookLink, twitterLink, youtubeLink } = footer
+
   return (
     <footer className="flex w-full items-center justify-center bg-custom-gray-200 py-12">
       <div className="flex w-full max-w-[1200px] flex-wrap justify-between gap-10 p-4 lg:gap-0">

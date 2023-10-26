@@ -1,15 +1,14 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { getArticleRecommendedArticles } from "@/lib/client"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
 type RecommendedArticlesProps = { id: string }
 
 export function RecommendedArticles({ id }: RecommendedArticlesProps) {
-  const locale = useLocale() as Locale;
+  const locale = useLocale()
   const { data: recommendedArticles, isLoading } = useQuery({
     queryKey: [`recommended-articles`, id],
     queryFn: () => getArticleRecommendedArticles({ locale, id }),

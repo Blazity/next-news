@@ -1,6 +1,5 @@
 import Image from "next/image"
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { formatDate } from "@/utils/formatDate"
 
@@ -19,7 +18,7 @@ export function ArticlePublishDetails({
   variant = "dark",
   className = "",
 }: ArticlePublishDetailsProps) {
-  const locale = useLocale() as Locale;
+  const locale = useLocale()
   return (
     <div
       className={cn(

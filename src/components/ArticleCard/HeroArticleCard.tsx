@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useLocale } from "next-intl"
 import { ReactNode } from "react"
+import { useLocale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
 

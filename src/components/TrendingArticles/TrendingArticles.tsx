@@ -1,5 +1,4 @@
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -10,7 +9,7 @@ type TrendingArticlesProps = {
 }
 
 export async function TrendingArticles({ title }: TrendingArticlesProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const trendingArticles = await getTrendingArticles(locale)
 
   const [mainArticle, ...secondaryArticles] = trendingArticles.slice(0, 3)

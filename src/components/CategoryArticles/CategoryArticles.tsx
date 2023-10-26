@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
-import { NextIntlClientProvider, useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { NextIntlClientProvider } from "next-intl"
+import { useLocale } from "@/i18n/i18n"
 import { listArticlesByCategory } from "@/lib/client"
 import { CategoryArticlesInfiniteDynamic } from "./CategoryArticlesInfiniteDynamic"
 
@@ -11,7 +11,7 @@ type CategoryArticlesProps = {
 }
 
 export async function CategoryArticles({ category }: CategoryArticlesProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const articles = await listArticlesByCategory({
     locale: locale,
     categorySlug: category,

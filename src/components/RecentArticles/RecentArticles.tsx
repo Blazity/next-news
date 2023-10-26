@@ -1,5 +1,5 @@
-import { NextIntlClientProvider, useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { NextIntlClientProvider } from "next-intl"
+import { useLocale } from "@/i18n/i18n"
 import { getRecentArticles } from "@/lib/client"
 import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 
@@ -10,7 +10,7 @@ type RecentArticlesProps = {
 }
 
 export async function RecentArticles({ title }: RecentArticlesProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const initialArticles = await getRecentArticles({ locale, first: 4 })
 
   return (

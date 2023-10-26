@@ -1,6 +1,5 @@
 import { Facebook, Linkedin, Twitter } from "lucide-react"
-import { useLocale } from "next-intl"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 
 type ShareOnSocialProps = {
   articleTitle: string
@@ -8,7 +7,7 @@ type ShareOnSocialProps = {
 }
 
 export function ShareOnSocial({ articleTitle, articleUrl }: ShareOnSocialProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const encodedTitle = encodeURIComponent(articleTitle)
   const encodedUrl = encodeURIComponent(articleUrl)
 

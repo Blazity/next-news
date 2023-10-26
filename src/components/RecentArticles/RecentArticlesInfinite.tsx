@@ -1,10 +1,9 @@
 "use client"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { useLocale } from "next-intl"
 import { Button } from "@/components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "@/gql/graphql"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -14,7 +13,7 @@ export type RecentArticlesInfiniteProps = {
 }
 
 export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
 
   const {
     data: recentArticlesQuery,
