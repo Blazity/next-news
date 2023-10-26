@@ -8,6 +8,7 @@ import "@/styles/tailwind.css"
 import { getNavigation } from "@/lib/client"
 import { GoogleAnalytics } from "../GoogleAnalytics"
 import Providers from "../Providers"
+import { notFound } from "next/navigation"
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
@@ -36,7 +37,10 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 
 export default async function Layout({ children, params }: { children: React.ReactNode; params: { lang?: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
+  const isValidLocale = i18n.locales.some((cur) => cur === locale)
+  if (!isValidLocale) notFound()
   unstable_setRequestLocale(locale)
+
   const { navigation, footer } = await getNavigation(locale)
 
   return (
