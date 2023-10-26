@@ -25,7 +25,7 @@ Welcome to the _Next enterprise media starter_ //final name goes here, an open-s
 
 ## More resources
 
-You can find more in depth dive into project's underlying architecture in [next-enteprise](https://github.com/Blazity/next-enterprise) repository.
+You can find more in depth dive into project's underlying architecture in the [next-enteprise](https://github.com/Blazity/next-enterprise) repository.
 
 ## 🎯 Getting Started
 
@@ -45,19 +45,21 @@ yarn install --frozen-lockfile
 ```
 
 3. Provide required env variables:
-```bash
 
+```bash
 NEXT_PUBLIC_SITE_URL // url of your site, used for SEO and sitemaps
 NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL // hygraph's graphql content api url
 HYGRAPH_WEBOOK_SECRET // secret used for authenticating webhooks
+```
 
-// Search engine - take it from your algolia project's config
-
+Search engine - take it from your algolia project's config
+```bash
 NEXT_PUBLIC_ALGOLIA_API_ID
 NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
+```
 
-// Analytics - used for counting views on your articles. Needed for 'Trending Articles' section
-
+Analytics - used for counting views on your articles. Needed for 'Trending Articles' section
+```bash
 GA_MEASUREMENT_ID: 
 GA_PROPERTY_ID: 
 GA_BASE64_SERVICE_ACCOUNT:
