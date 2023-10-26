@@ -82,7 +82,7 @@ export function ArticleCard({
               alt={imageAlt ?? "lack of description"}
               width={780}
               height={264}
-              sizes="(max-width: 640px) 82px, 320px, (max-width: 1024px) 82px ,480px, 780px"
+              sizes="(max-width: 640px) 82px, 320px, 480px , (max-width: 1024px) 82px ,480px, 780px"
               className={cn(
                 "h-[82px] min-h-[82px] w-full rounded-xl object-cover text-center brightness-90 md:h-[264px] md:min-h-[264px] md:rounded-none",
                 isMain && "h-[264px] min-h-[264px] rounded-none"
