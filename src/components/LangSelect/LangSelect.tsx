@@ -25,7 +25,7 @@ function LangSelect() {
         <SelectGroup>
           {i18n.locales.map((locale) => {
             return (
-              <SelectItem key={locale} value={locale}>
+              <SelectItem className="cursor-pointer" key={locale} value={locale}>
                 {locale}
               </SelectItem>
             )
