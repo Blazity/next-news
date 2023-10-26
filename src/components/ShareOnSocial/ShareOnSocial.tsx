@@ -17,7 +17,7 @@ export function ShareOnSocial({ articleTitle, articleUrl, lang }: ShareOnSocialP
 
   return (
     <div className="flex items-center justify-between gap-2 py-5 lg:justify-normal">
-      <p className="pr-3 text-sm text-custom-gray-300">Share on social:</p>
+      <p className="pr-3 text-sm opacity-60">Share on social:</p>
       <div className="flex items-center gap-2">
         <a href={twitterShareUrl} aria-label="Twitter" hrefLang={lang} className="rounded-xl bg-black p-2">
           <Twitter fill="white" stroke="none" />
