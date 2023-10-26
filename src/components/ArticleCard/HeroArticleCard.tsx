@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link, { LinkProps } from "next/link"
+import Link from "next/link"
 import { ReactNode } from "react"
 import { Locale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
@@ -53,7 +53,7 @@ export function HeroArticleCard({
               width={1200}
               height={320}
               sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, (max-width: 1200px) 780px, 1200px"
-              className="h-full max-h-[320px] object-cover text-center brightness-90"
+              className="h-full max-h-[320px] object-cover text-center brightness-[60%]"
               priority
             />
           )}
