@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { formatDate } from "@/utils/formatDate"
@@ -8,6 +9,7 @@ type ArticlePublishDetailsProps = {
   author: string
   publicationDate: string | null | Date
   imageUrl?: string
+  link?: string | undefined
   variant?: "dark" | "light"
   lang: Locale
 }
@@ -17,6 +19,7 @@ export function ArticlePublishDetails({
   publicationDate,
   imageUrl,
   variant = "dark",
+  link,
   className = "",
   lang,
 }: ArticlePublishDetailsProps) {
@@ -32,6 +35,14 @@ export function ArticlePublishDetails({
     >
       {publicationDate && (
         <>
+          {link && (
+            <>
+              <Link hrefLang={lang} className="z-[22] text-[#FF782C] underline" target="_blank" href={link}>
+                blazity.com
+              </Link>
+              <p>|</p>
+            </>
+          )}
           <p>{formatDate(publicationDate, lang)}</p>
           <p>|</p>
         </>

@@ -1,4 +1,6 @@
 import { Metadata } from "next"
+import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
+import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { HighlightedArticles } from "@/components/HighlightedArticles/HighlightedArticles"
 import { HighlightedCategoryArticles } from "@/components/HighlightedCategoryArticles/HighlightedCategoryArticles"
 import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
@@ -7,8 +9,6 @@ import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles
 import { i18n, Locale } from "@/i18n/i18n"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
-import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
-import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 
 export const dynamicParams = false
 
@@ -35,7 +35,12 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
       )}
 
       {homepage.heroArticle && (
-        <HeroArticleCard article={hygraphArticleToCardProps(homepage.heroArticle)} locale={params.lang} asLink />
+        <HeroArticleCard
+          article={hygraphArticleToCardProps(homepage.heroArticle)}
+          locale={params.lang}
+          asLink
+          additionalLink="https://blazity.com/"
+        />
       )}
       <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
       {homepage.highlightedArticles && (

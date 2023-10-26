@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 
 export default async function Layout({ children, params }: { children: React.ReactNode; params: { lang?: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
-  const { navigation, footer } = await getNavigation(locale)
+  const { navigation, footer, logo } = await getNavigation(locale)
 
   return (
     <html lang={locale}>
@@ -48,7 +48,7 @@ export default async function Layout({ children, params }: { children: React.Rea
           </div>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
-          <Footer footer={footer} lang={locale} />
+          <Footer logoUrl={logo?.url} footer={footer} lang={locale} />
         </body>
       </Providers>
     </html>
