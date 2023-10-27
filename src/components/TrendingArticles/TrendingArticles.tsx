@@ -3,7 +3,6 @@ import { cn } from "@/utils/cn"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
-import { HeroArticleCard } from "../ArticleCard/HeroArticleCard"
 
 type TrendingArticlesProps = {
   locale: Locale
