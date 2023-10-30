@@ -30,7 +30,13 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
     <>
       {homepage.marketStock?.data && <StockDisplay quotes={homepage.marketStock?.data} />}
 
-      {homepage.heroArticle && <HeroArticleCard article={hygraphArticleToCardProps(homepage.heroArticle)} asLink />}
+      {homepage.heroArticle && (
+        <HeroArticleCard
+          article={hygraphArticleToCardProps(homepage.heroArticle)}
+          asLink
+          additionalLink="https://blazity.com/"
+        />
+      )}
       <TrendingArticles title={homepage.trendingSectionTitle ?? "Trending articles"} />
       {homepage.highlightedArticles && (
         <HighlightedArticles
