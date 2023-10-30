@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import { NextIntlClientProvider } from "next-intl"
 import { unstable_setRequestLocale } from "next-intl/server"
 import { Footer } from "@/components/Footer/Footer"
@@ -8,7 +9,6 @@ import "@/styles/tailwind.css"
 import { getNavigation } from "@/lib/client"
 import { GoogleAnalytics } from "../GoogleAnalytics"
 import Providers from "../Providers"
-import { notFound } from "next/navigation"
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }) {
   const locale = params.lang ?? i18n.defaultLocale
@@ -41,7 +41,7 @@ export default async function Layout({ children, params }: { children: React.Rea
   if (!isValidLocale) notFound()
   unstable_setRequestLocale(locale)
 
-  const { navigation, footer } = await getNavigation(locale)
+  const { navigation, footer, logo } = await getNavigation(locale)
 
   return (
     <html lang={locale}>
@@ -57,7 +57,7 @@ export default async function Layout({ children, params }: { children: React.Rea
           </div>
 
           <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-4 pb-16">{children}</main>
-          <Footer footer={footer} />
+          <Footer logoUrl={logo?.url} footer={footer} />
         </body>
       </Providers>
     </html>

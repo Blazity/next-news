@@ -26,7 +26,6 @@ export function ArticleMinifiedCard({
               alt={imageAlt ?? "lack of description"}
               width={82}
               height={82}
-              sizes="(max-width: 640px) 82px, 320px, (max-width: 1024px) 82px ,480px, 780px"
               className=" min-h-[82px] rounded-xl object-cover text-center brightness-90"
             />
           )}

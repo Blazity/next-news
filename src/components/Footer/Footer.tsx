@@ -8,9 +8,10 @@ import { GetNavigationReturn } from "../Navigation/Navigation"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
+  logoUrl: string | undefined
 }
 
-export async function Footer({ footer }: FooterProps) {
+export async function Footer({ footer, logoUrl }: FooterProps) {
   const locale = useLocale()
 
   if (!footer?.contactSection) return null
@@ -61,12 +62,22 @@ export async function Footer({ footer }: FooterProps) {
             })}
           </ul>
         </nav>
-        <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-0">
+        <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
           <div className="w-1/3">
             <NextIntlClientProvider locale={locale}>
               <DynamicLangSelect />
             </NextIntlClientProvider>
           </div>
+          {logoUrl && (
+            <Link
+              hrefLang={locale}
+              target="_blank"
+              href={"https://blazity.com/"}
+              className="flex max-h-[100px] w-full max-w-full lg:justify-end "
+            >
+              <Image src={logoUrl} width={100} height={100} alt="Blazity logo" className="w-1/3" />
+            </Link>
+          )}
           <p className="text-sm">
             © {new Date().getFullYear()} {companyName} {footer?.ownershipAndCredits}
           </p>

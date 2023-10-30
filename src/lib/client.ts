@@ -74,6 +74,7 @@ export async function getHomepage(locale: Locale) {
     document: getHomepageQuery,
     tags: ["HOMEPAGE", "CATEGORY", "ARTICLE"],
     variables: { locale },
+    revalidate: 60 * 60 * 6, // 6h
   })
   return { ...homepages[0], marketStock }
 }
@@ -89,14 +90,14 @@ export async function getHomepageMetadata(locale: Locale) {
 }
 
 export async function getNavigation(locale: Locale) {
-  const { navigations, footers } = await graphqlFetch({
+  const { navigations, footers, asset } = await graphqlFetch({
     cache: "force-cache",
     document: getNavigationQuery,
     tags: ["NAVIGATION", "PAGE", "CATEGORY"],
     variables: { locale },
   })
 
-  return { navigation: navigations[0] ?? null, footer: footers[0] ?? null }
+  return { navigation: navigations[0] ?? null, footer: footers[0] ?? null, logo: asset ?? null }
 }
 
 export async function getArticlesQuantity(locale: Locale) {
