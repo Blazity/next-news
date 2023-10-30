@@ -1,3 +1,4 @@
+import { useLocale as useLocaleIntl } from "next-intl"
 import { Locale as HygraphLocaleEnum } from "../gql/graphql"
 
 export { HygraphLocaleEnum }
@@ -26,6 +27,8 @@ export function hygraphLocaleToStandardNotation(locale: string) {
 export function standardNotationToHygraphLocale(locale: Locale) {
   return locale.replace("-", "_") as HygraphLocaleEnum
 }
+
+export const useLocale = () => useLocaleIntl() as Locale
 
 export const i18n = {
   locales,

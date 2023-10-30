@@ -9,6 +9,6 @@ export async function generateMetadata({ params: { slug } }: ArticlePageProps): 
   return getMatadataObj({ title: `Category - ${slug}` })
 }
 
-export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
-  return <CategoryArticles category={slug} locale={lang} />
+export default async function Web({ params: { slug } }: ArticlePageProps) {
+  return <CategoryArticles category={slug} />
 }

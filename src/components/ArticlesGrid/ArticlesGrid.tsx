@@ -1,4 +1,3 @@
-import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
@@ -28,12 +27,11 @@ type Articles = Article[] | undefined | null
 
 type ArtilcesGridProps = {
   articles: Articles
-  locale: Locale
   cardsOrientation?: "vertical" | "horizontal"
   className?: string
 }
 
-export function ArticlesGrid({ articles, locale, cardsOrientation, className }: ArtilcesGridProps) {
+export function ArticlesGrid({ articles, cardsOrientation, className }: ArtilcesGridProps) {
   if (!articles || articles.length === 0) return <p>No Articles Found!</p>
   return (
     <div className={cn(`grid gap-8 md:grid-cols-3`, className)}>
@@ -44,7 +42,6 @@ export function ArticlesGrid({ articles, locale, cardsOrientation, className }: 
             key={`trending-${article.id}`}
             article={hygraphArticleToCardProps(article)}
             tagsPosition="under"
-            locale={locale}
           />
         )
       })}

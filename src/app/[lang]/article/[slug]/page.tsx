@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next/types"
+import { NextIntlClientProvider } from "next-intl"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
 import { RichText } from "@/components/RichText/RichText"
@@ -44,16 +45,17 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
             slug,
           }}
           asLink={false}
-          locale={lang}
         />
-        <ShareOnSocial lang={lang} articleUrl={articleUrl} articleTitle={title} />
+        <ShareOnSocial articleUrl={articleUrl} articleTitle={title} />
         {article.content && (
           <section className="flex w-full flex-col pt-8">
             <RichText references={initialQuiz ? [initialQuiz] : []} raw={article.content.raw} />
           </section>
         )}
       </article>
-      <RecommendedArticles id={article.id} lang={lang} />
+      <NextIntlClientProvider locale={lang}>
+        <RecommendedArticles id={article.id} />
+      </NextIntlClientProvider>
     </>
   )
 }
