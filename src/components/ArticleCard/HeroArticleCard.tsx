@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ReactNode } from "react"
 import { useLocale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
@@ -66,7 +65,6 @@ export function HeroArticleCard({
               imageUrl={author.imageUrl}
               author={author.name}
               publicationDate={publicationDate}
-              lang={locale}
             />
           </div>
         </div>

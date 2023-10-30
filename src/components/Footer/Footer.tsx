@@ -70,7 +70,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
           </div>
           {logoUrl && (
             <Link
-              hrefLang={lang}
+              hrefLang={locale}
               target="_blank"
               href={"https://blazity.com/"}
               className="flex max-h-[100px] w-full max-w-full lg:justify-end "

@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-
 import { unstable_setRequestLocale } from "next-intl/server"
 import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"

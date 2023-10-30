@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useLocale, Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { formatDate } from "@/utils/formatDate"
 
