@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { unstable_setRequestLocale } from "next-intl/server"
 import { RichText } from "@/components/RichText/RichText"
 import { hygraphLocaleToStandardNotation, i18n, Locale } from "@/i18n/i18n"
 import { getPageBySlug, getPageMetadataBySlug, listPagesForSitemap } from "@/lib/client"
@@ -28,6 +29,7 @@ export async function generateMetadata({ params: { slug, lang } }: CustomPagePro
 }
 
 export default async function Web({ params: { slug, lang } }: CustomPageProps) {
+  unstable_setRequestLocale(lang)
   const page = await getPageBySlug({ locale: lang, slug })
 
   if (!page) notFound()

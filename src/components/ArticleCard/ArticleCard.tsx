@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
@@ -21,7 +21,6 @@ type ArticleCardProps = {
   }
   tagsPosition?: "over" | "under"
   orientation?: "vertical" | "horizontal"
-  locale: Locale
   lines?: "1" | "2" | "3"
   isMain?: boolean
   imageClassName?: string
@@ -53,10 +52,10 @@ export function ArticleCard({
   tagsPosition = "under",
   orientation = "vertical",
   lines = "2",
-  locale,
   isMain = false,
   imageClassName,
 }: ArticleCardProps) {
+  const locale = useLocale()
   const mainTag = tags?.[0]
   return (
     <Link href={`/${locale}/article/${slug}`} hrefLang={locale} className="w-full">
@@ -156,7 +155,6 @@ export function ArticleCard({
               author={author.name}
               publicationDate={publicationDate}
               variant="light"
-              lang={locale}
             />
           </div>
         </div>

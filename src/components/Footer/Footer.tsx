@@ -1,20 +1,23 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { Locale } from "@/i18n/i18n"
+import { NextIntlClientProvider } from "next-intl"
+import { useLocale } from "@/i18n/i18n"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
-  lang: Locale
   logoUrl: string | undefined
 }
 
-export async function Footer({ logoUrl, lang, footer }: FooterProps) {
+export async function Footer({ footer, logoUrl }: FooterProps) {
+  const locale = useLocale()
+
   if (!footer?.contactSection) return null
   const { street, city, country, postCode } = footer.contactSection
   const { companyName, links, instagramLink, facebookLink, twitterLink, youtubeLink } = footer
+
   return (
     <footer className="flex w-full items-center justify-center bg-custom-gray-200 py-12">
       <div className="flex w-full max-w-[1200px] flex-wrap justify-between gap-10 p-4 lg:gap-0">
@@ -48,10 +51,10 @@ export async function Footer({ logoUrl, lang, footer }: FooterProps) {
           <ul className="grid grid-cols-3 gap-x-10 gap-y-7 text-sm font-semibold md:gap-x-20">
             {links?.map((footerElement) => {
               const categoryUrl = footerElement.element?.__typename === "Category" ? "/category" : ""
-              const url = `/${lang}${categoryUrl}/${footerElement?.element?.slug}`
+              const url = `/${locale}${categoryUrl}/${footerElement?.element?.slug}`
               return (
                 <li key={footerElement?.element?.slug}>
-                  <Link prefetch={false} href={url} hrefLang={lang}>
+                  <Link prefetch={false} href={url} hrefLang={locale}>
                     {footerElement?.element?.title}
                   </Link>
                 </li>
@@ -61,7 +64,9 @@ export async function Footer({ logoUrl, lang, footer }: FooterProps) {
         </nav>
         <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
           <div className="w-1/3">
-            <DynamicLangSelect />
+            <NextIntlClientProvider locale={locale}>
+              <DynamicLangSelect />
+            </NextIntlClientProvider>
           </div>
           {logoUrl && (
             <Link

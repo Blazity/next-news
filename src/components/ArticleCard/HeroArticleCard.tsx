@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Locale } from "@/i18n/i18n"
+import { ReactNode } from "react"
+import { useLocale } from "@/i18n/i18n"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
 
@@ -19,15 +20,15 @@ type HeroArticleCardProps = {
   }
   additionalLink?: string
   asLink?: boolean
-  locale: Locale
 }
 
 export function HeroArticleCard({
   article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug },
   additionalLink,
-  locale,
   asLink = true,
 }: HeroArticleCardProps) {
+  const locale = useLocale()
+
   return (
     <div className=" relative w-full overflow-hidden  rounded-xl text-white">
       <div className="relative h-[320px] bg-slate-900">

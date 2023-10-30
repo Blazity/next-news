@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Locale } from "@/i18n/i18n"
+import { useLocale, Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { formatDate } from "@/utils/formatDate"
 
@@ -11,7 +11,6 @@ type ArticlePublishDetailsProps = {
   imageUrl?: string
   link?: string | undefined
   variant?: "dark" | "light"
-  lang: Locale
 }
 
 export function ArticlePublishDetails({
@@ -21,8 +20,8 @@ export function ArticlePublishDetails({
   variant = "dark",
   link,
   className = "",
-  lang,
 }: ArticlePublishDetailsProps) {
+  const locale = useLocale()
   return (
     <div
       className={cn(
@@ -37,13 +36,13 @@ export function ArticlePublishDetails({
         <>
           {link && (
             <>
-              <Link hrefLang={lang} className="z-[22] text-[#FF782C] underline" target="_blank" href={link}>
+              <Link hrefLang={locale} className="z-[22] text-[#FF782C] underline" target="_blank" href={link}>
                 blazity.com
               </Link>
               <p>|</p>
             </>
           )}
-          <p>{formatDate(publicationDate, lang)}</p>
+          <p>{formatDate(publicationDate, locale)}</p>
           <p>|</p>
         </>
       )}

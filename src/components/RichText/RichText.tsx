@@ -2,6 +2,8 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
+import { NextIntlClientProvider } from "next-intl"
+import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { CodeSnippetDynamic } from "../CodeSnippet/CodeSnippetDynamic"
 import { QuizDynamic } from "../Quiz/QuizDynamic"
@@ -15,6 +17,8 @@ export function RichText({
   references?: EmbedReferences
   pClassName?: string
 }) {
+  const locale = useLocale()
+
   return (
     <HygraphRichText
       references={references}
@@ -46,7 +50,11 @@ export function RichText({
         ),
         embed: {
           Quiz: (props) => {
-            return <QuizDynamic id={props.id} />
+            return (
+              <NextIntlClientProvider locale={locale}>
+                <QuizDynamic id={props.id} />
+              </NextIntlClientProvider>
+            )
           },
         },
       }}

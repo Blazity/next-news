@@ -1,4 +1,6 @@
 import { Metadata } from "next"
+
+import { unstable_setRequestLocale } from "next-intl/server"
 import { hygraphArticleToCardProps } from "@/components/ArticleCard/ArticleCard"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { HighlightedArticles } from "@/components/HighlightedArticles/HighlightedArticles"
@@ -12,10 +14,8 @@ import { getMatadataObj } from "@/utils/getMetadataObj"
 
 export const dynamicParams = false
 
-export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({
-    lang: locale,
-  }))
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }))
 }
 
 export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata | null> {
@@ -24,40 +24,34 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 }
 
 export default async function Web({ params }: { params: { lang: Locale } }) {
+  unstable_setRequestLocale(params.lang)
   const homepage = await getHomepage(params.lang)
 
   return (
     <>
-      {homepage.marketStock?.data && (
-        <div className="flex w-full justify-end">
-          <StockDisplay quotes={homepage.marketStock?.data} />
-        </div>
-      )}
+      {homepage.marketStock?.data && <StockDisplay quotes={homepage.marketStock?.data} />}
 
       {homepage.heroArticle && (
         <HeroArticleCard
           article={hygraphArticleToCardProps(homepage.heroArticle)}
-          locale={params.lang}
           asLink
           additionalLink="https://blazity.com/"
         />
       )}
-      <TrendingArticles locale={params.lang} title={homepage.trendingSectionTitle ?? "Trending articles"} />
+      <TrendingArticles title={homepage.trendingSectionTitle ?? "Trending articles"} />
       {homepage.highlightedArticles && (
         <HighlightedArticles
-          locale={params.lang}
           title={homepage.highlightedSectionTitle ?? "Our picks"}
           articles={homepage.highlightedArticles}
         />
       )}
       {homepage.highlightedCategory && (
         <HighlightedCategoryArticles
-          locale={params.lang}
           title={homepage.highlightedCategoryTitle ?? homepage.highlightedCategory.title}
           categoryId={homepage.highlightedCategory.id}
         />
       )}
-      <RecentArticles locale={params.lang} title={homepage.recentSectionTitle ?? "Recent articles"} />
+      <RecentArticles title={homepage.recentSectionTitle ?? "Recent articles"} />
     </>
   )
 }

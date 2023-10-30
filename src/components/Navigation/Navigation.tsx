@@ -1,23 +1,24 @@
 "use client"
+
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
-import { Locale } from "@/i18n/i18n"
+import { useLocale } from "@/i18n/i18n"
 import { getNavigation } from "@/lib/client"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
-import Link from "next/link"
 
 export type GetNavigationReturn = Awaited<ReturnType<typeof getNavigation>>
 
 type NavigationProps = {
   navigation: Pick<GetNavigationReturn, "navigation">["navigation"]
-  locale: Locale
 }
 
-export function Navigation({ locale, navigation }: NavigationProps) {
+export function Navigation({ navigation }: NavigationProps) {
+  const locale = useLocale()
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const { logo, elements } = navigation
 

@@ -9,8 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/Select/Select"
-import { i18n } from "@/i18n/i18n"
-import { useLocale } from "@/i18n/useLocale"
+import { i18n, useLocale } from "@/i18n/i18n"
 
 function LangSelect() {
   const router = useRouter()

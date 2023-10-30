@@ -3,7 +3,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "@/gql/graphql"
-import { useLocale } from "@/i18n/useLocale"
+import { useLocale } from "@/i18n/i18n"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -47,14 +47,11 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
       <ArticleCard
         article={hygraphArticleToCardProps(firstArticle)}
         orientation="horizontal"
-        locale={locale}
         imageClassName="md:w-1/2"
       />
       <div className="grid gap-5 md:grid-cols-3">
         {otherArticles.map((article) => {
-          return (
-            <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} locale={locale} />
-          )
+          return <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} />
         })}
       </div>
       {hasNextPage && (
