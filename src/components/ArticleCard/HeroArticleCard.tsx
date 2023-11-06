@@ -45,7 +45,12 @@ export function HeroArticleCard({
         )}
         <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
           {asLink && (
-            <Link href={`/${locale}/article/${slug}`} className="absolute inset-0 z-[z-21]" hrefLang={locale} />
+            <Link
+              href={`/${locale}/article/${slug}`}
+              aria-label={`Read more about ${title}`}
+              className="absolute inset-0 z-[z-21]"
+              hrefLang={locale}
+            />
           )}
           <div className="flex w-full justify-between">
             <div className="flex flex-wrap gap-2">
