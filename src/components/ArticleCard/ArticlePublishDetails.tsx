@@ -27,7 +27,7 @@ export function ArticlePublishDetails({
       className={cn(
         variant === "dark" && " text-custom-dim",
         variant === "light" && " text-gray-500",
-        "flex items-center gap-2 whitespace-nowrap text-center text-sm",
+        "flex flex-wrap items-center gap-1 whitespace-nowrap text-center text-sm md:gap-2",
         className
       )}
       style={{ textShadow: variant === "dark" ? "0px 1px 2px rgba(26, 26, 27, 1)" : undefined }}

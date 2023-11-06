@@ -29,7 +29,7 @@ export function HeroArticleCard({
   const locale = useLocale()
 
   return (
-    <div className=" relative w-full overflow-hidden  rounded-xl text-white">
+    <div className="relative w-full overflow-hidden rounded-xl text-white">
       <div className="relative h-[320px] bg-slate-900">
         {imageUrl && (
           <Image
@@ -43,7 +43,7 @@ export function HeroArticleCard({
             priority
           />
         )}
-        <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-6 ">
+        <div className="absolute inset-0 z-20 flex w-full flex-col items-start justify-between p-4 md:p-6 ">
           {asLink && (
             <Link
               href={`/${locale}/article/${slug}`}
@@ -59,7 +59,7 @@ export function HeroArticleCard({
               })}
             </div>
           </div>
-          <div className="flex flex-col justify-around gap-5">
+          <div className="flex flex-col justify-around gap-3 md:gap-5">
             <h2
               className=" text-[1.8rem] font-bold leading-7 tracking-[1px] md:leading-10"
               style={{ textShadow: "0px 1px 4px rgba(26, 26, 27, 1)" }}
