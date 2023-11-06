@@ -43,7 +43,7 @@ export function Navigation({ navigation }: NavigationProps) {
         className="w-[100px]"
         onClick={() => setIsSheetOpen(false)}
       >
-        <Image src={logo.url} width={100} height={100} alt="site-logo" quality={100} />
+        <Image src={logo?.url} width={100} height={100} alt="site-logo" quality={100} />
       </Link>
       <ul className="hidden items-center gap-5 sm:flex-wrap lg:flex">
         <li className="flex items-center">
