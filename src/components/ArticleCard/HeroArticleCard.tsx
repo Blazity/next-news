@@ -37,7 +37,8 @@ export function HeroArticleCard({
             alt={imageAlt ?? "lack of description"}
             width={1200}
             height={320}
-            sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, (max-width: 1200px) 780px, 1200px"
+            quality={100}
+            sizes="(max-width: 640px) 480px, (max-width: 1024px) 780px, (max-width: 1200px) 780px, 1200px"
             className="h-full max-h-[320px] object-cover text-center brightness-[70%]"
             priority
           />
