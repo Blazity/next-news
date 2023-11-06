@@ -75,7 +75,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
               href={"https://blazity.com/"}
               className="flex max-h-[100px] w-full max-w-full lg:justify-end "
             >
-              <Image src={logoUrl} width={300} height={100} alt="Blazity logo" quality={100} className="w-1/3" />
+              <Image src={logoUrl} width={300} height={300} alt="Blazity logo" quality={100} className="w-1/3" />
             </Link>
           )}
           <p className="text-sm">
