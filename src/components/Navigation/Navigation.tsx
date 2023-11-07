@@ -40,10 +40,10 @@ export function Navigation({ navigation }: NavigationProps) {
         prefetch={false}
         href={`/${locale}/`}
         hrefLang={locale}
-        className="w-[100px]"
+        className="h-[33px] w-[100px]"
         onClick={() => setIsSheetOpen(false)}
       >
-        <Image src={logo?.url} width={100} height={100} alt="site-logo" quality={100} />
+        <Image src={logo?.url} width={100} height={33} alt="site-logo" quality={100} />
       </Link>
       <ul className="hidden items-center gap-4 sm:flex-wrap lg:flex">
         <li className="-mr-3 flex items-center">
