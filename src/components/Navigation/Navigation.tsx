@@ -26,7 +26,7 @@ export function Navigation({ navigation }: NavigationProps) {
     const categoryUrl = navElement.element?.__typename === "Category" ? "/category" : ""
     const url = `/${locale}${categoryUrl}/${navElement?.element?.slug}`
     return (
-      <li key={navElement?.element?.slug}>
+      <li key={navElement?.element?.slug} className="rounded-xl p-2 hover:bg-custom-dim">
         <Link prefetch={false} href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
           {navElement?.element?.title}
         </Link>
@@ -45,8 +45,8 @@ export function Navigation({ navigation }: NavigationProps) {
       >
         <Image src={logo?.url} width={100} height={100} alt="site-logo" quality={100} />
       </Link>
-      <ul className="hidden items-center gap-5 sm:flex-wrap lg:flex">
-        <li className="flex items-center">
+      <ul className="hidden items-center gap-4 sm:flex-wrap lg:flex">
+        <li className="-mr-3 flex items-center">
           <DynamicSearchDialog />
         </li>
         {navElements}
