@@ -30,7 +30,7 @@ export function RichText({
         h4: (props) => <h4 {...props} className="text-lg font-semibold  dark:text-white" />,
         h5: (props) => <h5 {...props} className="text-base font-semibold dark:text-white" />,
         h6: (props) => <h6 {...props} className="text-sm font-semibold dark:text-white" />,
-        p: (props) => <p {...props} className={cn(`my-4 text-lg text-gray-800 dark:text-white`, pClassName)} />,
+        p: (props) => <p {...props} className={cn(`text-md my-4 text-gray-800 dark:text-white`, pClassName)} />,
         ul: (props) => <ul {...props} className="my-4 list-inside list-disc text-lg text-gray-800 dark:text-white" />,
         ol: (props) => (
           <ol {...props} className="my-4 list-inside list-decimal text-lg text-gray-800 dark:text-white" />
