@@ -81,6 +81,7 @@ export function ArticleCard({
               alt={imageAlt ?? "lack of description"}
               width={780}
               height={264}
+              quality={100}
               sizes="(max-width: 220px) 82px, 480px, (max-width: 640px) 480px, 780px, (max-width: 1024px) 780px, 1020px"
               className={cn(
                 "h-[82px] min-h-[82px] w-full rounded-xl object-cover text-center brightness-90 md:h-[264px] md:min-h-[264px] md:rounded-none",
@@ -144,7 +145,7 @@ export function ArticleCard({
                 lines === "1" && "md:line-clamp-1",
                 lines === "2" && "md:line-clamp-2",
                 lines === "3" && "md:line-clamp-3",
-                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-10"
+                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-9"
               )}
             >
               {title}

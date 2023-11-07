@@ -53,7 +53,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
               const categoryUrl = footerElement.element?.__typename === "Category" ? "/category" : ""
               const url = `/${locale}${categoryUrl}/${footerElement?.element?.slug}`
               return (
-                <li key={footerElement?.element?.slug}>
+                <li key={footerElement?.element?.slug} className="w-fit">
                   <Link prefetch={false} href={url} hrefLang={locale}>
                     {footerElement?.element?.title}
                   </Link>
@@ -63,7 +63,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
           </ul>
         </nav>
         <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
-          <div className="w-1/3">
+          <div className="w-1/3 lg:w-auto">
             <NextIntlClientProvider locale={locale}>
               <DynamicLangSelect />
             </NextIntlClientProvider>
@@ -73,9 +73,9 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
               hrefLang={locale}
               target="_blank"
               href={"https://blazity.com/"}
-              className="flex max-h-[100px] w-full max-w-full lg:justify-end "
+              className="flex max-h-[100px] w-[100px] lg:justify-end "
             >
-              <Image src={logoUrl} width={300} height={300} alt="Blazity logo" quality={100} className="w-1/3" />
+              <Image src={logoUrl} width={300} height={300} alt="Blazity logo" className="w-full" quality={100} />
             </Link>
           )}
           <p className="text-sm">

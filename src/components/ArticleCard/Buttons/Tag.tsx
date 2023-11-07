@@ -16,7 +16,7 @@ export function Tag({
         variant === "transparent" && "bg-custom-gray-100 text-white",
         variant === "dark" && "bg-gray-500/90 text-white",
         variant === "light" && "bg-gray-200 text-black",
-        " max-w-[150px]  overflow-hidden text-ellipsis rounded-xl px-3 py-2 text-left font-semibold",
+        " max-w-[150px]  overflow-hidden text-ellipsis rounded-xl px-3 py-2 text-left text-sm font-semibold",
         className
       )}
     >

@@ -16,6 +16,8 @@ export async function HighlightedArticles({ title, articles }: HighlightedArticl
             <ArticleCard
               orientation="vertical"
               key={`highlighted-${article.id}`}
+              tagsPosition="over"
+              lines={"2"}
               article={hygraphArticleToCardProps(article)}
             />
           )
