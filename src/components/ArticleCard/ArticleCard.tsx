@@ -1,9 +1,11 @@
+import { RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
 import Link from "next/link"
 import { useLocale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { ArticlePublishDetails } from "./ArticlePublishDetails"
 import { Tag } from "./Buttons/Tag"
+import { RichText } from "../RichText/RichText"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/Tooltip/Tooltip"
 
 type ArticleCardProps = {
@@ -14,6 +16,7 @@ type ArticleCardProps = {
     publicationDate: string | null
     tags: string[]
     slug: string
+    content?: { raw: RichTextContent } | null
     author: {
       name: string
       imageUrl?: string
@@ -32,6 +35,7 @@ export const hygraphArticleToCardProps = (article: {
   author?: { name: string } | null
   image?: { data: { url: string }; description?: { text: string } | undefined | null } | null
   publishedAt?: string
+  content?: { raw: RichTextContent } | null
   slug: string
 }) => {
   return {
@@ -39,6 +43,7 @@ export const hygraphArticleToCardProps = (article: {
     imageUrl: article?.image?.data?.url,
     imageAlt: article.image?.description?.text,
     title: article?.title,
+    content: article?.content,
     author: { name: article?.author?.name ?? "Anonymous" },
     publicationDate: article?.publishedAt ? article.publishedAt : null,
     slug: article?.slug,
@@ -48,7 +53,7 @@ export const hygraphArticleToCardProps = (article: {
 const MAX_TAGS_TO_DISPLAY = 3
 
 export function ArticleCard({
-  article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug },
+  article: { imageUrl, imageAlt, title, publicationDate, author, tags, slug, content },
   tagsPosition = "under",
   orientation = "vertical",
   lines = "2",
@@ -135,7 +140,7 @@ export function ArticleCard({
           )}
           <div
             className={cn(
-              "flex flex-1 items-start gap-5  pt-0 md:flex-col  md:justify-between md:p-5 md:pt-2",
+              "flex flex-1 items-start gap-5 pt-0 md:flex-col md:justify-between md:gap-2 md:p-3 md:pt-2 lg:p-4",
               isMain && "flex-col justify-between p-5 pt-2"
             )}
           >
@@ -145,11 +150,16 @@ export function ArticleCard({
                 lines === "1" && "md:line-clamp-1",
                 lines === "2" && "md:line-clamp-2",
                 lines === "3" && "md:line-clamp-3",
-                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-9"
+                "line-clamp-3 text-lg font-bold tracking-[1px] md:text-[1.5rem] md:leading-9 xl:py-2"
               )}
             >
               {title}
             </h2>
+            {content && (
+              <div className="hidden max-h-[90px] overflow-hidden md:block">
+                <RichText pClassName="line-clamp-3" raw={content.raw} />
+              </div>
+            )}
             <ArticlePublishDetails
               className={cn("hidden md:flex", isMain && "flex")}
               imageUrl={author.imageUrl}

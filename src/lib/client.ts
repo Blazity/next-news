@@ -10,6 +10,7 @@ import {
   getArticleRecommendedArticlesQuery,
   getArticlesQuantityQuery,
   getRecentArticlesQuery,
+  getRecentArticlesWithMainQuery,
   listArticlesByCategoryQuery,
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
@@ -144,6 +145,16 @@ export async function getRecentArticles(variables: { locale: Locale; skip?: numb
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
+}
+
+export async function getRecentArticlesWithMain(variables: { locale: Locale; skip?: number; first?: number }) {
+  const { articles, articlesConnection, mainArticle } = await graphqlFetch({
+    cache: "force-cache",
+    document: getRecentArticlesWithMainQuery,
+    tags: ["ARTICLE"],
+    variables,
+  })
+  return { articles, count: articlesConnection.aggregate.count, mainArticle }
 }
 
 export async function getArticleRecommendedArticles(variables: { locale: Locale; id: string }) {
