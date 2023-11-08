@@ -61,8 +61,13 @@ export async function graphqlFetch<TQuery, TVariables>({
       ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
     })
   )
+  const fetchWithRetry = async (repeats: number): Promise<Response> => {
+    const result = await throttledFetch()
+    if (result.status === 423 && repeats > 0) return await fetchWithRetry(repeats - 1)
+    return result
+  }
 
-  const result = await throttledFetch()
+  const result = await fetchWithRetry(3)
 
   const parsed = (await result.json()) as { data: TQuery; errors?: unknown }
   if (!result.ok || parsed.errors) throw Error(JSON.stringify({ status: result.status, errors: parsed.errors }))
