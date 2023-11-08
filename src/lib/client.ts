@@ -63,7 +63,7 @@ export async function graphqlFetch<TQuery, TVariables>({
   )
   const fetchWithRetry = async (repeats: number): Promise<Response> => {
     const result = await throttledFetch()
-    if (result.status === 423 && repeats > 0) return await fetchWithRetry(repeats - 1)
+    if (result.status === 429 && repeats > 0) return await fetchWithRetry(repeats - 1)
     return result
   }
 
