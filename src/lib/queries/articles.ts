@@ -24,6 +24,64 @@ export const listArticlesForSitemapQuery = graphql(`
   }
 `)
 
+export const getRecentArticlesWithMainQuery = graphql(`
+  query getRecentArticlesQueryWithMain(
+    $locales: [Locale!]!
+    $skip: Int = 0
+    $first: Int = 50
+    $where: ArticleWhereInput
+  ) {
+    mainArticle: articles(locales: $locales, first: 1, orderBy: publishedAt_DESC, where: $where) {
+      id
+      author {
+        name
+      }
+      publishedAt
+      updatedAt
+      locale
+      slug
+      title
+      tags
+      content {
+        raw
+      }
+      image {
+        description {
+          text
+        }
+        data {
+          url
+        }
+      }
+    }
+    articles(locales: $locales, skip: $skip, first: $first, orderBy: publishedAt_DESC, where: $where) {
+      id
+      author {
+        name
+      }
+      publishedAt
+      updatedAt
+      locale
+      slug
+      title
+      tags
+      image {
+        description {
+          text
+        }
+        data {
+          url
+        }
+      }
+    }
+    articlesConnection(locales: $locales) {
+      aggregate {
+        count
+      }
+    }
+  }
+`)
+
 export const getRecentArticlesQuery = graphql(`
   query getRecentArticles($locales: [Locale!]!, $skip: Int = 0, $first: Int = 50, $where: ArticleWhereInput) {
     articles(locales: $locales, skip: $skip, first: $first, orderBy: publishedAt_DESC, where: $where) {

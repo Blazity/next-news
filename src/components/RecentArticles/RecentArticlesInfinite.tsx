@@ -25,7 +25,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
     queryFn: ({ pageParam = 0 }) =>
       getRecentArticles({
         locale,
-        skip: RECENT_ARTICLES_PER_PAGE * pageParam,
+        skip: RECENT_ARTICLES_PER_PAGE * pageParam + 1,
         first: RECENT_ARTICLES_PER_PAGE,
       }),
     getNextPageParam: (lastPage, pages) => {
@@ -40,15 +40,10 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
 
   const articles = recentArticlesQuery?.pages.flatMap((page) => page.articles)
   if (!articles) return null
-  const [firstArticle, ...otherArticles] = articles
+  const [...otherArticles] = articles
 
   return (
     <section className="flex flex-col gap-5">
-      <ArticleCard
-        article={hygraphArticleToCardProps(firstArticle)}
-        orientation="horizontal"
-        imageClassName="md:w-1/2"
-      />
       <div className="grid gap-5 md:grid-cols-3">
         {otherArticles.map((article) => {
           return <ArticleCard key={`recent-${article.id}`} article={hygraphArticleToCardProps(article)} />
