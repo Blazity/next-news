@@ -1,6 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import { z } from "zod"
-import { hygraphLocaleToStandardNotation } from "@/i18n/i18n"
+import { hygraphLocaleToStandardNotation, i18n } from "@/i18n/i18n"
 import { Tag } from "@/lib/tags"
 import { NextRequestWithValidBody } from "./validateBody"
 
@@ -9,7 +9,9 @@ export function handleRevalidation<T extends RevalidationBody>(req: NextRequestW
   const article = req.validBody.data
   if (isArticle(article)) {
     article.localizations.forEach(({ locale, slug }) => {
-      revalidatePath(`/${hygraphLocaleToStandardNotation(locale)}/article/${slug}`)
+      const standardLocale = hygraphLocaleToStandardNotation(locale)
+      if (i18n.defaultLocale === standardLocale) revalidatePath(`/article/${slug}`)
+      revalidatePath(`/${standardLocale}/article/${slug}`)
     })
   }
   tags.forEach(revalidateTag)
