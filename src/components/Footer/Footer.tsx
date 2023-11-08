@@ -20,8 +20,8 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
 
   return (
     <footer className="flex w-full items-center justify-center bg-custom-gray-200 py-12">
-      <div className="flex w-full max-w-[1200px] flex-wrap justify-between gap-10 p-4 lg:gap-0">
-        <div className="flex flex-col justify-between gap-10 md:gap-0">
+      <div className="flex w-full max-w-[1200px] flex-wrap justify-between gap-10 p-4 md:flex-nowrap lg:gap-0">
+        <div className="-mt-1 flex flex-col justify-between gap-10 md:gap-0">
           <Image src={footer?.logo?.url ?? ""} width={100} height={30} alt="site-logo" quality={100} />
           <div className="text-sm">
             <p className="font-bold">{companyName}</p>
@@ -63,7 +63,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
           </ul>
         </nav>
         <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
-          <div className="w-1/3 lg:w-auto">
+          <div className="w-fit lg:w-auto">
             <NextIntlClientProvider locale={locale}>
               <DynamicLangSelect />
             </NextIntlClientProvider>
@@ -73,7 +73,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
               hrefLang={locale}
               target="_blank"
               href={"https://blazity.com/"}
-              className="flex max-h-[100px] w-[100px] lg:justify-end "
+              className="flex max-h-[100px] w-[100px] lg:justify-end"
             >
               <Image src={logoUrl} width={300} height={300} alt="Blazity logo" className="w-full" quality={100} />
             </Link>
