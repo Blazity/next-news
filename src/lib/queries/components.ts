@@ -66,6 +66,11 @@ export const getHomepageQuery = graphql(`
         id
         author {
           name
+          avatar {
+            data {
+              url
+            }
+          }
         }
         publishedAt
         locale
@@ -94,6 +99,11 @@ export const getHomepageQuery = graphql(`
         id
         author {
           name
+          avatar {
+            data {
+              url
+            }
+          }
         }
         publishedAt
         locale

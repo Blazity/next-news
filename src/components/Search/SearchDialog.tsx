@@ -92,7 +92,11 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
         />
         <div className="flex flex-wrap gap-2">
           {hit.tags?.map((tag) => {
-            return <Tag key={tag}>{tag}</Tag>
+            return (
+              <Tag variant="light" key={tag}>
+                {tag}
+              </Tag>
+            )
           })}
         </div>
       </article>

@@ -46,8 +46,18 @@ export function ArticlePublishDetails({
           <p>|</p>
         </>
       )}
-      <p>{author}</p>
-      {imageUrl && <Image src={imageUrl} alt="author" width={24} height={24} className="rounded-full" />}
+      <div className="flex items-center gap-2">
+        <p>{author}</p>
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt="author"
+            width={24}
+            height={24}
+            className="h-[24px] w-[24px] rounded-full border object-cover"
+          />
+        )}
+      </div>
     </div>
   )
 }

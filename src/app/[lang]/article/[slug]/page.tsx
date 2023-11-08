@@ -40,7 +40,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
             imageUrl: image?.data?.url,
             publicationDate: publishedAt,
             title,
-            author: { name: author?.name ?? "Anonymous" },
+            author: { name: author?.name ?? "Anonymous", imageUrl: author?.avatar?.data?.url },
             tags,
             slug,
           }}

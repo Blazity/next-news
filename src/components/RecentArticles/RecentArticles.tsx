@@ -22,7 +22,7 @@ export async function RecentArticles({ title }: RecentArticlesProps) {
         <ArticleCard
           article={hygraphArticleToCardProps(mainArticle)}
           orientation="horizontal"
-          imageClassName="md:w-1/2"
+          imageClassName="lg:w-1/2"
           tagsPosition="over"
         />
       </div>

@@ -35,6 +35,11 @@ export const getRecentArticlesWithMainQuery = graphql(`
       id
       author {
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       publishedAt
       updatedAt
@@ -58,6 +63,11 @@ export const getRecentArticlesWithMainQuery = graphql(`
       id
       author {
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       publishedAt
       updatedAt
@@ -88,6 +98,11 @@ export const getRecentArticlesQuery = graphql(`
       id
       author {
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       publishedAt
       updatedAt
@@ -123,6 +138,11 @@ export const getArticleRecommendedArticlesQuery = graphql(`
         publishedAt
         author {
           name
+          avatar {
+            data {
+              url
+            }
+          }
         }
         image {
           description {
@@ -156,6 +176,11 @@ export const getArticleBySlugQuery = graphql(`
       author {
         id
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       content {
         raw
@@ -218,6 +243,11 @@ export const listArticlesBySlugQuery = graphql(`
       author {
         id
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       tags
     }
@@ -243,6 +273,11 @@ export const listArticlesByCategoryQuery = graphql(`
       }
       author {
         name
+        avatar {
+          data {
+            url
+          }
+        }
       }
       publishedAt
       tags
