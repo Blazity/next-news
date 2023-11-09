@@ -1,5 +1,6 @@
 import { Facebook, Linkedin, Twitter } from "lucide-react"
 import { useLocale } from "@/i18n/i18n"
+import { getTranslations } from "@/i18n/setTranslations"
 
 type ShareOnSocialProps = {
   articleTitle: string
@@ -7,6 +8,8 @@ type ShareOnSocialProps = {
 }
 
 export function ShareOnSocial({ articleTitle, articleUrl }: ShareOnSocialProps) {
+  const translations = getTranslations()
+
   const locale = useLocale()
   const encodedTitle = encodeURIComponent(articleTitle)
   const encodedUrl = encodeURIComponent(articleUrl)
@@ -17,7 +20,7 @@ export function ShareOnSocial({ articleTitle, articleUrl }: ShareOnSocialProps) 
 
   return (
     <div className="flex items-center justify-between gap-2 py-5 lg:justify-normal">
-      <p className="pr-3 text-sm opacity-60">Share on social:</p>
+      <p className="pr-3 text-sm opacity-60">{translations.shareOnSocial}:</p>
       <div className="flex items-center gap-2">
         <a href={twitterShareUrl} aria-label="Twitter" hrefLang={locale} className="rounded-xl bg-black p-2">
           <Twitter fill="white" stroke="none" />

@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components
 import { Input } from "@/components/ui/Input/Input"
 import { env } from "@/env.mjs"
 import { Locale, useLocale } from "@/i18n/i18n"
+import { useTranslations } from "@/i18n/useTranslations"
 import { RefinementCombobox } from "./RefinementCombobox"
 import { Tag } from "../ArticleCard/Buttons/Tag"
 import { Popover } from "../ui/Popover/Popover"
@@ -125,11 +126,12 @@ function NoResultsBoundary({ children, fallback }: { children: ReactNode; fallba
 
 function NoResults() {
   const { indexUiState } = useInstantSearch()
+  const translations = useTranslations()
 
   return (
     <div className="flex w-full justify-center px-2 py-4">
       <p className=" text-sm text-slate-600">
-        No results for <q>{indexUiState.query}</q>.
+        {translations.noResultsFor} <q>{indexUiState.query}</q>.
       </p>
     </div>
   )
@@ -140,6 +142,7 @@ const queryHook: UseSearchBoxProps["queryHook"] = (query, search) => {
 }
 
 function DebouncedSearchBox() {
+  const translations = useTranslations()
   const { refine, query } = useSearchBox({
     queryHook,
   })
@@ -153,7 +156,15 @@ function DebouncedSearchBox() {
     debouncedRefine(value)
   }
 
-  return <Input type="search" value={inputValue} onChange={onChange} placeholder="Search..." aria-label="Search" />
+  return (
+    <Input
+      type="search"
+      value={inputValue}
+      onChange={onChange}
+      placeholder={`${translations.search}...`}
+      aria-label={translations.search}
+    />
+  )
 }
 
 export default SearchDialogContent
