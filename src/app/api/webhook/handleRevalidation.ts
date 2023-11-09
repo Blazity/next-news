@@ -26,10 +26,22 @@ const modelTypeToTags: Record<RevalidationBody["data"]["__typename"], Tag[]> = {
   Homepage: ["HOMEPAGE"],
   Category: ["CATEGORY"],
   Author: ["ARTICLE"],
+  Singleton: ["TRANSLATIONS"],
+  GlobalTranslations: ["TRANSLATIONS"],
 }
 
 export const modelTypesSchema = z.object({
-  __typename: z.enum(["Article", "Navigation", "Footer", "Page", "Homepage", "Category", "Author"]),
+  __typename: z.enum([
+    "Article",
+    "Navigation",
+    "Footer",
+    "Page",
+    "Homepage",
+    "Category",
+    "Author",
+    "Singleton",
+    "GlobalTranslations",
+  ]),
 })
 
 const isArticle = (data: RevalidationBody["data"]): data is z.infer<typeof articleSchema> =>
