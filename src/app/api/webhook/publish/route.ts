@@ -26,7 +26,7 @@ async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<Publish
         title,
         content: slateToText(content),
         slug,
-        tags,
+        tags: tags.map(({ tag }) => tag),
       })
 
       return { title, locale }
@@ -55,7 +55,7 @@ const articleSchema = z.object({
       title: z.string(),
       locale: z.string(),
       slug: z.string(),
-      tags: z.array(z.string()),
+      tags: z.array(z.object({ tag: z.string() })),
     })
   ),
   id: z.string(),

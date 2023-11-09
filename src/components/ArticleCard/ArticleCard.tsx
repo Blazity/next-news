@@ -30,7 +30,7 @@ type ArticleCardProps = {
 }
 
 export const hygraphArticleToCardProps = (article: {
-  tags: string[]
+  tags: { tag: string }[]
   title: string
   author?: { name: string; avatar?: { data: { url: string } } | undefined | null } | null
   image?: { data: { url: string }; description?: { text: string } | undefined | null } | null
@@ -39,7 +39,7 @@ export const hygraphArticleToCardProps = (article: {
   slug: string
 }) => {
   return {
-    tags: article?.tags,
+    tags: article?.tags?.map(({ tag }) => tag),
     imageUrl: article?.image?.data?.url,
     imageAlt: article.image?.description?.text,
     title: article?.title,

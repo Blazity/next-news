@@ -41,7 +41,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
             publicationDate: publishedAt,
             title,
             author: { name: author?.name ?? "Anonymous", imageUrl: author?.avatar?.data?.url },
-            tags,
+            tags: tags.map(({ tag }) => tag),
             slug,
           }}
           asLink={false}

@@ -1,9 +1,9 @@
+import { env } from "@/env.mjs"
+import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { print } from "graphql"
 import omit from "lodash/omit"
 import pThrottle from "p-throttle"
-import { env } from "@/env.mjs"
-import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
   getArticleMetadataBySlugQuery,
@@ -149,7 +149,8 @@ export async function getRecentArticles(variables: { locale: Locale; skip?: numb
     tags: ["ARTICLE"],
     variables,
   })
-  return { articles, count: articlesConnection.aggregate.count }
+
+  return { articles: articles, count: articlesConnection.aggregate.count }
 }
 
 export async function getRecentArticlesWithMain(variables: { locale: Locale; skip?: number; first?: number }) {
@@ -159,6 +160,7 @@ export async function getRecentArticlesWithMain(variables: { locale: Locale; ski
     tags: ["ARTICLE"],
     variables,
   })
+
   return { articles, count: articlesConnection.aggregate.count, mainArticle }
 }
 

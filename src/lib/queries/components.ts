@@ -76,7 +76,9 @@ export const getHomepageQuery = graphql(`
         locale
         slug
         title
-        tags
+        tags {
+          tag
+        }
         image {
           description {
             text
@@ -109,7 +111,9 @@ export const getHomepageQuery = graphql(`
         locale
         slug
         title
-        tags
+        tags {
+          tag
+        }
         image {
           description {
             text

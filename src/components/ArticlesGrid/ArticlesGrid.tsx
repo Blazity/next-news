@@ -16,7 +16,7 @@ type Article = {
   id: string
   slug: string
   title: string
-  tags: string[]
+  tags: { tag: string }[]
   image?: Nullable<{
     description?: ImageDescription
     data: ImageData

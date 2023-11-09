@@ -46,7 +46,9 @@ export const getRecentArticlesWithMainQuery = graphql(`
       locale
       slug
       title
-      tags
+      tags {
+        tag
+      }
       content {
         raw
       }
@@ -74,7 +76,9 @@ export const getRecentArticlesWithMainQuery = graphql(`
       locale
       slug
       title
-      tags
+      tags {
+        tag
+      }
       image {
         description {
           text
@@ -109,7 +113,9 @@ export const getRecentArticlesQuery = graphql(`
       locale
       slug
       title
-      tags
+      tags {
+        tag
+      }
       image {
         description {
           text
@@ -134,7 +140,9 @@ export const getArticleRecommendedArticlesQuery = graphql(`
         title
         slug
         id
-        tags
+        tags {
+          tag
+        }
         publishedAt
         author {
           name
@@ -163,7 +171,9 @@ export const getArticleBySlugQuery = graphql(`
       id
       title
       publishedAt
-      tags
+      tags {
+        tag
+      }
       image(forceParentLocale: true) {
         id
         description {
@@ -249,7 +259,9 @@ export const listArticlesBySlugQuery = graphql(`
           }
         }
       }
-      tags
+      tags {
+        tag
+      }
     }
   }
 `)
@@ -280,7 +292,9 @@ export const listArticlesByCategoryQuery = graphql(`
         }
       }
       publishedAt
-      tags
+      tags {
+        tag
+      }
       slug
       title
       id
