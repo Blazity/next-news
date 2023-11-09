@@ -53,15 +53,17 @@ HYGRAPH_WEBOOK_SECRET // secret used for authenticating webhooks
 ```
 
 Search engine - take it from your algolia project's config
+
 ```bash
 NEXT_PUBLIC_ALGOLIA_API_ID
 NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 ```
 
 Analytics - used for counting views on your articles. Needed for 'Trending Articles' section
+
 ```bash
-GA_MEASUREMENT_ID: 
-GA_PROPERTY_ID: 
+GA_MEASUREMENT_ID:
+GA_PROPERTY_ID:
 GA_BASE64_SERVICE_ACCOUNT:
 ```
 
@@ -72,7 +74,6 @@ yarn dev
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 
 ## 🚀 Deployment
 

@@ -43,7 +43,6 @@ export default async function Layout({ children, params }: { children: React.Rea
 
   const [navigationData, translations] = await Promise.all([getNavigation(locale), getNavigationTranslation(locale)])
   const { navigation, footer, logo } = navigationData
-  
 
   return (
     <html lang={locale}>
