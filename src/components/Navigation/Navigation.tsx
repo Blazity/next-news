@@ -11,13 +11,13 @@ import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
 
-type GetNavigationTranslationReturn = Awaited<ReturnType<typeof getNavigationTranslation>>
+export type Translations = Awaited<ReturnType<typeof getNavigationTranslation>>
 
 export type GetNavigationReturn = Awaited<ReturnType<typeof getNavigation>>
 
 type NavigationProps = {
   navigation: Pick<GetNavigationReturn, "navigation">["navigation"]
-  translations: GetNavigationTranslationReturn
+  translations: Translations
 }
 
 export function Navigation({ navigation, translations }: NavigationProps) {
