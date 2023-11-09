@@ -7,7 +7,7 @@ import { RichText } from "@/components/RichText/RichText"
 import { ShareOnSocial } from "@/components/ShareOnSocial/ShareOnSocial"
 import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
-import { getArticleBySlug, getArticleMetadataBySlug, getArticleTranslationBySlug } from "@/lib/client"
+import { getArticleBySlug, getArticleMetadataBySlug, getArticleTranslation } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
@@ -26,7 +26,7 @@ export async function generateMetadata({ params: { slug, lang } }: ArticlePagePr
 export default async function Web({ params: { slug, lang } }: ArticlePageProps) {
   const [article, translations] = await Promise.all([
     getArticleBySlug({ locale: lang, slug }),
-    getArticleTranslationBySlug(lang),
+    getArticleTranslation(lang),
   ])
   const articleUrl = `${env.NEXT_PUBLIC_SITE_URL}/article/${slug}`
   const initialQuiz = article?.content?.references[0]

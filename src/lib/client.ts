@@ -204,7 +204,7 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
   return { ...articles[0] } ?? null
 }
 
-export async function getArticleTranslationBySlug(locale: Locale) {
+export async function getArticleTranslation(locale: Locale) {
   const { singleton } = await graphqlFetch({
     cache: "force-cache",
     document: getArticleTranslationQuery,
