@@ -74,6 +74,17 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
       className="mb-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
+        {hit.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {hit.tags.map((tag) => {
+              return (
+                <Tag variant="light" key={tag}>
+                  {tag}
+                </Tag>
+              )
+            })}
+          </div>
+        )}
         <Highlight
           attribute="title"
           hit={hit}
@@ -90,15 +101,6 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
             root: "line-clamp-2 text-md",
           }}
         />
-        <div className="flex flex-wrap gap-2">
-          {hit.tags?.map((tag) => {
-            return (
-              <Tag variant="light" key={tag}>
-                {tag}
-              </Tag>
-            )
-          })}
-        </div>
       </article>
     </a>
   )
