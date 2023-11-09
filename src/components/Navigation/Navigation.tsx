@@ -26,8 +26,14 @@ export function Navigation({ navigation }: NavigationProps) {
     const categoryUrl = navElement.element?.__typename === "Category" ? "/category" : ""
     const url = `/${locale}${categoryUrl}/${navElement?.element?.slug}`
     return (
-      <li key={navElement?.element?.slug} className="rounded-xl p-2 hover:bg-custom-dim">
-        <Link prefetch={false} href={url} hrefLang={locale} onClick={() => setIsSheetOpen(false)}>
+      <li key={navElement?.element?.slug}>
+        <Link
+          prefetch={false}
+          href={url}
+          hrefLang={locale}
+          onClick={() => setIsSheetOpen(false)}
+          className="rounded-xl p-2 font-semibold hover:bg-custom-dim"
+        >
           {navElement?.element?.title}
         </Link>
       </li>

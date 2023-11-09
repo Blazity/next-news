@@ -28,7 +28,7 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
             aria-expanded={open}
             className="w-[150px] justify-between bg-gray-100 text-gray-400"
           >
-            {`${translations.selectTag}...`}
+            {translations.selectTag}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -50,7 +50,7 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
       </div>
       <PopoverContent className="ml-6 w-[200px] bg-white p-0">
         <Command>
-          <CommandInput placeholder="Search tags.." />
+          <CommandInput placeholder={translations.selectTag} />
           <CommandEmpty>{translations.noTagsFound}</CommandEmpty>
           <CommandGroup value={"value"}>
             {items

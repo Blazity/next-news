@@ -33,7 +33,12 @@ function SearchDialogContent() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-lg p-4" variant="ghost" aria-label="Open search dialog" name="Search">
+        <Button
+          className="rounded-xl p-4 font-semibold hover:bg-custom-dim"
+          variant="ghost"
+          aria-label="Open search dialog"
+          name="Search"
+        >
           <Search className="h-4 w-4" />
         </Button>
       </DialogTrigger>
@@ -53,7 +58,7 @@ function SearchDialogContent() {
               />
             </NoResultsBoundary>
           </DialogContent>
-        </InstantSearch>{" "}
+        </InstantSearch>
       </Popover>
     </Dialog>
   )
@@ -161,7 +166,7 @@ function DebouncedSearchBox() {
       type="search"
       value={inputValue}
       onChange={onChange}
-      placeholder={`${translations.search}...`}
+      placeholder={translations.search}
       aria-label={translations.search}
     />
   )
