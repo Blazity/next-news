@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation/Navigation"
 import { env } from "@/env.mjs"
 import { i18n, type Locale } from "@/i18n/i18n"
 import "@/styles/tailwind.css"
-import { getNavigation } from "@/lib/client"
+import { getNavigation, getNavigationTranslation } from "@/lib/client"
 import { GoogleAnalytics } from "../GoogleAnalytics"
 import Providers from "../Providers"
 
@@ -41,7 +41,9 @@ export default async function Layout({ children, params }: { children: React.Rea
   if (!isValidLocale) notFound()
   unstable_setRequestLocale(locale)
 
-  const { navigation, footer, logo } = await getNavigation(locale)
+  const [navigationData, translations] = await Promise.all([getNavigation(locale), getNavigationTranslation(locale)])
+  const { navigation, footer, logo } = navigationData
+  
 
   return (
     <html lang={locale}>
@@ -51,7 +53,7 @@ export default async function Layout({ children, params }: { children: React.Rea
           <div className="z-50 flex w-full justify-center border-b bg-white">
             <nav className="flex w-full max-w-[1200px] items-center justify-end gap-4 py-4">
               <NextIntlClientProvider locale={locale}>
-                <Navigation navigation={navigation} />
+                <Navigation translations={translations} navigation={navigation} />
               </NextIntlClientProvider>
             </nav>
           </div>

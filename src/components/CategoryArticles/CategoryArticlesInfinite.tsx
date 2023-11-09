@@ -5,15 +5,17 @@ import { Button } from "@/components/ui/Button/Button"
 import { ListArticlesByCategoryQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/i18n"
 import { listArticlesByCategory } from "@/lib/client"
-import { CATEGORY_ARTICLES_PER_PAGE } from "./CategoryArticles"
 import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
 
 export type CategoryArticlesInfiniteProps = {
   initialArticles: { articles: ListArticlesByCategoryQuery["articles"]; count: number }
   category: string
+  showMoreText: string | null | undefined
 }
 
-export function RecentArticlesInfinite({ initialArticles, category }: CategoryArticlesInfiniteProps) {
+const CATEGORY_ARTICLES_PER_PAGE = 4
+
+export function RecentArticlesInfinite({ initialArticles, category, showMoreText }: CategoryArticlesInfiniteProps) {
   const locale = useLocale()
 
   const {
@@ -41,7 +43,6 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
   })
 
   const articles = categoryArticlesQuery?.pages.flatMap((page) => page.articles)
-  const buttonText = isFetchingNextPage ? "Loading" : "See more"
 
   return (
     <>
@@ -52,7 +53,7 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
           disabled={isFetchingNextPage}
           onClick={() => fetchNextPage()}
         >
-          {buttonText}
+          {showMoreText}
         </Button>
       )}
     </>

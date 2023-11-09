@@ -22,11 +22,12 @@ import { env } from "@/env.mjs"
 import { Locale, useLocale } from "@/i18n/i18n"
 import { RefinementCombobox } from "./RefinementCombobox"
 import { Tag } from "../ArticleCard/Buttons/Tag"
+import { Translations } from "../Navigation/Navigation"
 import { Popover } from "../ui/Popover/Popover"
 
 const algoliaClient = algoliasearch(env.NEXT_PUBLIC_ALGOLIA_API_ID, env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY)
 
-function SearchDialogContent() {
+function SearchDialogContent({ translations }: { translations: Translations }) {
   const lang = useLocale()
 
   return (
@@ -40,12 +41,15 @@ function SearchDialogContent() {
         <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
           <DialogContent className="bottom-auto top-[10%] max-h-[80%] translate-y-[0%] overflow-auto bg-gray-100 sm:max-w-2xl">
             <DialogHeader className="border-b bg-white p-4">
-              <RefinementCombobox attribute={"tags"} />
-              <DebouncedSearchBox />
+              <RefinementCombobox
+                noTagsFoundText={translations?.noTagsFound}
+                searchTagsText={translations?.selectTag}
+                attribute={"tags"}
+              />
+              <DebouncedSearchBox searchText={translations?.search} />
             </DialogHeader>
-
             <Configure attributesToSnippet={["content:20"]} />
-            <NoResultsBoundary fallback={<NoResults />}>
+            <NoResultsBoundary fallback={<NoResults noResultsText={translations?.noResultsFor} />}>
               <Hits
                 hitComponent={(props) => <CustomHit {...props} hit={props.hit as ArticleHit} lang={lang} />}
                 className="flex flex-col gap-4 p-4 py-0"
@@ -121,13 +125,13 @@ function NoResultsBoundary({ children, fallback }: { children: ReactNode; fallba
   return children
 }
 
-function NoResults() {
+function NoResults({ noResultsText }: { noResultsText: string | undefined | null }) {
   const { indexUiState } = useInstantSearch()
 
   return (
     <div className="flex w-full justify-center px-2 py-4">
       <p className=" text-sm text-slate-600">
-        No results for <q>{indexUiState.query}</q>.
+        {noResultsText ?? "No results for"} <q>{indexUiState.query}</q>.
       </p>
     </div>
   )
@@ -137,7 +141,7 @@ const queryHook: UseSearchBoxProps["queryHook"] = (query, search) => {
   search(query)
 }
 
-function DebouncedSearchBox() {
+function DebouncedSearchBox({ searchText }: { searchText: string | undefined | null }) {
   const { refine, query } = useSearchBox({
     queryHook,
   })
@@ -151,7 +155,9 @@ function DebouncedSearchBox() {
     debouncedRefine(value)
   }
 
-  return <Input type="search" value={inputValue} onChange={onChange} placeholder="Search..." aria-label="Search" />
+  return (
+    <Input type="search" value={inputValue} onChange={onChange} placeholder={`${searchText}...`} aria-label="Search" />
+  )
 }
 
 export default SearchDialogContent

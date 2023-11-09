@@ -199,6 +199,19 @@ export const getArticleBySlugQuery = graphql(`
   }
 `)
 
+export const getArticleTranslationBySlugQuery = graphql(`
+  query getArticleTranslationBySlug($locales: [Locale!]!) {
+    singleton(where: { key: "translations" }, locales: $locales) {
+      model {
+        ... on GlobalTranslations {
+          shareOnSocial
+          relatedArticles
+        }
+      }
+    }
+  }
+`)
+
 export const getArticleMetadataBySlugQuery = graphql(`
   query getArticleMetadataBySlugQuery($locales: [Locale!]!, $slug: String!) {
     articles(locales: $locales, where: { slug: $slug }) {
@@ -288,6 +301,21 @@ export const listArticlesByCategoryQuery = graphql(`
     articlesConnection(locales: $locales, where: { categories_some: { slug: $categorySlug } }) {
       aggregate {
         count
+      }
+    }
+  }
+`)
+
+export const getArticlesTranslationByCategoryQuery = graphql(`
+  query listArticlesByCategoryWithTranslations($locales: [Locale!]!) {
+    singleton(where: { key: "translations" }, locales: $locales) {
+      model {
+        ... on GlobalTranslations {
+          showMore
+          showing
+          resultsFor
+          searchCategory
+        }
       }
     }
   }

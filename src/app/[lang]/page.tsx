@@ -8,7 +8,7 @@ import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
 import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
 import { i18n, Locale } from "@/i18n/i18n"
-import { getHomepage, getHomepageMetadata } from "@/lib/client"
+import { getHomepage, getHomepageMetadata, getHomepageTranslation } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
 
 export const dynamicParams = false
@@ -24,7 +24,8 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 
 export default async function Web({ params }: { params: { lang: Locale } }) {
   unstable_setRequestLocale(params.lang)
-  const homepage = await getHomepage(params.lang)
+  const [homepage, translations] = await Promise.all([getHomepage(params.lang), getHomepageTranslation(params.lang)])
+  const showMoreText = translations?.showMore
 
   return (
     <>
@@ -50,7 +51,7 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
           categoryId={homepage.highlightedCategory.id}
         />
       )}
-      <RecentArticles title={homepage.recentSectionTitle ?? "Recent articles"} />
+      <RecentArticles showMoreText={showMoreText} title={homepage.recentSectionTitle ?? "Recent articles"} />
     </>
   )
 }

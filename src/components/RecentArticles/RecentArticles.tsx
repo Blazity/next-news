@@ -8,9 +8,10 @@ export const RECENT_ARTICLES_PER_PAGE = 6
 
 type RecentArticlesProps = {
   title: string
+  showMoreText: string | null | undefined
 }
 
-export async function RecentArticles({ title }: RecentArticlesProps) {
+export async function RecentArticles({ title, showMoreText }: RecentArticlesProps) {
   const locale = useLocale()
   const initialArticles = await getRecentArticlesWithMain({ locale, first: 3, skip: 1 })
   const mainArticle = initialArticles.mainArticle[0]
@@ -27,7 +28,7 @@ export async function RecentArticles({ title }: RecentArticlesProps) {
         />
       </div>
       <NextIntlClientProvider locale={locale}>
-        <RecentArticlesInfiniteDynamic initialArticles={initialArticles} />
+        <RecentArticlesInfiniteDynamic showMoreText={showMoreText} initialArticles={initialArticles} />
       </NextIntlClientProvider>
     </section>
   )

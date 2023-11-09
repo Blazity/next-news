@@ -9,13 +9,21 @@ import {
   getArticleMetadataBySlugQuery,
   getArticleRecommendedArticlesQuery,
   getArticlesQuantityQuery,
+  getArticlesTranslationByCategoryQuery,
+  getArticleTranslationBySlugQuery,
   getRecentArticlesQuery,
   getRecentArticlesWithMainQuery,
   listArticlesByCategoryQuery,
   listArticlesBySlugQuery,
   listArticlesForSitemapQuery,
 } from "./queries/articles"
-import { getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
+import {
+  getHomepageMetadataQuery,
+  getHomepageQuery,
+  getHomepageTranslationQuery,
+  getNavigationQuery,
+  getNavigationTranslationQuery,
+} from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 import { Tag } from "./tags"
@@ -80,6 +88,16 @@ export async function getHomepage(locale: Locale) {
   return { ...homepages[0], marketStock }
 }
 
+export async function getHomepageTranslation(locale: Locale) {
+  const { singleton } = await graphqlFetch({
+    cache: "force-cache",
+    document: getHomepageTranslationQuery,
+    tags: ["TRANSLATION"],
+    variables: { locale },
+  })
+  return { ...singleton?.model }
+}
+
 export async function getHomepageMetadata(locale: Locale) {
   const { homepages } = await graphqlFetch({
     cache: "force-cache",
@@ -99,6 +117,17 @@ export async function getNavigation(locale: Locale) {
   })
 
   return { navigation: navigations[0] ?? null, footer: footers[0] ?? null, logo: asset ?? null }
+}
+
+export async function getNavigationTranslation(locale: Locale) {
+  const { singleton } = await graphqlFetch({
+    cache: "force-cache",
+    document: getNavigationTranslationQuery,
+    tags: ["TRANSLATION"],
+    variables: { locale },
+  })
+
+  return { ...singleton?.model }
 }
 
 export async function getArticlesQuantity(locale: Locale) {
@@ -172,7 +201,17 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
     document: getArticleBySlugQuery,
     variables,
   })
-  return articles[0] ?? null
+  return { ...articles[0] } ?? null
+}
+
+export async function getArticleTranslationBySlug(locale: Locale) {
+  const { singleton } = await graphqlFetch({
+    cache: "force-cache",
+    document: getArticleTranslationBySlugQuery,
+    tags: ["TRANSLATION"],
+    variables: { locale },
+  })
+  return { ...singleton?.model } ?? null
 }
 
 export async function getArticleMetadataBySlug(variables: { locale: Locale; slug: string }) {
@@ -238,6 +277,16 @@ export async function listArticlesByCategory(variables: {
     variables,
   })
   return { articles, count: articlesConnection.aggregate.count }
+}
+
+export async function getArticlesTranslationByCategory(locale: Locale) {
+  const { singleton } = await graphqlFetch({
+    cache: "force-cache",
+    document: getArticlesTranslationByCategoryQuery,
+    tags: ["TRANSLATION"],
+    variables: { locale },
+  })
+  return { ...singleton?.model }
 }
 
 export async function getQuizQuestionsById(variables: { locale: Locale; id: string; skip: number }) {

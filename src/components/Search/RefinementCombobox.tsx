@@ -10,9 +10,12 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover/Popover"
 import { cn } from "@/utils/cn"
 
-type RefinementComboboxProps = UseRefinementListProps
+type ExtendedRefinementComboboxProps = UseRefinementListProps & {
+  searchTagsText?: string | undefined | null
+  noTagsFoundText?: string | undefined | null
+}
 
-export function RefinementCombobox(props: RefinementComboboxProps) {
+export function RefinementCombobox(props: ExtendedRefinementComboboxProps) {
   const { items, refine } = useRefinementList(props)
   const [open, setOpen] = React.useState(false)
 
@@ -26,7 +29,7 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
             aria-expanded={open}
             className="w-[150px] justify-between bg-gray-100 text-gray-400"
           >
-            {"Select tag..."}
+            {props?.searchTagsText}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -48,8 +51,8 @@ export function RefinementCombobox(props: RefinementComboboxProps) {
       </div>
       <PopoverContent className="ml-6 w-[200px] bg-white p-0">
         <Command>
-          <CommandInput placeholder="Search tags.." />
-          <CommandEmpty>No tags found.</CommandEmpty>
+          <CommandInput placeholder={props?.searchTagsText ?? "Search tags.."} />
+          <CommandEmpty>{props?.noTagsFoundText}</CommandEmpty>
           <CommandGroup value={"value"}>
             {items
               .sort((a, b) => a.label.localeCompare(b.label))

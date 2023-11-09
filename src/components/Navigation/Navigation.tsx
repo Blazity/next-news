@@ -5,19 +5,22 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { useLocale } from "@/i18n/i18n"
-import { getNavigation } from "@/lib/client"
+import { getNavigation, getNavigationTranslation } from "@/lib/client"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { DynamicSearchDialog } from "../Search/DynamicSearchDialog"
 import { Button } from "../ui/Button/Button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/Sheet/Sheet"
 
+type GetNavigationTranslationReturn = Awaited<ReturnType<typeof getNavigationTranslation>>
+
 export type GetNavigationReturn = Awaited<ReturnType<typeof getNavigation>>
 
 type NavigationProps = {
   navigation: Pick<GetNavigationReturn, "navigation">["navigation"]
+  translations: GetNavigationTranslationReturn
 }
 
-export function Navigation({ navigation }: NavigationProps) {
+export function Navigation({ navigation, translations }: NavigationProps) {
   const locale = useLocale()
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const { logo, elements } = navigation
@@ -47,7 +50,7 @@ export function Navigation({ navigation }: NavigationProps) {
       </Link>
       <ul className="hidden items-center gap-4 sm:flex-wrap lg:flex">
         <li className="-mr-3 flex items-center">
-          <DynamicSearchDialog />
+          <DynamicSearchDialog translations={translations} />
         </li>
         {navElements}
         <li>
@@ -56,7 +59,7 @@ export function Navigation({ navigation }: NavigationProps) {
       </ul>
       <ul className="flex items-center sm:flex-wrap lg:hidden">
         <li className="flex items-center">
-          <DynamicSearchDialog />
+          <DynamicSearchDialog translations={translations} />
         </li>
         <Sheet open={isSheetOpen}>
           <SheetTrigger asChild onClick={() => setIsSheetOpen((prev) => !prev)}>

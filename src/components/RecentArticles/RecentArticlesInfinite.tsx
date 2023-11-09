@@ -10,9 +10,10 @@ import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCa
 
 export type RecentArticlesInfiniteProps = {
   initialArticles: { articles: GetRecentArticlesQuery["articles"]; count: number }
+  showMoreText: string | undefined | null
 }
 
-export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
+export function RecentArticlesInfinite({ initialArticles, showMoreText }: RecentArticlesInfiniteProps) {
   const locale = useLocale()
 
   const {
@@ -51,7 +52,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
       </div>
       {hasNextPage && (
         <Button className="w-full rounded-xl border p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
-          See more
+          {showMoreText}
         </Button>
       )}
     </section>

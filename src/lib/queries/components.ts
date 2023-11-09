@@ -58,6 +58,21 @@ export const getNavigationQuery = graphql(`
   }
 `)
 
+export const getNavigationTranslationQuery = graphql(`
+  query getNavigationTranslation($locales: [Locale!]!) {
+    singleton(where: { key: "translations" }, locales: $locales) {
+      model {
+        ... on GlobalTranslations {
+          selectTag
+          search
+          noTagsFound
+          noResultsFor
+        }
+      }
+    }
+  }
+`)
+
 export const getHomepageQuery = graphql(`
   query getHomepage($locales: [Locale!]!) {
     marketStock
@@ -117,6 +132,18 @@ export const getHomepageQuery = graphql(`
           data {
             url
           }
+        }
+      }
+    }
+  }
+`)
+
+export const getHomepageTranslationQuery = graphql(`
+  query getHomepageTranslation($locales: [Locale!]!) {
+    singleton(where: { key: "translations" }, locales: $locales) {
+      model {
+        ... on GlobalTranslations {
+          showMore
         }
       }
     }
