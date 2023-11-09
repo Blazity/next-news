@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/Button/Button"
 import { GetRecentArticlesQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/i18n"
+import { useTranslations } from "@/i18n/useTranslations"
 import { getRecentArticles } from "@/lib/client"
 import { RECENT_ARTICLES_PER_PAGE } from "./RecentArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -14,6 +15,7 @@ export type RecentArticlesInfiniteProps = {
 
 export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfiniteProps) {
   const locale = useLocale()
+  const translations = useTranslations()
 
   const {
     data: recentArticlesQuery,
@@ -51,7 +53,7 @@ export function RecentArticlesInfinite({ initialArticles }: RecentArticlesInfini
       </div>
       {hasNextPage && (
         <Button className="w-full rounded-xl border p-4" disabled={isFetchingNextPage} onClick={() => fetchNextPage()}>
-          See more
+          {translations.showMore}
         </Button>
       )}
     </section>

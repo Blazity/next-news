@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/Button/Button"
 import { ListArticlesByCategoryQuery } from "@/gql/graphql"
 import { useLocale } from "@/i18n/i18n"
+import { useTranslations } from "@/i18n/useTranslations"
 import { listArticlesByCategory } from "@/lib/client"
 import { CATEGORY_ARTICLES_PER_PAGE } from "./CategoryArticles"
 import { ArticlesGrid } from "../ArticlesGrid/ArticlesGrid"
@@ -15,6 +16,7 @@ export type CategoryArticlesInfiniteProps = {
 
 export function RecentArticlesInfinite({ initialArticles, category }: CategoryArticlesInfiniteProps) {
   const locale = useLocale()
+  const translations = useTranslations()
 
   const {
     data: categoryArticlesQuery,
@@ -41,7 +43,7 @@ export function RecentArticlesInfinite({ initialArticles, category }: CategoryAr
   })
 
   const articles = categoryArticlesQuery?.pages.flatMap((page) => page.articles)
-  const buttonText = isFetchingNextPage ? "Loading" : "See more"
+  const buttonText = isFetchingNextPage ? translations.loading : translations.showMore
 
   return (
     <>

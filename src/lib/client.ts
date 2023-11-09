@@ -19,6 +19,7 @@ import { getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
 import { Tag } from "./tags"
+import { getGlobalTranslationsQuery } from "./queries/translations"
 
 const throttle = pThrottle({
   limit: 5, //Community: 5req/sec
@@ -255,4 +256,14 @@ export async function getQuizQuestionsById(variables: { locale: Locale; id: stri
     variables,
   })
   return quiz?.question ?? null
+}
+
+export async function getGlobalTranslations(variables: { locale: Locale }) {
+  const { translationsSingleton } = await graphqlFetch({
+    cache: "force-cache",
+    document: getGlobalTranslationsQuery,
+    tags: ["TRANSLATIONS"],
+    variables,
+  })
+  return translationsSingleton?.translations
 }

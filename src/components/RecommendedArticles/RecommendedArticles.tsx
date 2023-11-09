@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { useLocale } from "@/i18n/i18n"
+import { useTranslations } from "@/i18n/useTranslations"
 import { getArticleRecommendedArticles } from "@/lib/client"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
@@ -9,6 +10,7 @@ type RecommendedArticlesProps = { id: string }
 
 export function RecommendedArticles({ id }: RecommendedArticlesProps) {
   const locale = useLocale()
+  const translations = useTranslations()
   const { data: recommendedArticles, isLoading } = useQuery({
     queryKey: [`recommended-articles`, id],
     queryFn: () => getArticleRecommendedArticles({ locale, id }),
@@ -17,7 +19,7 @@ export function RecommendedArticles({ id }: RecommendedArticlesProps) {
   if (!isLoading && recommendedArticles?.length === 0) return null
   return (
     <section className="w-full py-4">
-      <h2 className="mb-8 text-2xl font-bold">Related articles</h2>
+      <h2 className="mb-8 text-2xl font-bold">{translations.relatedArticles}</h2>
       <div className={`grid gap-8 md:grid-cols-3`}>
         {isLoading &&
           Array.from(Array(3).keys()).map((idx) => {

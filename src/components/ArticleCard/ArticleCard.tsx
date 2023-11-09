@@ -89,14 +89,14 @@ export function ArticleCard({
               quality={100}
               sizes="(max-width: 220px) 82px, 480px, (max-width: 640px) 480px, 780px, (max-width: 1024px) 780px, 1020px"
               className={cn(
-                "h-[82px] min-h-[82px] w-full rounded-xl object-cover text-center brightness-90 md:h-[264px] md:min-h-[264px] md:rounded-none",
+                "h-[82px] min-h-[82px] w-full rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 object-cover text-center brightness-90 md:h-[264px] md:min-h-[264px] md:rounded-none",
                 isMain && "h-[264px] min-h-[264px] rounded-none"
               )}
             />
           )}
           <div
             className={cn(
-              "absolute inset-0 z-20 hidden w-full flex-col items-start justify-end p-6 md:flex",
+              "absolute inset-0 z-20 hidden w-full flex-col items-start justify-end  p-6 md:flex",
               isMain && "flex"
             )}
           >

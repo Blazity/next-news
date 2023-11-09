@@ -8,6 +8,7 @@ import { RecentArticles } from "@/components/RecentArticles/RecentArticles"
 import { StockDisplay } from "@/components/StockDisplay/StockDisplay"
 import { TrendingArticles } from "@/components/TrendingArticles/TrendingArticles"
 import { i18n, Locale } from "@/i18n/i18n"
+import { setTranslations } from "@/i18n/setTranslations"
 import { getHomepage, getHomepageMetadata } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
 
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
 export default async function Web({ params }: { params: { lang: Locale } }) {
   unstable_setRequestLocale(params.lang)
   const homepage = await getHomepage(params.lang)
+  await setTranslations(params.lang)
 
   return (
     <>
