@@ -199,8 +199,8 @@ export const getArticleBySlugQuery = graphql(`
   }
 `)
 
-export const getArticleTranslationBySlugQuery = graphql(`
-  query getArticleTranslationBySlug($locales: [Locale!]!) {
+export const getArticleTranslationQuery = graphql(`
+  query getArticleTranslation($locales: [Locale!]!) {
     singleton(where: { key: "translations" }, locales: $locales) {
       model {
         ... on GlobalTranslations {

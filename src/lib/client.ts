@@ -10,7 +10,7 @@ import {
   getArticleRecommendedArticlesQuery,
   getArticlesQuantityQuery,
   getArticlesTranslationByCategoryQuery,
-  getArticleTranslationBySlugQuery,
+  getArticleTranslationQuery,
   getRecentArticlesQuery,
   getRecentArticlesWithMainQuery,
   listArticlesByCategoryQuery,
@@ -207,7 +207,7 @@ export async function getArticleBySlug(variables: { locale: Locale; slug: string
 export async function getArticleTranslationBySlug(locale: Locale) {
   const { singleton } = await graphqlFetch({
     cache: "force-cache",
-    document: getArticleTranslationBySlugQuery,
+    document: getArticleTranslationQuery,
     tags: ["TRANSLATION"],
     variables: { locale },
   })
