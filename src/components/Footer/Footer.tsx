@@ -1,8 +1,11 @@
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { NextIntlClientProvider } from "next-intl"
 import { useLocale } from "@/i18n/i18n"
+import FacebookIcon from "../../../public/icons/facebook.svg"
+import InstagramIcon from "../../../public/icons/instagram.svg"
+import XIcon from "../../../public/icons/X.svg"
+import YoutubeIcon from "../../../public/icons/youtube.svg"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
 
@@ -34,18 +37,18 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
           </div>
         </div>
         <nav className="flex flex-col gap-10 md:gap-7">
-          <div className="flex gap-4">
+          <div className="flex gap-5">
             <a href={twitterLink ?? ""} aria-label="Twitter" target="_blank" rel="noreferrer">
-              <Twitter />
+              <Image alt="X icon" src={XIcon} width={20} height={20} />
             </a>
             <a href={facebookLink ?? ""} aria-label="Facebook" target="_blank" rel="noreferrer">
-              <Facebook />
+              <Image alt="Facebook icon" src={FacebookIcon} width={20} height={20} />
             </a>
             <a href={instagramLink ?? ""} aria-label="Instagram" target="_blank" rel="noreferrer">
-              <Instagram />
+              <Image alt="Instagram icon" src={InstagramIcon} width={20} height={20} />
             </a>
             <a href={youtubeLink ?? ""} aria-label="Youtube" target="_blank" rel="noreferrer">
-              <Youtube />
+              <Image alt="Youtube icon" src={YoutubeIcon} width={20} height={20} />
             </a>
           </div>
           <ul className="grid grid-cols-3 gap-x-10 gap-y-7 text-sm font-semibold md:gap-x-20">
