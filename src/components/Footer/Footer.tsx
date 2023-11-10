@@ -39,16 +39,16 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
         <nav className="flex flex-col gap-10 md:gap-7">
           <div className="flex gap-5">
             <a href={twitterLink ?? ""} aria-label="Twitter" target="_blank" rel="noreferrer">
-              <Image alt="X icon" src={XIcon} width={20} height={20} />
+              <XIcon />
             </a>
             <a href={facebookLink ?? ""} aria-label="Facebook" target="_blank" rel="noreferrer">
-              <Image alt="Facebook icon" src={FacebookIcon} width={20} height={20} />
+              <FacebookIcon />
             </a>
             <a href={instagramLink ?? ""} aria-label="Instagram" target="_blank" rel="noreferrer">
-              <Image alt="Instagram icon" src={InstagramIcon} width={20} height={20} />
+              <InstagramIcon />
             </a>
             <a href={youtubeLink ?? ""} aria-label="Youtube" target="_blank" rel="noreferrer">
-              <Image alt="Youtube icon" src={YoutubeIcon} width={20} height={20} />
+              <YoutubeIcon />
             </a>
           </div>
           <ul className="grid grid-cols-3 gap-x-10 gap-y-7 text-sm font-semibold md:gap-x-20">
