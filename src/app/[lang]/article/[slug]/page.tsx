@@ -53,6 +53,9 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
           </section>
         )}
       </article>
+      <div className="mb-5 border-t py-5">
+        <ShareOnSocial articleUrl={articleUrl} articleTitle={title} />
+      </div>
       <NextIntlClientProvider locale={lang}>
         <RecommendedArticles id={article.id} />
       </NextIntlClientProvider>
