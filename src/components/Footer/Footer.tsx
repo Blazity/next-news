@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { NextIntlClientProvider } from "next-intl"
 import { useLocale } from "@/i18n/i18n"
 import FacebookIcon from "../../../public/icons/facebook.svg"
 import InstagramIcon from "../../../public/icons/instagram.svg"
@@ -67,9 +66,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
         </nav>
         <div className="flex flex-col justify-between gap-10 md:max-w-[30%] lg:items-end lg:gap-3">
           <div className="w-fit lg:w-auto">
-            <NextIntlClientProvider locale={locale}>
-              <DynamicLangSelect />
-            </NextIntlClientProvider>
+            <DynamicLangSelect />
           </div>
           {logoUrl && (
             <Link

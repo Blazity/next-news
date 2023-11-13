@@ -1,4 +1,3 @@
-import { NextIntlClientProvider } from "next-intl"
 import { useLocale } from "@/i18n/i18n"
 import { getRecentArticlesWithMain } from "@/lib/client"
 import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
@@ -26,9 +25,7 @@ export async function RecentArticles({ title }: RecentArticlesProps) {
           tagsPosition="over"
         />
       </div>
-      <NextIntlClientProvider locale={locale}>
-        <RecentArticlesInfiniteDynamic initialArticles={initialArticles} />
-      </NextIntlClientProvider>
+      <RecentArticlesInfiniteDynamic initialArticles={initialArticles} />
     </section>
   )
 }

@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation"
-import { NextIntlClientProvider } from "next-intl"
 import { useLocale } from "@/i18n/i18n"
+import { getTranslations } from "@/i18n/setTranslations"
 import { listArticlesByCategory } from "@/lib/client"
 import { CategoryArticlesInfiniteDynamic } from "./CategoryArticlesInfiniteDynamic"
-import { getTranslations } from "@/i18n/setTranslations"
 
 export const CATEGORY_ARTICLES_PER_PAGE = 4
 
@@ -29,9 +28,7 @@ export async function CategoryArticles({ category }: CategoryArticlesProps) {
         <p className="text-xl font-bold">&quot;{category}&quot;</p>
       </div>
       <div className="mx-auto w-full">
-        <NextIntlClientProvider locale={locale}>
-          <CategoryArticlesInfiniteDynamic category={category} initialArticles={articles} />
-        </NextIntlClientProvider>
+        <CategoryArticlesInfiniteDynamic category={category} initialArticles={articles} />
       </div>
     </section>
   )

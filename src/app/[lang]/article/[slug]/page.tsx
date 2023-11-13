@@ -1,6 +1,3 @@
-import { notFound } from "next/navigation"
-import { Metadata } from "next/types"
-import { NextIntlClientProvider } from "next-intl"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
 import { RichText } from "@/components/RichText/RichText"
@@ -9,6 +6,8 @@ import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { getArticleBySlug, getArticleMetadataBySlug } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
+import { notFound } from "next/navigation"
+import { Metadata } from "next/types"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 
@@ -56,9 +55,7 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
       <div className="mb-5 border-t py-5">
         <ShareOnSocial articleUrl={articleUrl} articleTitle={title} />
       </div>
-      <NextIntlClientProvider locale={lang}>
-        <RecommendedArticles id={article.id} />
-      </NextIntlClientProvider>
+      <RecommendedArticles id={article.id} />
     </>
   )
 }
