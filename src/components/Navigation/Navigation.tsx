@@ -32,7 +32,7 @@ export function Navigation({ navigation }: NavigationProps) {
           href={url}
           hrefLang={locale}
           onClick={() => setIsSheetOpen(false)}
-          className="rounded-xl p-2 font-semibold hover:bg-custom-dim"
+          className="whitespace-nowrap rounded-xl p-2 font-semibold hover:bg-custom-dim"
         >
           {navElement?.element?.title}
         </Link>
@@ -51,15 +51,20 @@ export function Navigation({ navigation }: NavigationProps) {
       >
         <Image src={logo?.url} width={100} height={33} alt="site-logo" quality={100} />
       </Link>
-      <ul className="hidden items-center gap-4 sm:flex-wrap lg:flex">
-        <li className="-mr-3 flex items-center">
+      <div className="hidden flex-nowrap items-center gap-4 lg:flex">
+        <div className="-mr-3 flex items-center">
           <DynamicSearchDialog />
-        </li>
-        {navElements}
-        <li>
+        </div>
+        <ul
+          className=" flex h-[40px] max-w-[700px] flex-nowrap items-center gap-4 overflow-hidden"
+          style={{ scrollbarGutter: "stable" }}
+        >
+          {navElements}
+        </ul>
+        <div>
           <DynamicLangSelect />
-        </li>
-      </ul>
+        </div>
+      </div>
       <ul className="flex items-center sm:flex-wrap lg:hidden">
         <li className="flex items-center">
           <DynamicSearchDialog />
