@@ -36,7 +36,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
             <p>{country}</p>
           </div>
         </div>
-        <nav className="flex flex-col gap-10 md:gap-7">
+        <nav className="flex flex-col justify-between gap-10 md:gap-7">
           <div className="flex gap-5">
             <a href={twitterLink ?? ""} aria-label="Twitter" target="_blank" rel="noreferrer">
               <XIcon />
@@ -65,7 +65,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
             })}
           </ul>
         </nav>
-        <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
+        <div className="flex flex-col justify-between gap-10 md:max-w-[30%] lg:items-end lg:gap-3">
           <div className="w-fit lg:w-auto">
             <NextIntlClientProvider locale={locale}>
               <DynamicLangSelect />
