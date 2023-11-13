@@ -1,8 +1,11 @@
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { NextIntlClientProvider } from "next-intl"
 import { useLocale } from "@/i18n/i18n"
+import FacebookIcon from "../../../public/icons/facebook.svg"
+import InstagramIcon from "../../../public/icons/instagram.svg"
+import XIcon from "../../../public/icons/X.svg"
+import YoutubeIcon from "../../../public/icons/youtube.svg"
 import { DynamicLangSelect } from "../LangSelect/DynamicLangSelect"
 import { GetNavigationReturn } from "../Navigation/Navigation"
 
@@ -33,19 +36,19 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
             <p>{country}</p>
           </div>
         </div>
-        <nav className="flex flex-col gap-10 md:gap-7">
-          <div className="flex gap-4">
+        <nav className="flex flex-col justify-between gap-10 md:gap-7">
+          <div className="flex gap-5">
             <a href={twitterLink ?? ""} aria-label="Twitter" target="_blank" rel="noreferrer">
-              <Twitter />
+              <XIcon />
             </a>
             <a href={facebookLink ?? ""} aria-label="Facebook" target="_blank" rel="noreferrer">
-              <Facebook />
+              <FacebookIcon />
             </a>
             <a href={instagramLink ?? ""} aria-label="Instagram" target="_blank" rel="noreferrer">
-              <Instagram />
+              <InstagramIcon />
             </a>
             <a href={youtubeLink ?? ""} aria-label="Youtube" target="_blank" rel="noreferrer">
-              <Youtube />
+              <YoutubeIcon />
             </a>
           </div>
           <ul className="grid grid-cols-3 gap-x-10 gap-y-7 text-sm font-semibold md:gap-x-20">
@@ -62,7 +65,7 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
             })}
           </ul>
         </nav>
-        <div className="flex flex-col justify-between gap-10 lg:items-end lg:gap-3">
+        <div className="flex flex-col justify-between gap-10 md:max-w-[30%] lg:items-end lg:gap-3">
           <div className="w-fit lg:w-auto">
             <NextIntlClientProvider locale={locale}>
               <DynamicLangSelect />

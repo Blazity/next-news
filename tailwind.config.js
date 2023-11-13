@@ -43,7 +43,8 @@ module.exports = {
             300: "#808080",
           },
           dim: "#D9D9D9",
-          green: "#55FF0080",
+          green: "#37A600",
+          red: "#D90000",
         },
       },
       fontFamily: {
