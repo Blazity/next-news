@@ -1,9 +1,9 @@
-import { env } from "@/env.mjs"
-import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { print } from "graphql"
 import omit from "lodash/omit"
 import pThrottle from "p-throttle"
+import { env } from "@/env.mjs"
+import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
   getArticleMetadataBySlugQuery,
@@ -18,8 +18,8 @@ import {
 import { getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
-import { Tag } from "./tags"
 import { getGlobalTranslationsQuery } from "./queries/translations"
+import { Tag } from "./tags"
 
 const throttle = pThrottle({
   limit: 5, //Community: 5req/sec
@@ -43,7 +43,7 @@ export async function graphqlFetch<TQuery, TVariables>({
   const variablesWithoutLocale = omit(variables, "locale")
   const localeFromVariables = variables?.locale
 
-  const throttledFetch = throttle(() =>
+  const regularFetch = () =>
     fetch(env.NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL, {
       method: "POST",
       headers: {
@@ -62,17 +62,19 @@ export async function graphqlFetch<TQuery, TVariables>({
       ...(!revalidate && { cache }),
       ...((tags || revalidate) && { next: { ...(tags && { tags }), ...(revalidate && { revalidate }) } }),
     })
-  )
-  const fetchWithRetry = async (repeats: number): Promise<Response> => {
-    const result = await throttledFetch()
+  const throttledFetch = throttle(() => regularFetch())
+
+  const fetchWithRetry = async (repeats: number, isFirst = false): Promise<Response> => {
+    const result = isFirst ? await regularFetch() : await throttledFetch()
     if (result.status === 429 && repeats > 0) return await fetchWithRetry(repeats - 1)
     return result
   }
 
-  const result = await fetchWithRetry(3)
+  const result = await fetchWithRetry(3, true)
 
   const parsed = (await result.json()) as { data: TQuery; errors?: unknown }
   if (!result.ok || parsed.errors) throw Error(JSON.stringify({ status: result.status, errors: parsed.errors }))
+
   return parsed.data
 }
 
