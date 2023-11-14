@@ -10,10 +10,9 @@ import { GetNavigationReturn } from "../Navigation/Navigation"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
-  logoUrl: string | undefined
 }
 
-export async function Footer({ footer, logoUrl }: FooterProps) {
+export async function Footer({ footer }: FooterProps) {
   const locale = useLocale()
 
   if (!footer?.contactSection) return null
@@ -68,14 +67,21 @@ export async function Footer({ footer, logoUrl }: FooterProps) {
           <div className="w-fit lg:w-auto">
             <DynamicLangSelect />
           </div>
-          {logoUrl && (
+          {footer?.additionalLogo && (
             <Link
               hrefLang={locale}
               target="_blank"
               href={"https://blazity.com/"}
               className="flex max-h-[100px] w-[100px] lg:justify-end"
             >
-              <Image src={logoUrl} width={300} height={300} alt="Blazity logo" className="w-full" quality={100} />
+              <Image
+                src={footer?.additionalLogo.url}
+                width={300}
+                height={300}
+                alt="Blazity logo"
+                className="w-full"
+                quality={100}
+              />
             </Link>
           )}
           <p className="text-sm">

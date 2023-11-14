@@ -1,9 +1,9 @@
-import { env } from "@/env.mjs"
-import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { print } from "graphql"
 import omit from "lodash/omit"
 import pThrottle from "p-throttle"
+import { env } from "@/env.mjs"
+import { Locale, standardNotationToHygraphLocale } from "@/i18n/i18n"
 import {
   getArticleBySlugQuery,
   getArticleMetadataBySlugQuery,
@@ -18,8 +18,8 @@ import {
 import { getHomepageMetadataQuery, getHomepageQuery, getNavigationQuery } from "./queries/components"
 import { getPageBySlugQuery, getPageMetadataBySlugQuery, listPagesForSitemapQuery } from "./queries/pages"
 import { getQuizQuestionsByIdQuery } from "./queries/quizes"
-import { Tag } from "./tags"
 import { getGlobalTranslationsQuery } from "./queries/translations"
+import { Tag } from "./tags"
 
 const throttle = pThrottle({
   limit: 5, //Community: 5req/sec
@@ -97,14 +97,14 @@ export async function getHomepageMetadata(locale: Locale) {
 }
 
 export async function getNavigation(locale: Locale) {
-  const { navigations, footers, asset } = await graphqlFetch({
+  const { navigations, footers } = await graphqlFetch({
     cache: "force-cache",
     document: getNavigationQuery,
     tags: ["NAVIGATION", "PAGE", "CATEGORY"],
     variables: { locale },
   })
 
-  return { navigation: navigations[0] ?? null, footer: footers[0] ?? null, logo: asset ?? null }
+  return { navigation: navigations[0] ?? null, footer: footers[0] ?? null }
 }
 
 export async function getArticlesQuantity(locale: Locale) {
