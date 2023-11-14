@@ -21,11 +21,11 @@ export const getNavigationQuery = graphql(`
         url
       }
     }
-    asset(where: { id: "clo74v3lz1yqp0bw1w7jsrrin" }) {
-      url
-    }
     footers(locales: $locales, first: 1) {
       logo {
+        url
+      }
+      additionalLogo {
         url
       }
       ownershipAndCredits
