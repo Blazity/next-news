@@ -11,12 +11,30 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "Pierniki",
+      "name": "Marcin Szczepaniak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35572075?v=4",
+      "profile": "https://github.com/Pierniki",
+      "contributions": [
+        "code, architecture"
+      ]
+    },
+    {
+      "login": "Max-Mogilski",
+      "name": "Max Mogilski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42366462?v=4",
+      "profile": "https://github.com/Max-Mogilski",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "bmstefanski",
       "name": "Bart Stefanski",
       "avatar_url": "https://avatars.githubusercontent.com/u/28964599?v=4",
       "profile": "https://bstefanski.com/",
       "contributions": [
-        "code"
+        "(next-enterpise) code"
       ]
     },
     {
@@ -25,7 +43,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/51968772?v=4",
       "profile": "https://github.com/jjablonski-it",
       "contributions": [
-        "infra"
+        "(next-enterpise) infra"
       ]
     }
   ],
