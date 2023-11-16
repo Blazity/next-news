@@ -1,8 +1,6 @@
-# Next enterprise media starter //final name goes here
+# Next news
 
-![Project intro image](./project-logo.png)
-
-Welcome to the _Next enterprise media starter_ //final name goes here, an open-source plug and play template and starter for you media apps or blogs! It's loaded with features that'll help you build a high-performance, maintainable, and enjoyable app. We've done all the heavy lifting for you, so sit back, relax, and get ready to conquer the world with your incredible app! 🌍
+Welcome to **Next.js - Hygraph news starter**, an open-source plug and play template and starter for you media apps or blogs! It's build on top of [next-enterprise](https://github.com/Blazity/next-enterprise) so it comes packed with functionalities designed to assist you in creating an app that is not only high-performing and maintainable but also enjoyable to use.
 
 <br />
 <a href="https://discord.gg/fyWtyNKmfX" style="width: 100%; display: flex; justify-content: center;">
@@ -35,7 +33,7 @@ To get started with this boilerplate, follow these steps:
 
 ```bash
 ## Don't forget to ⭐ star and fork it first :)
-git clone https://github.com/<your_username)/hygraph-next-enterprise.git //final repo name goes here
+git clone https://github.com/<your_username)/next-news.git
 ```
 
 2. Install the dependencies:
@@ -47,22 +45,30 @@ yarn install --frozen-lockfile
 3. Provide required env variables:
 
 ```bash
-NEXT_PUBLIC_SITE_URL // url of your site, used for SEO and sitemaps
-NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL // hygraph's graphql content api url
-HYGRAPH_WEBOOK_SECRET // secret used for authenticating webhooks
+# url of your site, used for SEO and sitemaps
+NEXT_PUBLIC_SITE_URL="my-site.app"
+# hygraph's graphql content api url - you can find it in API Acess tab on Hygraph
+NEXT_PUBLIC_HYGRAPH_CONTENT_API_URL="https://region.hygraph.com/v2/projectId/environment"
+# secret used for authenticating webhooks (generate it yourself)
+HYGRAPH_WEBOOK_SECRET="my-secret-123"
 ```
 
 Search engine - take it from your algolia project's config
 ```bash
-NEXT_PUBLIC_ALGOLIA_API_ID
-NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
+NEXT_PUBLIC_ALGOLIA_API_ID=""
+NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=""
 ```
 
 Analytics - used for counting views on your articles. Needed for 'Trending Articles' section
 ```bash
-GA_MEASUREMENT_ID: 
-GA_PROPERTY_ID: 
-GA_BASE64_SERVICE_ACCOUNT:
+GA_MEASUREMENT_ID=""
+GA_PROPERTY_ID=""
+# Base64 endoded service account containing:
+# {
+#   "private_key: "private-key-value"
+#   "client_email": "service-account-email@project.iam.gserviceaccount.com"
+# }
+GA_BASE64_SERVICE_ACCOUNT=""
 ```
 
 4. Run the development server:
@@ -84,7 +90,7 @@ Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=d
 
 The following scripts are available in the `package.json`:
 
-- `dev`: Starts the development server with colorized output
+- `dev`: Starts the development server along with codegen watcher
 - `build`: Builds the app for production
 - `start`: Starts the production server
 - `lint`: Lints the code using ESLint
@@ -95,6 +101,7 @@ The following scripts are available in the `package.json`:
 - `storybook`: Starts the Storybook server
 - `build-storybook`: Builds the Storybook for deployment
 - `test`: Runs unit and integration tests
+- `codegen`: Runs codegen on your public content api url
 - `e2e:headless`: Runs end-to-end tests in headless mode
 - `e2e:ui`: Runs end-to-end tests with UI
 - `format`: Formats the code with Prettier
