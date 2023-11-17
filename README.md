@@ -1,5 +1,7 @@
 # Next news
 
+[![Project intro image](./project-screenshot.png)](https://hygraph-next-enterprise.vercel.app/en)
+
 Welcome to **Next.js - Hygraph news starter**, an open-source plug and play template and starter for you media apps or blogs! It's build on top of [next-enterprise](https://github.com/Blazity/next-enterprise) so it comes packed with functionalities designed to assist you in creating an app that is not only high-performing and maintainable but also enjoyable to use.
 
 <br />
