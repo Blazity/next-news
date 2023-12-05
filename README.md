@@ -84,9 +84,9 @@ yarn dev
 
 ## 🚀 Deployment
 
-Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=next-news) by clicking the button below:
+Easily deploy your Next.js app with [Vercel](https://vercel.com/?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=next-news) by clicking the button below:
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Blazity/next-news)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBlazity%2Fnext-news)
 
 ## 📃 Scripts Overview
 
