@@ -63,30 +63,7 @@ export const getHomepageQuery = graphql(`
     marketStock
     homepages(locales: $locales, first: 1) {
       heroArticle {
-        id
-        author {
-          name
-          avatar {
-            data {
-              url
-            }
-          }
-        }
-        publishedAt
-        locale
-        slug
-        title
-        tags {
-          tag
-        }
-        image {
-          description {
-            text
-          }
-          data {
-            url
-          }
-        }
+        ...ArticleCard
       }
       recentSectionTitle
       trendingSectionTitle
@@ -98,30 +75,7 @@ export const getHomepageQuery = graphql(`
       }
       highlightedSectionTitle
       highlightedArticles(forceParentLocale: true) {
-        id
-        author {
-          name
-          avatar {
-            data {
-              url
-            }
-          }
-        }
-        publishedAt
-        locale
-        slug
-        title
-        tags {
-          tag
-        }
-        image {
-          description {
-            text
-          }
-          data {
-            url
-          }
-        }
+        ...ArticleCard
       }
     }
   }
