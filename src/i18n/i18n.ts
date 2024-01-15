@@ -1,7 +1,7 @@
 import { useLocale as useLocaleIntl } from "next-intl"
 import { Locale as HygraphLocaleEnum } from "../gql/graphql"
 
-export { HygraphLocaleEnum }
+export type { HygraphLocaleEnum }
 
 export type HygraphLocale = `${HygraphLocaleEnum}`
 

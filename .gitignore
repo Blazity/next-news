@@ -1,11 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 
-# codegen
-src/gql/fragment-masking.ts
-src/gql/gql.ts
-src/gql/graphql.ts
-src/gql/index.ts
 
 # generated on build
 /public/robots.txt
