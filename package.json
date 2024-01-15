@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "npm-run-all --parallel \"development\" \"codegen --watch\"",
     "development": "cross-env FORCE_COLOR=1 next dev",
-    "build": "graphql-codegen --require dotenv/config --config codegen.ts && next build",
-    "postbuild": "next-sitemap  --config next-sitemap.config.js",
+    "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -22,7 +22,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "npx patch-package -y",
     "coupling-graph": "npx madge --extensions js,jsx,ts,tsx,css,md,mdx ./ --exclude '.next|tailwind.config.js|reset.d.ts|prettier.config.js|postcss.config.js|playwright.config.ts|next.config.js|next-env.d.ts|instrumentation.ts|e2e/|README.md|.storybook/|.eslintrc.js' --image graph.svg",
-    "codegen": "graphql-codegen --require dotenv/config --config codegen.ts"
+    "codegen": "graphql-codegen codegen.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",
@@ -111,7 +111,6 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.3.1",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "^9.0.0",
