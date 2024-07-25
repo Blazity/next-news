@@ -25,8 +25,8 @@ const config = withPlugins(
       remotePatterns: [
         {
           protocol: "https",
-          hostname: "media.graphassets.com",
-        },
+          hostname: "**.graphassets.com",
+        }
       ],
     },
     webpack: (config) => {
