@@ -54,7 +54,7 @@ export function ArticlePublishDetails({
             alt="author"
             width={24}
             height={24}
-            className="h-[24px] w-[24px] rounded-full border object-cover"
+            className="size-[24px] rounded-full border object-cover"
           />
         )}
       </div>

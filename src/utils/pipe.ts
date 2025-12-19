@@ -12,9 +12,9 @@ export async function pipe<A, B, C, D, E>(
   de: Func<D, E>
 ): Promise<E>
 
-export async function pipe(...args: any[]): Promise<any> {
+export async function pipe(...args: readonly [unknown, ...Func<unknown, unknown>[]]): Promise<unknown> {
   return await args.slice(1).reduce(async (accPromise, fn) => {
     const acc = await accPromise
-    return fn(acc)
+    return (fn as Func<unknown, unknown>)(acc)
   }, Promise.resolve(args[0]))
 }

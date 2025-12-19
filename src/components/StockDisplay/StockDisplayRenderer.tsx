@@ -8,7 +8,7 @@ type StockDisplayRendererProps = {
 
 export function StockDisplayRenderer({ quotes }: StockDisplayRendererProps) {
   return (
-    <div className="my-8 flex w-full overflow-hidden rounded-xl border-[1px] bg-custom-gray-50">
+    <div className="my-8 flex w-full overflow-hidden rounded-xl border bg-custom-gray-50">
       <div className={"flex h-12 w-max animate-[wiggle_20s_linear_infinite] items-center "}>
         {quotes.map((quote) => (
           <StockQuote key={quote.id} quote={quote} />

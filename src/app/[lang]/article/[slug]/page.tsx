@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation"
+import { Metadata } from "next/types"
 import { HeroArticleCard } from "@/components/ArticleCard/HeroArticleCard"
 import { RecommendedArticles } from "@/components/RecommendedArticles/RecommendedArticles"
 import { RichText } from "@/components/RichText/RichText"
@@ -6,8 +8,6 @@ import { env } from "@/env.mjs"
 import { Locale } from "@/i18n/i18n"
 import { getArticleBySlug, getArticleMetadataBySlug } from "@/lib/client"
 import { getMatadataObj } from "@/utils/getMetadataObj"
-import { notFound } from "next/navigation"
-import { Metadata } from "next/types"
 
 type ArticlePageProps = { params: { slug: string; lang: Locale } }
 

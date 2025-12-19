@@ -1,4 +1,4 @@
-import { useLocale } from "@/i18n/i18n"
+import { Locale } from "@/i18n/i18n"
 import { getRecentArticlesWithMain } from "@/lib/client"
 import { RecentArticlesInfiniteDynamic } from "./RecentArticlesInfiniteDynamic"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -7,10 +7,10 @@ export const RECENT_ARTICLES_PER_PAGE = 6
 
 type RecentArticlesProps = {
   title: string
+  locale: Locale
 }
 
-export async function RecentArticles({ title }: RecentArticlesProps) {
-  const locale = useLocale()
+export async function RecentArticles({ title, locale }: RecentArticlesProps) {
   const initialArticles = await getRecentArticlesWithMain({ locale, first: 3, skip: 1 })
   const mainArticle = initialArticles.mainArticle[0]
 

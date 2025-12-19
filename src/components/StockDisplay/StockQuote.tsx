@@ -10,7 +10,7 @@ export function StockQuote({ quote }: { quote: Quote }) {
       <span className={cn("flex items-center gap-1", isNegative ? "text-custom-red" : "text-custom-green")}>
         {!isNegative && "+"}
         {quote.change.toFixed(2)}%
-        {isNegative ? <MoveDown className="mt-0.5 h-3 w-3" /> : <MoveUp className="mt-0.5  h-3 w-3" />}
+        {isNegative ? <MoveDown className="mt-0.5 size-3" /> : <MoveUp className="mt-0.5  size-3" />}
       </span>
     </div>
   )

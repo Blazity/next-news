@@ -1,4 +1,4 @@
-import { useLocale } from "@/i18n/i18n"
+import { Locale } from "@/i18n/i18n"
 import { cn } from "@/utils/cn"
 import { getTrendingArticles } from "./getTrendingArticles"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
@@ -6,10 +6,10 @@ import { ArticleMinifiedCard } from "../ArticleCard/ArticleMinifiedCard"
 
 type TrendingArticlesProps = {
   title: string
+  locale: Locale
 }
 
-export async function TrendingArticles({ title }: TrendingArticlesProps) {
-  const locale = useLocale()
+export async function TrendingArticles({ title, locale }: TrendingArticlesProps) {
   const trendingArticles = await getTrendingArticles(locale)
 
   const [mainArticle, ...secondaryArticles] = trendingArticles.slice(0, 3)

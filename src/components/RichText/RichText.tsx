@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import { cn } from "@/utils/cn"
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer"
 import { EmbedReferences, RichTextContent } from "@graphcms/rich-text-types"
 import Image from "next/image"
+import { cn } from "@/utils/cn"
 import { CodeSnippetDynamic } from "../CodeSnippet/CodeSnippetDynamic"
 import { QuizDynamic } from "../Quiz/QuizDynamic"
 

@@ -39,7 +39,7 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
           additionalLink="https://blazity.com/"
         />
       )}
-      <TrendingArticles title={homepage.trendingSectionTitle ?? "Trending articles"} />
+      <TrendingArticles title={homepage.trendingSectionTitle ?? "Trending articles"} locale={params.lang} />
       {homepage.highlightedArticles && (
         <HighlightedArticles
           title={homepage.highlightedSectionTitle ?? "Our picks"}
@@ -50,9 +50,10 @@ export default async function Web({ params }: { params: { lang: Locale } }) {
         <HighlightedCategoryArticles
           title={homepage.highlightedCategoryTitle ?? homepage.highlightedCategory.title}
           categoryId={homepage.highlightedCategory.id}
+          locale={params.lang}
         />
       )}
-      <RecentArticles title={homepage.recentSectionTitle ?? "Recent articles"} />
+      <RecentArticles title={homepage.recentSectionTitle ?? "Recent articles"} locale={params.lang} />
     </>
   )
 }

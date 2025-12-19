@@ -39,12 +39,12 @@ function SearchDialogContent() {
           aria-label="Open search dialog"
           name="Search"
         >
-          <Search className="h-4 w-4" />
+          <Search className="size-4" />
         </Button>
       </DialogTrigger>
       <Popover>
         <InstantSearch searchClient={algoliaClient} indexName={`articles-${lang}`}>
-          <DialogContent className="bottom-auto top-[10%] max-h-[80%] translate-y-[0%] overflow-auto bg-gray-100 sm:max-w-2xl">
+          <DialogContent className="bottom-auto top-[10%] max-h-[80%] translate-y-0 overflow-auto bg-gray-100 sm:max-w-2xl">
             <DialogHeader className="border-b bg-white p-4">
               <RefinementCombobox attribute={"tags"} />
               <DebouncedSearchBox />
@@ -77,7 +77,7 @@ function CustomHit({ hit, lang }: { hit: ArticleHit; lang: Locale }) {
     <a
       href={`/${lang}/article/${hit.slug}`}
       hrefLang={lang}
-      className="mb-5 inline-flex w-full rounded-xl border-[1px] bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="mb-5 inline-flex w-full rounded-xl border bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <article className="flex cursor-pointer flex-col gap-5 rounded-md p-7">
         {hit.tags.length > 0 && (
@@ -153,7 +153,7 @@ function DebouncedSearchBox() {
   })
   const [inputValue, setInputValue] = useState(query)
 
-  const debouncedRefine = useMemo(() => debounce(refine, 300), [])
+  const debouncedRefine = useMemo(() => debounce(refine, 300), [refine])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value

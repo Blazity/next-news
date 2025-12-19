@@ -5,11 +5,11 @@ import { pipe } from "@/utils/pipe"
 import { slateToText } from "@/utils/slateToText"
 import { errorToNextResponse } from "../../httpError"
 import { algoliaClient } from "../algoliaClient"
-import { handleRevalidation, modelTypesSchema } from "../handleRevalidation"
+import { bodySchema, handleRevalidation, RevalidationBody } from "../handleRevalidation"
 import { NextRequestWithValidBody, validateBody } from "../validateBody"
 import { validateSignature } from "../validateSignature"
 
-async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<PublishWebhookBody>) {
+async function handleAlgoliaPublishWebhook(req: NextRequestWithValidBody<RevalidationBody>) {
   const article = req.validBody.data
   if (!isArticle(article)) return NextResponse.json({ result: "success" }, { status: 200 })
 
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-const isArticle = (data: PublishWebhookBody["data"]): data is z.infer<typeof articleSchema> =>
+const isArticle = (data: RevalidationBody["data"]): data is z.infer<typeof articleSchema> =>
   data.__typename === "Article"
 
 const articleSchema = z.object({
@@ -63,8 +63,3 @@ const articleSchema = z.object({
   id: z.string(),
 })
 
-const bodySchema = z.object({
-  data: articleSchema.or(modelTypesSchema),
-})
-
-type PublishWebhookBody = z.infer<typeof bodySchema>
