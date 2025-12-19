@@ -15,5 +15,5 @@ export default async function Web({ params: { slug, lang } }: ArticlePageProps) 
   unstable_setRequestLocale(lang)
   await setTranslations(lang)
 
-  return <CategoryArticles category={slug} />
+  return <CategoryArticles category={slug} locale={lang} />
 }

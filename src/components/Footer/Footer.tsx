@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useLocale } from "@/i18n/i18n"
+import { Locale } from "@/i18n/i18n"
 import FacebookIcon from "../../../public/icons/facebook.svg"
 import InstagramIcon from "../../../public/icons/instagram.svg"
 import XIcon from "../../../public/icons/X.svg"
@@ -10,11 +10,10 @@ import { GetNavigationReturn } from "../Navigation/Navigation"
 
 type FooterProps = {
   footer: Pick<GetNavigationReturn, "footer">["footer"]
+  locale: Locale
 }
 
-export async function Footer({ footer }: FooterProps) {
-  const locale = useLocale()
-
+export async function Footer({ footer, locale }: FooterProps) {
   if (!footer?.contactSection) return null
   const { street, city, country, postCode } = footer.contactSection
   const { companyName, links, instagramLink, facebookLink, twitterLink, youtubeLink } = footer

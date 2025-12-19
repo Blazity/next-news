@@ -4,7 +4,7 @@ import { hygraphLocaleToStandardNotation, i18n } from "@/i18n/i18n"
 import { Tag } from "@/lib/tags"
 import { NextRequestWithValidBody } from "./validateBody"
 
-export function handleRevalidation<T extends RevalidationBody>(req: NextRequestWithValidBody<T>) {
+export function handleRevalidation(req: NextRequestWithValidBody<RevalidationBody>) {
   const tags = modelTypeToTags[req.validBody.data.__typename]
   const article = req.validBody.data
   if (isArticle(article)) {
@@ -58,8 +58,8 @@ const articleSchema = z.object({
   id: z.string(),
 })
 
-const bodySchema = z.object({
+export const bodySchema = z.object({
   data: articleSchema.or(modelTypesSchema),
 })
 
-type RevalidationBody = z.infer<typeof bodySchema>
+export type RevalidationBody = z.infer<typeof bodySchema>

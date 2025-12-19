@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server"
+import { z } from "zod"
 
 import { hasParsedBody, NextRequestWithBody } from "./validateSignature"
 import { HttpError } from "../httpError"
 
 export const validateBody =
-  <T>(schema: Zod.Schema<T>) =>
+  <T>(schema: z.ZodSchema<T>) =>
   async (req: NextRequest | NextRequestWithBody) => {
     try {
       const hasBody = hasParsedBody(req)

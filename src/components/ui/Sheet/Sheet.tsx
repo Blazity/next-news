@@ -11,8 +11,8 @@ const SheetTrigger = SheetPrimitive.Trigger
 
 const SheetClose = SheetPrimitive.Close
 
-const SheetPortal = ({ className, ...props }: SheetPrimitive.DialogPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props} />
+const SheetPortal = (props: SheetPrimitive.DialogPortalProps) => (
+  <SheetPrimitive.Portal {...props} />
 )
 SheetPortal.displayName = SheetPrimitive.Portal.displayName
 
@@ -31,10 +31,12 @@ const SheetOverlay = React.forwardRef<
 ))
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
+// eslint-disable-next-line tailwindcss/no-custom-classname
 const sheetVariants = cva(
   "fixed z-30 gap-4 bg-white p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
+      // eslint-disable-next-line tailwindcss/no-custom-classname
       side: {
         top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
         bottom:
@@ -51,8 +53,7 @@ const sheetVariants = cva(
 )
 
 interface SheetContentProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>, VariantProps<typeof sheetVariants> {}
 
 const SheetContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Content>, SheetContentProps>(
   ({ side = "right", className, children, ...props }, ref) => (

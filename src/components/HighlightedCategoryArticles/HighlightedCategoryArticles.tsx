@@ -1,4 +1,4 @@
-import { useLocale } from "@/i18n/i18n"
+import { Locale } from "@/i18n/i18n"
 import { getRecentArticlesByCategory } from "@/lib/client"
 import { ArticleCard, hygraphArticleToCardProps } from "../ArticleCard/ArticleCard"
 
@@ -7,10 +7,10 @@ export const RECENT_ARTICLES_PER_PAGE = 4
 type RecentArticlesProps = {
   title: string
   categoryId: string
+  locale: Locale
 }
 
-export async function HighlightedCategoryArticles({ title, categoryId }: RecentArticlesProps) {
-  const locale = useLocale()
+export async function HighlightedCategoryArticles({ title, categoryId, locale }: RecentArticlesProps) {
   const { articles } = await getRecentArticlesByCategory({ locale, first: RECENT_ARTICLES_PER_PAGE, categoryId })
 
   return (

@@ -87,7 +87,7 @@ export function QuizLogic({ id }: QuizProps) {
   if (isLoading || !data) return <Skeleton className="h-[20vh] w-full rounded-xl bg-custom-gray-200" />
 
   return (
-    <div className="w-full flex-col items-center justify-center rounded-xl border-[1px] p-5">
+    <div className="w-full flex-col items-center justify-center rounded-xl border p-5">
       <div className="w-full items-center justify-center">
         <div className="mx-1 flex items-center justify-between pb-8">
           {currentQuestion?.content?.raw && <RichText raw={currentQuestion?.content?.raw} />}

@@ -23,14 +23,14 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - run: echo "node_version=$(cat .github/nodejs.version)" >> $GITHUB_ENV
       - name: "use node ${{ env.node_version }}"
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: "${{ env.node_version }}"
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.yarn
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -43,7 +43,7 @@ jobs:
       - name: Install required system packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y libasound2 libffi8 libx264-dev
+          sudo apt-get install -y libasound2t64 libffi8 libx264-dev
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
       - name: Lint check
